@@ -21,6 +21,7 @@ import java.time.LocalDate;
 @Controller
 @RequiredArgsConstructor
 public class ProfileController {
+
     private final AuthorizeUserRepository authorizeUserRepository;
     private final ValidateService validateService;
     private final ImageService imageService;
