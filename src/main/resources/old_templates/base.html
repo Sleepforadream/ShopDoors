@@ -1,0 +1,712 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, authorizeUser-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+          rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body class="main-container">
+<header class="main-header">
+    <header class="second-header-menu">
+        <script type="text/javascript" src="{{ url_for('static', filename='js/baseScripts.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/smoothScroll.js') }}"></script>
+
+        <div class="menu-search" id="div2" data-some-data-attr="mydata">
+            <form class="search-form" method="get" action="">
+                <div class="search-form-content">
+                    <div class="search-field">
+                        <p class="text-search"><input type="text" class="input-search" name="log" id="search"
+                                                      value=""
+                                                      placeholder="Поиск ...">
+                            <input type="hidden" name="login_box" value="true"></p>
+                    </div>
+                    <div class="search-button">
+                        <p class="button-box-enter-authorizeUser">
+                            <input type="submit" name="submit" id="submit2" class="button-search"
+                                   value=" ">
+                            <input type="hidden" name="redirect" value=""></p>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="menu-search-sticky" id="div3" data-some-data-attr="mydata">
+            <form class="search-form" method="get" action="">
+                <div class="search-form-content">
+                    <div class="search-field">
+                        <p class="text-search"><input type="text" class="input-search-sticky" name="log" id="search2"
+                                                      value=""
+                                                      placeholder="Поиск ...">
+                            <input type="hidden" name="login_box" value="true"></p>
+                    </div>
+                    <div class="search-button">
+                        <p class="button-box-enter-authorizeUser">
+                            <input type="submit" name="submit" id="submit3" class="button-search"
+                                   value=" ">
+                            <input type="hidden" name="redirect" value=""></p>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="second-container-header">
+            <div class="second-menu-wrapper">
+                <div class="left-second-header">
+                    <div class="social-container">
+                        <a data-tooltip="Vk" href="/contacts" class="vk-icon"></a>
+                        <a data-tooltip="Facebook" href="/contacts" class="facebook-icon"></a>
+                        <a data-tooltip="Instagram" href="/contacts" class="instagram-icon"></a>
+                        <a data-tooltip="Whatsapp" href="/contacts" class="whatsapp-icon"></a>
+                        <a data-tooltip="Twitter" href="/contacts" class="twitter-icon"></a>
+                    </div>
+                </div>
+                <div class="authorizeUser-box">
+                    {% if current_user.is_authenticated %}
+                    <div class="popup__bg" id="popupDivAuth" data-some-data-attr="mydata">
+                        <div class="authorizeUser-popup" style="padding: 0px;width: 150px;">
+                            <ul class="dropdown-menu">
+                                <a class="dropdown-item" href="private_profile_home">
+                                    <svg class="icon-profile-menu" viewBox="0 0 24 24">
+                                        <g id="style=stroke">
+                                            <g id="profile">
+                                                <path id="vector (Stroke)" fill-rule="evenodd" clip-rule="evenodd"
+                                                      d="M12 2.75C9.92893 2.75 8.25 4.42893 8.25 6.5C8.25 8.57107 9.92893 10.25 12 10.25C14.0711 10.25 15.75 8.57107 15.75 6.5C15.75 4.42893 14.0711 2.75 12 2.75ZM6.75 6.5C6.75 3.6005 9.1005 1.25 12 1.25C14.8995 1.25 17.25 3.6005 17.25 6.5C17.25 9.3995 14.8995 11.75 12 11.75C9.1005 11.75 6.75 9.3995 6.75 6.5Z"/>
+                                                <path id="rec (Stroke)" fill-rule="evenodd" clip-rule="evenodd"
+                                                      d="M4.25 18.5714C4.25 15.6325 6.63249 13.25 9.57143 13.25H14.4286C17.3675 13.25 19.75 15.6325 19.75 18.5714C19.75 20.8792 17.8792 22.75 15.5714 22.75H8.42857C6.12081 22.75 4.25 20.8792 4.25 18.5714ZM9.57143 14.75C7.46091 14.75 5.75 16.4609 5.75 18.5714C5.75 20.0508 6.94924 21.25 8.42857 21.25H15.5714C17.0508 21.25 18.25 20.0508 18.25 18.5714C18.25 16.4609 16.5391 14.75 14.4286 14.75H9.57143Z"/>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                    <p class="dropdown-text">Профиль</p>
+                                </a>
+                                <a class="dropdown-item" href="">
+                                    <svg class="icon-profile-menu" viewBox="0 0 1024 1024">
+                                        <path d="M800.8 952c-31.2 0-56-24.8-56-56s24.8-56 56-56 56 24.8 56 56-25.6 56-56 56z m-448 0c-31.2 0-56-24.8-56-56s24.8-56 56-56 56 24.8 56 56-25.6 56-56 56zM344 792c-42.4 0-79.2-33.6-84-76l-54.4-382.4-31.2-178.4c-2.4-19.2-19.2-35.2-37.6-35.2H96c-13.6 0-24-10.4-24-24s10.4-24 24-24h40.8c42.4 0 80 33.6 85.6 76l31.2 178.4 54.4 383.2C309.6 728 326.4 744 344 744h520c13.6 0 24 10.4 24 24s-10.4 24-24 24H344z m40-128c-12.8 0-23.2-9.6-24-22.4-0.8-6.4 1.6-12.8 5.6-17.6s10.4-8 16-8l434.4-32c19.2 0 36-15.2 38.4-33.6l50.4-288c1.6-13.6-2.4-28-10.4-36.8-5.6-6.4-12.8-9.6-21.6-9.6H320c-13.6 0-24-10.4-24-24s10.4-24 24-24h554.4c22.4 0 42.4 9.6 57.6 25.6 16.8 19.2 24.8 47.2 21.6 75.2l-50.4 288c-4.8 41.6-42.4 74.4-84 74.4l-432 32c-1.6 0.8-2.4 0.8-3.2 0.8z"
+                                              fill=""/>
+                                    </svg>
+                                    <p class="dropdown-text">Корзина</p>
+                                </a>
+                                <a class="dropdown-item" href="">
+                                    <svg class="icon-profile-menu" viewBox="0 0 1024 1024">
+                                        <path d="M300 462.4h424.8v48H300v-48zM300 673.6H560v48H300v-48z" fill=""/>
+                                        <path d="M818.4 981.6H205.6c-12.8 0-24.8-2.4-36.8-7.2-11.2-4.8-21.6-11.2-29.6-20-8.8-8.8-15.2-18.4-20-29.6-4.8-12-7.2-24-7.2-36.8V250.4c0-12.8 2.4-24.8 7.2-36.8 4.8-11.2 11.2-21.6 20-29.6 8.8-8.8 18.4-15.2 29.6-20 12-4.8 24-7.2 36.8-7.2h92.8v47.2H205.6c-25.6 0-47.2 20.8-47.2 47.2v637.6c0 25.6 20.8 47.2 47.2 47.2h612c25.6 0 47.2-20.8 47.2-47.2V250.4c0-25.6-20.8-47.2-47.2-47.2H725.6v-47.2h92.8c12.8 0 24.8 2.4 36.8 7.2 11.2 4.8 21.6 11.2 29.6 20 8.8 8.8 15.2 18.4 20 29.6 4.8 12 7.2 24 7.2 36.8v637.6c0 12.8-2.4 24.8-7.2 36.8-4.8 11.2-11.2 21.6-20 29.6-8.8 8.8-18.4 15.2-29.6 20-12 5.6-24 8-36.8 8z"
+                                              fill=""/>
+                                        <path d="M747.2 297.6H276.8V144c0-32.8 26.4-59.2 59.2-59.2h60.8c21.6-43.2 66.4-71.2 116-71.2 49.6 0 94.4 28 116 71.2h60.8c32.8 0 59.2 26.4 59.2 59.2l-1.6 153.6z m-423.2-47.2h376.8V144c0-6.4-5.6-12-12-12H595.2l-5.6-16c-11.2-32.8-42.4-55.2-77.6-55.2-35.2 0-66.4 22.4-77.6 55.2l-5.6 16H335.2c-6.4 0-12 5.6-12 12v106.4z"
+                                              fill=""/>
+                                    </svg>
+                                    <p class="dropdown-text">Заказы</p>
+                                </a>
+                                <hr class="dropdown-divider">
+                                <a class="dropdown-item" href="{{ url_for('logout') }}">
+                                    <svg class="icon-profile-menu-exit" viewBox="0 0 21 21">
+                                        <g fill="none" fill-rule="evenodd" stroke-linecap="round"
+                                           stroke-linejoin="round" transform="translate(4 3)">
+                                            <path d="m10.595 10.5 2.905-3-2.905-3"/>
+                                            <path d="m13.5 7.5h-9"/>
+                                            <path d="m10.5.5-8 .00224609c-1.1043501.00087167-1.9994384.89621131-2 2.00056153v9.99438478c0 1.1045695.8954305 2 2 2h8.0954792"/>
+                                        </g>
+                                    </svg>
+                                    <p class="dropdown-text">Выйти</p>
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="popup__bg" id="popupDivNonAuth" data-some-data-attr="mydata">
+                        <form class="authorizeUser-popup" method="post" enctype="multipart/form-data">
+                            <p><input type="email" class="input-login-authorizeUser-popup" name="username_popup" id="username_popup" value=""
+                                      placeholder="Ваш email"></p>
+                            <p><input type="password" class="input-password-authorizeUser-popup" name="password_popup" id="password_popup"
+                                      value=""
+                                      placeholder="Пароль"></p>
+                            <p class="remember-checkbox">
+                                <label for="menu-login-box-rememberme">
+                                    <input name="menu-login-box-rememberme" type="checkbox" id="menu-login-box-rememberme"
+                                           value="forever">
+                                    Запомнить меня</label></p>
+                            <input type="hidden" name="login_box" value="true">
+                            <p class="button-box-enter-authorizeUser">
+                                <input type="submit" name="submit" id="submit" class="button-enter-authorizeUser" value="Войти">
+                                <input type="hidden" name="redirect" value=""></p>
+                            <a class="menu-login-box-register" href="/signup" title="Запись">Запись</a>
+                        </form>
+                    </div>
+                    {% endif %}
+                    {% if current_user.is_authenticated %}
+                    <a href="/private_profile_home" style="text-decoration: none;">
+                        <div class="menu-authorizeUser-panel">
+                            <span class="menu-text">Моя учётная запись</span>
+                            <div class="mini-profile-image">
+                                {% if current_user.imgPath == None %}
+                                <svg class="profile-image" height="16px" width="16px" viewBox="0 0 512 512">
+                                    <g>
+                                        <path class="st0" d="M458.159,404.216c-18.93-33.65-49.934-71.764-100.409-93.431c-28.868,20.196-63.938,32.087-101.745,32.087
+                                    c-37.828,0-72.898-11.89-101.767-32.087c-50.474,21.667-81.479,59.782-100.398,93.431C28.731,448.848,48.417,512,91.842,512
+                                    c43.426,0,164.164,0,164.164,0s120.726,0,164.153,0C463.583,512,483.269,448.848,458.159,404.216z"/>
+                                        <path class="st0" d="M256.005,300.641c74.144,0,134.231-60.108,134.231-134.242v-32.158C390.236,60.108,330.149,0,256.005,0
+                                    c-74.155,0-134.252,60.108-134.252,134.242V166.4C121.753,240.533,181.851,300.641,256.005,300.641z"/>
+                                    </g>
+                                </svg>
+                                {% else %}
+                                <img class="profile-image" src='/{{ current_user.imgPath }}' alt="mdo" width="28"
+                                     height="28">
+                                {% endif %}
+                            </div>
+                            <div class="indicator-dropdown"></div>
+                        </div>
+                    </a>
+                    {% else %}
+                    <a class="text-href" href="/login" style="text-decoration: none;">
+                        <div class="menu-authorizeUser-panel">
+                            <span class="menu-text">Моя учётная запись</span>
+                            <div class="indicator-dropdown"></div>
+                        </div>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <header class="header-sticky-menu">
+
+        <div class="container-header">
+            <div class="menu-wrapper">
+                <a href="/static" class="menu-logo">
+                    <img class=img_logo1 src="/static\img\logos\logo-kd-main.png"
+                         alt="Лого1" aria-label="Logo">
+                    <use xlink:href="#"></use>
+                </a>
+
+                <ul class="menu-categories">
+                    {% if request.endpoint == "index" %}
+                    <li style="padding-right:40px!important;"><a href="/static" class="text-menu hover">Главная</a></li>
+                    {% else %}
+                    <li style="padding-right:40px!important;"><a href="/static" class="text-menu">Главная</a></li>
+                    {% endif %}
+                    <li style="padding-right:40px!important;">
+                        <div class="menu-category-item-sticky">
+                            <span class="text-menu-categories-sticky">Категории</span>
+                            <span aria-label="Открыть подменю Категории" aria-expanded="false">
+                            <svg class="dropdown-category-icon-sticky"
+                                 width="10"
+                                 height="10"
+                                 viewBox="0 -10 256 256"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                 <polyline points="208 96 128 176 48 96" fill="none" stroke-linecap="round"
+                                           stroke-linejoin="round" stroke-width="24"/>
+                            </svg>
+                        </span>
+                            <div class="widget-menu-category-sticky">
+                                <div class="widget-menu-category-holder">
+                                    <ul role="menu" class="widget-menu-box">
+                                        <li class="menu-item-doors-mk">
+                                            <div class="widget-menu-item-title">
+                                                <a class="widget-menu-title" href="http://doors-kd.ru/md/">Межкомнатные
+                                                    двери</a>
+                                            </div>
+                                            <div class="widget-menu-category-second-level">
+                                                <div class="imageframe-liftup">
+                                                <span class="widget-menu-imageframe-sticky">
+                                                    <a class="widget-menu-lightbox" href="http://doors-kd.ru/md/"
+                                                       target="_self" rel="noopener noreferrer">
+                                                        <img src="../static/img/menu/Category-mk.jpg"
+                                                             data-orig-src="../img/menu/Category-mk.jpg"
+                                                             alt="" class="widget-menu-img">
+                                                    </a>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <li class="menu-item-doors-mk">
+                                            <div class="widget-menu-item-title">
+                                                <a class="widget-menu-title" href="http://doors-kd.ru/md/">Входные
+                                                    двери</a>
+                                            </div>
+                                            <div class="widget-menu-category-second-level">
+                                                <div class="imageframe-liftup">
+                                                <span class="widget-menu-imageframe-sticky">
+                                                    <a class="widget-menu-lightbox" href="http://doors-kd.ru/md/"
+                                                       target="_self" rel="noopener noreferrer">
+                                                        <img src="../static/img/menu/Category-vd.jpg"
+                                                             data-orig-src="../static/img/menu/Category-vd.jpg"
+                                                             alt="" class="widget-menu-img">
+                                                    </a>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <li class="menu-item-doors-mk">
+                                            <div class="widget-menu-item-title">
+                                                <a class="widget-menu-title" href="http://doors-kd.ru/md/">Фурнитура</a>
+                                            </div>
+                                            <div class="widget-menu-category-second-level">
+                                                <div class="imageframe-liftup">
+                                                <span class="widget-menu-imageframe-sticky">
+                                                    <a class="widget-menu-lightbox" href="http://doors-kd.ru/md/"
+                                                       target="_self" rel="noopener noreferrer">
+                                                        <img src="../static/img/menu/Category-furniture.jpg"
+                                                             data-orig-src="../static/img/menu/Category-furniture.jpg"
+                                                             alt="" class="widget-menu-img">
+                                                    </a>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <li class="menu-item-doors-mk">
+                                            <div class="widget-menu-item-title">
+                                                <a class="widget-menu-title" href="http://doors-kd.ru/md/">Погонажные
+                                                    изделия</a>
+                                            </div>
+                                            <div class="widget-menu-category-second-level">
+                                                <div class="imageframe-liftup">
+                                                <span class="widget-menu-imageframe-sticky">
+                                                    <a class="widget-menu-lightbox" href="http://doors-kd.ru/md/"
+                                                       target="_self" rel="noopener noreferrer">
+                                                        <img src="../static/img/menu/Category-pg.jpg"
+                                                             data-orig-src="../static/img/menu/Category-pg.jpg"
+                                                             alt="" class="widget-menu-img">
+                                                    </a>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div style="clear:both;"></div>
+                            </div>
+                        </div>
+                    </li>
+                    {% if request.endpoint == "headings" %}
+                    <li style="padding-right:40px!important;"><a href="/headings" class="text-menu hover">Блог</a></li>
+                    {% else %}
+                    <li style="padding-right:40px!important;"><a href="/headings" class="text-menu">Блог</a></li>
+                    {% endif %}
+                    {% if request.endpoint == "about" %}
+                    <li style="padding-right:40px!important;"><a href="/about" class="text-menu hover">О нас</a></li>
+                    {% else %}
+                    <li style="padding-right:40px!important;"><a href="/about" class="text-menu">О нас</a></li>
+                    {% endif %}
+                    {% if request.endpoint == "contacts" %}
+                    <li style="padding-right:40px!important;"><a href="/contacts" class="text-menu hover">Контакты</a>
+                    </li>
+                    {% else %}
+                    <li style="padding-right:40px!important;"><a href="/contacts" class="text-menu">Контакты</a></li>
+                    {% endif %}
+                </ul>
+
+                <form class="menu-right-sticky" role="search">
+                    <a href="/create-article" class="button-enter-authorizeUser medium menu">Запись на замер</a>
+                    <div class="search-icon-box-sticky">
+                        <svg class="search-icon" width="800px" height="800px" viewBox="0 0 52 52"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M49.62,45.27,36.22,32a18.9,18.9,0,1,0-34.1-9.2A18.91,18.91,0,0,0,32,36.27l13.3,13.3a1.45,1.45,0,0,0,2.1,0l2.1-2.1A1.68,1.68,0,0,0,49.62,45.27Zm-28.7-11.5a12.9,12.9,0,1,1,12.9-12.9A12.87,12.87,0,0,1,20.92,33.77Z"/>
+                        </svg>
+                    </div>
+                </form>
+
+                <div class="hamburger-menu"></div>
+            </div>
+        </div>
+    </header>
+
+    <header class="header-menu">
+
+        <div class="container-header">
+            <div class="menu-wrapper">
+                <a href="/static" class="menu-logo">
+                    <img class=img_logo1 src="/static\img\logos\logo-kd-main.png"
+                         id="menu-logo"
+                         alt="Лого1" aria-label="Logo">
+                    <use xlink:href="#"></use>
+                </a>
+
+                <ul class="menu-categories">
+                    {% if request.endpoint == "index" %}
+                    <li style="padding-right:40px!important;"><a href="/static" class="text-menu hover">Главная</a></li>
+                    {% else %}
+                    <li style="padding-right:40px!important;"><a href="/static" class="text-menu">Главная</a></li>
+                    {% endif %}
+                    <li style="padding-right:40px!important;">
+                        <div class="menu-category-item">
+                            <span class="text-menu-categories">Категории</span>
+                            <span aria-label="Открыть подменю Категории" aria-expanded="false">
+                            <svg class="dropdown-category-icon"
+                                 width="10"
+                                 height="10"
+                                 viewBox="0 -10 256 256"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                 <polyline points="208 96 128 176 48 96" fill="none" stroke-linecap="round"
+                                           stroke-linejoin="round" stroke-width="24"/>
+                            </svg>
+                        </span>
+                            <div class="widget-menu-category">
+                                <div class="widget-menu-category-holder">
+                                    <ul role="menu" class="widget-menu-box">
+                                        <li id="menu-item-doors-mk" class="menu-item-doors-mk">
+                                            <div class="widget-menu-item-title">
+                                                <a class="widget-menu-title" href="http://doors-kd.ru/md/">Межкомнатные
+                                                    двери</a>
+                                            </div>
+                                            <div class="widget-menu-category-second-level">
+                                                <div class="imageframe-liftup">
+                                                <span class="widget-menu-imageframe">
+                                                    <a class="widget-menu-lightbox" href="http://doors-kd.ru/md/"
+                                                       target="_self" rel="noopener noreferrer">
+                                                        <img src="../static/img/menu/Category-mk.jpg"
+                                                             data-orig-src="../img/menu/Category-mk.jpg"
+                                                             alt="" class="widget-menu-img">
+                                                    </a>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <li id="menu-item-doors-mk2" class="menu-item-doors-mk">
+                                            <div class="widget-menu-item-title">
+                                                <a class="widget-menu-title" href="http://doors-kd.ru/md/">Входные
+                                                    двери</a>
+                                            </div>
+                                            <div class="widget-menu-category-second-level">
+                                                <div class="imageframe-liftup">
+                                                <span class="widget-menu-imageframe">
+                                                    <a class="widget-menu-lightbox" href="http://doors-kd.ru/md/"
+                                                       target="_self" rel="noopener noreferrer">
+                                                        <img src="../static/img/menu/Category-vd.jpg"
+                                                             data-orig-src="../static/img/menu/Category-vd.jpg"
+                                                             alt="" class="widget-menu-img">
+                                                    </a>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <li id="menu-item-doors-mk3" class="menu-item-doors-mk">
+                                            <div class="widget-menu-item-title">
+                                                <a class="widget-menu-title" href="http://doors-kd.ru/md/">Фурнитура</a>
+                                            </div>
+                                            <div class="widget-menu-category-second-level">
+                                                <div class="imageframe-liftup">
+                                                <span class="widget-menu-imageframe">
+                                                    <a class="widget-menu-lightbox" href="http://doors-kd.ru/md/"
+                                                       target="_self" rel="noopener noreferrer">
+                                                        <img src="../static/img/menu/Category-furniture.jpg"
+                                                             data-orig-src="../static/img/menu/Category-furniture.jpg"
+                                                             alt="" class="widget-menu-img">
+                                                    </a>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <li id="menu-item-doors-mk4" class="menu-item-doors-mk">
+                                            <div class="widget-menu-item-title">
+                                                <a class="widget-menu-title" href="http://doors-kd.ru/md/">Погонажные
+                                                    изделия</a>
+                                            </div>
+                                            <div class="widget-menu-category-second-level">
+                                                <div class="imageframe-liftup">
+                                                <span class="widget-menu-imageframe">
+                                                    <a class="widget-menu-lightbox" href="http://doors-kd.ru/md/"
+                                                       target="_self" rel="noopener noreferrer">
+                                                        <img src="../static/img/menu/Category-pg.jpg"
+                                                             data-orig-src="../static/img/menu/Category-pg.jpg"
+                                                             alt="" class="widget-menu-img">
+                                                    </a>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div style="clear:both;"></div>
+                            </div>
+                        </div>
+                    </li>
+                    {% if request.endpoint == "headings" %}
+                    <li style="padding-right:40px!important;"><a href="/headings" class="text-menu hover">Блог</a></li>
+                    {% else %}
+                    <li style="padding-right:40px!important;"><a href="/headings" class="text-menu">Блог</a></li>
+                    {% endif %}
+                    {% if request.endpoint == "about" %}
+                    <li style="padding-right:40px!important;"><a href="/about" class="text-menu hover">О нас</a></li>
+                    {% else %}
+                    <li style="padding-right:40px!important;"><a href="/about" class="text-menu">О нас</a></li>
+                    {% endif %}
+                    {% if request.endpoint == "contacts" %}
+                    <li style="padding-right:40px!important;"><a href="/contacts" class="text-menu hover">Контакты</a>
+                    </li>
+                    {% else %}
+                    <li style="padding-right:40px!important;"><a href="/contacts" class="text-menu">Контакты</a></li>
+                    {% endif %}
+                </ul>
+
+                <form class="menu-right" role="search">
+                    <a href="/sample" class="button-enter-authorizeUser medium menu">Запись на замер</a>
+                    <div class="search-icon-box">
+                        <svg class="search-icon" width="800px" height="800px" viewBox="0 0 52 52"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M49.62,45.27,36.22,32a18.9,18.9,0,1,0-34.1-9.2A18.91,18.91,0,0,0,32,36.27l13.3,13.3a1.45,1.45,0,0,0,2.1,0l2.1-2.1A1.68,1.68,0,0,0,49.62,45.27Zm-28.7-11.5a12.9,12.9,0,1,1,12.9-12.9A12.87,12.87,0,0,1,20.92,33.77Z"/>
+                        </svg>
+                    </div>
+                </form>
+
+                <div class="hamburger-menu"></div>
+            </div>
+        </div>
+    </header>
+
+
+    <header class="mobile-menu-box">
+        <nav class="mobile-menu" aria-label="Главное мобильное меню" style="display: block;">
+            <ul class="mobile-menu-list">
+                <li class="mobile-menu-item">
+                    <a href="http://doors-kd.ru/" class="mobile-menu-highlight">
+                        <span class="menu-text">Главная</span>
+                    </a>
+                </li>
+                <li class="mobile-menu-item">
+                    <a href="http://doors-kd.ru/blog/" class="mobile-menu-highlight">
+                        <span class="menu-text">Блог</span>
+                    </a>
+                </li>
+                <li class="mobile-menu-item-categories">
+                    <div class="mobile-menu-categories">
+                        <a class="mobile-menu-highlight"><span class="menu-text">Категории</span>
+                        </a>
+                        <a aria-label="Открыть подменю Категории" aria-expanded="false"
+                           class="indicator-dropdown-medium">
+                        </a>
+                    </div>
+                </li>
+                <ul role="menu" class="mobile-sub-menu">
+                    <li class="mobile-submenu-item">
+                        <a class="mobile-menu-highlight" href="http://doors-kd.ru/md/">- Межкомнатные двери</a>
+                    </li>
+                    <li class="mobile-submenu-item">
+                        <a class="mobile-menu-highlight" href="http://doors-kd.ru/vd/">- Входные двери</a>
+                    </li>
+                    <li class="mobile-submenu-item">
+                        <a class="mobile-menu-highlight" href="http://doors-kd.ru/furn/">- Фурнитура</a>
+                    </li>
+                    <li class="mobile-submenu-item">
+                        <a class="mobile-menu-highlight" href="http://doors-kd.ru/pg/">- Погонажные изделия</a>
+                    </li>
+                </ul>
+                <li class="mobile-menu-item">
+                    <a href="http://doors-kd.ru/we/" class="mobile-menu-highlight">
+                        <span class="menu-text">О нас</span>
+                    </a>
+                </li>
+                <li class="mobile-menu-item">
+                    <a href="http://doors-kd.ru/cocntacts/" class="mobile-menu-highlight">
+                        <span class="menu-text">Контакты</span>
+                    </a>
+                </li>
+                <li class="mobile-menu-item">
+                    <a href="http://doors-kd.ru/zamer/" class="mobile-menu-highlight"><span
+                            class="menu-text">Запись на замер</span></a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+</header>
+{% block body %}{% endblock %}
+<footer class="shop-footer">
+    <div class="footer-widget-area">
+        <div class="footer-column1">
+            <section id="text-6" class="footer-text">
+                <div style="margin-bottom: 50px;" class="textwidget"><p><img
+                        src="../static/img/content/Краснодеревщик6-1.png" alt="logo_footer"
+                        width="160" height="86" class=""></p>
+                </div>
+                <div style="clear:both;"></div>
+            </section>
+            <section id="text-7" class="footer-widget-text">
+                <div class="text-widget">Проспект Ленина 14,<br>
+                    Стерлитамак, 453103<br>
+
+                    Телефон: 8 (917) 349-14-05,<br>
+                    8(3473)43-40-50<br>
+                    Email: Elitehouse.str@mail.ru<br>
+                    Web: Doors-kd.ru<br></div>
+                <div style="clear:both;"></div>
+            </section>
+            <section id="social_links-widget" class="social_links-widget">
+                <div class="social-container">
+                    <a data-tooltip="Vk" href="#" class="vk-icon-footer"></a>
+                    <a data-tooltip="Facebook" href="#" class="facebook-icon-footer"></a>
+                    <a data-tooltip="Instagram" href="#" class="instagram-icon-footer"></a>
+                    <a data-tooltip="Whatsapp" href="#" class="whatsapp-icon-footer"></a>
+                    <a data-tooltip="Twitter" href="#" class="twitter-icon-footer"></a>
+                </div>
+            </section>
+        </div>
+        <div class="footer-column2">
+        </div>
+        <div class="footer-column3">
+            <section id="recent-posts" class="widget-recent-entries">
+                <h4 class="widget-title" data-fontsize="15" data-lineheight="22">Свежие записи</h4>
+                <ul style="padding-inline-start: 0px;margin: auto;">
+                    <div class="footer-fresh-articles">
+                        <svg class="dropdown-footer-icon"
+                             width="13"
+                             height="13"
+                             viewBox="0 75 256 256"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <polyline points="208 96 128 176 48 96" fill="none" stroke-linecap="round"
+                                      stroke-linejoin="round" stroke-width="36"/>
+                        </svg>
+                        <li class="footer-list">
+                            <a class="text-footer-list"
+                               href="http://doors-kd.ru/2019/11/14/aenean-lobortis-sapien-enim-viverra/">Sofia в
+                                передаче
+                                Квартирный вопрос: «Кухня со вкусом инжира»</a>
+                        </li>
+                    </div>
+                    <div class="footer-fresh-articles">
+                        <svg class="dropdown-footer-icon"
+                             width="13"
+                             height="13"
+                             viewBox="0 75 256 256"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <polyline points="208 96 128 176 48 96" fill="none" stroke-linecap="round"
+                                      stroke-linejoin="round" stroke-width="36"/>
+                        </svg>
+                        <li class="footer-list">
+                            <a class="text-footer-list"
+                               href="http://doors-kd.ru/2019/10/18/duis-ac-massa-semper-maximus-lacus/">Идеи: необычные
+                                возможности покрытия Sofia «под грунт»</a>
+                        </li>
+                    </div>
+                    <div class="footer-fresh-articles">
+                        <svg class="dropdown-footer-icon"
+                             width="13"
+                             height="13"
+                             viewBox="0 75 256 256"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <polyline points="208 96 128 176 48 96" fill="none" stroke-linecap="round"
+                                      stroke-linejoin="round" stroke-width="36"/>
+                        </svg>
+                        <li class="footer-list">
+                            <a class="text-footer-list"
+                               href="http://doors-kd.ru/2019/09/09/fusce-mattis-nunc-ut-aliquam/">Как
+                                выбрать межкомнатные
+                                двери</a>
+                        </li>
+                    </div>
+                    <div class="footer-fresh-articles">
+                        <svg class="dropdown-footer-icon"
+                             width="13"
+                             height="13"
+                             viewBox="0 75 256 256"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <polyline points="208 96 128 176 48 96" fill="none" stroke-linecap="round"
+                                      stroke-linejoin="round" stroke-width="36"/>
+                        </svg>
+                        <li class="footer-list">
+                            <a class="text-footer-list"
+                               href="http://doors-kd.ru/2019/08/09/nunc-ferment-nulla-eu-justo/">Выбираем
+                                двери: какое
+                                покрытие самое практичное?</a>
+                        </li>
+                    </div>
+                    <div class="footer-fresh-articles">
+                        <svg class="dropdown-footer-icon"
+                             width="13"
+                             height="13"
+                             viewBox="0 75 256 256"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <polyline points="208 96 128 176 48 96" fill="none" stroke-linecap="round"
+                                      stroke-linejoin="round" stroke-width="36"/>
+                        </svg>
+                        <li class="footer-list">
+                            <a class="text-footer-list"
+                               href="http://doors-kd.ru/2019/07/19/aliquam-posuere-magna-eget/">Как
+                                произвести замер проёма
+                                самостоятельно</a>
+                        </li>
+                    </div>
+                </ul>
+                <div style="clear:both;"></div>
+            </section>
+        </div>
+        <div class="footer-column4">
+            <section id="tag_cloud-6" class="widget-tag-cloud"><h4
+                    class="widget-title" data-fontsize="15" data-lineheight="22">Метки</h4>
+                <div class="tag-cloud">
+                    <a href="http://doors-kd.ru/tag/sofia/"
+                       class="tag-cloud-link"
+                       aria-label="sofia (3 элемента)">sofia</a>
+                    <a href="http://doors-kd.ru/tag/%d0%b2%d0%b0%d0%bd%d0%bd%d0%b0%d1%8f/"
+                       class="tag-cloud-link"
+                       aria-label="ванная (1 элемент)">ванная</a>
+                    <a href="http://doors-kd.ru/tag/%d0%b4%d0%b2%d0%b5%d1%80%d1%8c-invisible/"
+                       class="tag-cloud-link"
+                       aria-label="дверь invisible (2 элемента)">дверь invisible</a>
+                    <a href="http://doors-kd.ru/tag/%d0%b8%d0%b4%d0%b5%d1%8f/"
+                       class="tag-cloud-link" aria-label="идея (1 элемент)">идея</a>
+                    <a href="http://doors-kd.ru/tag/%d0%ba%d0%b0%d0%ba-%d0%b2%d1%8b%d0%b1%d1%80%d0%b0%d1%82%d1%8c/"
+                       class="tag-cloud-link" aria-label="как выбрать (4 элемента)">как
+                        выбрать</a>
+                    <a href="http://doors-kd.ru/tag/%d0%ba%d0%b2%d0%b0%d1%80%d1%82%d0%b8%d1%80%d0%bd%d1%8b%d0%b9-%d0%b2%d0%be%d0%bf%d1%80%d0%be%d1%81/"
+                       class="tag-cloud-link"
+                       aria-label="квартирный вопрос (1 элемент)">квартирный вопрос</a>
+                    <a href="http://doors-kd.ru/tag/%d0%ba%d0%be%d0%bc%d0%bf%d0%bb%d0%b5%d0%ba%d1%82%d1%83%d1%8e%d1%89%d0%b8%d0%b5/"
+                       class="tag-cloud-link" aria-label="комплектующие (1 элемент)">комплектующие</a>
+                    <a href="http://doors-kd.ru/tag/%d0%ba%d1%83%d1%85%d0%bd%d1%8f/"
+                       class="tag-cloud-link" aria-label="кухня (1 элемент)">кухня</a>
+                    <a href="http://doors-kd.ru/tag/%d0%bd%d0%be%d0%b2%d0%be%d1%81%d1%82%d0%b8-%d0%bc%d0%be%d0%b4%d1%8b/"
+                       class="tag-cloud-link" aria-label="новости моды (1 элемент)">новости
+                        моды</a>
+                    <a href="http://doors-kd.ru/tag/%d0%be%d1%82%d0%b4%d0%b5%d0%bb%d0%ba%d0%b0-%d0%b4%d0%b2%d0%b5%d1%80%d0%b5%d0%b9/"
+                       class="tag-cloud-link"
+                       aria-label="отделка дверей (4 элемента)">отделка дверей</a>
+                    <a href="http://doors-kd.ru/tag/%d0%bf%d0%be%d0%bb%d0%b5%d0%b7%d0%bd%d0%be%d0%b5/"
+                       class="tag-cloud-link" aria-label="полезное (5 элементов)">полезное</a>
+                    <a href="http://doors-kd.ru/tag/%d1%83%d1%81%d1%82%d0%b0%d0%bd%d0%be%d0%b2%d0%ba%d0%b0/"
+                       class="tag-cloud-link" aria-label="установка (1 элемент)">установка</a>
+                    <a href="http://doors-kd.ru/tag/%d1%84%d1%83%d1%80%d0%bd%d0%b8%d1%82%d1%83%d1%80%d0%b0/"
+                       class="tag-cloud-link" aria-label="фурнитура (1 элемент)">фурнитура</a>
+                </div>
+                <div style="clear:both;"></div>
+            </section>
+        </div>
+        <div class="fusion-clearfix"></div>
+    </div>
+    <div class="to-top-container">
+        <a href="#" id="toTop" style="display: block;">
+            <span id="toTopHover"></span>
+            <span class="screen-reader-text"><svg class="dropdown-to-top-icon"
+                                                  width="18"
+                                                  height="18"
+                                                  viewBox="0 150 256 256"
+                                                  xmlns="http://www.w3.org/2000/svg">
+                            <polyline points="208 96 128 176 48 96" fill="none" stroke-linecap="round"
+                                      stroke-linejoin="round" stroke-width="30"/>
+                        </svg></span>
+        </a>
+    </div>
+    <footer id="footer" class="footer-copyright-area">
+        <div class="footer-copyright-content" style="padding-bottom: 0px;">
+            © Copyright 2012 -&nbsp;
+            <script>document.write(new Date().getFullYear());</script>
+            &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Краснодеревщик &nbsp;|&nbsp;&nbsp;&nbsp;Все права
+            защищены
+        </div>
+    </footer>
+</footer>
+</body>
+</html>

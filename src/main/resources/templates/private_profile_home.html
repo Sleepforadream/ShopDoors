@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{private_profile}" lang="ru">
+
+<th:block layout:fragment="info">
+    <script type="text/javascript" th:src="@{/js/privateProfileMain.js}" defer></script>
+
+    <div class="profile-info-box">
+        <div class="user-title">
+            <h2 class="profile-title-text">
+                <th:block th:if="${#authentication.principal.imgPath} == null">
+                    <p>Привет, <span th:text="${#authentication.principal.nickName}">User</span></p>
+                </th:block>
+                <th:block th:unless="${#authentication.principal.imgPath} == null">
+                    <img class="user-img-profile" th:src="${imgProfileUrl}"
+                         alt="mdo" width="64" height="64" src="">
+                    <p>Привет, <span th:text="${#authentication.principal.nickName}">User</span></p>
+                </th:block>
+            </h2>
+            <hr>
+        </div>
+        <div class="user-info">
+            <p><b>Никнейм:</b>
+                <span th:text="${#authentication.principal.nickName}">User</span>!
+            </p>
+            <hr>
+            <p><b>Обо мне:</b>
+                <th:block th:if="${#authentication.principal.info} == null">
+                </th:block>
+                <th:block th:unless="${#authentication.principal.info} == null">
+                    <span th:text="${#authentication.principal.info}">Info</span>
+                </th:block>
+            </p>
+            <hr>
+            <p><b>Автор статей:</b>
+<!--                <th:block th:if="${#authentication.principal.articles} == null">-->
+<!--                    <span th:text="У автора пока нет написанных им статей">Article</span>-->
+<!--                </th:block>-->
+<!--                <th:block th:if="${#authentication.principal.articles} == null">-->
+<!--                    th:block th:for="${#authentication.principal.articles}">-->
+<!--                    <span th:text="${#article}">Article</span>-->
+<!--                </th:block>-->
+            </p>
+            <hr>
+            <p>
+                <b>Дата регистрации на сайте:</b>
+                <span th:text="${#authentication.principal.registerDate}">Register date</span>
+            </p>
+            <hr>
+        </div>
+    </div>
+</th:block>

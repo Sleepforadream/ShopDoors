@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Блоги
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="p-4 p-md-5 mb-4 rounded text-bg-dark2">
+        <div class="col-md-13 px-0">
+            <h1 class="title-text-image-posts fst-italic">Все пользователи сайта</h1>
+            <br>
+            <p class="sub-text-image-posts">Полный перечень всех пользователей зарегистрированных на сайте</p>
+        </div>
+    </div>
+    <br>
+    <hr>
+    <h2>Все пользователи</h2>
+    <hr>
+    {% if articles|length > 0 %}
+    {% for element in articles %}
+    <div class="alert alert-info">
+        <div class="announcement-info">
+            <div class="title-and-intro">
+                <h2 class="announcement-title">{{ element.title }}</h2>
+                <p class="intro-posts"> {{ element.intro }}</p>
+
+            </div>
+            <div class="btn-posts-to-detail">
+                <p class="intro-heading"><b>Рубрика: {{ element.heading }}</b></p>
+                <p class="date-posts"><b>Дата: {{ element.date.date() }}</b></p>
+                <a href="/posts/{{ element.id }}" class="btn btn-warning">Детальнее</a>
+            </div>
+        </div>
+        <div class="preview-img">
+            <p class="intro-img"><img src="{{ element.imgpath }}"></p>
+        </div>
+    </div>
+
+
+    {% endfor %}
+    {% else %}
+    <p>У нас ещё нет статей на сайте</p>
+    {% endif %}
+    <p><a href="{{ url_for('logout') }}">Logout</a></p>
+</div>
+{% endblock %}

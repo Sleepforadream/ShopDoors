@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}" lang="ru">
+
+<head>
+    <title layout:fragment="title">Главная</title>
+</head>
+
+<div layout:fragment="content">
+
+    <script type="text/javascript" th:src="@{/js/homeScripts.js}" defer></script>
+    <main class="container" xmlns="http://www.w3.org/1999/html">
+        <div class="sliders-container">
+            <ul class="flex-direction-nav">
+                <li class="flex-nav-prev"><a class="flex-prev" href="#">
+                    <svg class="dropdown-to-left-icon"
+                         width="34"
+                         height="34"
+                         viewBox="-40 0 256 256"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <polyline points="208 96 128 176 48 96" fill="none" stroke-linecap="round"
+                                  stroke-linejoin="round" stroke-width="18"/>
+                    </svg>
+                </a></li>
+                <li class="flex-nav-next"><a class="flex-next" href="#">
+                    <svg class="dropdown-to-right-icon"
+                         width="34"
+                         height="34"
+                         viewBox="40 0 256 256"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <polyline points="208 96 128 176 48 96" fill="none" stroke-linecap="round"
+                                  stroke-linejoin="round" stroke-width="18"/>
+                    </svg>
+                </a></li>
+            </ul>
+            <div class="slides active" style="max-width: 100%; width: 100%;">
+                <div class="text-slide" data-mute="yes" data-loop="yes" data-autoplay="yes">
+                    <div class="text-box-slide" data-mute="yes" data-loop="yes" data-autoplay="yes">
+                        <div class="title-sc-wrapper">
+                            <h2 class="title-heading-wrapper"
+                                data-inline-fontsize="80px"
+                                data-inline-lineheight="96px"
+                                data-fontsize="80"
+                                data-lineheight="96">
+                                ДОБРО ПОЖАЛОВАТЬ!
+                            </h2>
+                        </div>
+                        <div class="caption-with-bg">
+                            <h3 class="subtitle-heading-wrapper"
+                                data-inline-fontsize="24px" data-inline-lineheight="28.8px"
+                                data-fontsize="24" data-lineheight="28">
+                                ПЕРВЫЙ СПЕЦИАЛИЗИРОВАННЫЙ САЛОН ДВЕРЕЙ В г.СТЕРЛИТАМАК
+                            </h3>
+                        </div>
+                        <div class="slider-button">
+                            <a class="button-wrapper"
+                               data-animationtype="2InDown" data-animationduration="1"
+                               data-animationoffset="100%" target="_blank" rel="noopener noreferrer"
+                               href="https://doors-kd.ru/md/"
+                               style="visibility: visible; animation-duration: 1s;">
+                                <span class="button-wrapper-text">ПОСМОТРЕТЬ СЕЙЧАС!</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="wrapper-background-image" data-imgwidth="2560"></div>
+            </div>
+
+
+            <div class="slides2" style="max-width: 100%; width: 100%;">
+                <div class="text-slide" data-mute="yes" data-loop="yes" data-autoplay="yes">
+                    <div class="text-box-slide" data-mute="yes" data-loop="yes" data-autoplay="yes">
+                        <div class="title-sc-wrapper">
+                            <h2 class="title-heading-wrapper"
+                                data-inline-fontsize="80px"
+                                data-inline-lineheight="96px"
+                                data-fontsize="80"
+                                data-lineheight="96">
+                                КАЧЕСТВО И НАДЁЖНОСТЬ
+                            </h2>
+                        </div>
+                        <div class="caption-with-bg">
+                            <h3 class="subtitle-heading-wrapper"
+                                data-inline-fontsize="24px" data-inline-lineheight="28.8px"
+                                data-fontsize="24" data-lineheight="28">
+                                МЕЖКОМНАТНЫЕ И ВХОДНЫЕ ДВЕРИ ОТ ВЕДУЩИХ ПРОИЗВОДИТЕЛЕЙ РОССИИ И ИТАЛИИ
+                            </h3>
+                        </div>
+                        <div class="slider-button">
+                            <a class="button-wrapper"
+                               data-animationtype="2InDown" data-animationduration="1"
+                               data-animationoffset="100%" target="_blank" rel="noopener noreferrer"
+                               href="https://doors-kd.ru/md/"
+                               style="visibility: visible; animation-duration: 1s;">
+                                <span class="button-wrapper-text">КАТАЛОГ</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="wrapper-background-image2" data-imgwidth="2560"></div>
+            </div>
+
+            <div class="slides3" style="max-width: 100%; width: 100%;">
+                <div class="text-slide" data-mute="yes" data-loop="yes" data-autoplay="yes">
+                    <div class="text-box-slide" data-mute="yes" data-loop="yes" data-autoplay="yes">
+                        <div class="title-sc-wrapper">
+                            <h2 class="title-heading-wrapper"
+                                data-inline-fontsize="80px"
+                                data-inline-lineheight="96px"
+                                data-fontsize="80"
+                                data-lineheight="96">
+                                ВЫБЕРИ СВОЙ СТИЛЬ
+                            </h2>
+                        </div>
+                        <div class="caption-with-bg">
+                            <h3 class="subtitle-heading-wrapper"
+                                data-inline-fontsize="24px" data-inline-lineheight="28.8px"
+                                data-fontsize="24" data-lineheight="28">
+                                НОВЫЕ КОЛЛЕКЦИИ ПОСЛЕДНИХ ТРЕНДОВ
+                            </h3>
+                        </div>
+                        <div class="slider-button">
+                            <a class="button-wrapper"
+                               data-animationtype="2InDown" data-animationduration="1"
+                               data-animationoffset="100%" target="_blank" rel="noopener noreferrer"
+                               href="https://doors-kd.ru/md/"
+                               style="visibility: visible; animation-duration: 1s;">
+                                <span class="button-wrapper-text">СМОТРЕТЬ</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="wrapper-background-image3" data-imgwidth="2560"></div>
+            </div>
+        </div>
+
+        <div class="block-recommend">
+
+            <div class="text-section">
+                <div class="section-title">
+                    <div class="separation-line"></div>
+                    <div class="text-title-section"><h1>Рекомендуемые товары</h1></div>
+                    <div class="separation-line"></div>
+                </div>
+                <div class="section-subTitle">
+                    <p>Межкомнатные и входные двери от лучших фабрик-производителей.</p>
+                </div>
+            </div>
+            <div class="image-box-recommend">
+
+                <div class="image-recommend-block">
+                    <div class="text-image-recommend">
+                        <div class="block-text-recommend">
+                            <div class="title-image-recommend">Sofia</div>
+                            <div class="subTitle-image-recommend">СЛУЖЕНИЕ ГАРМОНИИ И КРАСОТЕ</div>
+                            <div class="button-image-recommend">ПЕРЕЙТИ</div>
+                        </div>
+                    </div>
+                    <div class="image-recommend1"></div>
+                </div>
+
+                <div class="image-recommend-block2">
+                    <div class="text-image-recommend">
+                        <div class="block-text-recommend2">
+                            <div class="title-image-recommend">KD</div>
+                            <div class="subTitle-image-recommend">ПРОСЛУЖАТ ДОЛГО...</div>
+                            <div class="button-image-recommend">ПЕРЕЙТИ</div>
+                        </div>
+                    </div>
+                    <div class="image-recommend2"></div>
+                </div>
+
+                <div class="image-recommend-block3">
+                    <div class="text-image-recommend">
+                        <div class="block-text-recommend3">
+                            <div class="title-image-recommend">Guardian</div>
+                            <div class="subTitle-image-recommend2">НАДЁЖНЫЕ СТАЛЬНЫЕ ДВЕРИ</div>
+                            <div class="button-image-recommend">ПЕРЕЙТИ</div>
+                        </div>
+                    </div>
+                    <div class="image-recommend3"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="most-viewed">
+
+            <div class="text-section">
+                <div class="section-title">
+                    <div class="separation-line"></div>
+                    <div class="text-title-section"><h1>Самые продаваемые</h1></div>
+                    <div class="separation-line"></div>
+                </div>
+                <div class="section-subTitle">
+                    <p>Наши лидеры продаж</p>
+                </div>
+                <div style="border-bottom-style: solid; border-color: #e7e6e6; border-bottom-width: thin; margin-bottom:5px;"></div>
+                <div style="border-bottom-style: solid; border-color: #e7e6e6; border-bottom-width: thin; margin-bottom:5px;"></div>
+            </div>
+
+            <div class="most-viewed-box">
+                <div class="most-viewed-container">
+                    <div class="most-viewed-text">Краснодеревщик 3000 линия</div>
+                    <div class="most-viewed-image">
+                        <img class="image-viewed"
+                             th:src="@{/img/content/vib_zamer-e1585215784813-400x387.jpg}" alt="most-viewed1" src="">
+                    </div>
+                </div>
+                <div class="most-viewed-container">
+                    <div class="most-viewed-text">Краснодеревщик 6000 линия</div>
+                    <div class="most-viewed-image">
+                        <img class="image-viewed"
+                             th:src="@{/img/content/conseption2.jpg}" alt="most-viewed2" src="">
+                    </div>
+                </div>
+                <div class="most-viewed-container-right">
+                    <div class="most-viewed-text">Краснодеревщик 700 линия</div>
+                    <div class="most-viewed-image">
+                        <img class="image-viewed"
+                             th:src="@{/img/content/conception1-e1585214258820.jpg}" alt="most-viewed3" src="">
+                    </div>
+                </div>
+            </div>
+            <div style="border-bottom-style: solid; border-color: #e7e6e6; border-bottom-width: thin;
+        margin-bottom:5px;margin-right: 30px; margin-left: 30px;"></div>
+            <div style="border-bottom-style: solid; border-color: #e7e6e6; border-bottom-width: thin;
+        margin-bottom:5px;margin-right: 30px; margin-left: 30px;"></div>
+        </div>
+
+        <div class="guaranties">
+
+            <div class="text-section">
+                <div class="section-title">
+                    <div class="separation-line"></div>
+                    <div class="text-title-section"><h1>Гарантии</h1></div>
+                    <div class="separation-line"></div>
+                </div>
+                <br>
+                <div style="border-bottom-style: solid; border-color: #e7e6e6; border-bottom-width: thin; margin-bottom:5px;"></div>
+                <div style="border-bottom-style: solid; border-color: #e7e6e6; border-bottom-width: thin; margin-bottom:5px;"></div>
+            </div>
+
+            <div class="image-box-guaranties">
+
+                <div class="image-guaranties-block">
+                    <div class="text-image-guaranties">
+                        <div class="title-image-guaranties">Гарантия установки</div>
+                        <div class="subTitle-image-guaranties">1 год гарантийного обслуживания дверей установленных
+                            нашей
+                            монтажной бригадой
+                        </div>
+                        <div class="button-image-guaranties">Показать больше</div>
+                    </div>
+                </div>
+
+                <div class="image-guaranties-block2">
+                    <div class="text-image-guaranties2">
+                        <div class="title-image-guaranties">Гарантия продукции</div>
+                        <div class="subTitle-image-guaranties">Дополнительная гарантия на качество дверей приобретённых
+                            в
+                            нашем салоне
+                        </div>
+                        <div class="button-image-guaranties2">Показать больше</div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="new-collection">
+
+            <div class="text-section">
+                <div class="section-title">
+                    <div class="separation-line"></div>
+                    <div class="text-title-section"><h1>Новые коллекции</h1></div>
+                    <div class="separation-line"></div>
+                </div>
+                <div class="section-subTitle">
+                    <p>Совершенно новые двери от лучших дизайнеров</p>
+                </div>
+                <div style="border-bottom-style: solid; border-color: #e7e6e6; border-bottom-width: thin; margin-bottom:5px;"></div>
+                <div style="border-bottom-style: solid; border-color: #e7e6e6; border-bottom-width: thin; margin-bottom:5px;"></div>
+            </div>
+
+            <div class="new-collection-box">
+                <div class="new-collection-container">
+                    <div class="new-collection-text">Монохромный кортекс</div>
+                    <div class="new-collection-image">
+                        <img class="new-collection-image"
+                             th:src="@{/img/content/ursU68G68NANAvOFe2bDk_2tZ3t35U_S.jpg}" alt="new-collection1" src="">
+                    </div>
+                </div>
+                <div class="new-collection-container">
+                    <div class="new-collection-text">Скрытый плинтус «Invisible»</div>
+                    <div class="new-collection-image">
+                        <img class="new-collection-image"
+                             th:src="@{/img/content/KQRMiqP5rj2M-mjP9kgoIoVxcnf-f-ok.jpg}" alt="new-collection2" src="">
+                    </div>
+                </div>
+                <div class="new-collection-container-right">
+                    <div class="new-collection-text">Реечные перегородки</div>
+                    <div class="new-collection-image">
+                        <img class="new-collection-image"
+                             th:src="@{/img/content/3842-2-e1624521337779.jpg}" alt="new-collection3" src="">
+                    </div>
+                </div>
+            </div>
+            <div style="border-bottom-style: solid; border-color: #e7e6e6; border-bottom-width: thin;
+        margin-bottom:5px;margin-right: 30px; margin-left: 30px;"></div>
+            <div style="border-bottom-style: solid; border-color: #e7e6e6; border-bottom-width: thin;
+        margin-bottom:5px;margin-right: 30px; margin-left: 30px;"></div>
+        </div>
+
+        <div class="popover-guaranties">
+            <div class="arrow"></div>
+            <h3 class="popover-title">Гарантия на установку</h3>
+            <div class="popover-content">Для установки лучших дверей требуются лучшие специалисты.
+                Наши высококвалифицированные монтажные бригады гарантируют Вам качество своей работы.
+                Если в течение года с Вашими дверями произошло что-то связанное с неточностями или ошибками
+                при монтаже (провес полотна, задевание коробки при закрывании, щели на стыках где их быть не
+                должно и т.п.), то к Вам выезжает мастер и бесплатно в кратчайшие сроки устраняет все возникшие
+                проблемы.
+            </div>
+        </div>
+        <div class="popover-guaranties2">
+            <div class="arrow"></div>
+            <h3 class="popover-title">Гарантия на продукт</h3>
+            <div class="popover-content">На всю продукцию, приобретённую в нашем салоне распространяется гарантия,
+                срок действия которой отдельно устанавливает каждая фабрика-производитель. Это значит, что любое
+                отклонение от нормы качества произведённого товара будет признано как брак. После этого в ускоренном
+                порядке последует перепроизводство и замена данного продукта на товар надлежащего качества.
+            </div>
+        </div>
+
+        <div class="slider-review">
+
+            <div class="text-section">
+                <div class="section-title">
+                    <div class="separation-line"></div>
+                    <div class="text-title-section"><h1>Отзывы</h1></div>
+                    <div class="separation-line"></div>
+                </div>
+                <br>
+            </div>
+
+            <div class="slider-review-box" style="max-width: 100%; width: 100%;">
+                <div class="text-slide-review" data-mute="yes" data-loop="yes" data-autoplay="yes">
+                    <img class="avatar-image-review active" th:src="@{img/content/Без-имени-2.png}" alt="avatar-review1"
+                         src="">
+                    <img class="avatar-image-review2" th:src="@{img/content/Без-имени-1-1.png}" alt="avatar-review1"
+                         src="">
+                    <div class="title-sc-review">
+                        <h2 class="title-heading-review active"
+                            data-inline-fontsize="80px"
+                            data-inline-lineheight="96px"
+                            data-fontsize="80"
+                            data-lineheight="96">
+                            Мы уже много лет знаем этот магазин и только там адекватный персонал, который все популярно
+                            и подробно объясняет и рассказывает. Мы уже брали двери себе в квартиру, в дом и нашим
+                            детям,
+                            поэтому советую всем этот магазин. Качественные двери и профессиональный персонал.
+                        </h2>
+                        <h2 class="title-heading-review2"
+                            data-inline-fontsize="80px"
+                            data-inline-lineheight="96px"
+                            data-fontsize="80"
+                            data-lineheight="96">
+                            Заказывал в данном салоне межкомнатные двери фабрики «Sofia». Пришли довольно быстро.
+                            Элегантные, роскошные, красивые двери. Такого качества я ещё не встречал."
+                        </h2>
+                    </div>
+                    <div class="subtitle-sc-review">
+                        <h3 class="subtitle-heading-review active"
+                            data-inline-fontsize="24px" data-inline-lineheight="28.8px"
+                            data-fontsize="24" data-lineheight="28">
+                            Ахмедьянова Роза
+                        </h3>
+                        <h3 class="subtitle-heading-review2"
+                            data-inline-fontsize="24px" data-inline-lineheight="28.8px"
+                            data-fontsize="24" data-lineheight="28">
+                            Петров Виктор
+                        </h3>
+                    </div>
+                    <div class="slider-button-review active"></div>
+                    <div class="slider-button-review2"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="blog-box">
+
+            <div class="text-section">
+                <div class="section-title">
+                    <div class="separation-line"></div>
+                    <div class="text-title-section"><h1>Наш блог</h1></div>
+                    <div class="separation-line"></div>
+                </div>
+                <div class="section-subTitle">
+                    <p>Последние новости мира дверей</p>
+                </div>
+                <br>
+            </div>
+
+            <div class="blog-announcement-box">
+
+                <div class="blog-announcement-container">
+                    <div class="blog-image-announcement-box">
+                        <img class="blog-image-announcement"
+                             th:src="@{img/content/Эскиз_СП71.19КВ-700x441.jpg}" alt="announcement1" src="">
+                    </div>
+                    <div class="blog-text-announcement-box">
+                        <div class="blog-title-announcement">
+                            <a class="text-title-h4" href="#">
+                                Sofia в передаче Квартирный вопрос: «Кухня со вкусом инжира»
+                            </a>
+                        </div>
+                        <p class="date-comments" style="margin-top: 0;">
+                            <span>14 ноября, 2019</span>
+                            <span class="inline-sep">|</span>
+                            <span class="comments-block">
+                            <a class="comments"
+                               href="https://doors-kd.ru/2019/11/14/aenean-lobortis-sapien-enim-viverra/#respond">Комментарии</a>
+                        </span>
+                        </p>
+                        <div class="blog-text-announcement">Если вы хотите использовать динамичный цвет для яркого
+                            акцента в
+                            интерьере, вам понадобится
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog-announcement-container">
+                    <div class="blog-image-announcement-box">
+                        <img class="blog-image-announcement"
+                             th:src="@{img/content/yZ-Y1nszpI-1500x1000-700x441.jpeg}" alt="announcement2" src="">
+                    </div>
+                    <div class="blog-text-announcement-box">
+                        <div class="blog-title-announcement">
+                            <a class="text-title-h4" href="#">
+                                Идеи: необычные возможности покрытия Sofia «под грунт»
+                            </a>
+                        </div>
+                        <p class="date-comments" style="margin-top: 0;">
+                            <span>18 октября, 2019</span>
+                            <span class="inline-sep">|</span>
+                            <span class="comments-block">
+                            <a class="comments"
+                               href="https://doors-kd.ru/2019/11/14/aenean-lobortis-sapien-enim-viverra/#respond">Комментарии</a>
+                        </span>
+                        </p>
+                        <div class="blog-text-announcement">За что дизайнеры обожают Sofia “под грунт”?⠀ Отделка
+                            представляет собой идеально отшлифованную белую
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog-announcement-container-right">
+                    <div class="blog-image-announcement-box">
+                        <img class="blog-image-announcement"
+                             th:src="@{img/content/pokupka-i-vyibor-dveri--e1574168261545-700x441.jpeg}"
+                             alt="announcement3" src="">
+                    </div>
+                    <div class="blog-text-announcement-box">
+                        <div class="blog-title-announcement">
+                            <a class="text-title-h4" href="#">
+                                Как выбрать межкомнатные двери
+                            </a>
+                        </div>
+                        <p class="date-comments" style="margin-top: 0;">
+                            <span>9 сентября, 2019</span>
+                            <span class="inline-sep">|</span>
+                            <span class="comments-block">
+                            <a class="comments"
+                               href="https://doors-kd.ru/2019/11/14/aenean-lobortis-sapien-enim-viverra/#respond">Комментарии</a>
+                        </span>
+                        </p>
+                        <div class="blog-text-announcement">При создании интерьера важно грамотно подойди к покупке
+                            дверей,
+                            т.к. от этого не
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div style="border-bottom-style: solid; border-color: #e7e6e6; border-bottom-width: 2px; margin-bottom: 50px;
+                margin-right: 30px; margin-left: 30px;"></div>
+
+        <div class="dynamic-separator-2px"></div>
+
+        <div class="last-viewed-box">
+            <div class="last-viewed-container">
+                <div class="last-viewed-text">ЛУЧШЕЕ</div>
+                <div class="last-viewed-image">
+                    <img class="last-viewed-image"
+                         th:src="@{img/content/Vision-2-scaled-e1628402772621.jpg}" alt="last-viewed1" src="">
+                </div>
+            </div>
+            <div class="last-viewed-container">
+                <div class="last-viewed-text">САМЫЕ ПОПУЛЯРНЫЕ</div>
+                <div class="last-viewed-image">
+                    <img class="last-viewed-image"
+                         th:src="@{img/content/smart-05-multi-scaled.jpg}" alt="last-viewed2" src="">
+                </div>
+            </div>
+            <div class="last-viewed-container-right">
+                <div class="last-viewed-text">ПОСЛЕДНИЕ ОБЗОРЫ</div>
+                <div class="last-viewed-image">
+                    <img class="last-viewed-image"
+                         th:src="@{img/content/03-multi-2nd-scaled.jpg}" alt="last-viewed3" src="">
+                </div>
+            </div>
+        </div>
+
+        <div class="our-brands-carousel">
+            <div class="our-brands-text">
+                НАШИ БРЕНДЫ
+            </div>
+            <div class="our-brands-icons">
+                <div>
+                    <img class="carousel-icon"
+                         th:src="@{/img/logos/Краснодеревщик.png}" alt="carousel-icon1" src="">
+                </div>
+                <div>
+                    <img class="carousel-icon"
+                         th:src="@{/img/logos/Без-имени-1.png}" alt="carousel-icon2" src="">
+                </div>
+                <div>
+                    <img class="carousel-icon"
+                         th:src="@{/img/logos/92c0d0d77516b0ad45509af9b24aa8d0-e1572174165984-320x59.png}"
+                         alt="carousel-icon3" src="">
+                </div>
+                <div>
+                    <img class="carousel-icon"
+                         th:src="@{/img/logos/213-320x202.png}" alt="carousel-icon4" src="">
+                </div>
+                <div>
+                    <img class="carousel-icon"
+                         th:src="@{/img/logos/logo-320x430-320x202.png}" alt="carousel-icon5" src="">
+                </div>
+            </div>
+        </div>
+
+        <div class="subscribe-block">
+            <div class="subscribe-row">
+                <div class="subscribe-info">
+                    <div class="subscribe-icon-box">
+                        <svg fill="#74797f" width="33.4px" height="33.4px" viewBox="0 0 512 512"
+                             xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle; margin-right: 17px;
+                         margin-left: 17px;">
+                            <path d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49
+                        48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587
+                        106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18
+                        199.465 70.425 171.067 48 152.805V112h416zM48 400V214.398c22.914 18.251 55.409 43.862 104.938
+                        82.646 21.857 17.205 60.134 55.186 103.062 54.955 42.717.231 80.509-37.199 103.053-54.947
+                        49.528-38.783 82.032-64.401 104.947-82.653V400H48z"/>
+                        </svg>
+                    </div>
+                    <div class="subscribe-text">
+                        Подпишитесь сейчас и получайте специальные предложения!
+                    </div>
+                </div>
+                <div class="subscribe-form">
+                    <div class="subscribe-input">
+                        <p class="subscribe-input-text">
+                            <label for="input-text"></label>
+                            <input type="text" class="input-search-sticky" name="log" id="input-text"
+                                   value="" placeholder="Ваш e-mail">
+                            <input type="hidden" name="login_box" value="true"></p>
+                    </div>
+
+                    <div class="button-enter-user medium">
+                        Отправить
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

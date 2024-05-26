@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Профиль
+{% endblock %}
+
+{% block body %}
+{% if authorizeUser == None %}
+<div class="profile-main">
+    <div class="authorizeUser-title">
+        <hr>
+        <br>
+        <h2>
+            Такого пользователя не существует
+        </h2>
+        <hr>
+    </div>
+</div>
+{% else %}
+<div class="profile-main">
+    <div class="authorizeUser-title">
+        <div class="separator-with-shadow" style="padding-top: 0px;padding-bottom: 0px;margin-top: 0;">
+            <div class="separator-with-shadow-box" style="margin-top: 0px;"></div>
+        </div>
+        <br>
+        <h2><img class="authorizeUser-img-profile" src='/{{ authorizeUser.imgPath }}' alt="mdo" width="64" height="64">
+            Профиль пользователя "{{ authorizeUser.name }}"
+        </h2>
+        <hr>
+    </div>
+    <div class="authorizeUser-info">
+        <p><b>Имя:</b> {{ authorizeUser.name }}</p>
+        <hr>
+        <p><b>Email:</b> {{ authorizeUser.email }}</p>
+        <hr>
+        <p><b>Дата регистрации:</b> {{ authorizeUser.registerDate.date() }}</p>
+        <hr>
+        <p><b>Обо мне:</b> {{ authorizeUser.info }}</p>
+        <hr>
+        <a><b>Автор статей:</b>
+            {% for article in articles %}
+                {% if article.author == authorizeUser.name %}
+                    {% if article.private == None or article.author == current_user.name %}
+                        <a href="/posts/{{ article.id }}"> {{ article.title }}</a>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

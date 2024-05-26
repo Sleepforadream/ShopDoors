@@ -1,0 +1,6 @@
+{% macro nav_link(menu_item) %}
+  <a href="{{ url_for(menu_item) }}">{{ menu_item|upper }}</a>
+  {% if request.endpoint == menu_item %}
+    ←
+  {% endif %}
+{% endmacro %}

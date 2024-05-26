@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Профиль
+{% endblock %}
+
+{% block body %}
+
+<div class="separator-with-shadow" style="padding-top: 0px;padding-bottom: 0px;margin-top: 0;">
+    <div class="separator-with-shadow-box" style="margin-top: 0px;"></div>
+</div>
+
+<div class="profile-box">
+    <div class="main-private-profile">
+        <div class="profile-menu">
+            {% if request.endpoint == "private_profile_home" %}
+            <a class="profile-menu-item changed" href="private_profile_home">
+                {% else %}
+                <a class="profile-menu-item" href="private_profile_home">
+                    {% endif %}
+                    <svg width="26px" height="26px" viewBox="0 0 1024 1024" class="icon" version="1.1"
+                         xmlns="http://www.w3.org/2000/svg" style="margin-right: 18px">
+                        <path d="M972 520.8c-6.4 0-12-2.4-16.8-7.2L530.4 86.4c-4.8-4.8-11.2-8-18.4-8-6.4 0-12.8 2.4-18.4 8L68.8 512c-4.8 4.8-10.4 7.2-16.8 7.2s-12-2.4-16-6.4c-4.8-4-7.2-8.8-7.2-15.2-0.8-7.2 2.4-14.4 7.2-19.2L458.4 52.8c14.4-14.4 32.8-22.4 52.8-22.4s38.4 8 52.8 22.4L988.8 480c4.8 4.8 7.2 11.2 7.2 18.4 0 7.2-4 13.6-8.8 17.6-4.8 3.2-10.4 4.8-15.2 4.8z"
+                              fill=""/>
+                        <path d="M637.6 998.4v-33.6h-33.6V904c0-51.2-41.6-92-92-92-51.2 0-92 41.6-92 92v60.8h-33.6v33.6H196.8c-40.8 0-73.6-32.8-73.6-73.6V509.6c0-13.6 10.4-24 24-24s24 10.4 24 24v415.2c0 14.4 11.2 25.6 25.6 25.6h175.2v-45.6c0-77.6 63.2-140 140-140s140 63.2 140 140v45.6h175.2c14.4 0 25.6-11.2 25.6-25.6V509.6c0-13.6 10.4-24 24-24s24 10.4 24 24v415.2c0 40.8-32.8 73.6-73.6 73.6H637.6z"
+                              fill=""/>
+                        <path d="M604 998.4v-48h48v48h-48z m-232 0v-48h48v48h-48z" fill=""/>
+                    </svg>
+                    <p>Главная</p>
+                </a>
+                {% if request.endpoint == "private_profile_info" %}
+                <a class="profile-menu-item changed" href="private_profile_info">
+                    <svg width="26px" height="26px" viewBox="0 0 48 48" class="icon" xmlns="http://www.w3.org/2000/svg"
+                         style="margin-right: 16px" fill="none" stroke="">
+                        <rect class="stroke-icon-profile-menu changed" x="4" y="6" width="40" height="36" rx="3"
+                              stroke="#000000" stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                        <path class="stroke-icon-profile-menu changed" d="M4 14H44" stroke="#000000" stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                        <path class="stroke-icon-profile-menu changed" d="M20 24H36" stroke="#000000" stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                        <path class="stroke-icon-profile-menu changed" d="M20 32H36" stroke="#000000" stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                        <path class="stroke-icon-profile-menu changed" d="M12 24H14" stroke="#000000" stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                        <path class="stroke-icon-profile-menu changed" d="M12 32H14" stroke="#000000" stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                    </svg>
+                    <div class="profile-info">
+                        <p>Информация</p>
+                    </div>
+                </a>
+                {% else %}
+                <a class="profile-menu-item" href="private_profile_info">
+                    <svg width="26px" height="26px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"
+                         style="margin-right: 18px" fill="none" stroke="" class="icon" >
+                        <rect class="stroke-icon-profile-menu" x="4" y="6" width="40" height="36" rx="3"
+                              stroke="#000000" stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                        <path class="stroke-icon-profile-menu" d="M4 14H44" stroke="#000000" stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                        <path class="stroke-icon-profile-menu" d="M20 24H36" stroke="#000000" stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                        <path class="stroke-icon-profile-menu" d="M20 32H36" stroke="#000000" stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                        <path class="stroke-icon-profile-menu" d="M12 24H14" stroke="#000000" stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                        <path class="stroke-icon-profile-menu" d="M12 32H14" stroke="#000000" stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                    </svg>
+                    <div class="profile-info">
+                        <p>Информация</p>
+                    </div>
+                </a>
+                {% endif %}
+                {% if request.endpoint == "private_profile_security" %}
+                <a class="profile-menu-item changed" href="private_profile_security">
+                    {% else %}
+                    <a class="profile-menu-item" href="private_profile_security">
+                        {% endif %}
+                        <svg width="28px" height="28px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                             style="margin-right: 16px" class="icon" >
+                            <path d="M12 22.943C3.533 18.32 2.498 12.026 3.16 4.723l.08-.869.871-.042c3.31-.166 5.668-.934 7.21-2.35L12 .838l.68.624c1.54 1.416 3.9 2.184 7.21 2.35l.87.042.08.869c.666 7.34-.407 13.61-8.84 18.22zM4.16 4.811c-.543 5.988-.04 12.694 7.838 16.993 7.88-4.3 8.39-11.001 7.845-16.99-3.553-.178-6.12-1.036-7.84-2.616-1.72 1.58-4.29 2.435-7.842 2.613z"/>
+                            <path fill="none" d="M0 0h24v24H0z"/>
+                        </svg>
+                        <div class="profile-security">
+                            <p>Безопасность</p>
+                        </div>
+                    </a>
+                    {% if request.endpoint == "private_profile_orders" %}
+                    <a class="profile-menu-item changed" href="private_profile_orders">
+                        {% else %}
+                        <a class="profile-menu-item" href="private_profile_orders">
+                            {% endif %}
+                            <svg width="28px" height="28px" viewBox="0 0 1024 1024" class="icon" version="1.1"
+                                 xmlns="http://www.w3.org/2000/svg" style="margin-right: 16px" >
+                                <path d="M53.6 1023.2c-6.4 0-12.8-2.4-17.6-8-4.8-4.8-7.2-11.2-6.4-18.4L80 222.4c0.8-12.8 11.2-22.4 24-22.4h211.2v-3.2c0-52.8 20.8-101.6 57.6-139.2C410.4 21.6 459.2 0.8 512 0.8c108 0 196.8 88 196.8 196.8 0 0.8-0.8 1.6-0.8 2.4v0.8H920c12.8 0 23.2 9.6 24 22.4l49.6 768.8c0.8 2.4 0.8 4 0.8 6.4-0.8 13.6-11.2 24.8-24.8 24.8H53.6z m25.6-48H944l-46.4-726.4H708v57.6h0.8c12.8 8.8 20 21.6 20 36 0 24.8-20 44.8-44.8 44.8s-44.8-20-44.8-44.8c0-14.4 7.2-27.2 20-36h0.8v-57.6H363.2v57.6h0.8c12.8 8.8 20 21.6 20 36 0 24.8-20 44.8-44.8 44.8-24.8 0-44.8-20-44.8-44.8 0-14.4 7.2-27.2 20-36h0.8v-57.6H125.6l-46.4 726.4zM512 49.6c-81.6 0-148.8 66.4-148.8 148.8v3.2h298.4l-0.8-1.6v-1.6c0-82.4-67.2-148.8-148.8-148.8z"
+                                      fill=""/>
+                            </svg>
+                            <div class="profile-orders">
+                                <p>Заказы</p>
+                            </div>
+                        </a>
+                        {% if request.endpoint == "private_profile_cart" %}
+                        <a class="profile-menu-item changed" href="private_profile_cart">
+                            {% else %}
+                            <a class="profile-menu-item" href="private_profile_cart">
+                                {% endif %}
+                                <svg width="28px" height="28px" viewBox="0 0 1024 1024" class="icon" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" style="margin-right: 16px">
+                                    <path d="M800.8 952c-31.2 0-56-24.8-56-56s24.8-56 56-56 56 24.8 56 56-25.6 56-56 56z m-448 0c-31.2 0-56-24.8-56-56s24.8-56 56-56 56 24.8 56 56-25.6 56-56 56zM344 792c-42.4 0-79.2-33.6-84-76l-54.4-382.4-31.2-178.4c-2.4-19.2-19.2-35.2-37.6-35.2H96c-13.6 0-24-10.4-24-24s10.4-24 24-24h40.8c42.4 0 80 33.6 85.6 76l31.2 178.4 54.4 383.2C309.6 728 326.4 744 344 744h520c13.6 0 24 10.4 24 24s-10.4 24-24 24H344z m40-128c-12.8 0-23.2-9.6-24-22.4-0.8-6.4 1.6-12.8 5.6-17.6s10.4-8 16-8l434.4-32c19.2 0 36-15.2 38.4-33.6l50.4-288c1.6-13.6-2.4-28-10.4-36.8-5.6-6.4-12.8-9.6-21.6-9.6H320c-13.6 0-24-10.4-24-24s10.4-24 24-24h554.4c22.4 0 42.4 9.6 57.6 25.6 16.8 19.2 24.8 47.2 21.6 75.2l-50.4 288c-4.8 41.6-42.4 74.4-84 74.4l-432 32c-1.6 0.8-2.4 0.8-3.2 0.8z"
+                                          fill=""/>
+                                </svg>
+                                <div class="profile-cart">
+                                    <p>Корзина</p>
+                                </div>
+                            </a>
+        </div>
+        {% block info %}{% endblock %}
+    </div>
+</div>
+{% endblock %}

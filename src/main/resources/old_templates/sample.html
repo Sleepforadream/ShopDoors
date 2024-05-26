@@ -1,0 +1,266 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Страница про нас
+{% endblock %}
+
+{% block body %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/sampleScripts.js') }}" defer></script>
+<div class="sample-main">
+    <div class="separator-with-shadow" style="padding-top: 0px;padding-bottom: 0px;margin-top: 0;">
+        <div class="separator-with-shadow-box" style="margin-top: 0px;"></div>
+    </div>
+    <div class="sample-box">
+        <div class="separator-with-shadow" style="margin-top: 0px;">
+            <div class="separator-with-shadow-box"></div>
+        </div>
+        <div class="sample-title">Заполните контактные данные для выезда мастера к Вам на замер и мы свяжемся с Вами
+        </div>
+        <div class="separator-with-shadow" style="padding-top: inherit;margin-bottom: 0px;background: antiquewhite;">
+            <div class="separator-with-shadow-box"></div>
+        </div>
+        <div class="sample-form">
+            <div class="sample-input-line">
+                <div class="sample-input" style="width: 32.6666%;">
+                    <label> Ваше имя
+                        <span class="sample-input-name">
+                        <input type="text" name="your-name" value="" size="40"
+                               class="form-control" aria-required="true"
+                               aria-invalid="false" placeholder="Введите имя">
+                    </span>
+                    </label>
+                </div>
+                <div class="sample-input" style="width: 26%;">
+                    <label> Телефон
+                        <span class="sample-input-phone">
+                        <input type="text" name="your-name" value="" size="40"
+                               class="form-control" aria-required="true"
+                               aria-invalid="false" placeholder="Введите телефон">
+                    </span>
+                    </label>
+                </div>
+                <div class="sample-input" style="width: 32.6666%;margin-right: 0%;">
+                    <label> Адрес
+                        <span class="sample-input-address">
+                        <input type="number" name="your-name" value="" size="40"
+                               class="form-control" aria-required="true"
+                               aria-invalid="false" placeholder="Введите адрес">
+                    </span>
+                    </label>
+                </div>
+            </div>
+            <div class="sample-input-line">
+                <div class="sample-input" style="width: 46.75%;">
+                    <label> Выберите город
+                        <span class="sample-input-name">
+                        <div class="sample-select">
+                            <select class="form-control-select" aria-invalid="false">
+                                <option value="Стерлитамак">Стерлитамак</option>
+                                <option value="Салават">Салават</option><option value="Ишимбай">Ишимбай</option>
+                                <option value="Толбазы">Толбазы</option><option value="Мелеуз">Мелеуз</option>
+                                <option value="Уфа">Уфа</option>
+                                <option value="Близлежайшая деревня">Близлежайшая деревня</option>
+                            </select>
+                            <div class="select-arrow" style="height: 36px; width: 36px; line-height: 36px;">
+                                <div class="indicator-dropdown" style="margin-left: 35%;margin-top: 40%;"></div>
+                            </div>
+                        </div>
+                    </span>
+                    </label>
+                </div>
+                <div class="sample-input" style="width: 46.75%;margin-right: 0%;">
+                    <label> Ориентировочная фабрика
+                        <span class="sample-input-name">
+                        <div class="sample-select">
+                            <select class="form-control-select" aria-invalid="false">
+                                <option value="Sofia">Sofia</option>
+                                <option value="Краснодеревщик">Краснодеревщик</option>
+                                <option value="Mezzo Porte">Mezzo Porte</option>
+                                <option value="Synergy">Synergy</option>
+                                <option value="ВДК">ВДК</option>
+                                <option value="VellDoris">VellDoris</option>
+                                <option value="LineDoor">LineDoor</option>
+                                <option value="Гардиан">Гардиан</option>
+                            </select>
+                            <div class="select-arrow" style="height: 36px; width: 36px; line-height: 36px;">
+                                <div class="indicator-dropdown" style="margin-left: 35%;margin-top: 40%;"></div>
+                            </div>
+                        </div>
+                    </span>
+                    </label>
+                </div>
+            </div>
+            <div class="sample-input-line">
+                <div class="sample-input" style="width: 20.4%;">
+                    <label> Кол-во м/к дверей
+                        <span class="sample-input-name">
+                        <input type="number" name="your-name" value="0" size="40"
+                               class="form-control" aria-required="true"
+                               aria-invalid="false">
+                    </span>
+                    </label>
+                </div>
+                <div class="sample-input" style="width: 20.4%;">
+                    <label> Кол-во входных дверей
+                        <span class="sample-input-name">
+                        <input type="number" name="your-name" value="0" size="40"
+                               class="form-control" aria-required="true"
+                               aria-invalid="false">
+                    </span>
+                    </label>
+                </div>
+                <div class="sample-input" style="width: 20.4%;f">
+                    <label> Дата замера
+                        <span class="sample-input-phone">
+                        <input type="date" name="your-name" value="" size="40"
+                               class="form-control" aria-required="true"
+                               aria-invalid="false">
+                    </span>
+                    </label>
+                </div>
+                <div class="sample-input" style="width: 20.4%;margin-right: 0%;">
+                    <label> Время замера
+                        <span class="sample-input-address">
+                        <input type="time" name="your-name" value="" size="40"
+                               class="form-control" aria-required="true"
+                               aria-invalid="false">
+                    </span>
+                    </label>
+                </div>
+            </div>
+            <div class="sample-input-line">
+                <div class="sample-input" style="width: 100%;margin-right:0;">
+                    <label> Дополнительная информация
+                        <span class="sample-input-name">
+                        <textarea style="height: 200px;" name="your-name" class="form-control"
+                                  aria-required="true" aria-invalid="false">
+                        </textarea>
+                    </span>
+                    </label>
+                </div>
+            </div>
+            <div class="sample-input-line" style="padding-bottom: 3%;">
+                <div class="button-enter-authorizeUser submit-sample">
+                    Отправить
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="about-contacts">
+        <div class="about-contacts-row">
+            <div class="about-contacts-bar">
+                <div class="about-contacts-bar-content">
+                    <div class="about-contacts-image">
+                        <svg style="width: 100%;" fill="#cbaa5c" width="45px" height="60px" viewBox="-3 0 24 24"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="m8.075 23.52c-6.811-9.878-8.075-10.891-8.075-14.52 0-4.971 4.029-9 9-9s9 4.029 9 9c0 3.629-1.264 4.64-8.075 14.516-.206.294-.543.484-.925.484s-.719-.19-.922-.48l-.002-.004zm.925-10.77c2.07 0 3.749-1.679 3.749-3.75s-1.679-3.75-3.75-3.75-3.75 1.679-3.75 3.75c0 2.071 1.679 3.75 3.75 3.75z"/>
+                        </svg>
+                    </div>
+                    <div class="about-contacts-title">
+                        Корпоративный офис
+                    </div>
+                    <div class="about-contacts-text">
+                        Наш салон дверей всегда открыт Вам!
+                    </div>
+                </div>
+                <div class="about-contacts-bar-content-backface">
+                    <div class="about-contacts-title-backface">
+                        Местоположение салона
+                    </div>
+                    <div class="about-contacts-text-backface">
+                        пр.Ленина 14, Стерлитамак
+                    </div>
+                    <div class="about-contacts-button">
+                        Заказать звонок
+                    </div>
+                </div>
+            </div>
+            <div class="about-contacts-bar">
+                <div class="about-contacts-bar-content">
+                    <div class="about-contacts-image">
+                        <svg style="width: 100%;" fill="#cbaa5c" width="45px" height="60px" viewBox="0 0 512 512"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M493.4 24.6l-104-24c-11.3-2.6-22.9 3.3-27.5 13.9l-48 112c-4.2 9.8-1.4 21.3 6.9 28l60.6 49.6c-36 76.7-98.9 140.5-177.2 177.2l-49.6-60.6c-6.8-8.3-18.2-11.1-28-6.9l-112 48C3.9 366.5-2 378.1.6 389.4l24 104C27.1 504.2 36.7 512 48 512c256.1 0 464-207.5 464-464 0-11.2-7.7-20.9-18.6-23.4z"/>
+                        </svg>
+                    </div>
+                    <div class="about-contacts-title">
+                        Позвоните нам
+                    </div>
+                    <div class="about-contacts-text">
+                        Если у Вас возникли какие-либо вопросы мы с радостью на них ответим!
+                    </div>
+                </div>
+                <div class="about-contacts-bar-content-backface">
+                    <div class="about-contacts-title-backface">
+                        Звоните!
+                    </div>
+                    <div class="about-contacts-text-backface">
+                        8(3474) 43-40-50<br>
+                        8(917) 349-14-05
+                    </div>
+                    <div class="about-contacts-button">
+                        Позвонить!
+                    </div>
+                </div>
+            </div>
+            <div class="about-contacts-bar-right">
+                <div class="about-contacts-bar-content">
+                    <div class="about-contacts-image">
+                        <svg style="width: 100%;" fill="#cbaa5c" width="45px" height="60px" viewBox="0 0 512 512"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416zM48 400V214.398c22.914 18.251 55.409 43.862 104.938 82.646 21.857 17.205 60.134 55.186 103.062 54.955 42.717.231 80.509-37.199 103.053-54.947 49.528-38.783 82.032-64.401 104.947-82.653V400H48z"/>
+                        </svg>
+                    </div>
+                    <div class="about-contacts-title">
+                        Отправить нам письмо
+                    </div>
+                    <div class="about-contacts-text">
+                        Отправьте нам письмо с вопросами и деталями.
+                    </div>
+                </div>
+                <div class="about-contacts-bar-content-backface">
+                    <div class="about-contacts-title-backface">
+                        Мы готовы!
+                    </div>
+                    <div class="about-contacts-text-backface">
+                        Elitehouse.str@mail.ru
+                    </div>
+                    <div class="about-contacts-button">
+                        Отправить письмо!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="separator-with-shadow" style="padding-bottom: 10px;margin-bottom: 0;">
+        <div class="separator-with-shadow-box"></div>
+    </div>
+    <div class="geo-position">
+        <div class="geo-position-title">
+            Мы находимся здесь
+        </div>
+        <div class="separator-with-shadow" style="padding-top: 0;padding-bottom: 0;">
+            <div class="separator-with-shadow-box"></div>
+        </div>
+        <div class="geo-position-map" style="margin-top:15px;margin-bottom:15px;">
+            <div class="fusion-column-wrapper"
+                 style="padding: 0px; background-position: left top; background-repeat: no-repeat; background-size: cover; height: auto;"
+                 data-bg-url="">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2365.087926252177!2d55.94039891598514!3d53.64540435996924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x43d81195b18aff73%3A0x5ded8c80b884c7c1!2z0KHRgtC10YDQu9C40YLQsNC80LDQuiwg0KDQtdGB0L8uINCR0LDRiNC60L7RgNGC0L7RgdGC0LDQvSwgNDUzMTAz!5e0!3m2!1sru!2sru!4v1585891718497!5m2!1sru!2sru"
+                        width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen=""
+                        aria-hidden="false" tabindex="0"></iframe>
+                <div class="fusion-sep-clear"></div>
+                <div class="fusion-separator fusion-full-width-sep sep-shadow"
+                     style="background:radial-gradient(ellipse at 50% -50% , #eaeaea 0px, rgba(255, 255, 255, 0) 80%) repeat scroll 0 0 rgba(0, 0, 0, 0);background:-webkit-radial-gradient(ellipse at 50% -50% , #eaeaea 0px, rgba(255, 255, 255, 0) 80%) repeat scroll 0 0 rgba(0, 0, 0, 0);background:-moz-radial-gradient(ellipse at 50% -50% , #eaeaea 0px, rgba(255, 255, 255, 0) 80%) repeat scroll 0 0 rgba(0, 0, 0, 0);background:-o-radial-gradient(ellipse at 50% -50% , #eaeaea 0px, rgba(255, 255, 255, 0) 80%) repeat scroll 0 0 rgba(0, 0, 0, 0);margin-left: auto;margin-right: auto;margin-top:;"></div>
+                <div class="fusion-clearfix"></div>
+
+            </div>
+        </div>
+    </div>
+    <div class="separator-with-shadow" style="padding-top: inherit;padding-bottom:0;">
+        <div class="separator-with-shadow-box"></div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'private_profile.html' %}
+
+{% block info %}
+<div class="profile-info-box">
+    <div class="authorizeUser-title">
+        <h2><img class="authorizeUser-img-profile" src='/{{ current_user.imgPath }}' alt="mdo" width="64" height="64">
+            Профиль пользователя "{{ current_user.name }}"
+        </h2>
+        <hr>
+    </div>
+    <div class="authorizeUser-info">
+        <p><b>Имя:</b> {{ current_user.name }}</p>
+        <hr>
+        <p><b>Email:</b> {{ current_user.email }}</p>
+        <hr>
+        <p><b>Дата регистрации:</b> {{ current_user.registerDate.date() }}</p>
+        <hr>
+        <p><b>Обо мне:</b> {{ current_user.info }}</p>
+        <hr>
+        <a><b>Автор статей:</b>
+            {% for article in articles %}
+            {% if article.author == current_user.name %}
+            <a href="/posts/{{ article.id }}"> {{ article.title }}</a>
+            {% endif %}
+            {% endfor %}
+        </a>
+        <div class="separator-with-shadow" style="padding-top: 0px;padding-bottom: 0px;margin-top: 0;">
+            <div class="separator-with-shadow-box" style="margin-top: 0px;"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

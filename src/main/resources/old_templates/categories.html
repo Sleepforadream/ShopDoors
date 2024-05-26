@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Product Categories</title>
+  </head>
+  <body>
+    <h1>Product Categories</h1>
+    <ul>
+      <li><a href="{{ url_for('category', category_id='all') }}">All Products</a></li>
+      {% for category in categories %}
+      <li>
+        <a href="{{ url_for('category', category_id=category.id) }}">{{ category.name }}</a>
+        <ul>
+          <li><a href="{{ url_for('sort', category_id=category.id, sort_by='name_asc') }}">Sort by Name (A-Z)</a></li>
+          <li><a href="{{ url_for('sort', category_id=category.id, sort_by='price_asc') }}">Sort by Price (Low to High)</a></li>
+          <li><a href="{{ url_for('sort', category_id=category.id, sort_by='price_desc') }}">Sort by Price (High to Low)</a></li>
+        </ul>
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Обновление статьи
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1>Обновление статьи</h1>
+    <form method="post" enctype="multipart/form-data">
+        <input type="text" name="title" id="title" class="form-control" value="{{ article.title }}"
+               placeholder="Введите название"><br>
+        <textarea name="intro" id="intro" class="form-control"
+                  placeholder="Введите анонс">{{ article.intro }}</textarea><br>
+        <textarea style="width:100%; height:17em;" name="text" id="text" class="form-control"
+                  placeholder="Введите основной текст">{{ article.text }}</textarea><br>
+        <div class="select-headings">
+            <div class="image-upload-heading">
+                <div class="heading-selector">Рубрика:
+                    <select name="heading" id="heading">
+                        <option value="{{ article.heading }}" hidden="">{{ article.heading }}</option>
+                        <option value="Закон и порядок"> Закон и порядок</option>
+                        <option value="Спорт">Спорт</option>
+                        <option value="Финансы">Финансы</option>
+                        <option value="Природа">Природа</option>
+                        <option value="Обучение">Обучение</option>
+                        <option value="Здоровье">Здоровье</option>
+                        <option value="Наука и технологии">Наука и технологии</option>
+                        <option value="Политика">Политика</option>
+                        <option value="Военное дело">Военное дело</option>
+                        <option value="Фотографии">Фотографии</option>
+                    </select>
+                </div>
+                <div class="image-selector">
+                    <label class="label-upload-image" for="img">Выберете обложку для блога:</label>
+                    <input class="button-upload-image" type="file" name="img" id="img" accept="image/jpeg,image/png">
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="upload-image">
+            <input type="submit" class="btn btn-submit" value="Отправить">
+            <input class="btn btn-danger reset-button" type="reset">
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{private_profile}" lang="ru">
+
+<th:block layout:fragment="info">
+    <script type="text/javascript" th:src="@{/js/privateProfileMain.js}" defer></script>
+    <div class="profile-info-box">
+        <div class="user-title">
+            <h2 class="profile-title-text">
+                Профиль пользователя "<span th:text="${user.nickName}">User</span>"
+            </h2>
+            <hr>
+        </div>
+        <form method="post" enctype="multipart/form-data">
+            <div class="image-upload-heading">
+                <div class="image-selector">
+                    <th:block th:if="${user.imgPath} == null">
+                        <img class="user-img-profile" width="200"
+                             height="200" style="border-radius: 15px;"
+                             th:src="@{/img/users_photo/unknownUser.svg}"
+                             src="../static/img/users_photo/unknownUser.svg" alt="img_profile">
+                        <label class="feedback__label cancel" style="display: none;">
+                            Удалить фото
+                            <input type="button" name="imgProfileRemove" class="feedback__file cancel">
+                        </label>
+                    </th:block>
+                    <th:block th:unless="${user.imgPath} == null">
+                        <img class="user-img-profile" width="200" height="200" style="border-radius: 15px;"
+                             th:src="${imgProfileUrl}" alt="img_profile" src="">
+                        <label class="feedback__label cancel">
+                            Удалить фото
+                            <input type="button" name="imgProfileRemove" class="feedback__file cancel">
+                        </label>
+                    </th:block>
+                    <label class="feedback__label"><span id="textLabel">
+                    <th:block th:if="${user.imgPath} == null">Добавить фото</th:block>
+                    <th:block th:unless="${user.imgPath} == null">Изменить фото</th:block>
+                    </span>
+                        <input type="file" name="imgProfileAdd" id="imgProfileAdd" accept="image/jpeg,image/png"
+                               class="feedback__file">
+                    </label>
+                </div>
+            </div>
+            <hr>
+            <div class="user-info">
+                <p><b>Никнейм:</b>
+                    <th:block th:if="${user.nickName} == null">
+                        <label for="no_nickName"></label>
+                        <input type="text" name="nickName" id="no_nickName" class="input-form"
+                               value="" placeholder="Введите свой никнейм" pattern="[a-zA-Zа-яА-ЯёЁ]+">
+                    </th:block>
+                    <th:block th:unless="${user.nickName} == null">
+                        <label for="nickName"></label>
+                        <input type="text" name="nickName" id="nickName" class="input-form"
+                               th:value="${user.nickName}"
+                               placeholder="Введите свой никнейм" pattern="[a-zA-Zа-яА-ЯёЁ]+">
+                    </th:block>
+
+                    <th:block th:if="${error} == 'Поле nickName содержит больше 64 символов'">
+                        <span class="error-input-name" style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                            Поле содержит больше 64 символов
+                        </span>
+                    </th:block>
+                    <th:block th:unless="${error} == 'Поле nickName содержит больше 64 символов'">
+                        <span class="error-input-name" style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                        </span>
+                    </th:block>
+                    <th:block
+                            th:if="${error} == 'Поле nickName должно содержать только латинские буквы, цифры, дефис и знак подчёркивания. Длина - не менее 3 символов, не более 16 символов'">
+                        <span class="error-input-name" style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                           Поле должно содержать только латинские буквы, цифры, дефис и знак подчёркивания. Длина - не менее 3 символов, не более 16 символов
+                        </span>
+                    </th:block>
+                    <th:block
+                            th:unless="${error} == 'Поле nickName должно содержать только латинские буквы, цифры, дефис и знак подчёркивания. Длина - не менее 3 символов, не более 16 символов'">
+                        <span class="error-input-name" style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                        </span>
+                    </th:block>
+                </p>
+                <hr>
+                <p><b>Имя:</b>
+                    <th:block th:if="${user.firstName} == null">
+                        <label for="no_firstName"></label>
+                        <input type="text" name="firstName" id="no_firstName" class="input-form"
+                               value="" placeholder="Введите свое имя" pattern="[a-zA-Zа-яА-ЯёЁ]+">
+                    </th:block>
+                    <th:block th:unless="${user.firstName} == null">
+                        <label for="firstName"></label>
+                        <input type="text" name="firstName" id="firstName" class="input-form"
+                               th:value="${user.firstName}"
+                               placeholder="Введите свое имя" pattern="[a-zA-Zа-яА-ЯёЁ]+">
+                    </th:block>
+
+                    <th:block th:if="${error} == 'Поле firstName содержит больше 64 символов'">
+                        <span class="error-input-name" style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                            Поле содержит больше 64 символов
+                        </span>
+                    </th:block>
+                    <th:block th:unless="${error} == 'Поле firstName содержит больше 64 символов'">
+                        <span class="error-input-name" style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                        </span>
+                    </th:block>
+                    <th:block
+                            th:if="${error} == 'Поле firstName должно содержать только латинские буквы, цифры, дефис и знак подчёркивания. Длина - не менее 3 символов, не более 16 символов'">
+                        <span class="error-input-name" style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                           Поле должно содержать только латинские буквы, цифры, дефис и знак подчёркивания. Длина - не менее 3 символов, не более 16 символов
+                        </span>
+                    </th:block>
+                    <th:block
+                            th:unless="${error} == 'Поле firstName должно содержать только латинские буквы, цифры, дефис и знак подчёркивания. Длина - не менее 3 символов, не более 16 символов'">
+                        <span class="error-input-name" style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                        </span>
+                    </th:block>
+                </p>
+                <hr>
+                <p><b>Фамилия:</b>
+                    <th:block th:if="${user.secondName} == null">
+                        <label for="no_secondName"></label>
+                        <input type="text" name="secondName" id="no_secondName" class="input-form"
+                               value="" placeholder="Введите свою фамилию" pattern="[a-zA-Zа-яА-ЯёЁ]+">
+                    </th:block>
+                    <th:block th:unless="${user.secondName} == null">
+                        <label for="secondName"></label>
+                        <input type="text" name="secondName" id="secondName" class="input-form"
+                               th:value="${user.secondName}"
+                               placeholder="Введите свою фамилию" pattern="[a-zA-Zа-яА-ЯёЁ]+">
+                    </th:block>
+
+                    <th:block th:if="${error} == 'Поле secondName содержит больше 64 символов'">
+                        <span class="error-input-secondName"
+                              style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                            Поле содержит больше 64 символов
+                        </span>
+                    </th:block>
+                    <th:block th:unless="${error} == 'Поле secondName содержит больше 64 символов'">
+                        <span class="error-input-secondName"
+                              style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                        </span>
+                    </th:block>
+                    <th:block
+                            th:if="${error} == 'Поле secondName должно содержать только латинские буквы, цифры, дефис и знак подчёркивания. Длина - не менее 3 символов, не более 16 символов'">
+                        <span class="error-input-secondName"
+                              style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                           Поле должно содержать только латинские буквы, цифры, дефис и знак подчёркивания. Длина - не менее 3 символов, не более 16 символов
+                        </span>
+                    </th:block>
+                    <th:block
+                            th:unless="${error} == 'Поле secondName должно содержать только латинские буквы, цифры, дефис и знак подчёркивания. Длина - не менее 3 символов, не более 16 символов'">
+                        <span class="error-input-secondName"
+                              style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                        </span>
+                    </th:block>
+                </p>
+                <hr>
+                <p><b>Отчество:</b>
+                    <th:block th:if="${user.thirdName} == null">
+                        <label for="no_thirdName"></label>
+                        <input type="text" name="thirdName" id="no_thirdName" class="input-form"
+                               value=""
+                               placeholder="Введите свое отчество" pattern="[a-zA-Zа-яА-ЯёЁ]+">
+                    </th:block>
+                    <th:block th:unless="${user.thirdName} == null">
+                        <label for="thirdName"></label>
+                        <input type="text" name="thirdName" id="thirdName" class="input-form"
+                               th:value="${user.thirdName}"
+                               placeholder="Введите свое отчество" pattern="[a-zA-Zа-яА-ЯёЁ]+">
+                    </th:block>
+
+                    <th:block th:if="${error} == 'Поле thirdName содержит больше 64 символов'">
+                        <span class="error-input-thirdName"
+                              style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                            Поле содержит больше 64 символов
+                        </span>
+                    </th:block>
+                    <th:block th:unless="${error} == 'Поле thirdName содержит больше 64 символов'">
+                        <span class="error-input-thirdName"
+                              style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                        </span>
+                    </th:block>
+                    <th:block
+                            th:if="${error} == 'Поле thirdName должно содержать только латинские буквы, цифры, дефис и знак подчёркивания. Длина - не менее 3 символов, не более 16 символов'">
+                        <span class="error-input-thirdName"
+                              style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                           Поле должно содержать только латинские буквы, цифры, дефис и знак подчёркивания. Длина - не менее 3 символов, не более 16 символов
+                        </span>
+                    </th:block>
+                    <th:block
+                            th:unless="${error} == 'Поле thirdName должно содержать только латинские буквы, цифры, дефис и знак подчёркивания. Длина - не менее 3 символов, не более 16 символов'">
+                        <span class="error-input-thirdName"
+                              style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                        </span>
+                    </th:block>
+                </p>
+                <hr>
+                <p><b>Пол:</b>
+                    <label for="gender"></label>
+                    <select name="gender" id="gender" class="input-form">
+                        <th:block th:if="${user.gender} == null">
+                            <option selected value="Не выбран"></option>
+                            <option selected th:value="Мужской">
+                                <th:block th:text="Мужской"></th:block>
+                            </option>
+                            <option th:value="Женский">
+                                <th:block th:text="Женский"></th:block>
+                            </option>
+                        </th:block>
+                        <th:block th:if="${user.gender} == Мужской">
+                            <option selected th:value="Мужской">
+                                <th:block th:text="Мужской"></th:block>
+                            </option>
+                            <option th:value="Женский">
+                                <th:block th:text="Женский"></th:block>
+                            </option>
+                            <option value="None">Не выбран</option>
+                        </th:block>
+                        <th:block th:if="${user.gender} == Женский">
+                            <option selected th:value="Женский">
+                                <th:block th:text="Женский"></th:block>
+                            </option>
+                            <option th:value="Мужской">
+                                <th:block th:text="Мужской"></th:block>
+                            </option>
+                            <option value="None">Не выбран</option>
+                        </th:block>
+                    </select>
+                </p>
+                <hr>
+                <p>
+                    <b>Дата рождения:</b>
+                    <th:block th:if="${user.birthDate} == null">
+                        <label for="no_birthDate"></label>
+                        <input type="date" placeholder="дд.мм.гггг" style="color: #aaa9a9"
+                               onchange="(this.style.color = '#585858')"
+                               name="birthDate" id="no_birthDate" class="input-form"
+                               value=""
+                               >
+                    </th:block>
+                    <th:block th:unless="${user.birthDate} == null">
+                        <label for="birthDate"></label>
+                        <input type="date" placeholder="дд.мм.гггг"
+                               onreset="(this.style.color = '#aaa9a9')"
+                               name="birthDate" id="birthDate" class="input-form"
+                               th:value="${user.birthDate}"
+                               >
+                    </th:block>
+
+                    <th:block th:if="${error} == 'Ваш возраст должен быть больше 16 лет'">
+                        <span class="error-input-bornDate"
+                              style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                            Ваш возраст должен быть больше 16 лет
+                        </span>
+                    </th:block>
+                    <th:block th:unless="${error} == 'Ваш возраст должен быть больше 16 лет'">
+                        <span class="error-input-bornDate"
+                              style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                        </span>
+                    </th:block>
+                    <th:block th:if="${error} == 'Ваш возраст не должен быть больше 150 лет'">
+                        <span class="error-input-bornDate"
+                              style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                           Ваш возраст не должен быть больше 150 лет
+                        </span>
+                    </th:block>
+                    <th:block th:unless="${error} == 'Ваш возраст не должен быть больше 150 лет'">
+                        <span class="error-input-bornDate"
+                              style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                        </span>
+                    </th:block>
+                </p>
+                <hr>
+                <p><b>Адрес доставки:</b>
+                    <th:block th:if="${user.address} == null">
+                        <label for="no_address"></label>
+                        <input type="text" name="address" id="no_address" class="input-form"
+                               value=""
+                               placeholder="Введите адрес для доставки (город, улица, дом, квартира)">
+                    </th:block>
+                    <th:block th:unless="${user.address} == null">
+                        <label for="address"></label>
+                        <input type="text" name="address" id="address" class="input-form"
+                               th:value="${user.address}"
+                               placeholder="Введите адрес для доставки (город, улица, дом, квартира)">
+                    </th:block>
+                </p>
+                <hr>
+                <p><b>Обо мне:</b>
+                    <th:block th:if="${user.info} == null">
+                        <label for="no_info"></label>
+                        <textarea style="width:100%; height:10em;font-family: sans-serif;" name="info"
+                                  id="no_info" class="input-form"
+                                  placeholder="Напишите что-нибудь о себе">
+                    </textarea>
+                    </th:block>
+                    <th:block th:unless="${user.info} == null">
+                        <label for="info"></label>
+                        <textarea style="width:100%; height:10em;font-family: sans-serif;" name="info"
+                                  id="info" class="input-form"
+                                  placeholder="Напишите что-нибудь о себе"
+                                  th:text="${user.info}">
+                    </textarea>
+                    </th:block>
+                </p>
+                <hr>
+                <p class="profile-submit-box" style="display:flex;justify-content: space-between;margin-bottom:0;">
+                    <input type="submit" class="button-enter-user" value="Сохранить изменения">
+                    <a href="/static" class="button-enter-user warning" type="button">Отмена</a>
+                </p>
+            </div>
+        </form>
+    </div>
+</th:block>

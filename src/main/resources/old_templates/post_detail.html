@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ article.title }}
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+
+    <div class="blog-implementation">
+        <p class="blog-img" role="img">
+            <img class="blog-img-implement" src='/{{ article.imgpath }}'>
+        </p>
+        <hr>
+        <h2><em>من {{ article.title }}</em></h2>
+        <hr>
+        <p class="blog-intro"> {{ article.date.strftime("%d %B %Y") }} автор <u>{{ article.author }}</u></p>
+        <h5><em>"{{ article.intro}}"</em></h5>
+        <hr>
+        <p class="blog-text"> {{ article.text }}</p>
+        <hr>
+        <p class="blog-heading" ><b>Рубрика: <u>{{ article.heading }}</u></b> </p>
+        <p><b>Дата: {{ article.date.date() }}</b></p>
+        {% if article.private != None %}
+        <hr>
+        <p><b><em>Статья приватна</em></b></p>
+        {% endif %}
+        {% if article.author == current_user.name %}
+        <hr>
+        <a href="/posts/{{ article.id }}/delete" class="btn btn-danger">Удалить</a>
+        <a href="/posts/{{ article.id }}/update" class="btn btn-success">Редактирование</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

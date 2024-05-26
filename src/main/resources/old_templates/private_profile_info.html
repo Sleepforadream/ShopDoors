@@ -1,0 +1,110 @@
+{% extends 'private_profile.html' %}
+
+{% block info %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/privateProfileInfo.js') }}" defer></script>
+<div class="profile-info-box">
+    <div class="authorizeUser-title">
+        <h2 class="profile-title-text">
+            Профиль пользователя "{{ current_user.nickName }}"
+        </h2>
+        <hr>
+    </div>
+    <form method="post" enctype="multipart/form-data">
+        <div class="image-upload-heading">
+            <div class="image-selector">
+                {% if current_user.imgPath == None %}
+                <img class="authorizeUser-img-profile" width="200"
+                     height="200" style="border-radius: 15px;" src="../static/img/users_photo/unknownUser.svg">
+                <label class="feedback__label cancel" style="display: none;">
+                    Удалить фото
+                    <input type="button" name="imgProfileRemove" class="feedback__file cancel">
+                </label>
+                {% else %}
+                <img class="authorizeUser-img-profile" width="200"
+                     height="200" style="border-radius: 15px;" src="../{{ current_user.imgPath }}">
+                <label class="feedback__label cancel">
+                    Удалить фото
+                    <input type="button" name="imgProfileRemove" class="feedback__file cancel">
+                </label>
+                {% endif %}
+                <label class="feedback__label"><span id="textLabel">
+                    {% if current_user.imgPath == None %}
+                    Добавить фото
+                    {% else %}
+                    Изменить фото
+                    {% endif %}
+                    </span>
+                    <input type="file" name="imgProfileAdd" id="imgProfileAdd" accept="image/jpeg,image/png"
+                           class="feedback__file">
+                </label>
+            </div>
+        </div>
+        <hr>
+        <div class="authorizeUser-info">
+            <p><b>Никнейм:</b> <input type="text" name="input_nickname" id="input_nickname" class="input-form"
+                                      value="{{ current_user.nickName }}" readonly spellcheck="false"
+                                      style="background-color: unset;">
+            <span id="error-nickName" class="error-input-nickName" style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">Никнейм уникален и отредактировать его невозможно. Вы можете зарегистрировать новый</span></p>
+            <hr>
+            <p><b>Имя:</b>
+                <input type="text" name="name" id="name" class="input-form"
+                                  value="{% if current_user.name == None %}{% else %}{{ current_user.name }}{% endif %}"
+                                  placeholder="Введите свое имя" pattern="([a-zA-Zа-яА-Я-_ё]+)">
+            <span class="error-input-name" style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">Имя введено некорректно. Оно должно состоять из 1 слова, либо разделяться через дефис</span></p>
+            <hr>
+            <p><b>Фамилия:</b> <input type="text" name="secondName" id="secondName" class="input-form"
+                                      value="{% if current_user.secondName == None %}{% else %}{{ current_user.secondName }}{% endif %}"
+                                      placeholder="Введите свою фамилию" pattern="([a-zA-Zа-яА-Я-_ё]+)">
+            <span class="error-input-secondName" style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">Фамилия введена некорректно. Она должна состоять из 1 слова, либо разделяться через дефис</span></p>
+            <hr>
+            <p><b>Отчество:</b> <input type="text" name="thirdName" id="thirdName" class="input-form"
+                                       value="{% if current_user.thirdName == None %}{% else %}{{ current_user.thirdName }}{% endif %}"
+                                       placeholder="Введите свое отчество" pattern="([a-zA-Zа-яА-Я-_ё]+)">
+            <span class="error-input-thirdName" style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">Отчество введено некорректно. Оно должно состоять из 1 слова, либо разделяться через дефис</span></p>
+            <hr>
+            <p><b>Пол:</b><select name="gender" id="gender" class="input-form">
+                {% if current_user.gender == None %}
+                <option value="None">Не выбран</option>
+                {% else %}
+                <option selected value="{{ current_user.gender }}">{{ current_user.gender }}</option>
+                {% endif %}
+                {% if current_user.gender == "Мужской" %}
+                <option value="Женский">Женский</option>
+                {% else %}
+                <option value="Мужской">Мужской</option>
+                {% endif %}
+            </select></p>
+            <hr>
+            <p><b>Дата рождения:</b>{% if current_user.bornDate == None %}
+                <input type="date" placeholder="дд.мм.гггг" style="color: #aaa9a9"
+                                           onchange="(this.style.color = '#585858')"
+                                           name="bornDate" id="bornDate1" class="input-form"
+                                           value="{% if current_user.bornDate == None %}{% else %}{{ current_user.bornDate.date() }}{% endif %}"
+                                           min="1923-01-01" max="2007-01-01">
+                <span class="error-input-bornDate" style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">Заполните все поля. Вы должны быть старше 16 и младше 100 лет</span></p>
+                {% else %}
+                <input type="date" placeholder="дд.мм.гггг"
+                                           onreset="(this.style.color = '#aaa9a9')"
+                                           name="bornDate" id="bornDate2" class="input-form"
+                                           value="{% if current_user.bornDate == None %}{% else %}{{ current_user.bornDate.date() }}{% endif %}"
+                                           min="1923-01-01" max="2007-01-01">
+                <span class="error-input-bornDate" style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">Заполните все поля. Вы должны быть старше 16 и младше 100 лет</span></p>
+                {% endif %}
+            <hr>
+            <p><b>Адрес доставки:</b><input type="text" name="address" id="address" class="input-form"
+                                            value="{% if current_user.address == None %}{% else %}{{ current_user.address }}{% endif %}"
+                                            placeholder="Введите адрес для доставки (город, улица, дом, квартира)"></p>
+            <hr>
+            <p><b>Обо мне:</b><textarea style="width:100%; height:10em;font-family: sans-serif;" name="info"
+                                        id="info" class="input-form"
+                                        placeholder="Напишите что-нибудь о себе">{% if current_user.info == None %}{% else %}{{ current_user.info }}{% endif %}</textarea>
+            </p>
+            <hr>
+            <p class="profile-submit-box" style="display:flex;justify-content: space-between;margin-bottom:0;">
+                <input type="submit" class="button-enter-authorizeUser" value="Сохранить изменения">
+                <a href="/static" class="button-enter-authorizeUser warning" type="button">Отмена</a>
+            </p>
+        </div>
+    </form>
+</div>
+{% endblock %}

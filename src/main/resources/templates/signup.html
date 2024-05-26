@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}" lang="ru">
+
+<head>
+    <title layout:fragment="title">Регистрация</title>
+</head>
+
+<div layout:fragment="content">
+    <script type="text/javascript" th:src="@{/js/registerScripts.js}" defer></script>
+    <body class="text-center">
+    <div class="separator-with-shadow" style="padding-top: 0;padding-bottom: 0;margin-top: 0;">
+        <div class="separator-with-shadow-box" style="margin-top: 0;"></div>
+    </div>
+    <th:block th:if="${error != null}">
+        <div class="error-register-block">
+            <p class="error-register" th:text="${error}"></p>
+        </div>
+    </th:block>
+    <th:block th:unless="${error != null}">
+        <div class="error-register-block" style="display:none;">
+            <p class="error-register" th:text="${error}"></p>
+        </div>
+    </th:block>
+
+    <main class="signup-form" style="padding-top: 2%;">
+
+        <form method="post" class="main-form" enctype="multipart/form-data">
+            <!--        <div class="separator-with-shadow" style="padding-top: 0px;padding-bottom: 0px;margin-top: 0;margin: inherit;">-->
+            <!--            <div class="separator-with-shadow-box" style="margin-top: 0px;"></div>-->
+            <!--        </div>-->
+
+            <h1 class="login-title">Введите данные для регистрации</h1>
+            <!--        <div class="separator-with-shadow" style="padding-top: 0px;padding-bottom: 0px;margin-top: 0;margin: inherit;">-->
+            <!--            <div class="separator-with-shadow-box" style="margin-top: 0px;"></div>-->
+            <!--        </div>-->
+            <div class="login-form" style="margin-bottom:20px;margin-top: 20px;">
+                <div class="form-control-title">Имя*</div>
+                <label for="floatingName"></label>
+                <input type="text" class="form-control" id="floatingName" name="floatingName"
+                                                         placeholder="Введите Ваше публичное имя (ник)">
+            </div>
+            <div class="login-form" style="margin-bottom:20px;">
+                <div class="form-control-title">Электронная почта*</div>
+                <label for="floatingEmail"></label>
+                <input type="email" class="form-control" id="floatingEmail" name="floatingEmail"
+                                                          placeholder="Имя@пример.com">
+            </div>
+            <div class="login-form" style="margin-bottom:20px;">
+                <div class="form-control-title">Пароль*</div>
+                <label for="floatingPassword"></label>
+                <input type="password" class="form-control" id="floatingPassword" name="floatingPassword"
+                                                             placeholder="Придумайте пароль">
+            </div>
+            <div class="login-form" style="margin-bottom:20px;">
+                <div class="form-control-title">Повторите пароль*</div>
+                <label for="floatingPassword2"></label>
+                <input type="password" class="form-control" id="floatingPassword2" name="floatingPassword2"
+                                                              placeholder="Повторите Ваш пароль">
+            </div>
+            <br>
+            <button class="button-enter-user submit-sample" style="margin-bottom:20px;" type="submit">
+                Зарегистрироваться
+            </button>
+            <div class="login-footer">
+                <br>
+                <div class="separator-with-shadow" style="padding-top: 0;padding-bottom: 0;margin-top: 0;">
+                    <div class="separator-with-shadow-box" style="margin-top: 0;width: 100%"></div>
+                </div>
+                <p>Уже есть учётная запись? <a href="/login">Войти</a></p>
+            </div>
+        </form>
+    </main>
+    </body>
+</div>

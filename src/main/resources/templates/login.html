@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}" lang="ru">
+
+<head>
+    <title layout:fragment="title">Вход</title>
+</head>
+
+<th:block layout:fragment="content">
+    <script type="text/javascript" th:src="@{/js/registerScripts.js}" defer></script>
+    <body class="text-center">
+    <div class="separator-with-shadow" style="padding-top: 0;padding-bottom: 0;margin-top: 0;">
+        <div class="separator-with-shadow-box" style="margin-top: 0;"></div>
+    </div>
+
+    <th:block th:if="${error != null}">
+        <div class="error-register-block">
+            <p class="error-register" th:text="${error}"></p>
+        </div>
+    </th:block>
+    <th:block th:unless="${error != null}">
+        <div class="error-register-block" style="display:none;">
+            <p class="error-register" th:text="${error}"></p>
+        </div>
+    </th:block>
+
+    <main class="signup-form">
+        <form method="post" class="main-form" enctype="multipart/form-data" th:action="@{/login}">
+            <div class="login-main">
+                <div class="separator-with-shadow" style="padding-top: 0;padding-bottom: 0;margin-top: 0;">
+                    <div class="separator-with-shadow-box" style="margin-top: 0;"></div>
+                </div>
+                <h1 class="login-title">Введите данные для входа</h1>
+                <div class="separator-with-shadow" style="padding-top: 0;padding-bottom: 0;margin-top: 0;">
+                    <div class="separator-with-shadow-box" style="margin-top: 0;"></div>
+                </div>
+                <div class="login-form" style="margin-bottom:20px;margin-top:20px;">
+                    <div class="form-control-title">Электронная почта*</div>
+                    <label for="floatingInput"></label>
+                    <input type="email" class="form-control" id="floatingInput" name="floatingInput"
+                           placeholder="Введите свою электронную почту">
+                </div>
+                <div class="login-form">
+                    <div class="form-control-title">Пароль*</div>
+                    <label for="floatingPassword"></label>
+                    <input type="password" class="form-control" id="floatingPassword" name="floatingPassword"
+                           placeholder="Введите пароль">
+                </div>
+                <br>
+                <button class="button-enter-user submit-sample" style="margin-bottom:20px;" type="submit">
+                    Войти
+                </button>
+            </div>
+            <br>
+            <div class="login-footer">
+                <div class="separator-with-shadow" style="padding-top: 0;padding-bottom: 0;margin-top: 0;">
+                    <div class="separator-with-shadow-box" style="margin-top: 0;width: 100%"></div>
+                </div>
+                <p>Нет учётной записи? <a href="/signup">Зарегистрироваться</a></p>
+            </div>
+        </form>
+    </main>
+    </body>
+</th:block>

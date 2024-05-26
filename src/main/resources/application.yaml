@@ -1,0 +1,14 @@
+spring:
+  jpa:
+    open-in-view: true
+  main:
+    banner-mode: off
+
+minio:
+  url: http://127.0.0.1
+  accessKey: minioadmin
+  secretKey: minioadmin
+  port: 9996
+  secure: false
+  partSize: 5242880
+  imgBucket: profile-img

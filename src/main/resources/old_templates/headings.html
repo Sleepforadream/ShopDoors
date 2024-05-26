@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Рубрики
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="p-4 p-md-5 mb-4 rounded text-bg-dark4">
+        <div class="col-md-13 px-0">
+            <h1 class="title-text-image-posts fst-italic">Рубрики</h1>
+            <br>
+            <p class="sub-text-image-posts">Все категории статей размещённых на сайте</p>
+        </div>
+    </div>
+    <hr>
+    <form method="post" enctype="multipart/form-data">
+        <div class="headings-filters">
+            <div class="heading-selector">Рубрика:
+                <select name="select" id="select">
+                    <option value="{{ select }}" hidden="">{{ select }}</option>
+                    <option value="Все категории">Все категории</option>
+                    <option value="Закон и порядок">Закон и порядок</option>
+                    <option value="Спорт">Спорт</option>
+                    <option value="Финансы">Финансы</option>
+                    <option value="Природа">Природа</option>
+                    <option value="Обучение">Обучение</option>
+                    <option value="Здоровье">Здоровье</option>
+                    <option value="Наука и технологии">Наука и технологии</option>
+                    <option value="Политика">Политика</option>
+                    <option value="Военное дело">Военное дело</option>
+                    <option value="Фотографии">Фотографии</option>
+                </select>
+            </div>
+            <div class="heading-selector-date">Дата статьи:
+                <input type="date" name="selectdate" id="selectdate">
+            </div>
+        </div>
+        <br>
+        <br>
+        <input type="submit" class="btn btn-filter" value="Фильтровать">
+        <br>
+    </form>
+
+    {% for key, value in dictory|items %}
+    {% if select == key or select == "Все категории" %}
+
+    {% if key == "Закон и порядок" %}
+    <hr>
+    <a href="/headings_law" style="color: black;"><h2>{{ key }}</h2></a>
+    <hr>
+    {% endif %}
+
+    {% if key == "Военное дело" %}
+    <hr>
+    <a href="/headings_army" style="color: black;"><h2>{{ key }}</h2></a>
+    <hr>
+    {% endif %}
+
+    {% if key == "Финансы" %}
+    <hr>
+    <a href="/headings_finance" style="color: black;"><h2>{{ key }}</h2></a>
+    <hr>
+    {% endif %}
+
+    {% if key == "Здоровье" %}
+    <hr>
+    <a href="/headings_health" style="color: black;"><h2>{{ key }}</h2></a>
+    <hr>
+    {% endif %}
+
+    {% if key == "Обучение" %}
+    <hr>
+    <a href="/headings_learning" style="color: black;"><h2>{{ key }}</h2></a>
+    <hr>
+    {% endif %}
+
+    {% if key == "Наука и технологии" %}
+    <hr>
+    <a href="/headings_science" style="color: black;"><h2>{{ key }}</h2></a>
+    <hr>
+    {% endif %}
+
+    {% if key == "Политика" %}
+    <hr>
+    <a href="/headings_politic" style="color: black;"><h2>{{ key }}</h2></a>
+    <hr>
+    {% endif %}
+
+    {% if key == "Фотографии" %}
+    <hr>
+    <a href="/headings_photography" style="color: black;"><h2>{{ key }}</h2></a>
+    <hr>
+    {% endif %}
+
+    {% if key == "Спорт" %}
+    <hr>
+    <a href="/headings_sport" style="color: black;"><h2>{{ key }}</h2></a>
+    <hr>
+    {% endif %}
+
+    {% if key == "Природа" %}
+    <hr>
+    <a href="/headings_nature" style="color: black;"><h2>{{ key }}</h2></a>
+    <hr>
+    {% endif %}
+
+    {% if value|length > 0 %}
+    {% for element in value %}
+    {% if element.private == None or element.author == current_user.name %}
+    {% if selectdate == element.date.strftime("%Y-%m-%d") or selectdate == "" %}
+    <div class="heading-category">
+        <div class="headings-card">
+            <div class="alert-info2">
+                <div class="announcement-info">
+                    <div class="title-and-intro">
+                        <h2 class="announcement-title">{{ element.title }}</h2>
+                        <b>Автор:</b> <a class="intro-author" href="/profile/{{ element.author }}">{{ element.author
+                        }}</a>
+                        <p class="intro-posts2"> {{ element.intro }}</p>
+                    </div>
+                    <div class="btn-posts-to-detail">
+                        <p class="date-posts"><b>Дата: {{ element.date.date() }}</b></p>
+                        <a href="/posts/{{ element.id }}" class="btn btn-warning">Детальнее</a>
+                    </div>
+                </div>
+                <div class="preview-img">
+                    <p class="intro-img">
+                        <img class="intro-img-implementation" src="{{ element.imgpath }}">
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+    {% else %}
+    <p>У нас ещё нет статей данной рубрики на сайте</p>
+    {% endif %}
+
+
+    {% endif %}
+    {% endfor %}
+    <hr>
+    <br>
+</div>
+{% endblock %}
