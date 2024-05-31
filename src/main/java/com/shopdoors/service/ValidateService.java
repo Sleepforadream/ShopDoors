@@ -19,23 +19,13 @@ import java.util.regex.Pattern;
 public class ValidateService {
     private final AuthenticationManager authenticationManager;
 
-    public Map<String, Boolean> validateRegistrationFields(String nickName,
-                                                           String email,
-                                                           String password,
-                                                           String passwordDouble) {
+    public Map<String, Boolean> validateRegistrationFields(
+            String nickName,
+            String email,
+            String password,
+            String passwordDouble
+    ) {
         Map<String, Boolean> validFields = new HashMap<>();
-
-        Map<String, Boolean> nameNotEmpty = validateSizeFields(nickName, "Имя");
-        if (nameNotEmpty.containsValue(false)) return nameNotEmpty;
-
-        Map<String, Boolean> emailNotEmpty = validateSizeFields(email, "Электронная почта");
-        if (emailNotEmpty.containsValue(false)) return emailNotEmpty;
-
-        Map<String, Boolean> passwordNotEmpty = validateSizeFields(password, "Пароль");
-        if (passwordNotEmpty.containsValue(false)) return passwordNotEmpty;
-
-        Map<String, Boolean> passwordDoubleNotEmpty = validateSizeFields(passwordDouble, "Повторите пароль");
-        if (passwordDoubleNotEmpty.containsValue(false)) return passwordDoubleNotEmpty;
 
         Map<String, Boolean> nickNameValidation = validateCorrectLogin(nickName);
         if (nickNameValidation.containsValue(false)) return nickNameValidation;
@@ -56,12 +46,6 @@ public class ValidateService {
     public Map<String, Boolean> validateLoginFields(String email, String password) {
         Map<String, Boolean> validFields = new HashMap<>();
 
-        Map<String, Boolean> emailNotEmpty = validateSizeFields(email, "Электронная почта");
-        if (emailNotEmpty.containsValue(false)) return emailNotEmpty;
-
-        Map<String, Boolean> passwordNotEmpty = validateSizeFields(password, "Пароль");
-        if (passwordNotEmpty.containsValue(false)) return passwordNotEmpty;
-
         Map<String, Boolean> emailValidation = validateCorrectEmail(email);
         if (emailValidation.containsValue(false)) return emailValidation;
 
@@ -72,29 +56,16 @@ public class ValidateService {
         return validFields;
     }
 
-    public Map<String, Boolean> validateProfileFields(String nickName,
-                                                      String firstName,
-                                                      String secondName,
-                                                      String thirdName,
-                                                      String birthDate,
-                                                      String address,
-                                                      String info) {
+    public Map<String, Boolean> validateProfileFields(
+            String nickName,
+            String firstName,
+            String secondName,
+            String thirdName,
+            String birthDate,
+            String address,
+            String info
+    ) {
         Map<String, Boolean> validFields = new HashMap<>();
-
-        Map<String, Boolean> nickNameSizeValidation = validateMaxSizeFields(nickName, "nickName", 64);
-        if (nickNameSizeValidation.containsValue(false)) return nickNameSizeValidation;
-
-        Map<String, Boolean> firstNameSizeValidation = validateMaxSizeFields(firstName, "firstName", 64);
-        if (firstNameSizeValidation.containsValue(false)) return firstNameSizeValidation;
-
-        Map<String, Boolean> secondNameSizeValidation = validateMaxSizeFields(secondName, "secondName", 64);
-        if (secondNameSizeValidation.containsValue(false)) return secondNameSizeValidation;
-
-        Map<String, Boolean> thirdNameSizeValidation = validateMaxSizeFields(thirdName, "thirdName", 64);
-        if (thirdNameSizeValidation.containsValue(false)) return thirdNameSizeValidation;
-
-        Map<String, Boolean> addressSizeValidation = validateMaxSizeFields(address, "address", 256);
-        if (addressSizeValidation.containsValue(false)) return addressSizeValidation;
 
         Map<String, Boolean> infoSizeValidation = validateMaxSizeFields(info, "info", 512);
         if (infoSizeValidation.containsValue(false)) return infoSizeValidation;
@@ -122,24 +93,49 @@ public class ValidateService {
         return validFields;
     }
 
-    private Map<String, Boolean> validateSizeFields(String field, String fieldName) {
-        Map<String, Boolean> erroredFields = new HashMap<>();
+    public Map<String, Boolean> validateSecurityFields(
+            String phone,
+            String email,
+            String currentEmail,
+            String oldPassword,
+            String newPassword,
+            String againPassword
+    ) {
+        Map<String, Boolean> validFields = new HashMap<>();
 
-        if (field == null || field.trim().equals("")) {
-            erroredFields.put("Поле " + fieldName + " не заполнено", false);
-            return erroredFields;
-        }
-        if (field.length() < 3) {
-            erroredFields.put("Поле " + fieldName + " содержит меньше 3 символов", false);
-            return erroredFields;
-        }
-        if (field.length() > 64) {
-            erroredFields.put("Поле " + fieldName + " содержит больше 64 символов", false);
-            return erroredFields;
-        }
+        Map<String, Boolean> phoneValidation = validateCorrectPhoneNumber(phone);
+        if (phoneValidation.containsValue(false)) return phoneValidation;
 
-        erroredFields.put("Поле заполнено", true);
-        return erroredFields;
+        Map<String, Boolean> emailValidation = validateCorrectEmail(email);
+        if (emailValidation.containsValue(false)) return emailValidation;
+
+        Map<String, Boolean> passwordValidation = validateSuccessPassword(currentEmail, oldPassword);
+        if (passwordValidation.containsValue(false)) return passwordValidation;
+
+        Map<String, Boolean> newPasswordValidation = validateCorrectPassword(newPassword);
+        if (newPasswordValidation.containsValue(false)) return newPasswordValidation;
+
+        Map<String, Boolean> passwordDoubleValidation = validateDoublePassword(newPassword, againPassword);
+        if (passwordDoubleValidation.containsValue(false)) return passwordDoubleValidation;
+
+        validFields.put("Все поля валидны", true);
+        return validFields;
+    }
+
+    public Map<String, Boolean> validatePhoneAndEmailFields(
+            String phone,
+            String email
+    ) {
+        Map<String, Boolean> validFields = new HashMap<>();
+
+        Map<String, Boolean> phoneValidation = validateCorrectPhoneNumber(phone);
+        if (phoneValidation.containsValue(false)) return phoneValidation;
+
+        Map<String, Boolean> emailValidation = validateCorrectEmail(email);
+        if (emailValidation.containsValue(false)) return emailValidation;
+
+        validFields.put("Все поля валидны", true);
+        return validFields;
     }
 
     private Map<String, Boolean> validateMaxSizeFields(String field, String fieldName, int size) {
@@ -164,6 +160,19 @@ public class ValidateService {
             erroredFields.put("Email валиден", true);
         } else {
             erroredFields.put("Email не валиден", false);
+        }
+        return erroredFields;
+    }
+
+    private Map<String, Boolean> validateCorrectPhoneNumber(String phoneNumber) {
+        Map<String, Boolean> erroredFields = new HashMap<>();
+        String PHONE_PATTERN = "^(\\+7|8)\\d{10}$";
+        Pattern pattern = Pattern.compile(PHONE_PATTERN);
+        Matcher matcher = pattern.matcher(phoneNumber);
+        if (matcher.matches()) {
+            erroredFields.put("Номер телефона валиден", true);
+        } else {
+            erroredFields.put("Номер телефона не валиден", false);
         }
         return erroredFields;
     }
@@ -215,15 +224,18 @@ public class ValidateService {
     private Map<String, Boolean> validateCorrectPassword(String password) {
         Map<String, Boolean> erroredFields = new HashMap<>();
         String PASSWORD_PATTERN =
-                "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=-])(?=\\S+$).{8,}$";
+                "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+_=-])(?=\\S+$).{8,}$";
         Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
         Matcher matcher = pattern.matcher(password);
         if (matcher.matches()) {
             erroredFields.put("Введённый пароль валиден", true);
         } else {
-            erroredFields.put("Пароль должен содержать хотя бы одну цифру, " +
-                    "строчную букву, заглавную букву, специальный символ из набора [@#$%^&+=-]. " +
-                    "Не должен содержать пробелов. Длина - не менее 8 символов", false);
+            erroredFields.put(
+                    "Пароль должен содержать хотя бы одну цифру, строчную букву, заглавную букву, " +
+                            "специальный символ из набора [@#$%^&+_=-]. Не должен содержать пробелов. " +
+                            "Длина - не менее 8 символов",
+                    false
+            );
         }
         return erroredFields;
     }
@@ -257,7 +269,7 @@ public class ValidateService {
         Map<String, Boolean> erroredFields = new HashMap<>();
         if (LocalDate.parse(birthdate).isAfter(LocalDate.now().minusYears(16))) {
             erroredFields.put("Ваш возраст должен быть больше 16 лет", false);
-        } else if (LocalDate.parse(birthdate).isBefore(LocalDate.now().minusYears(150))){
+        } else if (LocalDate.parse(birthdate).isBefore(LocalDate.now().minusYears(150))) {
             erroredFields.put("Ваш возраст не должен быть больше 150 лет", false);
         } else {
             erroredFields.put("Возраст валиден", true);

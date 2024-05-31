@@ -57,8 +57,8 @@ public class AuthorizeUser {
     @Column
     private LocalDate birthDate;
 
-    @Column(unique = true)
-    private Integer phoneNumber;
+    @Column(unique = true, length = 12)
+    private String phoneNumber;
 
     @Column(length = 1000)
     private String address;

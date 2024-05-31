@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{private_profile}" lang="ru">
+
+<th:block layout:fragment="info">
+    <script type="text/javascript" th:src="@{/js/privateProfileSecurity.js}"
+            defer></script>
+    <div class="profile-info-box">
+        <div class="user-title">
+            <h2 class="profile-title-text">
+                <th:block th:if="${#authentication.principal.imgPath} == null">
+                    <p>Профиль пользователя "<span th:text="${#authentication.principal.nickName}">User</span>"</p>
+                </th:block>
+                <th:block th:unless="${#authentication.principal.imgPath} == null">
+                    <img class="user-img-profile" th:src="${imgProfileUrl}"
+                         alt="mdo" width="64" height="64" src="">
+                    <p>Профиль пользователя "<span th:text="${#authentication.principal.nickName}">User</span>"</p>
+                </th:block>
+            </h2>
+            <!--            <hr>-->
+
+            <!--            {% if error == "Изменения успешно сохранены" %}-->
+            <!--            <div class="success-register-block">-->
+            <!--                <p class="success-register">{{ error }}</p>-->
+            <!--            </div>-->
+            <!--            {% elif error != "" or error == None %}-->
+            <!--            <div class="error-register-block">-->
+            <!--                <p class="error-register">{{ error }}</p>-->
+            <!--            </div>-->
+            <!--            {% else %}-->
+            <!--            <div class="error-register-block" style="display:none;">-->
+            <!--                <p class="error-register">{{ error }}</p>-->
+            <!--            </div>-->
+            <!--            {% endif %}-->
+            <!--            <hr>-->
+        </div>
+        <form method="post" enctype="multipart/form-data">
+            <div class="user-info">
+                <p><b>Телефон:</b>
+                    <th:block th:if="${user.phoneNumber} == null">
+                        <label for="no_phoneNumber"></label>
+                        <input type="text" name="phoneNumber" id="no_phoneNumber" class="input-form"
+                               value="" placeholder="Введите свой телефон (Пример: 89871234567)">
+                    </th:block>
+                    <th:block th:unless="${user.phoneNumber} == null">
+                        <label for="phoneNumber"></label>
+                        <input type="text" name="phoneNumber" id="phoneNumber" class="input-form"
+                               th:value="${user.phoneNumber}"
+                               placeholder="Введите свой телефон (Пример: 89871234567)">
+                    </th:block>
+
+                    <th:block th:if="${error} == 'Номер телефона не валиден'">
+                        <span class="error-input-name" style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                            Номер телефона не валиден
+                        </span>
+                    </th:block>
+                    <th:block th:unless="${error} == 'Номер телефона не валиден'">
+                        <span class="error-input-name" style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                        </span>
+                    </th:block>
+                </p>
+                <hr>
+                <p><b>Email:</b>
+                    <th:block th:if="${user.email} == null">
+                        <label for="no_email"></label>
+                        <input type="text" name="email" id="no_email" class="input-form"
+                               value="" placeholder="Введите свой email">
+                    </th:block>
+                    <th:block th:unless="${user.email} == null">
+                        <label for="email"></label>
+                        <input type="text" name="email" id="email" class="input-form"
+                               th:value="${user.email}"
+                               placeholder="Введите свой email">
+                    </th:block>
+
+                    <th:block th:if="${error} == 'Email не валиден'">
+                        <span class="error-input-name" style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                            Email не валиден
+                        </span>
+                    </th:block>
+                    <th:block th:unless="${error} == 'Email не валиден'">
+                        <span class="error-input-name" style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                        </span>
+                    </th:block>
+                </p>
+
+                <hr>
+                <p><b>Пароль:</b>
+                    <th:block th:if="${user.email} == null">
+                        <label for="no_password">
+                        </label><input type="password" name="password" id="no_password" class="input-form"
+                                       value="" readonly spellcheck="false" style="background-color: unset;">
+                    </th:block>
+                    <th:block th:unless="${user.email} == null">
+                        <label for="password">
+                        </label><input type="password" name="password" id="password" class="input-form"
+                                       th:value="${user.password}"
+                                       readonly spellcheck="false" style="background-color: unset;">
+                    </th:block>
+                <p class="profile-submit-box" style="display:flex;justify-content: space-between;margin-bottom:0;">
+                    <a class="button-enter-user default" type="button">Изменить пароль</a>
+                </p>
+                <hr>
+                <div class="edit-password-menu">
+                    <p><b>Старый пароль:</b>
+                        <label for="oldPassword"></label>
+                        <input type="password" name="oldPassword" id="oldPassword"
+                               class="input-form"
+                               placeholder="Введите текущий пароль"></p>
+                    <hr>
+
+                    <th:block th:if="${error} == 'Не верный email или пароль'">
+                        <span class="error-input-name" style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                            Не верный пароль
+                        </span>
+                    </th:block>
+                    <th:block th:unless="${error} == 'Не верный email или пароль'">
+                        <span class="error-input-name" style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                        </span>
+                    </th:block>
+
+                    <p><b>Новый пароль:</b>
+                        <label for="newPassword"></label>
+                        <input type="password" name="newPassword" id="newPassword" class="input-form"
+                               placeholder="Введите новый пароль"></p>
+                    <hr>
+
+                    <th:block th:if="${error} == 'Пароль должен содержать хотя бы одну цифру, строчную букву, заглавную букву, специальный символ из набора [@#$%^&+_=-]. Не должен содержать пробелов. Длина - не менее 8 символов'">
+                        <span class="error-input-name" style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                            Пароль должен содержать хотя бы одну цифру, строчную букву, заглавную букву, специальный символ из набора [@#$%^&+_=-]. Не должен содержать пробелов. Длина - не менее 8 символов
+                        </span>
+                    </th:block>
+                    <th:block th:unless="${error} == 'Пароль должен содержать хотя бы одну цифру, строчную букву, заглавную букву, специальный символ из набора [@#$%^&+_=-]. Не должен содержать пробелов. Длина - не менее 8 символов'">
+                        <span class="error-input-name" style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                        </span>
+                    </th:block>
+
+                    <p><b>Повторите пароль:</b>
+                        <label for="repeatNewPassword"></label>
+                        <input type="password" name="repeatNewPassword" id="repeatNewPassword"
+                               class="input-form"
+                               placeholder="Повторите новый пароль"></p>
+                    <hr>
+
+                    <th:block th:if="${error} == 'Пароли не совпадают'">
+                        <span class="error-input-name" style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                            Пароли не совпадают
+                        </span>
+                    </th:block>
+                    <th:block th:unless="${error} == 'Пароли не совпадают'">
+                        <span class="error-input-name" style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                        </span>
+                    </th:block>
+
+                </div>
+                <p class="profile-delete-box"><a class="button-enter-user danger">Удалить этот аккаунт</a>
+                </p>
+                <hr>
+                <p class="profile-submit-box" style="display:flex;justify-content: space-between;margin-bottom:0;">
+                    <input type="submit" class="button-enter-user" value="Сохранить изменения">
+                    <a href="/static" class="button-enter-user warning" type="button">Отмена</a>
+                </p>
+            </div>
+            <div class="modal-password-popup" tabindex="-1" role="dialog" aria-labelledby="modal-heading"
+                 aria-hidden="false">
+                <div class="modal-password-dialog">
+                    <div class="modal-password-content" style="background-color:#f6f6f6">
+                        <div class="modal-header">
+                            <button class="modal-close-button" type="button" data-dismiss="modal" aria-hidden="true">×
+                            </button>
+                            <h3 class="modal-title" id="modal-heading-1" data-dismiss="modal" aria-hidden="false"
+                                data-fontsize="16" data-lineheight="30">Подтвердите удаление аккаунта</h3></div>
+
+                        <div class="modal-password-body">
+                            <label for="confirmDelete"></label>
+                            <input type="password" name="confirmDelete" id="confirmDelete"
+                                   class="input-form"
+                                   placeholder="Введите пароль для удаления аккаунта">
+                            <br>
+                            <br>
+                            <p class="profile-submit-box"
+                               style="display:flex;justify-content: space-between;margin-bottom:0;">
+                                <input type="submit" class="button-enter-user danger"
+                                       name="confirmDeleteButton"
+                                       id="confirmDeleteButton" value="Удалить" style="margin-right: 10px;">
+                                <a class="button-enter-user warning" type="button" name="cancelDeleteButton"
+                                   id="cancelDeleteButton">Отмена</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</th:block>

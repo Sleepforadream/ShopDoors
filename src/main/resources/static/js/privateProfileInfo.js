@@ -5,7 +5,7 @@ let secondMenu = document.querySelector('.second-header-menu');
 
 secondMenu.style.display = "none";
 
-imgProfileAdd.onchange = evt => {
+imgProfileAdd.onchange = () => {
   const [file] = imgProfileAdd.files
   if (file) {
     userImgProfile.src = URL.createObjectURL(file)

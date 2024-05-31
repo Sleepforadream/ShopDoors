@@ -4,6 +4,22 @@
     let shopFooter = document.querySelector('.shop-footer');
     let secondMenu = document.querySelector('.second-header-menu');
 
+    document.addEventListener('DOMContentLoaded', function () {
+        const imgProfileAdd = document.getElementById('imgProfileAdd');
+        const profileImage = document.getElementById('profileImage');
+
+        imgProfileAdd.addEventListener('change', function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    profileImage.src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    });
+
     secondMenu.style.display = "none";
 
     let coordsShopFooter = shopFooter.getBoundingClientRect();
