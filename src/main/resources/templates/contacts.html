@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}" lang="ru">
+
+<head>
+    <title layout:fragment="title">Контакты</title>
+</head>
+
+<th:block layout:fragment="content">
+    <script type="text/javascript" th:src="@{/js/sampleScripts.js}" defer></script>
+    <div class="contacts-main">
+        <div class="contacts-data">
+            <div class="separator-with-shadow">
+                <div class="separator-with-shadow-box"></div>
+            </div>
+            <div class="contacts-data-title">Наши контактные данные</div>
+            <div class="separator-with-shadow" style="padding-top: inherit;">
+                <div class="separator-with-shadow-box"></div>
+            </div>
+            <div class="contacts-data-box">
+                <div class="contacts-data-left">
+                    <div class="contact-bar">
+                        <div class="separator-thin"></div>
+                        <div class="separator-thin-double"></div>
+                        <div class="contact-title">Адрес</div>
+                        <div class="contact-info">
+                            <div class="contact-icon">
+                                <div class="contact-box-icon"></div>
+                                <svg fill="#ffffff" width="14px" height="14px" viewBox="-3 0 24 24"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="m8.075 23.52c-6.811-9.878-8.075-10.891-8.075-14.52 0-4.971 4.029-9 9-9s9 4.029 9 9c0 3.629-1.264 4.64-8.075 14.516-.206.294-.543.484-.925.484s-.719-.19-.922-.48l-.002-.004zm.925-10.77c2.07 0 3.749-1.679 3.749-3.75s-1.679-3.75-3.75-3.75-3.75 1.679-3.75 3.75c0 2.071 1.679 3.75 3.75 3.75z"/>
+                                </svg>
+                            </div>
+                            <div class="contact-text">г. Стерлитамак, пр. Ленина 14</div>
+                        </div>
+                    </div>
+                    <div class="contact-bar">
+                        <div class="separator-thin"></div>
+                        <div class="separator-thin-double"></div>
+                        <div class="contact-title">WhatsApp</div>
+                        <div class="contact-info">
+                            <div class="contact-icon">
+                                <div class="contact-box-icon"></div>
+                                <svg width="15px" height="15px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill="#fff" clip-rule="evenodd"
+                                          d="M18.403 5.633A8.919 8.919 0 0 0 12.053 3c-4.948 0-8.976 4.027-8.978 8.977 0 1.582.413 3.126 1.198 4.488L3 21.116l4.759-1.249a8.981 8.981 0 0 0 4.29 1.093h.004c4.947 0 8.975-4.027 8.977-8.977a8.926 8.926 0 0 0-2.627-6.35m-6.35 13.812h-.003a7.446 7.446 0 0 1-3.798-1.041l-.272-.162-2.824.741.753-2.753-.177-.282a7.448 7.448 0 0 1-1.141-3.971c.002-4.114 3.349-7.461 7.465-7.461a7.413 7.413 0 0 1 5.275 2.188 7.42 7.42 0 0 1 2.183 5.279c-.002 4.114-3.349 7.462-7.461 7.462m4.093-5.589c-.225-.113-1.327-.655-1.533-.73-.205-.075-.354-.112-.504.112s-.58.729-.711.879-.262.168-.486.056-.947-.349-1.804-1.113c-.667-.595-1.117-1.329-1.248-1.554s-.014-.346.099-.458c.101-.1.224-.262.336-.393.112-.131.149-.224.224-.374s.038-.281-.019-.393c-.056-.113-.505-1.217-.692-1.666-.181-.435-.366-.377-.504-.383a9.65 9.65 0 0 0-.429-.008.826.826 0 0 0-.599.28c-.206.225-.785.767-.785 1.871s.804 2.171.916 2.321c.112.15 1.582 2.415 3.832 3.387.536.231.954.369 1.279.473.537.171 1.026.146 1.413.089.431-.064 1.327-.542 1.514-1.066.187-.524.187-.973.131-1.067-.056-.094-.207-.151-.43-.263"/>
+                                </svg>
+                            </div>
+                            <div class="contact-text">8 (917) 349-14-05</div>
+                        </div>
+                    </div>
+                    <div class="contact-bar">
+                        <div class="separator-thin"></div>
+                        <div class="separator-thin-double"></div>
+                        <div class="contact-title">VK</div>
+                        <div class="contact-info">
+                            <div class="contact-icon">
+                                <div class="contact-box-icon"></div>
+                                <svg fill="#fff"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 48 48"
+                                     width="14px"
+                                     height="14px">
+                                    <path d="M45.763,35.202c-1.797-3.234-6.426-7.12-8.337-8.811c-0.523-0.463-0.579-1.264-0.103-1.776 c3.647-3.919,6.564-8.422,7.568-11.143C45.334,12.27,44.417,11,43.125,11l-3.753,0c-1.237,0-1.961,0.444-2.306,1.151 c-3.031,6.211-5.631,8.899-7.451,10.47c-1.019,0.88-2.608,0.151-2.608-1.188c0-2.58,0-5.915,0-8.28 c0-1.147-0.938-2.075-2.095-2.075L18.056,11c-0.863,0-1.356,0.977-0.838,1.662l1.132,1.625c0.426,0.563,0.656,1.248,0.656,1.951 L19,23.556c0,1.273-1.543,1.895-2.459,1.003c-3.099-3.018-5.788-9.181-6.756-12.128C9.505,11.578,8.706,11.002,7.8,11l-3.697-0.009 c-1.387,0-2.401,1.315-2.024,2.639c3.378,11.857,10.309,23.137,22.661,24.36c1.217,0.12,2.267-0.86,2.267-2.073l0-3.846 c0-1.103,0.865-2.051,1.977-2.079c0.039-0.001,0.078-0.001,0.117-0.001c3.267,0,6.926,4.755,8.206,6.979 c0.368,0.64,1.056,1.03,1.8,1.03l4.973,0C45.531,38,46.462,36.461,45.763,35.202z"/>
+                                </svg>
+                            </div>
+                            <div class="contact-text">vk.com/dveri_elite_house</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="contacts-data-right">
+                    <div class="contact-bar">
+                        <div class="separator-thin"></div>
+                        <div class="separator-thin-double"></div>
+                        <div class="contact-title">Телефон</div>
+                        <div class="contact-info">
+                            <div class="contact-icon">
+                                <div class="contact-box-icon"></div>
+                                <svg fill="#fff" width="14px" height="14px" viewBox="0 0 512 512"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M493.4 24.6l-104-24c-11.3-2.6-22.9 3.3-27.5 13.9l-48 112c-4.2 9.8-1.4 21.3 6.9 28l60.6 49.6c-36 76.7-98.9 140.5-177.2 177.2l-49.6-60.6c-6.8-8.3-18.2-11.1-28-6.9l-112 48C3.9 366.5-2 378.1.6 389.4l24 104C27.1 504.2 36.7 512 48 512c256.1 0 464-207.5 464-464 0-11.2-7.7-20.9-18.6-23.4z"/>
+                                </svg>
+                            </div>
+                            <div class="contact-text">8 (3473) 43-40-50</div>
+                        </div>
+                    </div>
+                    <div class="contact-bar">
+                        <div class="separator-thin"></div>
+                        <div class="separator-thin-double"></div>
+                        <div class="contact-title">E-mail</div>
+                        <div class="contact-info">
+                            <div class="contact-icon">
+                                <div class="contact-box-icon"></div>
+                                <svg style="width: 100%;" fill="#fff" width="3.5px" height="14px" viewBox="0 0 512 512"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416zM48 400V214.398c22.914 18.251 55.409 43.862 104.938 82.646 21.857 17.205 60.134 55.186 103.062 54.955 42.717.231 80.509-37.199 103.053-54.947 49.528-38.783 82.032-64.401 104.947-82.653V400H48z"/>
+                                </svg>
+                            </div>
+                            <div class="contact-text">Elitehouse.str@mail.ru</div>
+                        </div>
+                    </div>
+                    <div class="contact-bar">
+                        <div class="separator-thin"></div>
+                        <div class="separator-thin-double"></div>
+                        <div class="contact-title">Веб-сайт</div>
+                        <div class="contact-info">
+                            <div class="contact-icon">
+                                <div class="contact-box-icon"></div>
+                                <svg fill="#ffffff" width="14px" height="14px" viewBox="0 0 24 24"
+                                     xmlns="http://www.w3.org/2000/svg" style="margin-right: 2px;margin-bottom: 1px;">
+                                    <path d="m24.436 12.56v.051c0 .482-.035.956-.102 1.42l.006-.053h-15.695c0 .022-.001.049-.001.075 0 1.3.577 2.466 1.488 3.255l.005.005c.902.833 2.112 1.344 3.442 1.344.024 0 .049 0 .073-.001h-.004.025c.918 0 1.781-.235 2.532-.648l-.027.014c.78-.419 1.411-1.025 1.85-1.76l.012-.022h5.768c-.528 1.489-1.32 2.767-2.33 3.837l.005-.005c-2.011 2.143-4.86 3.478-8.022 3.478-1.769 0-3.441-.418-4.921-1.161l.063.029c-1.546.894-3.381 1.467-5.339 1.581l-.033.002q-3.232 0-3.232-3.586c.039-1.351.26-2.636.641-3.85l-.027.101c.454-1.208.954-2.236 1.536-3.21l-.05.09c1.748-3.199 3.909-5.929 6.454-8.241l.026-.023q-2.509 1.078-5.822 4.827c.564-2.505 1.945-4.623 3.842-6.112l.023-.018c1.822-1.49 4.175-2.393 6.739-2.393h.105-.005q.409 0 .614.014c1.715-.898 3.728-1.474 5.863-1.597l.039-.002h.068c.537 0 1.059.065 1.559.187l-.045-.009c.489.121.919.311 1.305.562l-.016-.01c.391.258.7.61.901 1.025l.007.015c.207.436.328.946.328 1.486 0 .029 0 .058-.001.087v-.004c-.081 1.434-.45 2.764-1.049 3.958l.026-.058c.866 1.518 1.376 3.336 1.376 5.272v.053-.003zm-.954-8.728c.002-.034.003-.073.003-.112 0-.663-.277-1.262-.722-1.687l-.001-.001c-.465-.416-1.081-.67-1.758-.67-.039 0-.077.001-.116.002h.005c-1.277.065-2.461.411-3.508.976l.044-.022c1.164.459 2.167 1.064 3.051 1.806l-.017-.014c.907.756 1.678 1.636 2.298 2.62l.027.046c.378-.864.626-1.867.692-2.919l.001-.025zm-21.736 16.868c-.003.046-.005.099-.005.153 0 .643.254 1.226.667 1.655l-.001-.001c.446.397 1.037.639 1.685.639.053 0 .105-.002.157-.005h-.007c1.351-.077 2.592-.488 3.66-1.151l-.033.019c-1.133-.677-2.095-1.507-2.894-2.477l-.015-.019c-.79-.948-1.427-2.057-1.852-3.266l-.023-.075c-.727 1.309-1.208 2.849-1.337 4.488l-.002.039zm6.872-9.722h9.927c-.027-1.296-.617-2.448-1.535-3.227l-.006-.005c-.908-.804-2.11-1.295-3.426-1.295s-2.518.491-3.431 1.3l.005-.005c-.92.785-1.508 1.938-1.534 3.227z"/>
+                                </svg>
+                            </div>
+                            <div class="contact-text">Doors-kd.ru</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="contact-bar" style="text-align: center;margin-top: 10px;padding: 0 30px;">
+                <div class="separator-thin"></div>
+                <div class="separator-thin-double"></div>
+                <div class="contact-title" style="margin-top: 10px;">Режим работы</div>
+                <div class="contact-info" style="justify-content: center;">
+                    <div class="contact-icon">
+                        <div class="contact-box-icon"></div>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="15px" height="15px"
+                             viewBox="0 0 24 24">
+                            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
+                            <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                        </svg>
+                    </div>
+                    <div class="contact-text" style="margin-right: 20px;">Пн-Пт 10:00 - 19:00</div>
+                    <div class="contact-text">Сб-Вск 10:00 - 17:00</div>
+                </div>
+            </div>
+            <div class="separator-with-shadow" style="margin-bottom: 0;">
+                <div class="separator-with-shadow-box"></div>
+            </div>
+        </div>
+        <div class="about-contacts" style="max-width: var(--site_width);margin: auto;">
+            <div class="about-contacts-row" style="padding-left: 30px;padding-right: 30px;width: auto;">
+                <div class="about-contacts-bar">
+                    <div class="about-contacts-bar-content">
+                        <div class="about-contacts-image">
+                            <svg style="width: 100%;" fill="#cbaa5c" width="45px" height="60px" viewBox="-3 0 24 24"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="m8.075 23.52c-6.811-9.878-8.075-10.891-8.075-14.52 0-4.971 4.029-9 9-9s9 4.029 9 9c0 3.629-1.264 4.64-8.075 14.516-.206.294-.543.484-.925.484s-.719-.19-.922-.48l-.002-.004zm.925-10.77c2.07 0 3.749-1.679 3.749-3.75s-1.679-3.75-3.75-3.75-3.75 1.679-3.75 3.75c0 2.071 1.679 3.75 3.75 3.75z"/>
+                            </svg>
+                        </div>
+                        <div class="about-contacts-title">
+                            Наш офис
+                        </div>
+                        <div class="about-contacts-text">
+                            Двери нашего специализированного салона всегда открыты Вам!
+                        </div>
+                    </div>
+                    <div class="about-contacts-bar-content-backface">
+                        <div class="about-contacts-title-backface">
+                            Местоположение салона
+                        </div>
+                        <div class="about-contacts-text-backface">
+                            пр.Ленина 14, Стерлитамак
+                        </div>
+                        <div class="about-contacts-button">
+                            Заказать звонок
+                        </div>
+                    </div>
+                </div>
+                <div class="about-contacts-bar">
+                    <div class="about-contacts-bar-content">
+                        <div class="about-contacts-image">
+                            <svg style="width: 100%;" fill="#cbaa5c" width="45px" height="60px" viewBox="0 0 512 512"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M493.4 24.6l-104-24c-11.3-2.6-22.9 3.3-27.5 13.9l-48 112c-4.2 9.8-1.4 21.3 6.9 28l60.6 49.6c-36 76.7-98.9 140.5-177.2 177.2l-49.6-60.6c-6.8-8.3-18.2-11.1-28-6.9l-112 48C3.9 366.5-2 378.1.6 389.4l24 104C27.1 504.2 36.7 512 48 512c256.1 0 464-207.5 464-464 0-11.2-7.7-20.9-18.6-23.4z"/>
+                            </svg>
+                        </div>
+                        <div class="about-contacts-title">
+                            Позвоните нам
+                        </div>
+                        <div class="about-contacts-text">
+                            Если у Вас возникли какие-либо вопросы мы с радостью на них ответим!
+                        </div>
+                    </div>
+                    <div class="about-contacts-bar-content-backface">
+                        <div class="about-contacts-title-backface">
+                            Звоните!
+                        </div>
+                        <div class="about-contacts-text-backface">
+                            8(3474) 43-40-50<br>
+                            8(917) 349-14-05
+                        </div>
+                        <div class="about-contacts-button">
+                            Позвонить!
+                        </div>
+                    </div>
+                </div>
+                <div class="about-contacts-bar-right">
+                    <div class="about-contacts-bar-content">
+                        <div class="about-contacts-image">
+                            <svg style="width: 100%;" fill="#cbaa5c" width="45px" height="60px" viewBox="0 0 512 512"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416zM48 400V214.398c22.914 18.251 55.409 43.862 104.938 82.646 21.857 17.205 60.134 55.186 103.062 54.955 42.717.231 80.509-37.199 103.053-54.947 49.528-38.783 82.032-64.401 104.947-82.653V400H48z"/>
+                            </svg>
+                        </div>
+                        <div class="about-contacts-title">
+                            Напишите нам
+                        </div>
+                        <div class="about-contacts-text">
+                            Отправьте нам письмо с вопросами и деталями.
+                        </div>
+                    </div>
+                    <div class="about-contacts-bar-content-backface">
+                        <div class="about-contacts-title-backface">
+                            Мы готовы!
+                        </div>
+                        <div class="about-contacts-text-backface">
+                            Elitehouse.str@mail.ru
+                        </div>
+                        <div class="about-contacts-button">
+                            Написать нам!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="separator-with-shadow" style="background: #fff;margin-bottom: 0;">
+            <div class="separator-with-shadow-box"></div>
+        </div>
+        <div class="geo-position" style="background: #fff;max-width: var(--site_width);margin: auto;">
+            <div class="geo-position-title">
+                Мы находимся здесь
+            </div>
+            <div class="separator-with-shadow" style="padding-top: 0;padding-bottom: 0;">
+                <div class="separator-with-shadow-box"></div>
+            </div>
+            <div class="geo-position-map" style="margin-top:15px;margin-bottom:15px;padding: 10px 10px 0;">
+                <div class="fusion-column-wrapper"
+                     style="padding: 0; background-position: left top; background-repeat: no-repeat; background-size: cover; height: auto;"
+                     data-bg-url="">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2365.087926252177!2d55.94039891598514!3d53.64540435996924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x43d81195b18aff73%3A0x5ded8c80b884c7c1!2z0KHRgtC10YDQu9C40YLQsNC80LDQuiwg0KDQtdGB0L8uINCR0LDRiNC60L7RgNGC0L7RgdGC0LDQvSwgNDUzMTAz!5e0!3m2!1sru!2sru!4v1585891718497!5m2!1sru!2sru"
+                            width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen=""
+                            aria-hidden="false" tabindex="0"></iframe>
+                    <div class="fusion-sep-clear"></div>
+                    <div class="fusion-separator fusion-full-width-sep sep-shadow"
+                         style="background:radial-gradient(ellipse at 50% -50% , #eaeaea 0px, rgba(255, 255, 255, 0) 80%) repeat scroll 0 0 rgba(0, 0, 0, 0);margin-left: auto;margin-right: auto;"></div>
+                    <div class="fusion-clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-politic-popup" tabindex="-1" role="dialog"
+             aria-labelledby="modal-heading" aria-hidden="false">
+            <div class="modal-dialog">
+                <div class="modal-content" style="background-color:#f6f6f6">
+                    <div class="modal-header">
+                        <button class="modal-close-button" type="button" data-dismiss="modal" aria-hidden="true">×
+                        </button>
+                        <h3 class="modal-title" id="modal-heading-1" data-dismiss="modal" aria-hidden="false"
+                            data-fontsize="16" data-lineheight="30">Политика конфиденциальности</h3></div>
+                    <div class="modal-body">
+                        <p><strong>Кто мы</strong></p>
+                        <p>Наш адрес сайта: http://doors-kd.ru.</p>
+                        <p><strong>Какие персональные данные мы собираем и с какой целью</strong></p>
+                        <p>Комментарии</p>
+                        <p>Если посетитель оставляет комментарий на сайте, мы собираем данные указанные в форме
+                            комментария,
+                            а также IP адрес посетителя и данные authorizeUser-agent браузера с целью определения
+                            спама.</p>
+                        <p>Анонимизированная строка создаваемая из вашего адреса email («хеш») может предоставляться
+                            сервису
+                            Gravatar, чтобы определить, используете ли вы его. Политика конфиденциальности Gravatar
+                            доступна
+                            здесь: https://automattic.com/privacy/ . После одобрения комментария ваше изображение
+                            профиля
+                            будет видимым публично в контексте вашего комментария.</p>
+                        <p><strong>Медиафайлы</strong></p>
+                        <p>Если вы зарегистрированный пользователь и загружаете фотографии на сайт, вам возможно следует
+                            избегать загрузки изображений с метаданными EXIF, так как они могут содержать данные вашего
+                            месторасположения по GPS. Посетители могут извлечь эту информацию скачав изображения с
+                            сайта.</p>
+                        <p><strong>Куки</strong></p>
+                        <p>Если вы оставляете комментарий на нашем сайте, вы можете включить сохранение вашего имени,
+                            адреса
+                            email и вебсайта в куки. Это делается для вашего удобства, чтобы не заполнять данные снова
+                            при
+                            повторном комментировании. Эти куки хранятся в течение одного года.</p>
+                        <p>Если у вас есть учетная запись на сайте и вы войдете в неё, мы установим временный куки для
+                            определения поддержки куки вашим браузером, куки не содержит никакой личной информации и
+                            удаляется при закрытии вашего браузера.</p>
+                        <p>При входе в учетную запись мы также устанавливаем несколько куки с данными входа и
+                            настройками
+                            экрана. Куки входа хранятся в течение двух дней, куки с настройками экрана — год. Если вы
+                            выберете возможность «Запомнить меня», данные о входе будут сохраняться в течение двух
+                            недель.
+                            При выходе из учетной записи куки входа будут удалены.</p>
+                        <p>При редактировании или публикации статьи в браузере будет сохранен дополнительный куки, он не
+                            содержит персональных данных и содержит только ID записи отредактированной вами, истекает
+                            через
+                            1 день.</p>
+                        <p><strong>Встраиваемое содержимое других вебсайтов</strong></p>
+                        <p>Статьи на этом сайте могут включать встраиваемое содержимое (например видео, изображения,
+                            статьи
+                            и др.), подобное содержимое ведет себя так же, как если бы посетитель зашел на другой
+                            сайт.</p>
+                        <p>Эти сайты могут собирать данные о вас, использовать куки, внедрять дополнительное
+                            отслеживание
+                            третьей стороной и следить за вашим взаимодействием с внедренным содержимым, включая
+                            отслеживание взаимодействия, если у вас есть учетная запись и вы авторизовались на том
+                            сайте.</p>
+                        <p><strong>Как долго мы храним ваши данные</strong></p>
+                        <p>Если вы оставляете комментарий, то сам комментарий и его метаданные сохраняются неопределенно
+                            долго. Это делается для того, чтобы определять и одобрять последующие комментарии
+                            автоматически,
+                            вместо помещения их в очередь на одобрение.</p>
+                        <p>Для пользователей с регистрацией на нашем сайте мы храним ту личную информацию, которую они
+                            указывают в своем профиле. Все пользователи могут видеть, редактировать или удалить свою
+                            информацию из профиля в любое время (кроме имени пользователя). Администрация вебсайта также
+                            может видеть и изменять эту информацию.</p>
+                        <p><strong>Какие у вас права на ваши данные</strong></p>
+                        <p>При наличии учетной записи на сайте или если вы оставляли комментарии, то вы можете запросить
+                            файл экспорта персональных данных, которые мы сохранили о вас, включая предоставленные вами
+                            данные. Вы также можете запросить удаление этих данных, это не включает данные, которые мы
+                            обязаны хранить в административных целях, по закону или целях безопасности.</p>
+                        <p><strong>Куда мы отправляем ваши данные</strong></p>
+                        <p>Комментарии пользователей могут проверяться автоматическим сервисом определения спама.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
