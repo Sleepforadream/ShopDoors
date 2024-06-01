@@ -18,6 +18,7 @@ public class AuthorizeUserDetailsService implements UserDetailsService {
 
     private final AuthorizeUserRepository authorizeUserRepository;
     private final PasswordEncoder passwordEncoder;
+    public final String DEFAULT_IMG_PATH = "unknownUser.svg";
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -41,6 +42,7 @@ public class AuthorizeUserDetailsService implements UserDetailsService {
                 .email(email)
                 .password(passwordEncoder.encode(password))
                 .nickName(name)
+                .imgPath(DEFAULT_IMG_PATH)
                 .build();
 
         return saveUser(newUser);

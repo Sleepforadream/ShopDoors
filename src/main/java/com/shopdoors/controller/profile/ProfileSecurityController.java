@@ -50,9 +50,20 @@ public class ProfileSecurityController {
             @RequestParam("oldPassword") String oldPassword,
             @RequestParam("newPassword") String newPassword,
             @RequestParam("repeatNewPassword") String againPassword,
+            @RequestParam("isDelete") String isDelete,
             Model model
     ) {
         String currentEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        if (Boolean.parseBoolean(isDelete)) {
+            transactionRunner.doInTransaction(() -> {
+                var user = authorizeUserRepository.findByEmail(currentEmail).orElseThrow();
+                authorizeUserRepository.delete(user);
+            });
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            authentication.setAuthenticated(false);
+            return "home";
+        }
 
         Map<String, Boolean> errors;
 
@@ -69,7 +80,7 @@ public class ProfileSecurityController {
             model.addAttribute("error", errors.keySet()
                     .stream()
                     .findFirst()
-                    .orElse("vНеизвестная ошибка"));
+                    .orElse("Неизвестная ошибка"));
 
             transactionRunner.doInTransaction(() -> {
                 String userImageName = userDetailsService.getImgPathByEmail(currentEmail);

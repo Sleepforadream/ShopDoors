@@ -48,6 +48,7 @@ public class ProfileInfoController {
                                 @RequestParam("birthDate") String birthDate,
                                 @RequestParam("info") String info,
                                 @RequestParam("address") String address,
+                                @RequestParam("imgProfileName") String imgProfileName,
                                 Model model) {
 
         var errors = validateService.validateProfileFields(
@@ -71,6 +72,8 @@ public class ProfileInfoController {
                 if (img != null && !img.isEmpty()) {
                     imageService.saveImg(img.getOriginalFilename(), img.getInputStream());
                     user.setImgPath(img.getOriginalFilename());
+                } else {
+                    user.setImgPath(imgProfileName);
                 }
             } catch (IOException e) {
                 throw new RuntimeException("Saving img is failed!", e);

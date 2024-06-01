@@ -15,27 +15,18 @@
         <form method="post" enctype="multipart/form-data">
             <div class="image-upload-heading">
                 <div class="image-selector">
-                    <th:block th:if="${user.imgPath} == null">
-                        <img class="user-img-profile" width="200"
-                             height="200" style="border-radius: 15px;"
-                             th:src="@{/img/users_photo/unknownUser.svg}"
-                             src="../static/img/users_photo/unknownUser.svg" alt="img_profile">
-                        <label class="feedback__label cancel" style="display: none;">
-                            Удалить фото
-                            <input type="button" name="imgProfileRemove" class="feedback__file cancel">
-                        </label>
-                    </th:block>
-                    <th:block th:unless="${user.imgPath} == null">
-                        <img id="profileImage" class="user-img-profile" width="200" height="200" style="border-radius: 15px;"
-                             th:src="${imgProfileUrl}" alt="img_profile" src="">
-                        <label class="feedback__label cancel">
-                            Удалить фото
-                            <input type="button" name="imgProfileRemove" class="feedback__file cancel">
-                        </label>
-                    </th:block>
+                    <input type="hidden" id="imgProfileName" name="imgProfileName" th:value="${user.imgPath}">
+                    <img id="profileImage" class="user-img-profile" width="200" height="200"
+                         style="border-radius: 15px;"
+                         th:src="${imgProfileUrl}" alt="img_profile" src="">
+                    <label class="feedback__label cancel">
+                        Удалить фото
+                        <input type="button" id="imgProfileRemove" name="imgProfileRemove"
+                               class="feedback__file cancel">
+                    </label>
                     <label class="feedback__label"><span id="textLabel">
-                    <th:block th:if="${user.imgPath} == null">Добавить фото</th:block>
-                    <th:block th:unless="${user.imgPath} == null">Изменить фото</th:block>
+                    <th:block th:if="${user.imgPath} == 'unknownUser.svg'">Добавить фото</th:block>
+                    <th:block th:unless="${user.imgPath} == 'unknownUser.svg'">Изменить фото</th:block>
                     </span>
                         <input type="file" name="imgProfileAdd" id="imgProfileAdd" accept="image/jpeg,image/png"
                                class="feedback__file">
@@ -234,7 +225,7 @@
                                onchange="(this.style.color = '#585858')"
                                name="birthDate" id="no_birthDate" class="input-form"
                                value=""
-                               >
+                        >
                     </th:block>
                     <th:block th:unless="${user.birthDate} == null">
                         <label for="birthDate"></label>
@@ -242,7 +233,7 @@
                                onreset="(this.style.color = '#aaa9a9')"
                                name="birthDate" id="birthDate" class="input-form"
                                th:value="${user.birthDate}"
-                               >
+                        >
                     </th:block>
 
                     <th:block th:if="${error} == 'Ваш возраст должен быть больше 16 лет'">
@@ -304,7 +295,7 @@
                 <hr>
                 <p class="profile-submit-box" style="display:flex;justify-content: space-between;margin-bottom:0;">
                     <input type="submit" class="button-enter-user" value="Сохранить изменения">
-                    <a href="/static" class="button-enter-user warning" type="button">Отмена</a>
+                    <a href="/home" class="button-enter-user warning" type="button">Отмена</a>
                 </p>
             </div>
         </form>

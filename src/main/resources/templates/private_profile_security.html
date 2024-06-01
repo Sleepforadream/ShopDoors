@@ -159,7 +159,7 @@
                 <hr>
                 <p class="profile-submit-box" style="display:flex;justify-content: space-between;margin-bottom:0;">
                     <input type="submit" class="button-enter-user" value="Сохранить изменения">
-                    <a href="/static" class="button-enter-user warning" type="button">Отмена</a>
+                    <a href="/home" class="button-enter-user warning" type="button">Отмена</a>
                 </p>
             </div>
             <div class="modal-password-popup" tabindex="-1" role="dialog" aria-labelledby="modal-heading"
@@ -181,6 +181,7 @@
                             <br>
                             <p class="profile-submit-box"
                                style="display:flex;justify-content: space-between;margin-bottom:0;">
+                                <input type="hidden" id="isDelete" name="isDelete" value="false">
                                 <input type="submit" class="button-enter-user danger"
                                        name="confirmDeleteButton"
                                        id="confirmDeleteButton" value="Удалить" style="margin-right: 10px;">
