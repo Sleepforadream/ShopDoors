@@ -32,8 +32,10 @@ public class ProfileSecurityController {
 
     @GetMapping("/private_profile_security")
     public String profileInfoPage(Model model) {
-        model.addAttribute("currentPage", "/private_profile_security");
         String currentEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (currentEmail.equals("anonymousUser")) return "redirect:/home";
+
+        model.addAttribute("currentPage", "/private_profile_security");
         transactionRunner.doInTransaction(() -> {
             String userImageName = userDetailsService.getImgPathByEmail(currentEmail);
             AuthorizeUser user = authorizeUserRepository.findByEmail(currentEmail).orElseThrow();

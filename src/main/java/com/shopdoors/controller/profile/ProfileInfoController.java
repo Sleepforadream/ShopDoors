@@ -32,11 +32,13 @@ public class ProfileInfoController {
 
     @GetMapping("/private_profile_info")
     public String profileInfoPage(Model model) {
+        String currentEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (currentEmail.equals("anonymousUser")) return "redirect:/home";
+
         model.addAttribute("currentPage", "/private_profile_info");
-        String email = SecurityContextHolder.getContext().getAuthentication().getName();
         transactionRunner.doInTransaction(() -> {
-            String userImageName = userDetailsService.getImgPathByEmail(email);
-            AuthorizeUser user = authorizeUserRepository.findByEmail(email).orElseThrow();
+            String userImageName = userDetailsService.getImgPathByEmail(currentEmail);
+            AuthorizeUser user = authorizeUserRepository.findByEmail(currentEmail).orElseThrow();
             model.addAttribute("imgProfileUrl", imageService.getImgUrl(userImageName));
             model.addAttribute("user", user);
         });
