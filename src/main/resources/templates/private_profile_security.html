@@ -3,6 +3,10 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{private_profile}" lang="ru">
 
+<head>
+    <title layout:fragment="title">Личный кабинет</title>
+</head>
+
 <th:block layout:fragment="info">
     <script type="text/javascript" th:src="@{/js/privateProfileSecurity.js}"
             defer></script>
