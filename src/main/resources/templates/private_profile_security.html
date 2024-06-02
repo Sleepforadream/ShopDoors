@@ -35,7 +35,8 @@
             <!--            {% endif %}-->
             <!--            <hr>-->
         </div>
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" enctype="multipart/form-data" id="form" name="form">
+            <input type="hidden" id="hiddenError" th:value="${error}">
             <div class="user-info">
                 <p><b>Телефон:</b>
                     <th:block th:if="${user.phoneNumber} == null">
@@ -51,7 +52,8 @@
                     </th:block>
 
                     <th:block th:if="${error} == 'Номер телефона не валиден'">
-                        <span class="error-input-name" style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                        <span class="error-input-name" id="errorPhone"
+                              style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
                             Номер телефона не валиден
                         </span>
                     </th:block>
@@ -75,7 +77,8 @@
                     </th:block>
 
                     <th:block th:if="${error} == 'Email не валиден'">
-                        <span class="error-input-name" style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                        <span class="error-input-name" id="errorEmail"
+                              style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
                             Email не валиден
                         </span>
                     </th:block>
@@ -111,7 +114,8 @@
                     <hr>
 
                     <th:block th:if="${error} == 'Не верный email или пароль'">
-                        <span class="error-input-name" style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                        <span class="error-input-name" id="errorOldPassword"
+                              style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
                             Не верный пароль
                         </span>
                     </th:block>
@@ -126,12 +130,15 @@
                                placeholder="Введите новый пароль"></p>
                     <hr>
 
-                    <th:block th:if="${error} == 'Пароль должен содержать хотя бы одну цифру, строчную букву, заглавную букву, специальный символ из набора [@#$%^&+_=-]. Не должен содержать пробелов. Длина - не менее 8 символов'">
-                        <span class="error-input-name" style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                    <th:block
+                            th:if="${error} == 'Пароль должен содержать хотя бы одну цифру, строчную букву, заглавную букву, специальный символ из набора [@#$%^&+_=-]. Не должен содержать пробелов. Длина - не менее 8 символов'">
+                        <span class="error-input-name" id="errorNewPassword"
+                              style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
                             Пароль должен содержать хотя бы одну цифру, строчную букву, заглавную букву, специальный символ из набора [@#$%^&+_=-]. Не должен содержать пробелов. Длина - не менее 8 символов
                         </span>
                     </th:block>
-                    <th:block th:unless="${error} == 'Пароль должен содержать хотя бы одну цифру, строчную букву, заглавную букву, специальный символ из набора [@#$%^&+_=-]. Не должен содержать пробелов. Длина - не менее 8 символов'">
+                    <th:block
+                            th:unless="${error} == 'Пароль должен содержать хотя бы одну цифру, строчную букву, заглавную букву, специальный символ из набора [@#$%^&+_=-]. Не должен содержать пробелов. Длина - не менее 8 символов'">
                         <span class="error-input-name" style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
                         </span>
                     </th:block>
@@ -144,7 +151,8 @@
                     <hr>
 
                     <th:block th:if="${error} == 'Пароли не совпадают'">
-                        <span class="error-input-name" style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
+                        <span class="error-input-name" id="errorAgainPassword"
+                              style="margin-left: 15px;margin-top: 10px;margin-bottom: -5px;">
                             Пароли не совпадают
                         </span>
                     </th:block>
@@ -174,9 +182,12 @@
 
                         <div class="modal-password-body">
                             <label for="confirmDelete"></label>
-                            <input type="password" name="confirmDelete" id="confirmDelete"
+                            <input type="text" name="confirmDelete" id="confirmDelete"
                                    class="input-form"
-                                   placeholder="Введите пароль для удаления аккаунта">
+                                   placeholder="Введите 'Delete' для удаления аккаунта">
+                            <span class="error-input-name" id="deleteError" style="color: red; display: none;">
+                                Неверный ввод. Пожалуйста, введите 'Delete'.
+                            </span>
                             <br>
                             <br>
                             <p class="profile-submit-box"

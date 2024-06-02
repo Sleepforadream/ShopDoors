@@ -43,8 +43,13 @@ let deleteUserButton = document.querySelector('.button-enter-user.danger');
 let buttonPasswordClose = document.querySelector('.modal-close-button');
 let cancelDeleteButton = document.getElementById('cancelDeleteButton');
 let confirmDeleteButton = document.getElementById('confirmDeleteButton');
+let confirmDeleteText = document.getElementById('confirmDelete');
 let isDelete = document.getElementById('isDelete');
-// const isDelete = document.getElementById('isDelete');
+
+let errorOldPassword = document.getElementById('errorOldPassword');
+let errorNewPassword = document.getElementById('errorNewPassword');
+let errorAgainPassword = document.getElementById('errorAgainPassword');
+let deleteForm = document.querySelector('#form');
 
 let backdrop = document.createElement('div');
 
@@ -103,6 +108,21 @@ cancelDeleteButton.addEventListener('click', () => {
     hidePopupPassword();
 })
 
-confirmDeleteButton.addEventListener('click', () => {
-    isDelete.value = "true"
-})
+confirmDeleteButton.addEventListener('click', e => {
+    e.preventDefault();
+    let deleteError = document.getElementById('deleteError');
+    if (confirmDeleteText.value === "Delete") {
+        isDelete.value = "true";
+        deleteForm.submit();
+    } else {
+        deleteError.style.display = 'block';
+    }
+});
+
+if (
+    errorOldPassword && errorOldPassword.textContent.trim() !== '' ||
+    errorNewPassword && errorNewPassword.textContent.trim() !== '' ||
+    errorAgainPassword && errorAgainPassword.textContent.trim() !== ''
+) {
+    editPasswordMenu.classList.add('active');
+}

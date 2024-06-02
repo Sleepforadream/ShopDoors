@@ -2,10 +2,13 @@ package com.shopdoors.controller.profile;
 
 import com.shopdoors.dao.entity.AuthorizeUser;
 import com.shopdoors.dao.repository.AuthorizeUserRepository;
+import com.shopdoors.security.dto.AuthorizeUserDetails;
 import com.shopdoors.service.AuthorizeUserDetailsService;
 import com.shopdoors.service.ImageService;
 import com.shopdoors.service.ValidateService;
+import com.shopdoors.util.TransactionRunner;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,16 +28,19 @@ public class ProfileInfoController {
     private final ValidateService validateService;
     private final ImageService imageService;
     private final AuthorizeUserDetailsService userDetailsService;
+    private final TransactionRunner transactionRunner;
 
     @GetMapping("/private_profile_info")
     public String profileInfoPage(Model model) {
         model.addAttribute("currentPage", "/private_profile_info");
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
-        String userImageName = userDetailsService.getImgPathByEmail(email);
+        transactionRunner.doInTransaction(() -> {
+            String userImageName = userDetailsService.getImgPathByEmail(email);
+            AuthorizeUser user = authorizeUserRepository.findByEmail(email).orElseThrow();
+            model.addAttribute("imgProfileUrl", imageService.getImgUrl(userImageName));
+            model.addAttribute("user", user);
+        });
 
-        AuthorizeUser user = authorizeUserRepository.findByEmail(email).orElseThrow();
-        model.addAttribute("imgProfileUrl", imageService.getImgUrl(userImageName));
-        model.addAttribute("user", user);
         return "private_profile_info";
     }
 
@@ -54,40 +60,51 @@ public class ProfileInfoController {
         var errors = validateService.validateProfileFields(
                 nickName, firstName, secondName, thirdName, birthDate, address, info
         );
+
+        Authentication currentAuth = SecurityContextHolder.getContext().getAuthentication();
+        String currentEmail = currentAuth.getName();
+
         if (!errors.values().stream().findFirst().orElse(true)) {
             model.addAttribute("error", errors.keySet()
                     .stream()
                     .findFirst()
-                    .orElse("Íåèçâåñòíàÿ îøèáêà"));
-            String email = SecurityContextHolder.getContext().getAuthentication().getName();
-            String userImageName = userDetailsService.getImgPathByEmail(email);
-            AuthorizeUser user = authorizeUserRepository.findByEmail(email).orElseThrow();
-            model.addAttribute("user", user);
-            model.addAttribute("imgProfileUrl", imageService.getImgUrl(userImageName));
+                    .orElse("ÐÐµÐ¸Ð·Ð²ÐµÑÑ‚Ð½Ð°Ñ Ð¾ÑˆÐ¸Ð±ÐºÐ°"));
+            transactionRunner.doInTransaction(() -> {
+                String userImageName = userDetailsService.getImgPathByEmail(currentEmail);
+                AuthorizeUser user = authorizeUserRepository.findByEmail(currentEmail).orElseThrow();
+                model.addAttribute("user", user);
+                model.addAttribute("imgProfileUrl", imageService.getImgUrl(userImageName));
+            });
             return "private_profile_info";
         }
 
-        authorizeUserRepository.findByNickName(nickName).ifPresent(user -> {
-            try {
-                if (img != null && !img.isEmpty()) {
-                    imageService.saveImg(img.getOriginalFilename(), img.getInputStream());
-                    user.setImgPath(img.getOriginalFilename());
-                } else {
-                    user.setImgPath(imgProfileName);
-                }
-            } catch (IOException e) {
-                throw new RuntimeException("Saving img is failed!", e);
-            }
+        transactionRunner.doInTransaction(() -> authorizeUserRepository.findByEmail(currentEmail).ifPresent(user -> {
             user.setNickName(nickName);
             user.setFirstName(firstName);
             user.setSecondName(secondName);
             user.setThirdName(thirdName);
             user.setGender(gender);
-            user.setBirthDate(LocalDate.parse(birthDate));
+            if (!birthDate.isEmpty()) {
+                user.setBirthDate(LocalDate.parse(birthDate));
+            } else {
+                user.setBirthDate(null);
+            }
             user.setInfo(info);
             user.setAddress(address);
-            authorizeUserRepository.save(user);
-        });
+            user.setImgPath(img.getOriginalFilename());
+            if (!user.equals(((AuthorizeUserDetails) currentAuth.getPrincipal()).authorizeUser())) {
+                try {
+                    if (!img.isEmpty()) {
+                        imageService.saveImg(img.getOriginalFilename(), img.getInputStream());
+                    } else {
+                        user.setImgPath(imgProfileName);
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException("Saving img is failed!", e);
+                }
+                authorizeUserRepository.save(user);
+            }
+        }));
 
         return "redirect:/private_profile_info";
     }

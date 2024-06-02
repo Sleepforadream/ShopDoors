@@ -33,10 +33,10 @@ public class ProfileSecurityController {
     @GetMapping("/private_profile_security")
     public String profileInfoPage(Model model) {
         model.addAttribute("currentPage", "/private_profile_security");
-        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        String currentEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         transactionRunner.doInTransaction(() -> {
-            String userImageName = userDetailsService.getImgPathByEmail(email);
-            AuthorizeUser user = authorizeUserRepository.findByEmail(email).orElseThrow();
+            String userImageName = userDetailsService.getImgPathByEmail(currentEmail);
+            AuthorizeUser user = authorizeUserRepository.findByEmail(currentEmail).orElseThrow();
             model.addAttribute("imgProfileUrl", imageService.getImgUrl(userImageName));
             model.addAttribute("user", user);
         });
@@ -53,23 +53,22 @@ public class ProfileSecurityController {
             @RequestParam("isDelete") String isDelete,
             Model model
     ) {
-        String currentEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        Authentication currentAuth = SecurityContextHolder.getContext().getAuthentication();
+        String currentEmail = currentAuth.getName();
 
         if (Boolean.parseBoolean(isDelete)) {
             transactionRunner.doInTransaction(() -> {
                 var user = authorizeUserRepository.findByEmail(currentEmail).orElseThrow();
                 authorizeUserRepository.delete(user);
             });
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            authentication.setAuthenticated(false);
+            currentAuth.setAuthenticated(false);
             return "home";
         }
 
         Map<String, Boolean> errors;
 
-        if (!phone.isEmpty() && !email.isEmpty() && oldPassword.isEmpty() && newPassword.isEmpty() && againPassword.isEmpty()) {
+        if (!email.isEmpty() && oldPassword.isEmpty() && newPassword.isEmpty() && againPassword.isEmpty()) {
             errors = validateService.validatePhoneAndEmailFields(phone, email);
-
         } else {
             errors = validateService.validateSecurityFields(
                     phone, email, currentEmail, oldPassword, newPassword, againPassword
@@ -80,7 +79,7 @@ public class ProfileSecurityController {
             model.addAttribute("error", errors.keySet()
                     .stream()
                     .findFirst()
-                    .orElse("Íåèçâåñòíàÿ îøèáêà"));
+                    .orElse("ÐÐµÐ¸Ð·Ð²ÐµÑÑ‚Ð½Ð°Ñ Ð¾ÑˆÐ¸Ð±ÐºÐ°"));
 
             transactionRunner.doInTransaction(() -> {
                 String userImageName = userDetailsService.getImgPathByEmail(currentEmail);
@@ -97,17 +96,16 @@ public class ProfileSecurityController {
             if (!newPassword.isEmpty()) {
                 user.setPassword(passwordEncoder.encode(newPassword));
             }
-            authorizeUserRepository.save(user);
+            if (!user.equals(((AuthorizeUserDetails) currentAuth.getPrincipal()).authorizeUser())) {
+                authorizeUserRepository.save(user);
+            }
         }));
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
         AuthorizeUser user = authorizeUserRepository.findByEmail(email).orElseThrow();
-
         Authentication newAuth = new UsernamePasswordAuthenticationToken(
                 new AuthorizeUserDetails(user),
-                authentication.getCredentials(),
-                authentication.getAuthorities()
+                currentAuth.getCredentials(),
+                currentAuth.getAuthorities()
         );
         SecurityContextHolder.getContext().setAuthentication(newAuth);
 

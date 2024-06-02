@@ -15,6 +15,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -72,5 +73,44 @@ public class AuthorizeUser {
     @Override
     public String toString() {
         return email;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AuthorizeUser that = (AuthorizeUser) o;
+        return id.equals(that.id)
+                && Objects.equals(registerDate, that.registerDate)
+                && email.equals(that.email)
+                && password.equals(that.password)
+                && nickName.equals(that.nickName)
+                && Objects.equals(firstName, that.firstName)
+                && Objects.equals(secondName, that.secondName)
+                && Objects.equals(thirdName, that.thirdName)
+                && Objects.equals(gender, that.gender)
+                && Objects.equals(birthDate, that.birthDate)
+                && Objects.equals(phoneNumber, that.phoneNumber)
+                && Objects.equals(address, that.address)
+                && Objects.equals(info, that.info)
+                && imgPath.equals(that.imgPath);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id,
+                registerDate,
+                email,
+                password,
+                nickName,
+                firstName,
+                secondName,
+                thirdName,
+                gender,
+                birthDate,
+                phoneNumber,
+                address,
+                info,
+                imgPath);
     }
 }

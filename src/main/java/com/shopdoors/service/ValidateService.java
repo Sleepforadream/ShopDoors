@@ -67,27 +67,39 @@ public class ValidateService {
     ) {
         Map<String, Boolean> validFields = new HashMap<>();
 
-        Map<String, Boolean> infoSizeValidation = validateMaxSizeFields(info, "info", 512);
-        if (infoSizeValidation.containsValue(false)) return infoSizeValidation;
+        if (!info.isEmpty()) {
+            Map<String, Boolean> infoSizeValidation = validateMaxSizeFields(info, "info", 512);
+            if (infoSizeValidation.containsValue(false)) return infoSizeValidation;
+        }
 
         Map<String, Boolean> nickNameCorrectValidation = validateCorrectName(nickName, "nickName");
         if (nickNameCorrectValidation.containsValue(false)) return nickNameCorrectValidation;
 
-        Map<String, Boolean> firstNameCorrectValidation = validateCorrectName(firstName, "firstName");
-        if (firstNameCorrectValidation.containsValue(false)) return firstNameCorrectValidation;
+        if (!firstName.isEmpty()) {
+            Map<String, Boolean> firstNameCorrectValidation = validateCorrectName(firstName, "firstName");
+            if (firstNameCorrectValidation.containsValue(false)) return firstNameCorrectValidation;
+        }
 
-        Map<String, Boolean> secondNameCorrectValidation = validateCorrectName(secondName, "secondName");
-        if (secondNameCorrectValidation.containsValue(false)) return secondNameCorrectValidation;
+        if (!secondName.isEmpty()) {
+            Map<String, Boolean> secondNameCorrectValidation = validateCorrectName(secondName, "secondName");
+            if (secondNameCorrectValidation.containsValue(false)) return secondNameCorrectValidation;
+        }
 
-        Map<String, Boolean> thirdNameCorrectValidation = validateCorrectName(thirdName, "thirdName");
-        if (thirdNameCorrectValidation.containsValue(false)) return thirdNameCorrectValidation;
+        if (!thirdName.isEmpty()) {
+            Map<String, Boolean> thirdNameCorrectValidation = validateCorrectName(thirdName, "thirdName");
+            if (thirdNameCorrectValidation.containsValue(false)) return thirdNameCorrectValidation;
+        }
 
-        Map<String, Boolean> birthDateValidation = validateBirthDate(birthDate);
-        if (birthDateValidation.containsValue(false)) return birthDateValidation;
+        if (!birthDate.isEmpty()) {
+            Map<String, Boolean> birthDateValidation = validateBirthDate(birthDate);
+            if (birthDateValidation.containsValue(false)) return birthDateValidation;
+        }
 
         //todo
-        Map<String, Boolean> addressCorrectValidation = validateCorrectAddress(address);
-        if (addressCorrectValidation.containsValue(false)) return addressCorrectValidation;
+        if (!address.isEmpty()) {
+            Map<String, Boolean> addressCorrectValidation = validateCorrectAddress(address);
+            if (addressCorrectValidation.containsValue(false)) return addressCorrectValidation;
+        }
 
         validFields.put("Все поля валидны", true);
         return validFields;
@@ -103,8 +115,10 @@ public class ValidateService {
     ) {
         Map<String, Boolean> validFields = new HashMap<>();
 
-        Map<String, Boolean> phoneValidation = validateCorrectPhoneNumber(phone);
-        if (phoneValidation.containsValue(false)) return phoneValidation;
+        if (!phone.isEmpty()) {
+            Map<String, Boolean> phoneValidation = validateCorrectPhoneNumber(phone);
+            if (phoneValidation.containsValue(false)) return phoneValidation;
+        }
 
         Map<String, Boolean> emailValidation = validateCorrectEmail(email);
         if (emailValidation.containsValue(false)) return emailValidation;
@@ -128,8 +142,10 @@ public class ValidateService {
     ) {
         Map<String, Boolean> validFields = new HashMap<>();
 
-        Map<String, Boolean> phoneValidation = validateCorrectPhoneNumber(phone);
-        if (phoneValidation.containsValue(false)) return phoneValidation;
+        if(!phone.isEmpty()) {
+            Map<String, Boolean> phoneValidation = validateCorrectPhoneNumber(phone);
+            if (phoneValidation.containsValue(false)) return phoneValidation;
+        }
 
         Map<String, Boolean> emailValidation = validateCorrectEmail(email);
         if (emailValidation.containsValue(false)) return emailValidation;

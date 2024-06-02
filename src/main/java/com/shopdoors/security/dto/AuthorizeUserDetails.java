@@ -6,13 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-public class AuthorizeUserDetails implements UserDetails {
-
-    private final AuthorizeUser authorizeUser;
-
-    public AuthorizeUserDetails(AuthorizeUser authorizeUser) {
-        this.authorizeUser = authorizeUser;
-    }
+public record AuthorizeUserDetails(AuthorizeUser authorizeUser) implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
