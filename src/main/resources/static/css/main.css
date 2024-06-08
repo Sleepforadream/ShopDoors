@@ -4039,6 +4039,8 @@ img {
     background-repeat: no-repeat;
     background-size: cover;
     height: 182px;
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
 }
 
 .about-contacts-bar-content.active {
@@ -4078,7 +4080,6 @@ img {
     font-weight: var(--h2_typography-font-weight);
     line-height: var(--h2_typography-line-height);
     letter-spacing: var(--h2_typography-letter-spacing);
-    font-style: var(--h2_typography-font-style, normal);
     margin-top: 0;
     margin-bottom: 9px;
 }
@@ -4089,7 +4090,6 @@ img {
     font-weight: var(--h2_typography-font-weight);
     line-height: var(--h2_typography-line-height);
     letter-spacing: var(--h2_typography-letter-spacing);
-    font-style: var(--h2_typography-font-style, normal);
     margin-top: 0;
     margin-bottom: 9px;
     text-align: center;
@@ -4503,7 +4503,7 @@ img {
     }
 }
 
-.sample-title {
+.measurements-title {
     color: #4f4f4f;
     font-size: 20px;
     text-align: center;
@@ -4518,13 +4518,13 @@ img {
     transition-timing-function: linear;
 }
 
-.sample-form {
+.measurements-form {
     max-width: var(--site_width);
     margin: auto;
     background: antiquewhite;
 }
 
-.sample-input {
+.measurements-input {
     margin-right: 4%;
     position: relative;
     margin-bottom: 20px;
@@ -4548,14 +4548,14 @@ img {
     vertical-align: middle;
 }
 
-.sample-input-line {
+.measurements-input-line {
     display: flex;
     padding-left: 3%;
     padding-right: 3%;
     justify-content: space-between;
 }
 
-.sample-select {
+.measurements-select {
     overflow: hidden;
     position: relative;
     width: 100%;
@@ -4585,6 +4585,9 @@ img {
 }
 
 .select-arrow {
+    height: 36px;
+    width: 36px;
+    line-height: 36px;
     border-left: 1px solid var(--form_border_color, #dadada);
     position: absolute;
     /*top: 1px;*/
@@ -4596,14 +4599,13 @@ img {
     text-align: center;
     font-size: var(--form_text_size, 9px);
     color: var(--form_text_color);
-    border-width: var(--form_border_width);
     border-color: var(--form_border_color);
     border-radius: var(--form_border_radius);
     bottom: var(--form_border_width);
 }
 
 @media (max-width: 950px) {
-    .sample-input-line {
+    .measurements-input-line {
         flex-direction: column;
     }
 
@@ -4611,7 +4613,7 @@ img {
         width: fit-content;
     }
 
-    .sample-input {
+    .measurements-input {
         width: 100% !important;
     }
 }
@@ -4758,8 +4760,8 @@ img {
 
 .dropdown-divider {
     border-style: solid;
-    border-width: 0.5px;
-    margin-block-start: 0 .;
+    border-width: 1px;
+    margin-block-start: 0;
     unicode-bidi: isolate;
     border-top-width: inherit;
     border-left: none;

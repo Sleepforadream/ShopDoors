@@ -95,7 +95,6 @@ public class ValidateService {
             if (birthDateValidation.containsValue(false)) return birthDateValidation;
         }
 
-        //todo
         if (!address.isEmpty()) {
             Map<String, Boolean> addressCorrectValidation = validateCorrectAddress(address);
             if (addressCorrectValidation.containsValue(false)) return addressCorrectValidation;
@@ -142,13 +141,46 @@ public class ValidateService {
     ) {
         Map<String, Boolean> validFields = new HashMap<>();
 
-        if(!phone.isEmpty()) {
+        if (!phone.isEmpty()) {
             Map<String, Boolean> phoneValidation = validateCorrectPhoneNumber(phone);
             if (phoneValidation.containsValue(false)) return phoneValidation;
         }
 
         Map<String, Boolean> emailValidation = validateCorrectEmail(email);
         if (emailValidation.containsValue(false)) return emailValidation;
+
+        validFields.put("Все поля валидны", true);
+        return validFields;
+    }
+
+    public Map<String, Boolean> validateMeasurements(
+            String name,
+            String phoneNumber,
+            String address,
+            int roomDoorsCount,
+            int enterDoorsCount,
+            String measurementDate,
+            String info
+    ) {
+        Map<String, Boolean> validFields = new HashMap<>();
+
+        Map<String, Boolean> nameCorrectValidation = validateCorrectName(name, "name");
+        if (nameCorrectValidation.containsValue(false)) return nameCorrectValidation;
+
+        Map<String, Boolean> phoneValidation = validateCorrectPhoneNumber(phoneNumber);
+        if (phoneValidation.containsValue(false)) return phoneValidation;
+
+        Map<String, Boolean> addressCorrectValidation = validateCorrectAddress(address);
+        if (addressCorrectValidation.containsValue(false)) return addressCorrectValidation;
+
+        Map<String, Boolean> doorsCountValidation = validateDoorsCount(roomDoorsCount,enterDoorsCount);
+        if (doorsCountValidation.containsValue(false)) return doorsCountValidation;
+
+        Map<String, Boolean> measurementDateValidation = validateMeasurementDate(measurementDate);
+        if (measurementDateValidation.containsValue(false)) return measurementDateValidation;
+
+        Map<String, Boolean> infoValidation = validateMaxSizeFields(info, "info", 1000);
+        if (infoValidation.containsValue(false)) return infoValidation;
 
         validFields.put("Все поля валидны", true);
         return validFields;
@@ -221,8 +253,6 @@ public class ValidateService {
         return erroredFields;
     }
 
-
-    //todo
     private Map<String, Boolean> validateCorrectAddress(String address) {
         Map<String, Boolean> erroredFields = new HashMap<>();
         String ADDRESS_PATTERN = "^[a-zA-Z\\d\\s-,.]{3,256}$";
@@ -289,6 +319,28 @@ public class ValidateService {
             erroredFields.put("Ваш возраст не должен быть больше 150 лет", false);
         } else {
             erroredFields.put("Возраст валиден", true);
+        }
+        return erroredFields;
+    }
+
+    private Map<String, Boolean> validateDoorsCount(int roomDoorsCount, int enterDoorsCount) {
+        Map<String, Boolean> erroredFields = new HashMap<>();
+        if ((roomDoorsCount <= 0 && enterDoorsCount <= 0)  || roomDoorsCount > 1000 || enterDoorsCount > 1000) {
+            erroredFields.put("Количество дверей должно быть больше 0 и меньше 1000", false);
+        } else {
+            erroredFields.put("Количество дверей валидно", true);
+        }
+        return erroredFields;
+    }
+
+    private Map<String, Boolean> validateMeasurementDate(String measurementDate) {
+        Map<String, Boolean> erroredFields = new HashMap<>();
+        if (LocalDate.parse(measurementDate).isBefore(LocalDate.now().plusDays(1))) {
+            erroredFields.put("Запись должна осуществляться заранее как минимум за один день", false);
+        } else if (LocalDate.parse(measurementDate).isAfter(LocalDate.now().plusDays(30))) {
+            erroredFields.put("Записаться на замер заранее можно не позднее чем за 30 дней до даты замера", false);
+        } else {
+            erroredFields.put("Запись валидна", true);
         }
         return erroredFields;
     }

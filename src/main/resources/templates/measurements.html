@@ -7,141 +7,144 @@
 </head>
 
 <th:block layout:fragment="content">
-    <script type="text/javascript" th:src="@{/js/sampleScripts.js}" defer></script>
-    <div class="sample-main">
+    <script type="text/javascript" th:src="@{/js/measurementScripts.js}" defer></script>
+    <div class="measurements-main">
         <div class="separator-with-shadow" style="padding-top: 0;padding-bottom: 0;margin-top: 0;">
             <div class="separator-with-shadow-box" style="margin-top: 0;"></div>
         </div>
-        <div class="sample-box">
+        <div class="measurements-box">
             <div class="separator-with-shadow" style="margin-top: 0;">
                 <div class="separator-with-shadow-box"></div>
             </div>
-            <div class="sample-title">Заполните контактные данные для выезда мастера к Вам на замер и мы свяжемся с Вами
+            <div class="measurements-title">Заполните контактные данные для выезда мастера к Вам на замер и мы свяжемся
+                с Вами
             </div>
             <div class="separator-with-shadow" style="padding-top: inherit;margin-bottom: 0;background: antiquewhite;">
                 <div class="separator-with-shadow-box"></div>
             </div>
-            <div class="sample-form">
-                <div class="sample-input-line">
-                    <div class="sample-input" style="width: 32.6666%;">
+            <div class="measurements-form">
+                <div class="measurements-input-line">
+                    <div class="measurements-input" style="width: 32.6666%;">
                         <label> Ваше имя
-                            <span class="sample-input-name">
-                        <input type="text" name="your-name" value="" size="40"
-                               class="form-control" aria-required="true"
-                               aria-invalid="false" placeholder="Введите имя">
-                    </span>
+                            <span class="measurements-input-name">
+                                <input type="text" name="name" value="" size="40"
+                                       class="form-control" aria-required="true" id="name"
+                                       aria-invalid="false" placeholder="Введите имя">
+                            </span>
                         </label>
                     </div>
-                    <div class="sample-input" style="width: 26%;">
+                    <div class="measurements-input" style="width: 26%;">
                         <label> Телефон
-                            <span class="sample-input-phone">
-                        <input type="text" name="your-name" value="" size="40"
-                               class="form-control" aria-required="true"
-                               aria-invalid="false" placeholder="Введите телефон">
-                    </span>
+                            <span class="measurements-input-phone">
+                                <input type="text" name="phoneNumber" value="" size="40"
+                                       class="form-control" aria-required="true" id="phoneNumber"
+                                       aria-invalid="false" placeholder="Введите телефон">
+                            </span>
                         </label>
                     </div>
-                    <div class="sample-input" style="width: 32.6666%;margin-right: 0;">
+                    <div class="measurements-input" style="width: 32.6666%;margin-right: 0;">
                         <label> Адрес
-                            <span class="sample-input-address">
-                        <input type="number" name="your-name" value="" size="40"
-                               class="form-control" aria-required="true"
-                               aria-invalid="false" placeholder="Введите адрес">
-                    </span>
+                            <span class="measurements-input-address">
+                                <input type="number" name="address" value="" size="40"
+                                       class="form-control" aria-required="true" id="address"
+                                       aria-invalid="false" placeholder="Введите адрес">
+                            </span>
                         </label>
                     </div>
                 </div>
-                <div class="sample-input-line">
-                    <div class="sample-input" style="width: 46.75%;">
+                <div class="measurements-input-line">
+                    <div class="measurements-input" style="width: 46.75%;">
                         <label> Выберите город
-                            <span class="sample-input-name">
-                        <div class="sample-select">
-                            <select class="form-control-select" aria-invalid="false">
-                                <option value="Стерлитамак">Стерлитамак</option>
-                                <option value="Салават">Салават</option><option value="Ишимбай">Ишимбай</option>
-                                <option value="Толбазы">Толбазы</option><option value="Мелеуз">Мелеуз</option>
-                                <option value="Уфа">Уфа</option>
-                                <option value="Близлежайшая деревня">Близлежайшая деревня</option>
-                            </select>
-                            <div class="select-arrow" style="height: 36px; width: 36px; line-height: 36px;">
-                                <div class="indicator-dropdown" style="margin-left: 35%;margin-top: 40%;"></div>
-                            </div>
-                        </div>
-                    </span>
+                            <span class="measurements-input-name">
+                                <div class="measurements-select">
+                                    <select class="form-control-select" aria-invalid="false" name="city" id="city">
+                                        <option value="Стерлитамак">Стерлитамак</option>
+                                        <option value="Салават">Салават</option>
+                                        <option value="Ишимбай">Ишимбай</option>
+                                        <option value="Толбазы">Толбазы</option>
+                                        <option value="Мелеуз">Мелеуз</option>
+                                        <option value="Уфа">Уфа</option>
+                                    </select>
+                                    <div class="select-arrow">
+                                        <div class="indicator-dropdown" style="margin-left: 35%;margin-top: 40%;"></div>
+                                    </div>
+                                </div>
+                            </span>
                         </label>
                     </div>
-                    <div class="sample-input" style="width: 46.75%;margin-right: 0;">
-                        <label> Ориентировочная фабрика
-                            <span class="sample-input-name">
-                        <div class="sample-select">
-                            <select class="form-control-select" aria-invalid="false">
-                                <option value="Sofia">Sofia</option>
-                                <option value="Краснодеревщик">Краснодеревщик</option>
-                                <option value="Mezzo Porte">Mezzo Porte</option>
-                                <option value="Synergy">Synergy</option>
-                                <option value="ВДК">ВДК</option>
-                                <option value="VellDoris">VellDoris</option>
-                                <option value="LineDoor">LineDoor</option>
-                                <option value="Гардиан">Гардиан</option>
-                            </select>
-                            <div class="select-arrow" style="height: 36px; width: 36px; line-height: 36px;">
-                                <div class="indicator-dropdown" style="margin-left: 35%;margin-top: 40%;"></div>
-                            </div>
-                        </div>
-                    </span>
+                    <div class="measurements-input" style="width: 46.75%;margin-right: 0;">
+                        <label> Фабрика-изготовитель
+                            <span class="measurements-input-name">
+                                <div class="measurements-select">
+                                    <select class="form-control-select" aria-invalid="false" name="fabric" id="fabric">
+                                        <option value="Sofia">Sofia</option>
+                                        <option value="Краснодеревщик">Краснодеревщик</option>
+                                        <option value="Mezzo Porte">Mezzo Porte</option>
+                                        <option value="Synergy">Synergy</option>
+                                        <option value="ВДК">ВДК</option>
+                                        <option value="VellDoris">VellDoris</option>
+                                        <option value="LineDoor">LineDoor</option>
+                                        <option value="Гардиан">Гардиан</option>
+                                    </select>
+                                    <div class="select-arrow" style="height: 36px; width: 36px; line-height: 36px;">
+                                        <div class="indicator-dropdown" style="margin-left: 35%;margin-top: 40%;"></div>
+                                    </div>
+                                </div>
+                            </span>
                         </label>
                     </div>
                 </div>
-                <div class="sample-input-line">
-                    <div class="sample-input" style="width: 20.4%;">
+                <div class="measurements-input-line">
+                    <div class="measurements-input" style="width: 20.4%;">
                         <label> Кол-во м/к дверей
-                            <span class="sample-input-name">
-                        <input type="number" name="your-name" value="0" size="40"
-                               class="form-control" aria-required="true"
-                               aria-invalid="false">
-                    </span>
+                            <span class="measurements-input-name">
+                                <input type="number" name="countOfRoomDoors" value="0" size="40"
+                                       class="form-control" id="countOfRoomDoors" aria-required="true"
+                                       aria-invalid="false">
+                            </span>
                         </label>
                     </div>
-                    <div class="sample-input" style="width: 20.4%;">
+                    <div class="measurements-input" style="width: 20.4%;">
                         <label> Кол-во входных дверей
-                            <span class="sample-input-name">
-                        <input type="number" name="your-name" value="0" size="40"
-                               class="form-control" aria-required="true"
-                               aria-invalid="false">
-                    </span>
+                            <span class="measurements-input-name">
+                                <input type="number" name="countOfEnterDoors" value="0" size="40"
+                                       class="form-control" id="countOfEnterDoors" aria-required="true"
+                                       aria-invalid="false">
+                            </span>
                         </label>
                     </div>
-                    <div class="sample-input" style="width: 20.4%;">
+                    <div class="measurements-input" style="width: 20.4%;">
                         <label> Дата замера
-                            <span class="sample-input-phone">
-                        <input type="date" name="your-name" value="" size="40"
-                               class="form-control" aria-required="true"
-                               aria-invalid="false">
-                    </span>
+                            <span class="measurements-input-phone">
+                                <input type="date" name="your-name" value="" size="40"
+                                       class="form-control" aria-required="true"
+                                       aria-invalid="false">
+                            </span>
                         </label>
                     </div>
-                    <div class="sample-input" style="width: 20.4%;margin-right: 0;">
+                    <div class="measurements-input" style="width: 20.4%;margin-right: 0;">
                         <label> Время замера
-                            <span class="sample-input-address">
-                        <input type="time" name="your-name" value="" size="40"
-                               class="form-control" aria-required="true"
-                               aria-invalid="false">
-                    </span>
+                            <span class="measurements-input-address">
+                                <input type="time" min="10:00" max="18:00" step="900" name="your-name" value=""
+                                       size="40"
+                                       class="form-control" aria-required="true"
+                                       aria-invalid="false">
+                            </span>
                         </label>
                     </div>
                 </div>
-                <div class="sample-input-line">
-                    <div class="sample-input" style="width: 100%;margin-right:0;">
+                <div class="measurements-input-line">
+                    <div class="measurements-input" style="width: 100%;margin-right:0;">
                         <label> Дополнительная информация
-                            <span class="sample-input-name">
-                        <textarea style="height: 200px;" name="your-name" class="form-control"
-                                  aria-required="true" aria-invalid="false">
-                        </textarea>
-                    </span>
+                            <span class="measurements-input-name">
+                                <textarea style="height: 200px;" name="your-name" class="form-control"
+                                          aria-required="true" aria-invalid="false">
+                                </textarea>
+                            </span>
                         </label>
                     </div>
                 </div>
-                <div class="sample-input-line" style="padding-bottom: 3%;">
+                <div class="measurements-input-line" style="padding-bottom: 3%;">
                     <div class="button-enter-user submit-sample">
                         Отправить
                     </div>
