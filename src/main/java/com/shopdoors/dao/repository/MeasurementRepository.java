@@ -16,4 +16,8 @@ public interface MeasurementRepository extends JpaRepository<Measurement, Long> 
     Optional<Measurement> findByMeasurementDateAndMeasurementTimeAndAddress(
             LocalDate measurementDate, LocalTime measurementTime, String address
     );
+
+    Optional<List<Measurement>> findByMeasurementTimeBetweenAndMeasurementDate(
+            LocalTime fromTime, LocalTime toTime, LocalDate date
+    );
 }

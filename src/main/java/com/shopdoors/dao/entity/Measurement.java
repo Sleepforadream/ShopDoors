@@ -70,6 +70,9 @@ public class Measurement {
     @Column(length = 1000)
     private String info;
 
+    @Column
+    private boolean reminderSent;
+
     @ManyToOne(targetEntity = Client.class, fetch = FetchType.LAZY)
     private Client client;
 

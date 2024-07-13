@@ -29,7 +29,7 @@ public class MeasurementService {
     private final EmployeeRepository employeeRepository;
     private final TransactionRunner transactionRunner;
     private final ClientService clientService;
-    private final EmailService emailService;
+    private final NotificationService notificationService;
 
     public void createEventMeasurement(
             String email,
@@ -71,7 +71,8 @@ public class MeasurementService {
                             appointedMeasurer
                     );
 
-                    sendNotificationOnNewMeasurement(appointedMeasurer, measurement, client);
+                    notificationService.notifyOnNewMeasurementToEmployee(appointedMeasurer, measurement, client);
+                    notificationService.notifyOnNewMeasurementToClient(appointedMeasurer, measurement, client);
                     log.info("Successfully created measurement for email: {}", email);
                     return measurement;
                 }
@@ -115,18 +116,6 @@ public class MeasurementService {
         }
         log.info("Successfully saved measurement for address: {}", address);
         return measurement;
-    }
-
-    private void sendNotificationOnNewMeasurement(Employee appointedMeasurer, Measurement measurement, Client client) {
-        String message = "Поступила запись на новый замер. " +
-                "Дата: " + measurement.getMeasurementDate() + ". " +
-                "Время: " + measurement.getMeasurementTime() + ". " +
-                "Адрес замера: " + measurement.getAddress() + ". " +
-                "Телефон клиента: " + client.getPhoneNumber() + ". " +
-                "Имя клиента: " + client.getFirstName() + ". " +
-                "Фамилия клиента: " + client.getSecondName() + ". " +
-                "Отчество клиента: " + client.getThirdName() + ". ";
-        emailService.sendSEmail(appointedMeasurer.getEmail(), "Новая запись на замер", message);
     }
 
     public List<Employee> getAvailableMeasures(LocalDate date, LocalTime time) {
