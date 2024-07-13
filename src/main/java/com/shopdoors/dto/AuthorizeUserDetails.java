@@ -1,11 +1,14 @@
 package com.shopdoors.dto;
 
 import com.shopdoors.dao.entity.User;
+import lombok.Builder;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+@Setter
 public record AuthorizeUserDetails(User user) implements UserDetails {
 
     @Override

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -75,19 +76,7 @@ public class MeasurementController {
         var errors = validateService.validateMeasurements(measurementDto);
 
         if (!errors.values().stream().findFirst().orElse(true)) {
-            model.addAttribute("error", errors.keySet()
-                    .stream()
-                    .findFirst()
-                    .orElse("Неизвестная ошибка"));
-            if (!name.isEmpty()) model.addAttribute("name", name);
-            if (!phoneNumber.isEmpty()) model.addAttribute("phoneNumber", phoneNumber);
-            if (!address.isEmpty()) model.addAttribute("address", address);
-            if (!city.isEmpty()) model.addAttribute("city", city);
-            if (!fabric.isEmpty()) model.addAttribute("fabric", fabric);
-            if (roomDoorsCount != 0) model.addAttribute("roomDoorsCount", roomDoorsCount);
-            if (enterDoorsCount != 0) model.addAttribute("enterDoorsCount", enterDoorsCount);
-            if (!measurementDate.isEmpty()) model.addAttribute("measurementDate", measurementDate);
-            if (!info.isEmpty()) model.addAttribute("info", info);
+            addErrorAttributesForModel(measurementDto, model, errors);
             return "measurements";
         }
 
@@ -95,5 +84,21 @@ public class MeasurementController {
 
         model.addAttribute("success", true);
         return "redirect:/measurements";
+    }
+
+    private static void addErrorAttributesForModel(MeasurementDto measurementDto, Model model, Map<String, Boolean> errors) {
+        model.addAttribute("error", errors.keySet()
+                .stream()
+                .findFirst()
+                .orElse("Неизвестная ошибка"));
+        if (!measurementDto.getName().isEmpty()) model.addAttribute("name", measurementDto.getName());
+        if (!measurementDto.getPhoneNumber().isEmpty()) model.addAttribute("phoneNumber", measurementDto.getPhoneNumber());
+        if (!measurementDto.getAddress().isEmpty()) model.addAttribute("address", measurementDto.getAddress());
+        if (!measurementDto.getCity().isEmpty()) model.addAttribute("city", measurementDto.getCity());
+        if (!measurementDto.getFabric().isEmpty()) model.addAttribute("fabric", measurementDto.getFabric());
+        if (measurementDto.getRoomDoorsCount() != 0) model.addAttribute("roomDoorsCount", measurementDto.getRoomDoorsCount());
+        if (measurementDto.getEnterDoorsCount() != 0) model.addAttribute("enterDoorsCount", measurementDto.getEnterDoorsCount());
+        if (!measurementDto.getMeasurementDate().isEmpty()) model.addAttribute("measurementDate", measurementDto.getMeasurementDate());
+        if (!measurementDto.getInfo().isEmpty()) model.addAttribute("info", measurementDto.getInfo());
     }
 }

@@ -27,7 +27,6 @@ public class ProfileSecurityController {
     private final ValidateService validateService;
     private final ImageService imageService;
     private final AuthorizeUserDetailsService userDetailsService;
-    private final PasswordEncoder passwordEncoder;
     private final TransactionRunner transactionRunner;
 
     @GetMapping("/private_profile_security")
@@ -59,11 +58,7 @@ public class ProfileSecurityController {
         String currentEmail = currentAuth.getName();
 
         if (Boolean.parseBoolean(isDelete)) {
-            transactionRunner.doInTransaction(() -> {
-                var user = userRepository.findByEmail(currentEmail).orElseThrow();
-                userRepository.delete(user);
-            });
-            currentAuth.setAuthenticated(false);
+            userDetailsService.deleteUserWithSecurity(currentEmail, currentAuth);
             return "home";
         }
 
@@ -72,45 +67,30 @@ public class ProfileSecurityController {
         if (!email.isEmpty() && oldPassword.isEmpty() && newPassword.isEmpty() && againPassword.isEmpty()) {
             errors = validateService.validatePhoneAndEmailFields(phone, email);
         } else {
-            errors = validateService.validateSecurityFields(
-                    phone, email, currentEmail, oldPassword, newPassword, againPassword
-            );
+            errors = validateService.validateSecurityFields(phone, email, currentEmail, oldPassword, newPassword, againPassword);
         }
 
         if (!errors.values().stream().findFirst().orElse(true)) {
-            model.addAttribute("error", errors.keySet()
-                    .stream()
-                    .findFirst()
-                    .orElse("Неизвестная ошибка"));
-
-            transactionRunner.doInTransaction(() -> {
-                String userImageName = userDetailsService.getImgPathByEmail(currentEmail);
-                User user = userRepository.findByEmail(currentEmail).orElseThrow();
-                model.addAttribute("user", user);
-                model.addAttribute("imgProfileUrl", imageService.getImgUrl(userImageName));
-            });
+            addErrorAttributesForModel(model, errors, currentEmail);
             return "private_profile_security";
         }
 
-        transactionRunner.doInTransaction(() -> userRepository.findByEmail(currentEmail).ifPresent(user -> {
-            user.setEmail(email);
-            user.setPhoneNumber(phone);
-            if (!newPassword.isEmpty()) {
-                user.setPassword(passwordEncoder.encode(newPassword));
-            }
-            if (!user.equals(((AuthorizeUserDetails) currentAuth.getPrincipal()).user())) {
-                userRepository.save(user);
-            }
-        }));
-
-        User user = userRepository.findByEmail(email).orElseThrow();
-        Authentication newAuth = new UsernamePasswordAuthenticationToken(
-                new AuthorizeUserDetails(user),
-                currentAuth.getCredentials(),
-                currentAuth.getAuthorities()
-        );
-        SecurityContextHolder.getContext().setAuthentication(newAuth);
+        userDetailsService.updateSecurityInfoUser(phone, email, newPassword, currentEmail, currentAuth);
 
         return "redirect:/private_profile_security";
+    }
+
+    private void addErrorAttributesForModel(Model model, Map<String, Boolean> errors, String currentEmail) {
+        model.addAttribute("error", errors.keySet()
+                .stream()
+                .findFirst()
+                .orElse("Неизвестная ошибка"));
+
+        transactionRunner.doInTransaction(() -> {
+            String userImageName = userDetailsService.getImgPathByEmail(currentEmail);
+            User user = userRepository.findByEmail(currentEmail).orElseThrow();
+            model.addAttribute("user", user);
+            model.addAttribute("imgProfileUrl", imageService.getImgUrl(userImageName));
+        });
     }
 }

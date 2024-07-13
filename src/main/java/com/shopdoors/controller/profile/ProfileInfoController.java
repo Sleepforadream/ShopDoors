@@ -2,7 +2,7 @@ package com.shopdoors.controller.profile;
 
 import com.shopdoors.dao.entity.User;
 import com.shopdoors.dao.repository.UserRepository;
-import com.shopdoors.dto.AuthorizeUserDetails;
+import com.shopdoors.dto.ProfileDto;
 import com.shopdoors.service.AuthorizeUserDetailsService;
 import com.shopdoors.service.ImageService;
 import com.shopdoors.service.ValidateService;
@@ -18,8 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.time.LocalDate;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -59,55 +58,44 @@ public class ProfileInfoController {
                                 @RequestParam("imgProfileName") String imgProfileName,
                                 Model model) {
 
-        var errors = validateService.validateProfileFields(
-                nickName, firstName, secondName, thirdName, birthDate, address, info
-        );
+        ProfileDto profileDto = ProfileDto.builder()
+                .img(img)
+                .nickName(nickName)
+                .firstName(firstName)
+                .secondName(secondName)
+                .thirdName(thirdName)
+                .gender(gender)
+                .birthDate(birthDate)
+                .info(info)
+                .address(address)
+                .imgProfileName(imgProfileName)
+                .build();
+
+        var errors = validateService.validateProfileFields(profileDto);
 
         Authentication currentAuth = SecurityContextHolder.getContext().getAuthentication();
         String currentEmail = currentAuth.getName();
 
         if (!errors.values().stream().findFirst().orElse(true)) {
-            model.addAttribute("error", errors.keySet()
-                    .stream()
-                    .findFirst()
-                    .orElse("Неизвестная ошибка"));
-            transactionRunner.doInTransaction(() -> {
-                String userImageName = userDetailsService.getImgPathByEmail(currentEmail);
-                User user = userRepository.findByEmail(currentEmail).orElseThrow();
-                model.addAttribute("user", user);
-                model.addAttribute("imgProfileUrl", imageService.getImgUrl(userImageName));
-            });
+            addErrorAttributesForModel(model, errors, currentEmail);
             return "private_profile_info";
         }
 
-        transactionRunner.doInTransaction(() -> userRepository.findByEmail(currentEmail).ifPresent(user -> {
-            user.setNickName(nickName);
-            user.setFirstName(firstName);
-            user.setSecondName(secondName);
-            user.setThirdName(thirdName);
-            user.setGender(gender);
-            if (!birthDate.isEmpty()) {
-                user.setBirthDate(LocalDate.parse(birthDate));
-            } else {
-                user.setBirthDate(null);
-            }
-            user.setInfo(info);
-            user.setAddress(address);
-            user.setImgPath(img.getOriginalFilename());
-            if (!user.equals(((AuthorizeUserDetails) currentAuth.getPrincipal()).user())) {
-                try {
-                    if (!img.isEmpty()) {
-                        imageService.saveImg(img.getOriginalFilename(), img.getInputStream());
-                    } else {
-                        user.setImgPath(imgProfileName);
-                    }
-                } catch (IOException e) {
-                    throw new RuntimeException("Saving img is failed!", e);
-                }
-                userRepository.save(user);
-            }
-        }));
+        userDetailsService.updateSoftInfoUser(profileDto, currentEmail, currentAuth);
 
         return "redirect:/private_profile_info";
+    }
+
+    private void addErrorAttributesForModel(Model model, Map<String, Boolean> errors, String currentEmail) {
+        model.addAttribute("error", errors.keySet()
+                .stream()
+                .findFirst()
+                .orElse("Неизвестная ошибка"));
+        transactionRunner.doInTransaction(() -> {
+            String userImageName = userDetailsService.getImgPathByEmail(currentEmail);
+            User user = userRepository.findByEmail(currentEmail).orElseThrow();
+            model.addAttribute("user", user);
+            model.addAttribute("imgProfileUrl", imageService.getImgUrl(userImageName));
+        });
     }
 }

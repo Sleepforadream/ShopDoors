@@ -1,6 +1,7 @@
 package com.shopdoors.service;
 
 import com.shopdoors.dto.MeasurementDto;
+import com.shopdoors.dto.ProfileDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -63,48 +64,40 @@ public class ValidateService {
         return validFields;
     }
 
-    public Map<String, Boolean> validateProfileFields(
-            String nickName,
-            String firstName,
-            String secondName,
-            String thirdName,
-            String birthDate,
-            String address,
-            String info
-    ) {
+    public Map<String, Boolean> validateProfileFields(ProfileDto profileDto) {
         log.info("Validating profile fields");
         Map<String, Boolean> validFields = new HashMap<>();
 
-        if (!info.isEmpty()) {
-            Map<String, Boolean> infoSizeValidation = validateMaxSizeFields(info, "info", 512);
+        if (!profileDto.getInfo().isEmpty()) {
+            Map<String, Boolean> infoSizeValidation = validateMaxSizeFields(profileDto.getInfo(), "info", 512);
             if (infoSizeValidation.containsValue(false)) return infoSizeValidation;
         }
 
-        Map<String, Boolean> nickNameCorrectValidation = validateCorrectName(nickName, "nickName");
+        Map<String, Boolean> nickNameCorrectValidation = validateCorrectName(profileDto.getFirstName(), "nickName");
         if (nickNameCorrectValidation.containsValue(false)) return nickNameCorrectValidation;
 
-        if (!firstName.isEmpty()) {
-            Map<String, Boolean> firstNameCorrectValidation = validateCorrectName(firstName, "firstName");
+        if (!profileDto.getFirstName().isEmpty()) {
+            Map<String, Boolean> firstNameCorrectValidation = validateCorrectName(profileDto.getFirstName(), "firstName");
             if (firstNameCorrectValidation.containsValue(false)) return firstNameCorrectValidation;
         }
 
-        if (!secondName.isEmpty()) {
-            Map<String, Boolean> secondNameCorrectValidation = validateCorrectName(secondName, "secondName");
+        if (!profileDto.getSecondName().isEmpty()) {
+            Map<String, Boolean> secondNameCorrectValidation = validateCorrectName(profileDto.getSecondName(), "secondName");
             if (secondNameCorrectValidation.containsValue(false)) return secondNameCorrectValidation;
         }
 
-        if (!thirdName.isEmpty()) {
-            Map<String, Boolean> thirdNameCorrectValidation = validateCorrectName(thirdName, "thirdName");
+        if (!profileDto.getThirdName().isEmpty()) {
+            Map<String, Boolean> thirdNameCorrectValidation = validateCorrectName(profileDto.getThirdName(), "thirdName");
             if (thirdNameCorrectValidation.containsValue(false)) return thirdNameCorrectValidation;
         }
 
-        if (!birthDate.isEmpty()) {
-            Map<String, Boolean> birthDateValidation = validateBirthDate(birthDate);
+        if (!profileDto.getBirthDate().isEmpty()) {
+            Map<String, Boolean> birthDateValidation = validateBirthDate(profileDto.getBirthDate());
             if (birthDateValidation.containsValue(false)) return birthDateValidation;
         }
 
-        if (!address.isEmpty()) {
-            Map<String, Boolean> addressCorrectValidation = validateCorrectAddress(address);
+        if (!profileDto.getAddress().isEmpty()) {
+            Map<String, Boolean> addressCorrectValidation = validateCorrectAddress(profileDto.getAddress());
             if (addressCorrectValidation.containsValue(false)) return addressCorrectValidation;
         }
 
