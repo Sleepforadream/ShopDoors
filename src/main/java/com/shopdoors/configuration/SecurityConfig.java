@@ -1,4 +1,4 @@
-package com.shopdoors.security.configuration;
+package com.shopdoors.configuration;
 
 import com.shopdoors.service.AuthorizeUserDetailsService;
 import org.springframework.context.annotation.Bean;

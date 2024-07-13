@@ -1,4 +1,4 @@
-package com.shopdoors.security.dto;
+package com.shopdoors.dto;
 
 import com.shopdoors.dao.entity.User;
 import org.springframework.security.core.GrantedAuthority;

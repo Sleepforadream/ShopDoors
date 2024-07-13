@@ -1,5 +1,6 @@
 package com.shopdoors.controller.measurement;
 
+import com.shopdoors.dto.MeasurementDto;
 import com.shopdoors.service.MeasurementService;
 import com.shopdoors.service.ValidateService;
 import lombok.RequiredArgsConstructor;
@@ -55,20 +56,23 @@ public class MeasurementController {
             @RequestParam("info") String info,
             Model model
     ) {
+        MeasurementDto measurementDto = MeasurementDto.builder()
+                .name(name)
+                .secondName(secondName)
+                .thirdName(thirdName)
+                .email(email)
+                .phoneNumber(phoneNumber)
+                .address(address)
+                .city(city)
+                .fabric(fabric)
+                .roomDoorsCount(roomDoorsCount)
+                .enterDoorsCount(enterDoorsCount)
+                .measurementDate(measurementDate)
+                .measurementTime(measurementTime)
+                .info(info)
+                .build();
 
-        var errors = validateService.validateMeasurements(
-                name,
-                secondName,
-                thirdName,
-                email,
-                phoneNumber,
-                address,
-                roomDoorsCount,
-                enterDoorsCount,
-                measurementDate,
-                measurementTime,
-                info
-        );
+        var errors = validateService.validateMeasurements(measurementDto);
 
         if (!errors.values().stream().findFirst().orElse(true)) {
             model.addAttribute("error", errors.keySet()
@@ -87,21 +91,7 @@ public class MeasurementController {
             return "measurements";
         }
 
-        measurementService.createEventMeasurement(
-                email,
-                phoneNumber,
-                name,
-                secondName,
-                thirdName,
-                address,
-                city,
-                fabric,
-                roomDoorsCount,
-                enterDoorsCount,
-                measurementDate,
-                measurementTime,
-                info
-        );
+        measurementService.createEventMeasurement(measurementDto);
 
         model.addAttribute("success", true);
         return "redirect:/measurements";

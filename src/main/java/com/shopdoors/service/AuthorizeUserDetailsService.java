@@ -3,7 +3,7 @@ package com.shopdoors.service;
 import com.shopdoors.configuration.property.S3Properties;
 import com.shopdoors.dao.entity.User;
 import com.shopdoors.dao.repository.UserRepository;
-import com.shopdoors.security.dto.AuthorizeUserDetails;
+import com.shopdoors.dto.AuthorizeUserDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;

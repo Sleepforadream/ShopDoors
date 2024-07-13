@@ -8,6 +8,7 @@ import com.shopdoors.dao.entity.Measurement;
 import com.shopdoors.dao.entity.Position;
 import com.shopdoors.dao.repository.EmployeeRepository;
 import com.shopdoors.dao.repository.MeasurementRepository;
+import com.shopdoors.dto.MeasurementDto;
 import com.shopdoors.util.TransactionRunner;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,90 +32,62 @@ public class MeasurementService {
     private final ClientService clientService;
     private final NotificationService notificationService;
 
-    public void createEventMeasurement(
-            String email,
-            String phoneNumber,
-            String name,
-            String secondName,
-            String thirdName,
-            String address,
-            String city,
-            String fabric,
-            int roomDoorsCount,
-            int enterDoorsCount,
-            String measurementDate,
-            String measurementTime,
-            String info
-    ) {
-        log.info("Creating event measurement for email: {}", email);
+    public void createEventMeasurement(MeasurementDto measurementDto) {
+        log.info("Creating event measurement for email: {}", measurementDto.getEmail());
         transactionRunner.doInTransaction(
                 () -> {
-                    Client client = clientService.save(email, phoneNumber, name, secondName, thirdName);
+                    Client client = clientService.save(
+                            measurementDto.getEmail(),
+                            measurementDto.getPhoneNumber(),
+                            measurementDto.getName(),
+                            measurementDto.getSecondName(),
+                            measurementDto.getThirdName()
+                    );
 
                     List<Employee> availableMeasures = getAvailableMeasures(
-                            LocalDate.parse(measurementDate),
-                            LocalTime.parse(measurementTime)
+                            LocalDate.parse(measurementDto.getMeasurementDate()),
+                            LocalTime.parse(measurementDto.getMeasurementTime())
                     );
 
                     Employee appointedMeasurer = availableMeasures.stream().findAny().orElseThrow();
 
-                    Measurement measurement = save(
-                            address,
-                            city,
-                            fabric,
-                            roomDoorsCount,
-                            enterDoorsCount,
-                            measurementDate,
-                            measurementTime,
-                            info,
-                            client,
-                            appointedMeasurer
-                    );
+                    Measurement measurement = save(measurementDto, client, appointedMeasurer);
 
                     notificationService.notifyOnNewMeasurementToEmployee(appointedMeasurer, measurement, client);
                     notificationService.notifyOnNewMeasurementToClient(appointedMeasurer, measurement, client);
-                    log.info("Successfully created measurement for email: {}", email);
+                    log.info("Successfully created measurement for email: {}", measurementDto.getEmail());
                     return measurement;
                 }
         );
     }
 
-    public Measurement save(
-            String address,
-            String city,
-            String fabric,
-            int roomDoorsCount,
-            int enterDoorsCount,
-            String measurementDate,
-            String measurementTime,
-            String info,
-            Client client,
-            Employee appointedMeasurer
-    ) {
-        log.info("Saving measurement for address: {}", address);
+    public Measurement save(MeasurementDto measurementDto, Client client, Employee appointedMeasurer) {
+        log.info("Saving measurement for address: {}", measurementDto.getAddress());
         Measurement measurement = measurementRepository
                 .findByMeasurementDateAndMeasurementTimeAndAddress(
-                        LocalDate.parse(measurementDate), LocalTime.parse(measurementTime), address)
+                        LocalDate.parse(measurementDto.getMeasurementDate()),
+                        LocalTime.parse(measurementDto.getMeasurementTime()),
+                        measurementDto.getAddress())
                 .orElse(new Measurement());
 
         if (measurement.getMeasurementDate() == null) {
             measurement = measurementRepository.save(
                     Measurement.builder()
                             .registerDate(LocalDate.now())
-                            .address(address)
-                            .city(City.valueOf(city))
-                            .fabric(Fabric.valueOf(fabric))
-                            .roomDoorsCount(roomDoorsCount)
-                            .enterDoorsCount(enterDoorsCount)
-                            .measurementDate(LocalDate.parse(measurementDate))
-                            .measurementTime(LocalTime.parse(measurementTime))
-                            .info(info)
+                            .address(measurementDto.getAddress())
+                            .city(City.valueOf(measurementDto.getCity()))
+                            .fabric(Fabric.valueOf(measurementDto.getFabric()))
+                            .roomDoorsCount(measurementDto.getRoomDoorsCount())
+                            .enterDoorsCount(measurementDto.getEnterDoorsCount())
+                            .measurementDate(LocalDate.parse(measurementDto.getMeasurementDate()))
+                            .measurementTime(LocalTime.parse(measurementDto.getMeasurementTime()))
+                            .info(measurementDto.getInfo())
                             .client(client)
                             .employee(appointedMeasurer)
                             .build()
             );
         }
-        log.info("Successfully saved measurement for address: {}", address);
+        log.info("Successfully saved measurement for address: {}", measurementDto.getAddress());
         return measurement;
     }
 

@@ -23,7 +23,6 @@ public class EmailService {
         message.setText(body);
         message.setFrom(mailProperties.getUsername());
 
-        System.err.println(message);
         mailSender.send(message);
         log.info("Email sent to {}", toEmail);
     }

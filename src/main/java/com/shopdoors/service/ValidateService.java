@@ -1,5 +1,6 @@
 package com.shopdoors.service;
 
+import com.shopdoors.dto.MeasurementDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -8,7 +9,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -166,54 +166,42 @@ public class ValidateService {
         return validFields;
     }
 
-    public Map<String, Boolean> validateMeasurements(
-            String name,
-            String secondName,
-            String thirdName,
-            String email,
-            String phoneNumber,
-            String address,
-            int roomDoorsCount,
-            int enterDoorsCount,
-            String measurementDate,
-            String measurementTime,
-            String info
-    ) {
+    public Map<String, Boolean> validateMeasurements(MeasurementDto measurementDto) {
         log.info("Validating measurements");
         Map<String, Boolean> validFields = new HashMap<>();
 
-        Map<String, Boolean> nameCorrectValidation = validateCorrectName(name, "name");
+        Map<String, Boolean> nameCorrectValidation = validateCorrectName(measurementDto.getName(), "name");
         if (nameCorrectValidation.containsValue(false)) return nameCorrectValidation;
 
-        if (!secondName.isEmpty()) {
-            Map<String, Boolean> secondNameCorrectValidation = validateCorrectName(secondName, "secondName");
+        if (!measurementDto.getSecondName().isEmpty()) {
+            Map<String, Boolean> secondNameCorrectValidation = validateCorrectName(measurementDto.getSecondName(), "secondName");
             if (secondNameCorrectValidation.containsValue(false)) return secondNameCorrectValidation;
         }
 
-        if (!thirdName.isEmpty()) {
-            Map<String, Boolean> thirdNameCorrectValidation = validateCorrectName(thirdName, "thirdName");
+        if (!measurementDto.getThirdName().isEmpty()) {
+            Map<String, Boolean> thirdNameCorrectValidation = validateCorrectName(measurementDto.getThirdName(), "thirdName");
             if (thirdNameCorrectValidation.containsValue(false)) return thirdNameCorrectValidation;
         }
 
-        Map<String, Boolean> emailValidation = validateCorrectEmail(email);
+        Map<String, Boolean> emailValidation = validateCorrectEmail(measurementDto.getEmail());
         if (emailValidation.containsValue(false)) return emailValidation;
 
-        Map<String, Boolean> phoneValidation = validateCorrectPhoneNumber(phoneNumber);
+        Map<String, Boolean> phoneValidation = validateCorrectPhoneNumber(measurementDto.getPhoneNumber());
         if (phoneValidation.containsValue(false)) return phoneValidation;
 
-        Map<String, Boolean> addressCorrectValidation = validateCorrectAddress(address);
+        Map<String, Boolean> addressCorrectValidation = validateCorrectAddress(measurementDto.getAddress());
         if (addressCorrectValidation.containsValue(false)) return addressCorrectValidation;
 
-        Map<String, Boolean> doorsCountValidation = validateDoorsCount(roomDoorsCount, enterDoorsCount);
+        Map<String, Boolean> doorsCountValidation = validateDoorsCount(measurementDto.getRoomDoorsCount(), measurementDto.getEnterDoorsCount());
         if (doorsCountValidation.containsValue(false)) return doorsCountValidation;
 
-        Map<String, Boolean> measurementDateValidation = validateMeasurementDate(measurementDate);
+        Map<String, Boolean> measurementDateValidation = validateMeasurementDate(measurementDto.getMeasurementDate());
         if (measurementDateValidation.containsValue(false)) return measurementDateValidation;
 
-        Map<String, Boolean> measurementTimeValidation = validateMeasurementTime(measurementTime);
+        Map<String, Boolean> measurementTimeValidation = validateMeasurementTime(measurementDto.getMeasurementTime());
         if (measurementTimeValidation.containsValue(false)) return measurementTimeValidation;
 
-        Map<String, Boolean> infoValidation = validateMaxSizeFields(info, "info", 1000);
+        Map<String, Boolean> infoValidation = validateMaxSizeFields(measurementDto.getInfo(), "info", 1000);
         if (infoValidation.containsValue(false)) return infoValidation;
 
         validFields.put("Все поля валидны", true);
