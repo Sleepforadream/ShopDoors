@@ -2,10 +2,16 @@ package com.shopdoors.dao.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,32 +29,34 @@ import java.util.Objects;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "measurement")
+@Table(name = "measurement", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"measurement_date", "measurement_time", "address"})
+})
 public class Measurement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 100, nullable = false)
-    private String name;
+    @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate registerDate;
 
-    @Column(length = 12, nullable = false, unique = true)
-    private String phone;
-
-    @Column(length = 1000, nullable = false, unique = true)
+    @Column(length = 1000, nullable = false)
     private String address;
 
-    @Column(length = 100)
+    @Enumerated(value = EnumType.STRING)
+    @Column(length = 100, nullable = false)
     private City city;
 
-    @Column(length = 100)
+    @Enumerated(value = EnumType.STRING)
+    @Column(length = 100, nullable = false)
     private Fabric fabric;
 
-    @Column(length = 100)
+    @Column(length = 100, nullable = false)
     private int roomDoorsCount;
 
-    @Column(length = 100)
+    @Column(length = 100, nullable = false)
     private int enterDoorsCount;
 
     @Column(nullable = false)
@@ -62,6 +70,12 @@ public class Measurement {
     @Column(length = 1000)
     private String info;
 
+    @ManyToOne(targetEntity = Client.class, fetch = FetchType.LAZY)
+    private Client client;
+
+    @ManyToOne(targetEntity = Employee.class, fetch = FetchType.LAZY)
+    private Employee employee;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -70,8 +84,6 @@ public class Measurement {
         return roomDoorsCount == that.roomDoorsCount
                 && enterDoorsCount == that.enterDoorsCount
                 && Objects.equals(id, that.id)
-                && Objects.equals(name, that.name)
-                && Objects.equals(phone, that.phone)
                 && Objects.equals(address, that.address)
                 && Objects.equals(city, that.city)
                 && Objects.equals(fabric, that.fabric)
@@ -84,8 +96,6 @@ public class Measurement {
     public int hashCode() {
         return Objects.hash(
                 id,
-                name,
-                phone,
                 address,
                 city,
                 fabric,

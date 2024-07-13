@@ -1,6 +1,6 @@
 package com.shopdoors.controller;
 
-import com.shopdoors.dao.entity.AuthorizeUser;
+import com.shopdoors.dao.entity.User;
 import com.shopdoors.service.AuthorizeUserDetailsService;
 import com.shopdoors.service.ValidateService;
 import lombok.RequiredArgsConstructor;
@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -44,7 +42,7 @@ public class SignUpController {
                     .orElse("Неизвестная ошибка"));
             return "redirect:/signup";
         } else {
-            AuthorizeUser registeredUser = userService.saveUser(email, password, name);
+            User registeredUser = userService.saveUser(email, password, name);
             if (registeredUser.getEmail() == null) {
                 redirectAttr.addFlashAttribute("error", "Пользователь с таким email уже существует");
                 return "redirect:/signup";

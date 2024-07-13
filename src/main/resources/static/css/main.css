@@ -792,9 +792,15 @@ img {
     text-decoration: none;
 }
 
-.indicator-dropdown {
+.indicator-dropdown-main {
+    padding-left: 0.5rem;
     content: url(../img/icons/dropdown-indicator.svg);
-    margin-left: 7px;
+}
+
+.indicator-dropdown {
+    margin-left: 35%;
+    margin-top: 30%;
+    content: url(../img/icons/dropdown-indicator.svg);
 }
 
 .indicator-dropdown-medium {
@@ -4585,7 +4591,7 @@ img {
 }
 
 .select-arrow {
-    height: 36px;
+    height: 56%;
     width: 36px;
     line-height: 36px;
     border-left: 1px solid var(--form_border_color, #dadada);

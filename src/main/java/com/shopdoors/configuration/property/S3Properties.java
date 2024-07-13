@@ -23,4 +23,6 @@ public class S3Properties {
 
     private String imgBucket;
 
+    private String defaultImgPath;
+
 }

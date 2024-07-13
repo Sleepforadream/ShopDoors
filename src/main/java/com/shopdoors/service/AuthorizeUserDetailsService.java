@@ -1,9 +1,11 @@
 package com.shopdoors.service;
 
-import com.shopdoors.dao.entity.AuthorizeUser;
-import com.shopdoors.dao.repository.AuthorizeUserRepository;
+import com.shopdoors.configuration.property.S3Properties;
+import com.shopdoors.dao.entity.User;
+import com.shopdoors.dao.repository.UserRepository;
 import com.shopdoors.security.dto.AuthorizeUserDetails;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,44 +16,48 @@ import java.time.LocalDate;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AuthorizeUserDetailsService implements UserDetailsService {
 
-    private final AuthorizeUserRepository authorizeUserRepository;
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    public final String DEFAULT_IMG_PATH = "unknownUser.svg";
+    private final S3Properties s3Properties;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        AuthorizeUser authorizeUser = authorizeUserRepository.findByEmail(username)
+        log.info("Load user {}", username);
+        User user = userRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("AuthorizeUser not found with username or email:" + username));
-        return new AuthorizeUserDetails(authorizeUser);
+        return new AuthorizeUserDetails(user);
     }
 
-    public AuthorizeUser saveUser(AuthorizeUser user) {
-        if (authorizeUserRepository.findByEmail(user.getEmail()).isPresent()) {
-            return new AuthorizeUser();
+    public User saveUser(User user) {
+        log.info("Save user {}", user);
+        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+            return new User();
         }
-        return authorizeUserRepository.save(user);
+        return userRepository.save(user);
     }
 
-    public AuthorizeUser saveUser(String email, String password, String name) {
-
-        AuthorizeUser newUser = AuthorizeUser
+    public User saveUser(String email, String password, String name) {
+        log.info("Save user with enail {}", email);
+        User newUser = User
                 .builder()
                 .registerDate(LocalDate.now())
                 .email(email)
                 .password(passwordEncoder.encode(password))
                 .nickName(name)
-                .imgPath(DEFAULT_IMG_PATH)
+                .imgPath(s3Properties.getDefaultImgPath())
                 .build();
 
         return saveUser(newUser);
     }
 
     public String getImgPathByEmail(String email) {
-        return authorizeUserRepository
+        log.info("Get img path by email {}", email);
+        return userRepository
                 .findByEmail(email)
-                .orElse(new AuthorizeUser())
+                .orElse(new User())
                 .getImgPath();
     }
 }

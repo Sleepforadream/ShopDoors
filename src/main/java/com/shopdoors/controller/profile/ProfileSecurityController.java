@@ -1,7 +1,7 @@
 package com.shopdoors.controller.profile;
 
-import com.shopdoors.dao.entity.AuthorizeUser;
-import com.shopdoors.dao.repository.AuthorizeUserRepository;
+import com.shopdoors.dao.entity.User;
+import com.shopdoors.dao.repository.UserRepository;
 import com.shopdoors.security.dto.AuthorizeUserDetails;
 import com.shopdoors.service.AuthorizeUserDetailsService;
 import com.shopdoors.service.ImageService;
@@ -23,7 +23,7 @@ import java.util.Map;
 @Controller
 @RequiredArgsConstructor
 public class ProfileSecurityController {
-    private final AuthorizeUserRepository authorizeUserRepository;
+    private final UserRepository userRepository;
     private final ValidateService validateService;
     private final ImageService imageService;
     private final AuthorizeUserDetailsService userDetailsService;
@@ -38,7 +38,7 @@ public class ProfileSecurityController {
         model.addAttribute("currentPage", "/private_profile_security");
         transactionRunner.doInTransaction(() -> {
             String userImageName = userDetailsService.getImgPathByEmail(currentEmail);
-            AuthorizeUser user = authorizeUserRepository.findByEmail(currentEmail).orElseThrow();
+            User user = userRepository.findByEmail(currentEmail).orElseThrow();
             model.addAttribute("imgProfileUrl", imageService.getImgUrl(userImageName));
             model.addAttribute("user", user);
         });
@@ -60,8 +60,8 @@ public class ProfileSecurityController {
 
         if (Boolean.parseBoolean(isDelete)) {
             transactionRunner.doInTransaction(() -> {
-                var user = authorizeUserRepository.findByEmail(currentEmail).orElseThrow();
-                authorizeUserRepository.delete(user);
+                var user = userRepository.findByEmail(currentEmail).orElseThrow();
+                userRepository.delete(user);
             });
             currentAuth.setAuthenticated(false);
             return "home";
@@ -85,25 +85,25 @@ public class ProfileSecurityController {
 
             transactionRunner.doInTransaction(() -> {
                 String userImageName = userDetailsService.getImgPathByEmail(currentEmail);
-                AuthorizeUser user = authorizeUserRepository.findByEmail(currentEmail).orElseThrow();
+                User user = userRepository.findByEmail(currentEmail).orElseThrow();
                 model.addAttribute("user", user);
                 model.addAttribute("imgProfileUrl", imageService.getImgUrl(userImageName));
             });
             return "private_profile_security";
         }
 
-        transactionRunner.doInTransaction(() -> authorizeUserRepository.findByEmail(currentEmail).ifPresent(user -> {
+        transactionRunner.doInTransaction(() -> userRepository.findByEmail(currentEmail).ifPresent(user -> {
             user.setEmail(email);
             user.setPhoneNumber(phone);
             if (!newPassword.isEmpty()) {
                 user.setPassword(passwordEncoder.encode(newPassword));
             }
-            if (!user.equals(((AuthorizeUserDetails) currentAuth.getPrincipal()).authorizeUser())) {
-                authorizeUserRepository.save(user);
+            if (!user.equals(((AuthorizeUserDetails) currentAuth.getPrincipal()).user())) {
+                userRepository.save(user);
             }
         }));
 
-        AuthorizeUser user = authorizeUserRepository.findByEmail(email).orElseThrow();
+        User user = userRepository.findByEmail(email).orElseThrow();
         Authentication newAuth = new UsernamePasswordAuthenticationToken(
                 new AuthorizeUserDetails(user),
                 currentAuth.getCredentials(),

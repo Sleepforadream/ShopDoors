@@ -4,6 +4,10 @@ plugins {
     id("io.spring.dependency-management") version "1.1.4"
 }
 
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-mail")
+}
+
 group = "com.example"
 version = "0.0.1-SNAPSHOT"
 

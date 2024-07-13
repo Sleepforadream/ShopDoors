@@ -1,6 +1,15 @@
 spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: shopdoorskd@gmail.com
+    password: dtjg kbnp htqd hdza
+    properties.mail.smtp.from: shopdoorskd@gmail.com
+    properties.mail.smtp.auth: true
+    properties.mail.smtp.starttls.enable: true
   jpa:
     open-in-view: true
+    generate-ddl: true
   main:
     banner-mode: off
 
@@ -12,3 +21,4 @@ minio:
   secure: false
   partSize: 5242880
   imgBucket: profile-img
+  defaultImgPath: unknownUser.svg

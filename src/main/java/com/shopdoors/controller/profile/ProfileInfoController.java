@@ -1,7 +1,7 @@
 package com.shopdoors.controller.profile;
 
-import com.shopdoors.dao.entity.AuthorizeUser;
-import com.shopdoors.dao.repository.AuthorizeUserRepository;
+import com.shopdoors.dao.entity.User;
+import com.shopdoors.dao.repository.UserRepository;
 import com.shopdoors.security.dto.AuthorizeUserDetails;
 import com.shopdoors.service.AuthorizeUserDetailsService;
 import com.shopdoors.service.ImageService;
@@ -24,7 +24,7 @@ import java.time.LocalDate;
 @Controller
 @RequiredArgsConstructor
 public class ProfileInfoController {
-    private final AuthorizeUserRepository authorizeUserRepository;
+    private final UserRepository userRepository;
     private final ValidateService validateService;
     private final ImageService imageService;
     private final AuthorizeUserDetailsService userDetailsService;
@@ -38,7 +38,7 @@ public class ProfileInfoController {
         model.addAttribute("currentPage", "/private_profile_info");
         transactionRunner.doInTransaction(() -> {
             String userImageName = userDetailsService.getImgPathByEmail(currentEmail);
-            AuthorizeUser user = authorizeUserRepository.findByEmail(currentEmail).orElseThrow();
+            User user = userRepository.findByEmail(currentEmail).orElseThrow();
             model.addAttribute("imgProfileUrl", imageService.getImgUrl(userImageName));
             model.addAttribute("user", user);
         });
@@ -73,14 +73,14 @@ public class ProfileInfoController {
                     .orElse("Неизвестная ошибка"));
             transactionRunner.doInTransaction(() -> {
                 String userImageName = userDetailsService.getImgPathByEmail(currentEmail);
-                AuthorizeUser user = authorizeUserRepository.findByEmail(currentEmail).orElseThrow();
+                User user = userRepository.findByEmail(currentEmail).orElseThrow();
                 model.addAttribute("user", user);
                 model.addAttribute("imgProfileUrl", imageService.getImgUrl(userImageName));
             });
             return "private_profile_info";
         }
 
-        transactionRunner.doInTransaction(() -> authorizeUserRepository.findByEmail(currentEmail).ifPresent(user -> {
+        transactionRunner.doInTransaction(() -> userRepository.findByEmail(currentEmail).ifPresent(user -> {
             user.setNickName(nickName);
             user.setFirstName(firstName);
             user.setSecondName(secondName);
@@ -94,7 +94,7 @@ public class ProfileInfoController {
             user.setInfo(info);
             user.setAddress(address);
             user.setImgPath(img.getOriginalFilename());
-            if (!user.equals(((AuthorizeUserDetails) currentAuth.getPrincipal()).authorizeUser())) {
+            if (!user.equals(((AuthorizeUserDetails) currentAuth.getPrincipal()).user())) {
                 try {
                     if (!img.isEmpty()) {
                         imageService.saveImg(img.getOriginalFilename(), img.getInputStream());
@@ -104,7 +104,7 @@ public class ProfileInfoController {
                 } catch (IOException e) {
                     throw new RuntimeException("Saving img is failed!", e);
                 }
-                authorizeUserRepository.save(user);
+                userRepository.save(user);
             }
         }));
 

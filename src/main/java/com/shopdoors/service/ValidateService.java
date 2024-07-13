@@ -1,12 +1,14 @@
 package com.shopdoors.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -16,6 +18,7 @@ import java.util.regex.Pattern;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ValidateService {
     private final AuthenticationManager authenticationManager;
 
@@ -25,6 +28,7 @@ public class ValidateService {
             String password,
             String passwordDouble
     ) {
+        log.info("Validating registration fields");
         Map<String, Boolean> validFields = new HashMap<>();
 
         Map<String, Boolean> nickNameValidation = validateCorrectLogin(nickName);
@@ -40,10 +44,12 @@ public class ValidateService {
         if (passwordDoubleValidation.containsValue(false)) return validFields;
 
         validFields.put("Все поля валидны", true);
+        log.info("Validating registration fields completed");
         return validFields;
     }
 
     public Map<String, Boolean> validateLoginFields(String email, String password) {
+        log.info("Validating login fields");
         Map<String, Boolean> validFields = new HashMap<>();
 
         Map<String, Boolean> emailValidation = validateCorrectEmail(email);
@@ -53,6 +59,7 @@ public class ValidateService {
         if (passwordValidation.containsValue(false)) return passwordValidation;
 
         validFields.put("Все поля валидны", true);
+        log.info("Validating login fields completed");
         return validFields;
     }
 
@@ -65,6 +72,7 @@ public class ValidateService {
             String address,
             String info
     ) {
+        log.info("Validating profile fields");
         Map<String, Boolean> validFields = new HashMap<>();
 
         if (!info.isEmpty()) {
@@ -101,6 +109,7 @@ public class ValidateService {
         }
 
         validFields.put("Все поля валидны", true);
+        log.info("Validating profile fields completed");
         return validFields;
     }
 
@@ -112,6 +121,7 @@ public class ValidateService {
             String newPassword,
             String againPassword
     ) {
+        log.info("Validating security fields");
         Map<String, Boolean> validFields = new HashMap<>();
 
         if (!phone.isEmpty()) {
@@ -132,6 +142,7 @@ public class ValidateService {
         if (passwordDoubleValidation.containsValue(false)) return passwordDoubleValidation;
 
         validFields.put("Все поля валидны", true);
+        log.info("Validating security fields completed");
         return validFields;
     }
 
@@ -139,6 +150,7 @@ public class ValidateService {
             String phone,
             String email
     ) {
+        log.info("Validating phone and email fields");
         Map<String, Boolean> validFields = new HashMap<>();
 
         if (!phone.isEmpty()) {
@@ -150,22 +162,41 @@ public class ValidateService {
         if (emailValidation.containsValue(false)) return emailValidation;
 
         validFields.put("Все поля валидны", true);
+        log.info("Validating phone and email fields completed");
         return validFields;
     }
 
     public Map<String, Boolean> validateMeasurements(
             String name,
+            String secondName,
+            String thirdName,
+            String email,
             String phoneNumber,
             String address,
             int roomDoorsCount,
             int enterDoorsCount,
             String measurementDate,
+            String measurementTime,
             String info
     ) {
+        log.info("Validating measurements");
         Map<String, Boolean> validFields = new HashMap<>();
 
         Map<String, Boolean> nameCorrectValidation = validateCorrectName(name, "name");
         if (nameCorrectValidation.containsValue(false)) return nameCorrectValidation;
+
+        if (!secondName.isEmpty()) {
+            Map<String, Boolean> secondNameCorrectValidation = validateCorrectName(secondName, "secondName");
+            if (secondNameCorrectValidation.containsValue(false)) return secondNameCorrectValidation;
+        }
+
+        if (!thirdName.isEmpty()) {
+            Map<String, Boolean> thirdNameCorrectValidation = validateCorrectName(thirdName, "thirdName");
+            if (thirdNameCorrectValidation.containsValue(false)) return thirdNameCorrectValidation;
+        }
+
+        Map<String, Boolean> emailValidation = validateCorrectEmail(email);
+        if (emailValidation.containsValue(false)) return emailValidation;
 
         Map<String, Boolean> phoneValidation = validateCorrectPhoneNumber(phoneNumber);
         if (phoneValidation.containsValue(false)) return phoneValidation;
@@ -173,16 +204,20 @@ public class ValidateService {
         Map<String, Boolean> addressCorrectValidation = validateCorrectAddress(address);
         if (addressCorrectValidation.containsValue(false)) return addressCorrectValidation;
 
-        Map<String, Boolean> doorsCountValidation = validateDoorsCount(roomDoorsCount,enterDoorsCount);
+        Map<String, Boolean> doorsCountValidation = validateDoorsCount(roomDoorsCount, enterDoorsCount);
         if (doorsCountValidation.containsValue(false)) return doorsCountValidation;
 
         Map<String, Boolean> measurementDateValidation = validateMeasurementDate(measurementDate);
         if (measurementDateValidation.containsValue(false)) return measurementDateValidation;
 
+        Map<String, Boolean> measurementTimeValidation = validateMeasurementTime(measurementTime);
+        if (measurementTimeValidation.containsValue(false)) return measurementTimeValidation;
+
         Map<String, Boolean> infoValidation = validateMaxSizeFields(info, "info", 1000);
         if (infoValidation.containsValue(false)) return infoValidation;
 
         validFields.put("Все поля валидны", true);
+        log.info("Validating measurements completed");
         return validFields;
     }
 
@@ -255,13 +290,13 @@ public class ValidateService {
 
     private Map<String, Boolean> validateCorrectAddress(String address) {
         Map<String, Boolean> erroredFields = new HashMap<>();
-        String ADDRESS_PATTERN = "^[a-zA-Z\\d\\s-,.]{3,256}$";
+        String ADDRESS_PATTERN = "^[a-zA-Zа-яА-Я\\d\\s-,.№/]{3,256}$";
         Pattern pattern = Pattern.compile(ADDRESS_PATTERN);
         Matcher matcher = pattern.matcher(address);
         if (matcher.matches()) {
             erroredFields.put("Введённый адрес валиден", true);
         } else {
-            erroredFields.put("Адрес должен содержать только латинские буквы, цифры, пробел, дефис, знак тире и запятую. " +
+            erroredFields.put("Адрес должен содержать буквы, цифры, пробелы, дефисы, слэши точки и запятые. " +
                     "Длина - не менее 3 символов, не более 256 символов", false);
         }
         return erroredFields;
@@ -325,8 +360,8 @@ public class ValidateService {
 
     private Map<String, Boolean> validateDoorsCount(int roomDoorsCount, int enterDoorsCount) {
         Map<String, Boolean> erroredFields = new HashMap<>();
-        if ((roomDoorsCount <= 0 && enterDoorsCount <= 0)  || roomDoorsCount > 1000 || enterDoorsCount > 1000) {
-            erroredFields.put("Количество дверей должно быть больше 0 и меньше 1000", false);
+        if (roomDoorsCount <= 0 && enterDoorsCount <= 0) {
+            erroredFields.put("Количество дверей должно быть больше 0", false);
         } else {
             erroredFields.put("Количество дверей валидно", true);
         }
@@ -335,10 +370,22 @@ public class ValidateService {
 
     private Map<String, Boolean> validateMeasurementDate(String measurementDate) {
         Map<String, Boolean> erroredFields = new HashMap<>();
-        if (LocalDate.parse(measurementDate).isBefore(LocalDate.now().plusDays(1))) {
+        if (measurementDate.isEmpty()) {
+            erroredFields.put("Необходимо ввести дату для замера", false);
+        } else if (LocalDate.parse(measurementDate).isBefore(LocalDate.now().plusDays(1))) {
             erroredFields.put("Запись должна осуществляться заранее как минимум за один день", false);
         } else if (LocalDate.parse(measurementDate).isAfter(LocalDate.now().plusDays(30))) {
             erroredFields.put("Записаться на замер заранее можно не позднее чем за 30 дней до даты замера", false);
+        } else {
+            erroredFields.put("Запись валидна", true);
+        }
+        return erroredFields;
+    }
+
+    private Map<String, Boolean> validateMeasurementTime(String measurementTime) {
+        Map<String, Boolean> erroredFields = new HashMap<>();
+        if (measurementTime.equals("Нет доступного времени") || measurementTime.isEmpty()) {
+            erroredFields.put("Необходимо ввести время для замера", false);
         } else {
             erroredFields.put("Запись валидна", true);
         }

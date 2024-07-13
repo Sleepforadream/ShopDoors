@@ -1,12 +1,12 @@
 package com.shopdoors.security.dto;
 
-import com.shopdoors.dao.entity.AuthorizeUser;
+import com.shopdoors.dao.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-public record AuthorizeUserDetails(AuthorizeUser authorizeUser) implements UserDetails {
+public record AuthorizeUserDetails(User user) implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -15,56 +15,56 @@ public record AuthorizeUserDetails(AuthorizeUser authorizeUser) implements UserD
 
     @Override
     public String getUsername() {
-        return authorizeUser.getEmail();
+        return user.getEmail();
     }
 
     @Override
     public String getPassword() {
-        return authorizeUser.getPassword();
+        return user.getPassword();
     }
 
     public String getNickName() {
-        return authorizeUser.getNickName();
+        return user.getNickName();
     }
 
     public String getPhoneNumber() {
-        return authorizeUser.getPhoneNumber().toString();
+        return user.getPhoneNumber().toString();
     }
 
     public String getAddress() {
-        return authorizeUser.getAddress();
+        return user.getAddress();
     }
 
     public String getFirstName() {
-        return authorizeUser.getFirstName();
+        return user.getFirstName();
     }
 
     public String getSecondName() {
-        return authorizeUser.getSecondName();
+        return user.getSecondName();
     }
 
     public String getThirdName() {
-        return authorizeUser.getThirdName();
+        return user.getThirdName();
     }
 
     public String getGender() {
-        return authorizeUser.getGender();
+        return user.getGender();
     }
 
     public String getBirthDate() {
-        return authorizeUser.getBirthDate().toString();
+        return user.getBirthDate().toString();
     }
 
     public String getRegisterDate() {
-        return authorizeUser.getRegisterDate().toString();
+        return user.getRegisterDate().toString();
     }
 
     public String getImgPath() {
-        return authorizeUser.getImgPath();
+        return user.getImgPath();
     }
 
     public String getInfo() {
-        return authorizeUser.getInfo();
+        return user.getInfo();
     }
 
     @Override

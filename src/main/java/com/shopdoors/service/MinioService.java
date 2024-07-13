@@ -37,7 +37,9 @@ public class MinioService {
                     BucketExistsArgs.builder().bucket(bucketName).build());
 
             if (!flag) {
+                log.info("Making bucket {}", bucketName);
                 minioClient.makeBucket(MakeBucketArgs.builder().bucket(bucketName).build());
+                log.info("Bucket {} created", bucketName);
             }
         } catch (InsufficientDataException
                  | ErrorResponseException
@@ -64,10 +66,12 @@ public class MinioService {
     public void putObject(
             String bucketName, String objectName, String contentType, InputStream inputStream, int length) {
         try {
+            log.info("Putting object {} into bucket {}", objectName, bucketName);
             minioClient.putObject(
                     PutObjectArgs.builder().bucket(bucketName).object(objectName).contentType(contentType).stream(
                                     inputStream, length, s3Properties.getPartSize())
                             .build());
+            log.info("Successfully put object {} into bucket {}", objectName, bucketName);
         } catch (InsufficientDataException
                  | ErrorResponseException
                  | InternalException
@@ -84,6 +88,7 @@ public class MinioService {
 
     public String getObjectUrl(String bucketName, String objectName) {
         try {
+            log.info("Getting object url for bucket {} and object {}", bucketName, objectName);
             return minioClient.getPresignedObjectUrl(
                     GetPresignedObjectUrlArgs.builder()
                             .method(Method.GET)

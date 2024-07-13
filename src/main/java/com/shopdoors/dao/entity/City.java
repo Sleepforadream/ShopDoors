@@ -1,12 +1,15 @@
 package com.shopdoors.dao.entity;
 
+import lombok.Getter;
+
+@Getter
 public enum City {
-    Sterlitamak("Стерлитамак"),
-    Salavat("Салават"),
-    Ishimbay("Ишимбай"),
-    Tolbazy("Толбазы"),
-    Meleuz("Мелеуз"),
-    Ufa("Уфа");
+    STERLITAMAK("Стерлитамак"),
+    SALAVAT("Салават"),
+    ISHIMBAY("Ишимбай"),
+    TOLBAZY("Толбазы"),
+    MELEUZ("Мелеуз"),
+    UFA("Уфа");
 
     private final String rusName;
 
