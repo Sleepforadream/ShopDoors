@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-@Setter
 public record AuthorizeUserDetails(User user) implements UserDetails {
 
     @Override

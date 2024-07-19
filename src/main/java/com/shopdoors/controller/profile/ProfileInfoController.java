@@ -35,12 +35,7 @@ public class ProfileInfoController {
         if (currentEmail.equals("anonymousUser")) return "redirect:/home";
 
         model.addAttribute("currentPage", "/private_profile_info");
-        transactionRunner.doInTransaction(() -> {
-            String userImageName = userDetailsService.getImgPathByEmail(currentEmail);
-            User user = userRepository.findByEmail(currentEmail).orElseThrow();
-            model.addAttribute("imgProfileUrl", imageService.getImgUrl(userImageName));
-            model.addAttribute("user", user);
-        });
+        addAttributes(model, currentEmail);
 
         return "private_profile_info";
     }
@@ -77,7 +72,7 @@ public class ProfileInfoController {
         String currentEmail = currentAuth.getName();
 
         if (!errors.values().stream().findFirst().orElse(true)) {
-            addErrorAttributesForModel(model, errors, currentEmail);
+            addAttributesWithError(model, errors, currentEmail);
             return "private_profile_info";
         }
 
@@ -86,16 +81,21 @@ public class ProfileInfoController {
         return "redirect:/private_profile_info";
     }
 
-    private void addErrorAttributesForModel(Model model, Map<String, Boolean> errors, String currentEmail) {
+    private void addAttributesWithError(Model model, Map<String, Boolean> errors, String currentEmail) {
         model.addAttribute("error", errors.keySet()
                 .stream()
                 .findFirst()
                 .orElse("Неизвестная ошибка"));
+
+        addAttributes(model, currentEmail);
+    }
+
+    private void addAttributes(Model model, String currentEmail) {
         transactionRunner.doInTransaction(() -> {
             String userImageName = userDetailsService.getImgPathByEmail(currentEmail);
             User user = userRepository.findByEmail(currentEmail).orElseThrow();
-            model.addAttribute("user", user);
             model.addAttribute("imgProfileUrl", imageService.getImgUrl(userImageName));
+            model.addAttribute("user", user);
         });
     }
 }

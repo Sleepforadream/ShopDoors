@@ -6,6 +6,7 @@ import com.shopdoors.dao.repository.UserRepository;
 import com.shopdoors.dto.AuthorizeUserDetails;
 import com.shopdoors.dto.ProfileDto;
 import com.shopdoors.util.TransactionRunner;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,6 +25,7 @@ import java.time.LocalDate;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Getter
 public class AuthorizeUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;

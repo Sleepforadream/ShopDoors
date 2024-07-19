@@ -40,6 +40,14 @@ dependencies {
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     annotationProcessor("org.projectlombok:lombok")
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.boot:spring-boot-testcontainers")
+    testImplementation("org.springframework.security:spring-security-test")
+    testImplementation("org.testcontainers:postgresql")
+    testImplementation("org.testcontainers:minio:1.19.7")
+    testImplementation("org.springframework.boot:spring-boot-devtools")
+    testImplementation("com.github.tomakehurst:wiremock-standalone:3.0.1")
 }
 
 tasks.withType<Test> {

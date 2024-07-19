@@ -2,16 +2,13 @@ package com.shopdoors.controller.profile;
 
 import com.shopdoors.dao.entity.User;
 import com.shopdoors.dao.repository.UserRepository;
-import com.shopdoors.dto.AuthorizeUserDetails;
 import com.shopdoors.service.AuthorizeUserDetailsService;
 import com.shopdoors.service.ImageService;
 import com.shopdoors.service.ValidateService;
 import com.shopdoors.util.TransactionRunner;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,12 +32,7 @@ public class ProfileSecurityController {
         if (currentEmail.equals("anonymousUser")) return "redirect:/home";
 
         model.addAttribute("currentPage", "/private_profile_security");
-        transactionRunner.doInTransaction(() -> {
-            String userImageName = userDetailsService.getImgPathByEmail(currentEmail);
-            User user = userRepository.findByEmail(currentEmail).orElseThrow();
-            model.addAttribute("imgProfileUrl", imageService.getImgUrl(userImageName));
-            model.addAttribute("user", user);
-        });
+        addAttributes(model, currentEmail);
         return "private_profile_security";
     }
 
@@ -71,26 +63,29 @@ public class ProfileSecurityController {
         }
 
         if (!errors.values().stream().findFirst().orElse(true)) {
-            addErrorAttributesForModel(model, errors, currentEmail);
+            addAttributesWithModel(model, errors, currentEmail);
             return "private_profile_security";
         }
 
         userDetailsService.updateSecurityInfoUser(phone, email, newPassword, currentEmail, currentAuth);
-
         return "redirect:/private_profile_security";
     }
 
-    private void addErrorAttributesForModel(Model model, Map<String, Boolean> errors, String currentEmail) {
+    private void addAttributesWithModel(Model model, Map<String, Boolean> errors, String currentEmail) {
         model.addAttribute("error", errors.keySet()
                 .stream()
                 .findFirst()
                 .orElse("Неизвестная ошибка"));
 
+        addAttributes(model, currentEmail);
+    }
+
+    private void addAttributes(Model model, String currentEmail) {
         transactionRunner.doInTransaction(() -> {
             String userImageName = userDetailsService.getImgPathByEmail(currentEmail);
             User user = userRepository.findByEmail(currentEmail).orElseThrow();
-            model.addAttribute("user", user);
             model.addAttribute("imgProfileUrl", imageService.getImgUrl(userImageName));
+            model.addAttribute("user", user);
         });
     }
 }
