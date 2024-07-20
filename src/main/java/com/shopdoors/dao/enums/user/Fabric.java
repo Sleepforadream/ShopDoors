@@ -1,4 +1,4 @@
-package com.shopdoors.dao.entity;
+package com.shopdoors.dao.enums.user;
 
 public enum Fabric {
     SOFIA("София"),

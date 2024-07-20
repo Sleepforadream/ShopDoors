@@ -1,6 +1,6 @@
 package com.shopdoors.service;
 
-import com.shopdoors.dao.entity.Client;
+import com.shopdoors.dao.entity.user.Client;
 import com.shopdoors.dao.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

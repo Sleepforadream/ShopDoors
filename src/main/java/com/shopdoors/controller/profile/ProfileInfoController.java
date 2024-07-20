@@ -1,6 +1,6 @@
 package com.shopdoors.controller.profile;
 
-import com.shopdoors.dao.entity.User;
+import com.shopdoors.dao.entity.user.User;
 import com.shopdoors.dao.repository.UserRepository;
 import com.shopdoors.dto.ProfileDto;
 import com.shopdoors.service.AuthorizeUserDetailsService;

@@ -1,8 +1,6 @@
 package com.shopdoors.dto;
 
-import com.shopdoors.dao.entity.User;
-import lombok.Builder;
-import lombok.Setter;
+import com.shopdoors.dao.entity.user.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

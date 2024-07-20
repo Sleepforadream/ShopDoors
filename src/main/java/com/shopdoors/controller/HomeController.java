@@ -1,6 +1,6 @@
 package com.shopdoors.controller;
 
-import com.shopdoors.dao.entity.Article;
+import com.shopdoors.dao.entity.user.Article;
 import com.shopdoors.dao.repository.ArticleRepository;
 import com.shopdoors.service.AuthorizeUserDetailsService;
 import com.shopdoors.service.ImageService;

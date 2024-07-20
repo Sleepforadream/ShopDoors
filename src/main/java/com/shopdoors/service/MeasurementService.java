@@ -1,11 +1,11 @@
 package com.shopdoors.service;
 
-import com.shopdoors.dao.entity.City;
-import com.shopdoors.dao.entity.Client;
-import com.shopdoors.dao.entity.Employee;
-import com.shopdoors.dao.entity.Fabric;
-import com.shopdoors.dao.entity.Measurement;
-import com.shopdoors.dao.entity.Position;
+import com.shopdoors.dao.enums.user.City;
+import com.shopdoors.dao.entity.user.Client;
+import com.shopdoors.dao.entity.user.Employee;
+import com.shopdoors.dao.enums.user.Fabric;
+import com.shopdoors.dao.entity.user.Measurement;
+import com.shopdoors.dao.enums.user.Position;
 import com.shopdoors.dao.repository.EmployeeRepository;
 import com.shopdoors.dao.repository.MeasurementRepository;
 import com.shopdoors.dto.MeasurementDto;

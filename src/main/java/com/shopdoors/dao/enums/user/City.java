@@ -1,4 +1,4 @@
-package com.shopdoors.dao.entity;
+package com.shopdoors.dao.enums.user;
 
 import lombok.Getter;
 

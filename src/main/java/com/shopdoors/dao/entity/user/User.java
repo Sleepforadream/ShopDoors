@@ -1,9 +1,7 @@
-package com.shopdoors.dao.entity;
+package com.shopdoors.dao.entity.user;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,8 +22,8 @@ import java.util.Objects;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "employee")
-public class Employee {
+@Table(name = "users")
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,41 +31,40 @@ public class Employee {
 
     @Column(nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate registerDate;
+    private LocalDate registerDate = LocalDate.now();
 
     @Column(length = 100, nullable = false, unique = true)
     private String email;
 
-    @Column(length = 100, nullable = false, unique = true)
-    private String passport;
+    @Column(length = 100, nullable = false)
+    private String password;
 
-    @Column(length = 100, nullable = false, unique = true)
-    private String contractNumber;
+    @Column(length = 1000, nullable = false, unique = true)
+    private String nickName;
 
-    @Column(length = 1000, nullable = false)
+    @Column(length = 1000)
     private String firstName;
 
-    @Column(length = 1000, nullable = false)
+    @Column(length = 1000)
     private String secondName;
 
-    @Column(length = 1000, nullable = false)
+    @Column(length = 1000)
     private String thirdName;
 
-    @Enumerated(value = EnumType.STRING)
-    @Column(length = 100, nullable = false)
-    private Position position;
-
-    @Column(length = 25, nullable = false)
+    @Column(length = 25)
     private String gender;
 
-    @Column(nullable = false)
+    @Column
     private LocalDate birthDate;
 
-    @Column(unique = true, length = 12, nullable = false)
+    @Column(unique = true, length = 12)
     private String phoneNumber;
 
-    @Column(length = 1000, nullable = false)
+    @Column(length = 1000)
     private String address;
+
+    @Column(length = 1000)
+    private String info;
 
     @Column(length = 300)
     private String imgPath;
@@ -81,10 +78,12 @@ public class Employee {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Employee that = (Employee) o;
+        User that = (User) o;
         return id.equals(that.id)
                 && Objects.equals(registerDate, that.registerDate)
                 && email.equals(that.email)
+                && password.equals(that.password)
+                && nickName.equals(that.nickName)
                 && Objects.equals(firstName, that.firstName)
                 && Objects.equals(secondName, that.secondName)
                 && Objects.equals(thirdName, that.thirdName)
@@ -92,6 +91,7 @@ public class Employee {
                 && Objects.equals(birthDate, that.birthDate)
                 && Objects.equals(phoneNumber, that.phoneNumber)
                 && Objects.equals(address, that.address)
+                && Objects.equals(info, that.info)
                 && imgPath.equals(that.imgPath);
     }
 
@@ -100,6 +100,8 @@ public class Employee {
         return Objects.hash(id,
                 registerDate,
                 email,
+                password,
+                nickName,
                 firstName,
                 secondName,
                 thirdName,
@@ -107,6 +109,7 @@ public class Employee {
                 birthDate,
                 phoneNumber,
                 address,
+                info,
                 imgPath);
     }
 }

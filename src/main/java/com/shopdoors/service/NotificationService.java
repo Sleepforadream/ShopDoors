@@ -1,8 +1,8 @@
 package com.shopdoors.service;
 
-import com.shopdoors.dao.entity.Client;
-import com.shopdoors.dao.entity.Employee;
-import com.shopdoors.dao.entity.Measurement;
+import com.shopdoors.dao.entity.user.Client;
+import com.shopdoors.dao.entity.user.Employee;
+import com.shopdoors.dao.entity.user.Measurement;
 import com.shopdoors.dao.repository.MeasurementRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

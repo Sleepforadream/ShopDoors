@@ -1,9 +1,9 @@
 package com.shopdoors.service;
 
 import com.shopdoors.config.AbstractIntegrationTest;
-import com.shopdoors.dao.entity.Employee;
-import com.shopdoors.dao.entity.Measurement;
-import com.shopdoors.dao.entity.Position;
+import com.shopdoors.dao.entity.user.Employee;
+import com.shopdoors.dao.entity.user.Measurement;
+import com.shopdoors.dao.enums.user.Position;
 import com.shopdoors.dao.repository.ClientRepository;
 import com.shopdoors.dao.repository.EmployeeRepository;
 import com.shopdoors.dao.repository.MeasurementRepository;

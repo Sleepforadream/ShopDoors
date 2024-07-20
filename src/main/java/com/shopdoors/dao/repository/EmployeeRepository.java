@@ -1,7 +1,7 @@
 package com.shopdoors.dao.repository;
 
-import com.shopdoors.dao.entity.Employee;
-import com.shopdoors.dao.entity.Position;
+import com.shopdoors.dao.entity.user.Employee;
+import com.shopdoors.dao.enums.user.Position;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

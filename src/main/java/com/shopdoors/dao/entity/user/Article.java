@@ -1,4 +1,4 @@
-package com.shopdoors.dao.entity;
+package com.shopdoors.dao.entity.user;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -1,6 +1,6 @@
 package com.shopdoors.dao.repository;
 
-import com.shopdoors.dao.entity.Measurement;
+import com.shopdoors.dao.entity.user.Measurement;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDate;

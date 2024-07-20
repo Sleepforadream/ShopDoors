@@ -1,7 +1,10 @@
-package com.shopdoors.dao.entity;
+package com.shopdoors.dao.entity.user;
 
+import com.shopdoors.dao.enums.user.Position;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -22,8 +25,8 @@ import java.util.Objects;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "client")
-public class Client {
+@Table(name = "employee")
+public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,20 +39,39 @@ public class Client {
     @Column(length = 100, nullable = false, unique = true)
     private String email;
 
-    @Column(length = 100, unique = true)
+    @Column(length = 100, nullable = false, unique = true)
+    private String passport;
+
+    @Column(length = 100, nullable = false, unique = true)
     private String contractNumber;
 
     @Column(length = 1000, nullable = false)
     private String firstName;
 
-    @Column(length = 1000)
+    @Column(length = 1000, nullable = false)
     private String secondName;
 
-    @Column(length = 1000)
+    @Column(length = 1000, nullable = false)
     private String thirdName;
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(length = 100, nullable = false)
+    private Position position;
+
+    @Column(length = 25, nullable = false)
+    private String gender;
+
+    @Column(nullable = false)
+    private LocalDate birthDate;
 
     @Column(unique = true, length = 12, nullable = false)
     private String phoneNumber;
+
+    @Column(length = 1000, nullable = false)
+    private String address;
+
+    @Column(length = 300)
+    private String imgPath;
 
     @Override
     public String toString() {
@@ -60,26 +82,32 @@ public class Client {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Client that = (Client) o;
+        Employee that = (Employee) o;
         return id.equals(that.id)
                 && Objects.equals(registerDate, that.registerDate)
                 && email.equals(that.email)
                 && Objects.equals(firstName, that.firstName)
                 && Objects.equals(secondName, that.secondName)
                 && Objects.equals(thirdName, that.thirdName)
-                && Objects.equals(phoneNumber, that.phoneNumber);
+                && Objects.equals(gender, that.gender)
+                && Objects.equals(birthDate, that.birthDate)
+                && Objects.equals(phoneNumber, that.phoneNumber)
+                && Objects.equals(address, that.address)
+                && imgPath.equals(that.imgPath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(
-                id,
+        return Objects.hash(id,
                 registerDate,
                 email,
                 firstName,
                 secondName,
                 thirdName,
-                phoneNumber
-        );
+                gender,
+                birthDate,
+                phoneNumber,
+                address,
+                imgPath);
     }
 }

@@ -1,6 +1,6 @@
 package com.shopdoors.controller;
 
-import com.shopdoors.dao.entity.User;
+import com.shopdoors.dao.entity.user.User;
 import com.shopdoors.service.AuthorizeUserDetailsService;
 import com.shopdoors.service.ValidateService;
 import lombok.RequiredArgsConstructor;

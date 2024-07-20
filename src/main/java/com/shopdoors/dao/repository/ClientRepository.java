@@ -1,6 +1,6 @@
 package com.shopdoors.dao.repository;
 
-import com.shopdoors.dao.entity.Client;
+import com.shopdoors.dao.entity.user.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

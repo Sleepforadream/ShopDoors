@@ -1,7 +1,7 @@
 package com.shopdoors.config;
 
 import com.shopdoors.configuration.property.S3Properties;
-import com.shopdoors.dao.entity.User;
+import com.shopdoors.dao.entity.user.User;
 import com.shopdoors.service.AuthorizeUserDetailsService;
 import com.shopdoors.service.MinioService;
 import org.jetbrains.annotations.NotNull;
