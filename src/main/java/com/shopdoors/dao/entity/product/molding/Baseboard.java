@@ -1,7 +1,7 @@
-package com.shopdoors.dao.entity.product;
+package com.shopdoors.dao.entity.product.molding;
 
 import com.shopdoors.dao.entity.abstracted.Moldings;
-import jakarta.persistence.Column;
+import com.shopdoors.dao.entity.product.furniture.Bracing;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -15,9 +15,9 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @SuperBuilder
 @NoArgsConstructor
-@Table(name = "jamb")
-public class Jamb extends Moldings {
+@Table(name = "baseboard")
+public class Baseboard extends Moldings {
 
-    @Column(length = 100, nullable = false)
-    boolean isTelescope;
+    @OneToOne
+    private Bracing bracing;
 }

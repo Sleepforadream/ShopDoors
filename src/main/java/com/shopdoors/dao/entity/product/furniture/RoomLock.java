@@ -1,4 +1,4 @@
-package com.shopdoors.dao.entity.product;
+package com.shopdoors.dao.entity.product.furniture;
 
 import com.shopdoors.dao.entity.abstracted.Lock;
 import com.shopdoors.dao.enums.product.LockType;

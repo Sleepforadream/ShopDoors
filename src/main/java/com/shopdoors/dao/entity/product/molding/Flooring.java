@@ -1,7 +1,6 @@
-package com.shopdoors.dao.entity.product;
+package com.shopdoors.dao.entity.product.molding;
 
-import com.shopdoors.dao.entity.abstracted.Furniture;
-import com.shopdoors.dao.enums.product.Socket;
+import com.shopdoors.dao.entity.abstracted.Moldings;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -17,11 +16,9 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "handle")
-public class Handle extends Furniture {
-    @Column(length = 100, nullable = false)
-    private Socket socket;
+@Table(name = "flooring")
+public class Flooring extends Moldings {
 
     @Column(length = 100, nullable = false)
-    private int rodLength;
+    boolean isWaterResistance;
 }

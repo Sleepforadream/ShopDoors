@@ -1,4 +1,4 @@
-package com.shopdoors.dao.entity.product;
+package com.shopdoors.dao.entity.product.molding;
 
 import com.shopdoors.dao.entity.abstracted.Moldings;
 import jakarta.persistence.Column;

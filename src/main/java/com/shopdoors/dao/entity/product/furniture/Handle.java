@@ -1,4 +1,4 @@
-package com.shopdoors.dao.entity.product;
+package com.shopdoors.dao.entity.product.furniture;
 
 import com.shopdoors.dao.entity.abstracted.Furniture;
 import com.shopdoors.dao.enums.product.Socket;
@@ -15,8 +15,13 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @SuperBuilder
+@AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "bracing")
-public class Bracing extends Furniture {
+@Table(name = "handle")
+public class Handle extends Furniture {
+    @Column(length = 100, nullable = false)
+    private Socket socket;
 
+    @Column(length = 100, nullable = false)
+    private int rodLength;
 }

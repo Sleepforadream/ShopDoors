@@ -1,6 +1,11 @@
-package com.shopdoors.dao.entity.product;
+package com.shopdoors.dao.entity.product.door;
 
 import com.shopdoors.dao.entity.abstracted.Door;
+import com.shopdoors.dao.entity.product.furniture.EntryHinge;
+import com.shopdoors.dao.entity.product.furniture.EntryLock;
+import com.shopdoors.dao.entity.product.furniture.Handle;
+import com.shopdoors.dao.entity.product.furniture.Retainer;
+import com.shopdoors.dao.entity.product.molding.Panel;
 import com.shopdoors.dao.enums.product.Color;
 import com.shopdoors.dao.enums.product.Metal;
 import jakarta.persistence.Column;

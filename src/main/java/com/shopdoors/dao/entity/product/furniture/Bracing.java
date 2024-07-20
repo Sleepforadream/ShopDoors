@@ -1,6 +1,6 @@
-package com.shopdoors.dao.entity.product;
+package com.shopdoors.dao.entity.product.furniture;
 
-import com.shopdoors.dao.entity.abstracted.Hinge;
+import com.shopdoors.dao.entity.abstracted.Furniture;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -13,7 +13,7 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @SuperBuilder
 @NoArgsConstructor
-@Table(name = "entry_hinge")
-public class EntryHinge extends Hinge {
+@Table(name = "bracing")
+public class Bracing extends Furniture {
 
 }
