@@ -9,7 +9,12 @@ public enum Fabric {
     VELL_DORIS("Велл Дорис"),
     LINE_DOOR("Лайн Дор"),
     TOREX("Торекс"),
-    GUARDIAN("Гардиан");
+    GUARDIAN("Гардиан"),
+    MORELLI("Морелли"),
+    PUNTO("Пунто"),
+    ARMADILLO("Армадилло"),
+    FUARO("Фуаро"),
+    ;
 
     private final String rusName;
 

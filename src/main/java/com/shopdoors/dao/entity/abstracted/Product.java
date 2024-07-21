@@ -34,7 +34,7 @@ public abstract class Product {
     @Column(length = 100, nullable = false, unique = true)
     private String name;
 
-    @Column(length = 100)
+    @Column(length = 1000)
     private String description;
 
     @Column(length = 100)

@@ -3,7 +3,7 @@
       layout:decorate="~{base}" lang="ru">
 
 <head>
-    <title layout:fragment="title">Входные двери</title>
+    <title layout:fragment="title">Петли для дверей</title>
 </head>
 
 <th:block layout:fragment="content">
@@ -11,7 +11,7 @@
         <div class="separator-with-shadow" style="padding-top: 0;padding-bottom: 0;margin-top: 0;">
             <div class="separator-with-shadow-box" style="margin-top: 0;"></div>
         </div>
-        <HEADER class="product-data-title">Входные двери</HEADER>
+        <HEADER class="product-data-title">Петли для дверей</HEADER>
         <div class="separator-with-shadow" style="padding-top: 0;padding-bottom: 0;margin-top: 0;">
             <div class="separator-with-shadow-box" style="margin-top: 0;"></div>
         </div>
@@ -19,15 +19,10 @@
             <label for="fabric">Фабрика:</label>
             <select id="fabric" onchange="updateFilters()">
                 <option value="">Все</option>
-                <option value="GUARDIAN" th:selected="${fabric == 'GUARDIAN'}">Гардиан</option>
-                <option value="TOREX" th:selected="${fabric == 'TOREX'}">Торекс</option>
-            </select>
-            <label for="filling">Наполнение:</label>
-            <select id="filling" onchange="updateFilters()">
-                <option value="">Все</option>
-                <option value="FOAM_POLYURETHANE" th:selected="${filling == 'FOAM_POLYURETHANE'}">Вспененный полиуретан</option>
-                <option value="MINERAL_WADDING" th:selected="${filling == 'MINERAL_WADDING'}">Минеральная вата</option>
-                <option value="NONE" th:selected="${filling == 'NONE'}">Нет наполнения</option>
+                <option value="MORELLI" th:selected="${fabric == 'MORELLI'}">Морелли</option>
+                <option value="PUNTO" th:selected="${fabric == 'PUNTO'}">Пунто</option>
+                <option value="ARMADILLO" th:selected="${fabric == 'ARMADILLO'}">Армадилло</option>
+                <option value="FUARO" th:selected="${fabric == 'FUARO'}">Фуаро</option>
             </select>
             <label for="metal">Толщина металла:</label>
             <select id="metal" onchange="updateFilters()">
@@ -45,19 +40,30 @@
                 <option value="THICKNESS_11" th:selected="${metal == 'THICKNESS_11'}">Толщина 11мм</option>
                 <option value="THICKNESS_12" th:selected="${metal == 'THICKNESS_12'}">Толщина 12мм</option>
             </select>
-            <label for="color">Цвет металла:</label>
-            <select id="color" onchange="updateFilters()">
+            <label for="coating">Покрытие:</label>
+            <select id="coating" onchange="updateFilters()">
                 <option value="">Все</option>
-                <option value="BLACK" th:selected="${color == 'BLACK'}">Чёрный</option>
-                <option value="WHITE" th:selected="${color == 'WHITE'}">Белый</option>
-                <option value="BLUE" th:selected="${color == 'BLUE'}">Синий</option>
-                <option value="RED" th:selected="${color == 'RED'}">Красный</option>
-                <option value="GREEN" th:selected="${color == 'GREEN'}">Зелёный</option>
-                <option value="YELLOW" th:selected="${color == 'YELLOW'}">Жёлтый</option>
-                <option value="ORANGE" th:selected="${color == 'ORANGE'}">Оранжевый</option>
-                <option value="PINK" th:selected="${color == 'PINK'}">Розовый</option>
-                <option value="PURPLE" th:selected="${color == 'PURPLE'}">Пурпурный</option>
-                <option value="GRAPHITE" th:selected="${color == 'GRAPHITE'}">Графитовый</option>
+                <option value="CHROME" th:selected="${coating == 'CHROME'}">Хром</option>
+                <option value="MATTE_CHROME" th:selected="${coating == 'MATTE_CHROME'}">Белый</option>
+                <option value="GOLD" th:selected="${coating == 'GOLD'}">Синий</option>
+                <option value="MATTE_GOLD" th:selected="${coating == 'MATTE_GOLD'}">Красный</option>
+                <option value="BRONZE" th:selected="${coating == 'BRONZE'}">Зелёный</option>
+                <option value="BLACK" th:selected="${coating == 'BLACK'}">Жёлтый</option>
+                <option value="WHITE" th:selected="${coating == 'WHITE'}">Оранжевый</option>
+                <option value="GRAPHITE" th:selected="${coating == 'GRAPHITE'}">Розовый</option>
+            </select>
+            <label for="count">Кол-во в комплекте:</label>
+            <select id="count" onchange="updateFilters()">
+                <option value="">Все</option>
+                <option value="1" th:selected="${count == 1}">1 шт</option>
+                <option value="2" th:selected="${count == 2}">2 шт</option>
+                <option value="3" th:selected="${count == 3}">3 шт</option>
+            </select>
+            <label for="isHide">Скрытый тип:</label>
+            <select id="isHide" onchange="updateFilters()">
+                <option value="">Все</option>
+                <option value="true" th:selected="${isHide == true}">Скрытая петля</option>
+                <option value="false" th:selected="${isHide == false}">Видимая петля</option>
             </select>
             <label for="sort">Сортировать по:</label>
             <select id="sort" onchange="updateSort()">
@@ -70,12 +76,12 @@
             </select>
         </div>
         <div class="product-grid">
-            <th:block th:each="entryDoor : ${entryDoors}">
+            <th:block th:each="hinge : ${hinges}">
                 <div class="product-card">
-                    <img th:src="@{${entryDoor.imagePath}}" alt="Product Image" class="product-image">
-                    <h2 th:text="${entryDoor.name}">Product Name</h2>
-                    <p th:text="${entryDoor.price} + ' ₽'">Price</p>
-                    <a th:href="@{/entry-doors/{id}(id=${entryDoor.id})}" class="product-link">Подробнее</a>
+                    <img th:src="@{${hinge.imagePath}}" alt="Product Image" class="product-image">
+                    <h2 th:text="${hinge.name}">Product Name</h2>
+                    <p th:text="${hinge.price} + ' ₽'">Price</p>
+                    <a th:href="@{/hinges/{id}(id=${hinge.id})}" class="product-link">Подробнее</a>
                 </div>
             </th:block>
         </div>
@@ -87,8 +93,9 @@
         function updateFilters() {
             const fabricSelect = document.getElementById("fabric");
             const metalSelect = document.getElementById("metal");
-            const colorSelect = document.getElementById("color");
-            const fillingSelect = document.getElementById("filling");
+            const coatingSelect = document.getElementById("coating");
+            const countSelect = document.getElementById("count");
+            const isHideSelect = document.getElementById("isHide");
             const sortSelect = document.getElementById("sort");
             const selectedSortOption = sortSelect.value;
             const [sortBy, order] = selectedSortOption.split(",");
@@ -96,8 +103,9 @@
             const url = new URL(window.location.href);
             url.searchParams.set("fabric", fabricSelect.value);
             url.searchParams.set("metal", metalSelect.value);
-            url.searchParams.set("color", colorSelect.value);
-            url.searchParams.set("filling", fillingSelect.value);
+            url.searchParams.set("coating", coatingSelect.value);
+            url.searchParams.set("count", countSelect.value);
+            url.searchParams.set("isHide", isHideSelect.value);
             url.searchParams.set("sortBy", sortBy);
             url.searchParams.set("order", order);
             window.location.href = url.toString();

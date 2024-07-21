@@ -3946,6 +3946,33 @@ img {
     margin: 5px 0;
 }
 
+.category-card {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 400px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.category-card:hover {
+    transform: scale(1.05);
+}
+
+.category-card h2 {
+    color: #333333;
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+
+.category-card p {
+    color: #666666;
+    font-size: 1.2em;
+    margin: 5px 0;
+}
+
 .product-link {
     display: inline-block;
     margin: 10px 0;
@@ -3958,6 +3985,21 @@ img {
 }
 
 .product-link:hover {
+    background-color: rgba(66, 126, 209, 0.9);
+}
+
+.category-link {
+    display: inline-block;
+    margin: 10px 0;
+    padding: 10px 20px;
+    background-color: #427ed1;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.category-link:hover {
     background-color: rgba(66, 126, 209, 0.9);
 }
 

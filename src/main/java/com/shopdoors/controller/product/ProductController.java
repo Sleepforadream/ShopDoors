@@ -1,5 +1,6 @@
 package com.shopdoors.controller.product;
 
+import com.shopdoors.dao.entity.abstracted.Hinge;
 import com.shopdoors.dao.entity.product.door.EntryDoor;
 import com.shopdoors.dao.entity.product.door.RoomDoor;
 import com.shopdoors.dao.entity.product.furniture.Handle;
@@ -8,6 +9,7 @@ import com.shopdoors.service.ImageService;
 import com.shopdoors.service.product.BaseboardService;
 import com.shopdoors.service.product.EntryDoorService;
 import com.shopdoors.service.product.HandleService;
+import com.shopdoors.service.product.HingeService;
 import com.shopdoors.service.product.RoomDoorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,7 @@ public class ProductController {
     private final EntryDoorService entryDoorService;
     private final RoomDoorService roomDoorService;
     private final HandleService handleService;
+    private final HingeService hingeService;
     private final BaseboardService baseboardService;
     private final ImageService imageService;
 
@@ -92,10 +95,37 @@ public class ProductController {
         return "room_door_detail";
     }
 
+    @GetMapping("/furniture")
+    public String getFurniture() {
+        return "furniture";
+    }
+
     @GetMapping("/handles")
-    public String getHandles(Model model) {
-        List<Handle> handles = handleService.getAllHandles();
+    public String getHandles(
+            @RequestParam(required = false, defaultValue = "name") String sortBy,
+            @RequestParam(required = false, defaultValue = "asc") String order,
+            @RequestParam(required = false) String fabric,
+            @RequestParam(required = false) String metal,
+            @RequestParam(required = false) String coating,
+            @RequestParam(required = false) String socket,
+            @RequestParam(required = false) Integer rodLength,
+            Model model) {
+
+        List<Handle> handles = handleService.getFilteredHandles(
+                sortBy, order, fabric, metal, coating, socket, rodLength
+        );
+        for (Handle handle : handles) {
+            String productImageName = handleService.getImgPathByName(handle.getName());
+            handle.setImagePath(imageService.getImgUrl(productImageName));
+        }
         model.addAttribute("handles", handles);
+        model.addAttribute("sortBy", sortBy);
+        model.addAttribute("order", order);
+        model.addAttribute("fabric", fabric);
+        model.addAttribute("metal", metal);
+        model.addAttribute("coating", coating);
+        model.addAttribute("socket", socket);
+        model.addAttribute("rodLength", rodLength);
         return "handles";
     }
 
@@ -104,6 +134,40 @@ public class ProductController {
         Handle handle = handleService.getHandleById(id);
         model.addAttribute("handle", handle);
         return "handle_detail";
+    }
+
+    @GetMapping("/hinges")
+    public String getHinges(
+            @RequestParam(required = false, defaultValue = "name") String sortBy,
+            @RequestParam(required = false, defaultValue = "asc") String order,
+            @RequestParam(required = false) String fabric,
+            @RequestParam(required = false) String metal,
+            @RequestParam(required = false) String coating,
+            @RequestParam(required = false) Integer count,
+            @RequestParam(required = false) Boolean isHide,
+            Model model) {
+
+        List<Hinge> hinges = hingeService.getFilteredHinges(sortBy, order, fabric, metal, coating, count, isHide);
+        for (Hinge hinge : hinges) {
+            String productImageName = hingeService.getImgPathByName(hinge.getName());
+            hinge.setImagePath(imageService.getImgUrl(productImageName));
+        }
+        model.addAttribute("hinges", hinges);
+        model.addAttribute("sortBy", sortBy);
+        model.addAttribute("order", order);
+        model.addAttribute("fabric", fabric);
+        model.addAttribute("metal", metal);
+        model.addAttribute("coating", coating);
+        model.addAttribute("count", count);
+        model.addAttribute("isHide", isHide);
+        return "hinges";
+    }
+
+    @GetMapping("/hinges/{id}")
+    public String getHingeById(@PathVariable Long id, Model model) {
+        Hinge hinge = hingeService.getHingeById(id);
+        model.addAttribute("hinge", hinge);
+        return "hinge_detail";
     }
 
     @GetMapping("/moldings")

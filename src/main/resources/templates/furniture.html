@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}" lang="ru">
+
+<head>
+    <title layout:fragment="title">Фурнитура</title>
+</head>
+
+<th:block layout:fragment="content">
+    <div class="product-main">
+        <div class="separator-with-shadow" style="padding-top: 0;padding-bottom: 0;margin-top: 0;">
+            <div class="separator-with-shadow-box" style="margin-top: 0;"></div>
+        </div>
+        <HEADER class="product-data-title">Фурнитура</HEADER>
+        <div class="separator-with-shadow" style="padding-top: 0;padding-bottom: 0;margin-top: 0;">
+            <div class="separator-with-shadow-box" style="margin-top: 0;"></div>
+        </div>
+        <div class="product-grid">
+            <th:block>
+                <div class="category-card">
+                    <img th:src="@{/img/products/handle_main.jpg}" alt="Product Image" class="product-image">
+                    <h2>Ручки</h2>
+                    <a th:href="@{/handles}" class="category-link">Перейти к каталогу</a>
+                </div>
+            </th:block>
+            <th:block>
+                <div class="category-card">
+                    <img th:src="@{/img/products/hinge_main.jpg}" alt="Product Image" class="product-image">
+                    <h2>Петли для межкомнатных дверей</h2>
+                    <a th:href="@{/hinges}" class="category-link">Перейти к каталогу</a>
+                </div>
+            </th:block>
+            <th:block>
+                <div class="category-card">
+                    <img th:src="@{/img/products/room_lock_main.jpg}" alt="Product Image" class="product-image">
+                    <h2>Замки для межкомнатных дверей</h2>
+                    <a th:href="@{/room_locks}" class="category-link">Перейти к каталогу</a>
+                </div>
+            </th:block>
+            <th:block>
+                <div class="category-card">
+                    <img th:src="@{/img/products/retainer_main.jpg}" alt="Product Image" class="product-image">
+                    <h2>Фиксаторы</h2>
+                    <a th:href="@{/retainers}" class="category-link">Перейти к каталогу</a>
+                </div>
+            </th:block>
+            <th:block>
+                <div class="category-card">
+                    <img th:src="@{/img/products/entry_lock_main.jpg}" alt="Product Image" class="product-image">
+                    <h2>Замки для входных дверей</h2>
+                    <a th:href="@{/entry-locks}" class="category-link">Перейти к каталогу</a>
+                </div>
+            </th:block>
+            <th:block>
+                <div class="category-card">
+                    <img th:src="@{/img/products/peephole_main.jpg}" alt="Product Image" class="product-image">
+                    <h2>Глазки для входных дверей</h2>
+                    <a th:href="@{/peepholes}" class="category-link">Перейти к каталогу</a>
+                </div>
+            </th:block>
+            <th:block>
+                <div class="category-card">
+                    <img th:src="@{/img/products/bracing_main.jpg}" alt="Product Image" class="product-image">
+                    <h2>Крепления для установки плинтуса</h2>
+                    <a th:href="@{/bracings}" class="category-link">Перейти к каталогу</a>
+                </div>
+            </th:block>
+        </div>
+        <div class="separator-with-shadow">
+            <div class="separator-with-shadow-box"></div>
+        </div>
+    </div>
+</th:block>
+</html>

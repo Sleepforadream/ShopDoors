@@ -1,11 +1,11 @@
 package com.shopdoors.service.product;
 
-import com.shopdoors.dao.entity.product.furniture.Handle;
+import com.shopdoors.dao.entity.abstracted.Hinge;
+import com.shopdoors.dao.entity.product.furniture.RoomHinge;
 import com.shopdoors.dao.enums.product.Coating;
 import com.shopdoors.dao.enums.product.Metal;
-import com.shopdoors.dao.enums.product.Socket;
 import com.shopdoors.dao.enums.user.Fabric;
-import com.shopdoors.dao.repository.product.HandleRepository;
+import com.shopdoors.dao.repository.product.RoomHingeRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,31 +19,30 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @Slf4j
 @Getter
-public class HandleService {
-    private final HandleRepository handleRepository;
+public class HingeService {
+    private final RoomHingeRepository roomHingeRepository;
 
-    public List<Handle> getFilteredHandles(
-            String sortBy, String order, String fabric, String metal, String coating, String socket, Integer rodLength
+    public List<Hinge> getFilteredHinges(
+            String sortBy, String order, String fabric, String metal, String coating, Integer count, Boolean isHide
     ) {
         Sort sort = Sort.by(Sort.Direction.fromString(order), sortBy);
 
         Fabric fabricEnum = !Objects.equals(fabric, null) && !Objects.equals(fabric, "") ? Fabric.valueOf(fabric) : null;
         Metal metalEnum = !Objects.equals(metal, null) && !Objects.equals(metal, "") ? Metal.valueOf(metal) : null;
         Coating coatingEnum = !Objects.equals(coating, null) && !Objects.equals(coating, "") ? Coating.valueOf(coating) : null;
-        Socket socketEnum = !Objects.equals(socket, null) && !Objects.equals(socket, "") ? Socket.valueOf(socket) : null;
 
-        return handleRepository.findAllWithFilters(fabricEnum, metalEnum, coatingEnum, socketEnum, rodLength, sort);
+        return roomHingeRepository.findAllWithFilters(fabricEnum, metalEnum, coatingEnum, count, isHide, sort);
     }
 
-    public Handle getHandleById(Long id) {
-        return handleRepository.findById(id).orElseThrow();
+    public Hinge getHingeById(Long id) {
+        return roomHingeRepository.findById(id).orElseThrow();
     }
 
     public String getImgPathByName(String name) {
         log.info("Get img path for product - {}", name);
-        return handleRepository
+        return roomHingeRepository
                 .findByName(name)
-                .orElse(new Handle())
+                .orElse(new RoomHinge())
                 .getImagePath();
     }
 }
