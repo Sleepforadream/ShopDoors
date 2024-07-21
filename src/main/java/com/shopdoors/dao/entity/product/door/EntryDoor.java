@@ -10,6 +10,8 @@ import com.shopdoors.dao.enums.product.Color;
 import com.shopdoors.dao.enums.product.Metal;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -49,8 +51,10 @@ public class EntryDoor extends Door {
     private Retainer retainer;
 
     @Column(length = 100, nullable = false)
+    @Enumerated(EnumType.STRING)
     private Color color;
 
     @Column(length = 100, nullable = false)
+    @Enumerated(EnumType.STRING)
     private Metal metal;
 }

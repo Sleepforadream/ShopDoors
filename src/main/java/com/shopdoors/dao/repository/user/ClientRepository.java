@@ -1,4 +1,4 @@
-package com.shopdoors.dao.repository;
+package com.shopdoors.dao.repository.user;
 
 import com.shopdoors.dao.entity.user.Client;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,4 +1,4 @@
-package com.shopdoors.service;
+package com.shopdoors.service.user;
 
 import com.shopdoors.configuration.property.MailProperties;
 import lombok.RequiredArgsConstructor;

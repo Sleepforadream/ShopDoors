@@ -11,6 +11,8 @@ import com.shopdoors.dao.entity.product.molding.Pannier;
 import com.shopdoors.dao.enums.product.Facing;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -29,6 +31,7 @@ import lombok.experimental.SuperBuilder;
 public class RoomDoor extends Door {
 
     @Column(length = 100, nullable = false)
+    @Enumerated(EnumType.STRING)
     private Facing facing;
 
     @OneToOne

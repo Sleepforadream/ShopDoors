@@ -4,6 +4,8 @@ import com.shopdoors.dao.enums.product.Coating;
 import com.shopdoors.dao.enums.product.Metal;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -15,8 +17,10 @@ import lombok.experimental.SuperBuilder;
 public abstract class Furniture extends Product {
 
     @Column(length = 100, nullable = false)
+    @Enumerated(EnumType.STRING)
     private Coating coating;
 
     @Column(length = 100, nullable = false)
+    @Enumerated(EnumType.STRING)
     private Metal metal;
 }

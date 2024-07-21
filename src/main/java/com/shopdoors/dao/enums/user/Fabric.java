@@ -8,6 +8,7 @@ public enum Fabric {
     VDK("Владимирская Дверная Компания"),
     VELL_DORIS("Велл Дорис"),
     LINE_DOOR("Лайн Дор"),
+    TOREX("Торекс"),
     GUARDIAN("Гардиан");
 
     private final String rusName;

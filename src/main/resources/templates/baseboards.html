@@ -1,0 +1,21 @@
+<!-- moldings.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Moldings</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<h1>Moldings</h1>
+<div class="product-list">
+    <ul>
+        <th:block th:each="baseboard : ${baseboards}">
+            <li>
+                <a th:href="@{/moldings/{id}(id=${baseboard.id})}" th:text="${baseboard.name}">Product Name</a>
+            </li>
+        </th:block>
+    </ul>
+</div>
+</body>
+</html>

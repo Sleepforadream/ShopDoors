@@ -1,10 +1,11 @@
-package com.shopdoors.service;
+package com.shopdoors.service.user;
 
 import com.shopdoors.configuration.property.S3Properties;
 import com.shopdoors.dao.entity.user.User;
-import com.shopdoors.dao.repository.UserRepository;
+import com.shopdoors.dao.repository.user.UserRepository;
 import com.shopdoors.dto.AuthorizeUserDetails;
 import com.shopdoors.dto.ProfileDto;
+import com.shopdoors.service.ImageService;
 import com.shopdoors.util.TransactionRunner;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -58,7 +59,7 @@ public class AuthorizeUserDetailsService implements UserDetailsService {
                 .email(email)
                 .password(passwordEncoder.encode(password))
                 .nickName(name)
-                .imgPath(s3Properties.getDefaultImgPath())
+                .imgPath(s3Properties.getDefaultProfileImgPath())
                 .build();
 
         return saveUser(newUser);
@@ -91,7 +92,7 @@ public class AuthorizeUserDetailsService implements UserDetailsService {
             if (!user.equals(((AuthorizeUserDetails) currentAuth.getPrincipal()).user())) {
                 try {
                     if (!file.isEmpty()) {
-                        imageService.saveImg(file.getOriginalFilename(), file.getInputStream());
+                        imageService.saveUserImg(file.getOriginalFilename(), file.getInputStream());
                     } else {
                         user.setImgPath(profileDto.getImgProfileName());
                     }

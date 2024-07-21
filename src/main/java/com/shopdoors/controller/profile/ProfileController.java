@@ -1,6 +1,6 @@
 package com.shopdoors.controller.profile;
 
-import com.shopdoors.service.AuthorizeUserDetailsService;
+import com.shopdoors.service.user.AuthorizeUserDetailsService;
 import com.shopdoors.service.ImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;

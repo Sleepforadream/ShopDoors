@@ -1,8 +1,8 @@
 package com.shopdoors.controller;
 
 import com.shopdoors.dao.entity.user.Article;
-import com.shopdoors.dao.repository.ArticleRepository;
-import com.shopdoors.service.AuthorizeUserDetailsService;
+import com.shopdoors.dao.repository.user.ArticleRepository;
+import com.shopdoors.service.user.AuthorizeUserDetailsService;
 import com.shopdoors.service.ImageService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;

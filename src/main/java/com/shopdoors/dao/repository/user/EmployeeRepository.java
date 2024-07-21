@@ -1,4 +1,4 @@
-package com.shopdoors.dao.repository;
+package com.shopdoors.dao.repository.user;
 
 import com.shopdoors.dao.entity.user.Employee;
 import com.shopdoors.dao.enums.user.Position;

@@ -1,0 +1,21 @@
+<!-- handles.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Handles</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<h1>Handles</h1>
+<div class="product-list">
+    <ul>
+        <th:block th:each="handle : ${handles}">
+            <li>
+                <a th:href="@{/handles/{id}(id=${handle.id})}" th:text="${handle.name}">Product Name</a>
+            </li>
+        </th:block>
+    </ul>
+</div>
+</body>
+</html>

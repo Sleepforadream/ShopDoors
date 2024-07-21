@@ -113,4 +113,12 @@ public class MinioService {
     public String getImgBucket() {
         return s3Properties.getImgBucket();
     }
+
+    public String getImgProfilePath() {
+        return s3Properties.getImgProfilePath();
+    }
+
+    public String getImgProductPath() {
+        return s3Properties.getImgProductPath();
+    }
 }

@@ -2,7 +2,8 @@ package com.shopdoors.service;
 
 import com.shopdoors.config.AbstractIntegrationTest;
 import com.shopdoors.config.TestUtil;
-import com.shopdoors.dao.repository.UserRepository;
+import com.shopdoors.dao.repository.user.UserRepository;
+import com.shopdoors.service.user.AuthorizeUserDetailsService;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;

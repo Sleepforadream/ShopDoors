@@ -4,6 +4,7 @@ import com.shopdoors.dao.entity.user.Client;
 import com.shopdoors.dao.entity.user.Employee;
 import com.shopdoors.dao.entity.user.Measurement;
 import com.shopdoors.dao.repository.MeasurementRepository;
+import com.shopdoors.service.user.EmailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

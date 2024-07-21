@@ -1,7 +1,7 @@
 package com.shopdoors.controller;
 
 import com.shopdoors.dao.entity.user.User;
-import com.shopdoors.service.AuthorizeUserDetailsService;
+import com.shopdoors.service.user.AuthorizeUserDetailsService;
 import com.shopdoors.service.ValidateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -14,15 +14,18 @@ public class ImageService {
 
     private final MinioService minioService;
 
-    public void saveImg(String objectName, InputStream inputStream) {
+    public void saveUserImg(String objectName, InputStream inputStream) {
         log.info("Saving image to {}", objectName);
         minioService.makeBucketIfNotExists(minioService.getImgBucket());
-        minioService.putObject(minioService.getImgBucket(), objectName, inputStream);
+        minioService.putObject(
+                minioService.getImgBucket(),
+                minioService.getImgProfilePath() + objectName,
+                inputStream);
         log.info("Image saved to {}", objectName);
     }
 
     public String getImgUrl(String objectName) {
-        log.info("Retrieving image from {}", objectName);
+        log.info("Retrieving user image from {}", objectName);
         Objects.requireNonNull(objectName);
         return minioService.getObjectUrl(minioService.getImgBucket(), objectName);
     }

@@ -1,8 +1,8 @@
 package com.shopdoors.controller.profile;
 
 import com.shopdoors.dao.entity.user.User;
-import com.shopdoors.dao.repository.UserRepository;
-import com.shopdoors.service.AuthorizeUserDetailsService;
+import com.shopdoors.dao.repository.user.UserRepository;
+import com.shopdoors.service.user.AuthorizeUserDetailsService;
 import com.shopdoors.service.ImageService;
 import com.shopdoors.service.ValidateService;
 import com.shopdoors.util.TransactionRunner;

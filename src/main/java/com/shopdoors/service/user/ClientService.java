@@ -1,7 +1,7 @@
-package com.shopdoors.service;
+package com.shopdoors.service.user;
 
 import com.shopdoors.dao.entity.user.Client;
-import com.shopdoors.dao.repository.ClientRepository;
+import com.shopdoors.dao.repository.user.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
