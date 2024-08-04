@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}" lang="ru">
+
+<head>
+    <title layout:fragment="title">Погонажные изделия</title>
+</head>
+
+<th:block layout:fragment="content">
+    <div class="product-main">
+        <div class="separator-with-shadow" style="padding-top: 0;padding-bottom: 0;margin-top: 0;">
+            <div class="separator-with-shadow-box" style="margin-top: 0;"></div>
+        </div>
+        <HEADER class="product-data-title">Погонажные изделия</HEADER>
+        <div class="separator-with-shadow" style="padding-top: 0;padding-bottom: 0;margin-top: 0;">
+            <div class="separator-with-shadow-box" style="margin-top: 0;"></div>
+        </div>
+        <div class="product-grid">
+            <th:block>
+                <div class="category-card">
+                    <img th:src="@{/img/products/baseboard_main.jpg}" alt="Product Image" class="product-image">
+                    <h2>Плинтуса</h2>
+                    <a th:href="@{moldings/baseboards}" class="category-link">Перейти к каталогу</a>
+                </div>
+            </th:block>
+            <th:block>
+                <div class="category-card">
+                    <img th:src="@{/img/products/pannier_main.jpg}" alt="Product Image" class="product-image">
+                    <h2>Короба для дверей</h2>
+                    <a th:href="@{moldings/panniers}" class="category-link">Перейти к каталогу</a>
+                </div>
+            </th:block>
+            <th:block>
+                <div class="category-card">
+                    <img th:src="@{/img/products/jamb_main.webp}" alt="Product Image" class="product-image">
+                    <h2>Наличники</h2>
+                    <a th:href="@{moldings/jambs}" class="category-link">Перейти к каталогу</a>
+                </div>
+            </th:block>
+            <th:block>
+                <div class="category-card">
+                    <img th:src="@{/img/products/panel_main.webp}" alt="Product Image" class="product-image">
+                    <h2>Панели</h2>
+                    <a th:href="@{moldings/panels}" class="category-link">Перейти к каталогу</a>
+                </div>
+            </th:block>
+            <th:block>
+                <div class="category-card">
+                    <img th:src="@{/img/products/floor_covering_main.jpg}" alt="Product Image" class="product-image">
+                    <h2>Напольные покрытия</h2>
+                    <a th:href="@{moldings/floor-coverings}" class="category-link">Перейти к каталогу</a>
+                </div>
+            </th:block>
+            <th:block>
+                <div class="category-card">
+                    <img th:src="@{/img/products/additional_element_main.jpg}" alt="Product Image" class="product-image">
+                    <h2>Доборные элементы</h2>
+                    <a th:href="@{moldings/additional-elements}" class="category-link">Перейти к каталогу</a>
+                </div>
+            </th:block>
+        </div>
+        <div class="separator-with-shadow">
+            <div class="separator-with-shadow-box"></div>
+        </div>
+    </div>
+</th:block>
+</html>

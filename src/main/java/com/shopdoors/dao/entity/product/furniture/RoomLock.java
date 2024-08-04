@@ -2,6 +2,7 @@ package com.shopdoors.dao.entity.product.furniture;
 
 import com.shopdoors.dao.entity.abstracted.Lock;
 import com.shopdoors.dao.enums.product.LockType;
+import com.shopdoors.dao.enums.product.TongueType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -23,7 +24,8 @@ import lombok.experimental.SuperBuilder;
 public class RoomLock extends Lock {
 
     @Column(length = 100, nullable = false)
-    private boolean isMagnetic;
+    @Enumerated(EnumType.STRING)
+    private TongueType tongueType;
 
     @Column(length = 100, nullable = false)
     @Enumerated(EnumType.STRING)

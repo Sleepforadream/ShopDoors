@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}" lang="ru">
+
+<head>
+    <title layout:fragment="title" th:text="${entryLock.name}">Детали продукта</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<th:block layout:fragment="content">
+    <div class="product-detail-container">
+        <div class="product-detail">
+            <img th:src="@{${entryLock.imagePath}}" alt="Product Image" class="product-detail-image">
+            <div class="product-info">
+                <h1 th:text="${entryLock.name}">Название продукта</h1>
+
+                <b th:text="'Описание:'"></b>
+                <p th:text="${entryLock.description}"></p>
+                <hr>
+                <br>
+                <b th:text="'Фабрика: '"></b>
+                <q th:text="${entryLock.fabric.getRusName()}"></q>
+
+                <br>
+                <b th:text="'Наполнение: '"></b>
+                <comment th:text="${entryLock.filling.getRusName()}"></comment>
+
+                <br>
+                <b th:text="'Покрытие: '"></b>
+                <comment th:text="${entryLock.coating.getRusName()}"></comment>
+
+                <br>
+                <b th:text="'Толщина метала: '"></b>
+                <comment th:text="${entryLock.metal.getRusName()}"></comment>
+
+                <br>
+                <b th:text="'Класс защиты: '"></b>
+                <comment th:text="${entryLock.defenseClass.getRusName()}"></comment>
+
+                <br>
+                <b th:text="'Тип первого замка: '"></b>
+                <comment th:text="${entryLock.firstKeyType.getRusName()}"></comment>
+
+                <br>
+                <b th:text="'Тип второго замка: '"></b>
+                <comment th:text="${entryLock.secondKeyType.getRusName()}"></comment>
+
+                <br>
+                <b th:text="'Ширина: '"></b>
+                <comment th:text="${entryLock.getWidth()}"></comment>
+
+                <br>
+                <b th:text="'Высота: '"></b>
+                <comment th:text="${entryLock.getHeight()}"></comment>
+
+                <br>
+                <b th:text="'Толщина: '"></b>
+                <comment th:text="${entryLock.getDepth()}"></comment>
+
+                <br>
+                <b th:text="'Сторонность: '"></b>
+                <comment th:text="${entryLock.getSide().getRusName()}"></comment>
+
+                <p class="price" th:text="${entryLock.price} + ' ₽'">Цена</p>
+                <br>
+                <div class="action-buttons">
+                    <a href="#" class="buy-button">Добавить в корзину</a>
+                    <a href="#" class="favorite-button"><i class="fas fa-heart"></i></a>
+                </div>
+
+                <a th:href="@{/furniture/entry-locks}" class="back-link">← Вернуться к списку</a>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+</html>

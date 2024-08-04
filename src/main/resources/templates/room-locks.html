@@ -3,7 +3,7 @@
       layout:decorate="~{base}" lang="ru">
 
 <head>
-    <title layout:fragment="title">Петли для дверей</title>
+    <title layout:fragment="title">Замки для межкомнатных дверей</title>
 </head>
 
 <th:block layout:fragment="content">
@@ -11,7 +11,7 @@
         <div class="separator-with-shadow" style="padding-top: 0;padding-bottom: 0;margin-top: 0;">
             <div class="separator-with-shadow-box" style="margin-top: 0;"></div>
         </div>
-        <HEADER class="product-data-title">Петли для дверей</HEADER>
+        <HEADER class="product-data-title">Замки для межкомнатных дверей</HEADER>
         <div class="separator-with-shadow" style="padding-top: 0;padding-bottom: 0;margin-top: 0;">
             <div class="separator-with-shadow-box" style="margin-top: 0;"></div>
         </div>
@@ -44,26 +44,25 @@
             <select id="coating" onchange="updateFilters()">
                 <option value="">Все</option>
                 <option value="CHROME" th:selected="${coating == 'CHROME'}">Хром</option>
-                <option value="MATTE_CHROME" th:selected="${coating == 'MATTE_CHROME'}">Белый</option>
-                <option value="GOLD" th:selected="${coating == 'GOLD'}">Синий</option>
-                <option value="MATTE_GOLD" th:selected="${coating == 'MATTE_GOLD'}">Красный</option>
-                <option value="BRONZE" th:selected="${coating == 'BRONZE'}">Зелёный</option>
-                <option value="BLACK" th:selected="${coating == 'BLACK'}">Жёлтый</option>
-                <option value="WHITE" th:selected="${coating == 'WHITE'}">Оранжевый</option>
-                <option value="GRAPHITE" th:selected="${coating == 'GRAPHITE'}">Розовый</option>
+                <option value="MATTE_CHROME" th:selected="${coating == 'MATTE_CHROME'}">Матовый хром</option>
+                <option value="GOLD" th:selected="${coating == 'GOLD'}">Золото</option>
+                <option value="MATTE_GOLD" th:selected="${coating == 'MATTE_GOLD'}">Матовое золото</option>
+                <option value="BRONZE" th:selected="${coating == 'BRONZE'}">Бронза</option>
+                <option value="BLACK" th:selected="${coating == 'BLACK'}">Чёрный</option>
+                <option value="WHITE" th:selected="${coating == 'WHITE'}">Белый</option>
+                <option value="GRAPHITE" th:selected="${coating == 'GRAPHITE'}">Графит</option>
             </select>
-            <label for="count">Кол-во в комплекте:</label>
-            <select id="count" onchange="updateFilters()">
+            <label for="tongueType">Тип язычка:</label>
+            <select id="tongueType" onchange="updateFilters()">
                 <option value="">Все</option>
-                <option value="1" th:selected="${count == 1}">1 шт</option>
-                <option value="2" th:selected="${count == 2}">2 шт</option>
-                <option value="3" th:selected="${count == 3}">3 шт</option>
+                <option value="MECHANICAL" th:selected="${tongueType == 'MECHANICAL'}">Механический</option>
+                <option value="MAGNETIC" th:selected="${tongueType == 'MAGNETIC'}">Магнитный</option>
             </select>
-            <label for="isHide">Скрытый тип:</label>
-            <select id="isHide" onchange="updateFilters()">
+            <label for="lockType">Тип замка:</label>
+            <select id="lockType" onchange="updateFilters()">
                 <option value="">Все</option>
-                <option value="true" th:selected="${isHide == true}">Скрытая петля</option>
-                <option value="false" th:selected="${isHide == false}">Видимая петля</option>
+                <option value="RETAINER" th:selected="${lockType == 'RETAINER'}">Для фиксатора</option>
+                <option value="KEY" th:selected="${lockType == 'KEY'}">Для ключа</option>
             </select>
             <label for="sort">Сортировать по:</label>
             <select id="sort" onchange="updateSort()">
@@ -76,12 +75,12 @@
             </select>
         </div>
         <div class="product-grid">
-            <th:block th:each="hinge : ${hinges}">
+            <th:block th:each="roomLock : ${roomLocks}">
                 <div class="product-card">
-                    <img th:src="@{${hinge.imagePath}}" alt="Product Image" class="product-image">
-                    <h2 th:text="${hinge.name}">Product Name</h2>
-                    <p th:text="${hinge.price} + ' ₽'">Price</p>
-                    <a th:href="@{/hinges/{id}(id=${hinge.id})}" class="product-link">Подробнее</a>
+                    <img th:src="@{${roomLock.imagePath}}" alt="Product Image" class="product-image">
+                    <h2 th:text="${roomLock.name}">Product Name</h2>
+                    <p th:text="${roomLock.price} + ' ₽'">Price</p>
+                    <a th:href="@{room-locks/{id}(id=${roomLock.id})}" class="product-link">Подробнее</a>
                 </div>
             </th:block>
         </div>
@@ -94,8 +93,8 @@
             const fabricSelect = document.getElementById("fabric");
             const metalSelect = document.getElementById("metal");
             const coatingSelect = document.getElementById("coating");
-            const countSelect = document.getElementById("count");
-            const isHideSelect = document.getElementById("isHide");
+            const tongueTypeSelect = document.getElementById("tongueType");
+            const lockTypeSelect = document.getElementById("lockType");
             const sortSelect = document.getElementById("sort");
             const selectedSortOption = sortSelect.value;
             const [sortBy, order] = selectedSortOption.split(",");
@@ -104,8 +103,8 @@
             url.searchParams.set("fabric", fabricSelect.value);
             url.searchParams.set("metal", metalSelect.value);
             url.searchParams.set("coating", coatingSelect.value);
-            url.searchParams.set("count", countSelect.value);
-            url.searchParams.set("isHide", isHideSelect.value);
+            url.searchParams.set("tongueType", tongueTypeSelect.value);
+            url.searchParams.set("lockType", lockTypeSelect.value);
             url.searchParams.set("sortBy", sortBy);
             url.searchParams.set("order", order);
             window.location.href = url.toString();

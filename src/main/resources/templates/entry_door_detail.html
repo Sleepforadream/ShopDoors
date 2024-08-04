@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}" lang="ru">
+
+<head>
+    <title layout:fragment="title" th:text="${entryDoor.name}">Детали продукта</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<th:block layout:fragment="content">
+    <div class="product-detail-container">
+        <div class="product-detail">
+            <img th:src="@{${entryDoor.imagePath}}" alt="Product Image" class="product-detail-image">
+            <div class="product-info">
+                <h1 th:text="${entryDoor.name}">Название продукта</h1>
+
+                <b th:text="'Описание:'"></b>
+                <p th:text="${entryDoor.description}"></p>
+                <hr>
+                <br>
+                <b th:text="'Фабрика: '"></b>
+                <q th:text="${entryDoor.fabric.getRusName()}"></q>
+
+                <br>
+                <b th:text="'Наполнение: '"></b>
+                <comment th:text="${entryDoor.filling.getRusName()}"></comment>
+
+                <br>
+                <b th:text="'Цвет: '"></b>
+                <comment th:text="${entryDoor.color.getRusName()}"></comment>
+
+                <br>
+                <b th:text="'Толщина металла: '"></b>
+                <comment th:text="${entryDoor.metal.getRusName()}"></comment>
+
+                <br>
+                <b th:text="'Ширина: '"></b>
+                <comment th:text="${entryDoor.getWidth()}"></comment>
+
+                <br>
+                <b th:text="'Высота: '"></b>
+                <comment th:text="${entryDoor.getHeight()}"></comment>
+
+                <br>
+                <b th:text="'Толщина: '"></b>
+                <comment th:text="${entryDoor.getDepth()}"></comment>
+
+                <br>
+                <b th:text="'Сторонность: '"></b>
+                <comment th:text="${entryDoor.getSide().getRusName()}"></comment>
+
+                <p class="price" th:text="${entryDoor.price} + ' ₽'">Цена</p>
+                <br>
+                <div class="action-buttons">
+                    <a href="#" class="buy-button">Добавить в корзину</a>
+                    <a href="#" class="favorite-button"><i class="fas fa-heart"></i></a>
+                </div>
+
+                <a th:href="@{/entry-doors}" class="back-link">← Вернуться к списку</a>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+</html>

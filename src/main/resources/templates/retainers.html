@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}" lang="ru">
+
+<head>
+    <title layout:fragment="title">Фиксаторы для дверей</title>
+</head>
+
+<th:block layout:fragment="content">
+    <div class="product-main">
+        <div class="separator-with-shadow" style="padding-top: 0;padding-bottom: 0;margin-top: 0;">
+            <div class="separator-with-shadow-box" style="margin-top: 0;"></div>
+        </div>
+        <HEADER class="product-data-title">Фиксаторы для дверей</HEADER>
+        <div class="separator-with-shadow" style="padding-top: 0;padding-bottom: 0;margin-top: 0;">
+            <div class="separator-with-shadow-box" style="margin-top: 0;"></div>
+        </div>
+        <div class="filter-controls">
+            <label for="fabric">Фабрика:</label>
+            <select id="fabric" onchange="updateFilters()">
+                <option value="">Все</option>
+                <option value="MORELLI" th:selected="${fabric == 'MORELLI'}">Морелли</option>
+                <option value="PUNTO" th:selected="${fabric == 'PUNTO'}">Пунто</option>
+                <option value="ARMADILLO" th:selected="${fabric == 'ARMADILLO'}">Армадилло</option>
+                <option value="FUARO" th:selected="${fabric == 'FUARO'}">Фуаро</option>
+            </select>
+            <label for="metal">Толщина металла:</label>
+            <select id="metal" onchange="updateFilters()">
+                <option value="">Все</option>
+                <option value="THICKNESS_01" th:selected="${metal == 'THICKNESS_01'}">Толщина 1мм</option>
+                <option value="THICKNESS_02" th:selected="${metal == 'THICKNESS_02'}">Толщина 2мм</option>
+                <option value="THICKNESS_03" th:selected="${metal == 'THICKNESS_03'}">Толщина 3мм</option>
+                <option value="THICKNESS_04" th:selected="${metal == 'THICKNESS_04'}">Толщина 4мм</option>
+                <option value="THICKNESS_05" th:selected="${metal == 'THICKNESS_05'}">Толщина 5мм</option>
+                <option value="THICKNESS_06" th:selected="${metal == 'THICKNESS_06'}">Толщина 6мм</option>
+                <option value="THICKNESS_07" th:selected="${metal == 'THICKNESS_07'}">Толщина 7мм</option>
+                <option value="THICKNESS_08" th:selected="${metal == 'THICKNESS_08'}">Толщина 8мм</option>
+                <option value="THICKNESS_09" th:selected="${metal == 'THICKNESS_09'}">Толщина 9мм</option>
+                <option value="THICKNESS_10" th:selected="${metal == 'THICKNESS_10'}">Толщина 10мм</option>
+                <option value="THICKNESS_11" th:selected="${metal == 'THICKNESS_11'}">Толщина 11мм</option>
+                <option value="THICKNESS_12" th:selected="${metal == 'THICKNESS_12'}">Толщина 12мм</option>
+            </select>
+            <label for="coating">Покрытие:</label>
+            <select id="coating" onchange="updateFilters()">
+                <option value="">Все</option>
+                <option value="CHROME" th:selected="${coating == 'CHROME'}">Хром</option>
+                <option value="MATTE_CHROME" th:selected="${coating == 'MATTE_CHROME'}">Матовый хром</option>
+                <option value="GOLD" th:selected="${coating == 'GOLD'}">Золото</option>
+                <option value="MATTE_GOLD" th:selected="${coating == 'MATTE_GOLD'}">Матовое золото</option>
+                <option value="BRONZE" th:selected="${coating == 'BRONZE'}">Бронза</option>
+                <option value="BLACK" th:selected="${coating == 'BLACK'}">Чёрный</option>
+                <option value="WHITE" th:selected="${coating == 'WHITE'}">Белый</option>
+                <option value="GRAPHITE" th:selected="${coating == 'GRAPHITE'}">Графит</option>
+            </select>
+            <label for="socket">Розетка:</label>
+            <select id="socket" onchange="updateFilters()">
+                <option value="">Все</option>
+                <option value="SQUARE_THICK" th:selected="${socket == 'SQUARE_THICK'}">Квадратная толстая</option>
+                <option value="SQUARE_THIN" th:selected="${socket == 'SQUARE_THIN'}">Квадратная тонкая</option>
+                <option value="ROUND_THICK" th:selected="${socket == 'ROUND_THICK'}">Круглая толстая</option>
+                <option value="ROUND_THIN" th:selected="${socket == 'ROUND_THIN'}">Круглая тонкая</option>
+                <option value="WITHOUT_SOCKET" th:selected="${socket == 'WITHOUT_SOCKET'}">Без розетки</option>
+            </select>
+            <label for="keyRetainer">Тип:</label>
+            <select id="keyRetainer" onchange="updateFilters()">
+                <option value="">Все</option>
+                <option value="KEY_KEY" th:selected="${keyRetainer == 'KEY_KEY'}">Ключ-ключ</option>
+                <option value="KEY_RETAINER" th:selected="${keyRetainer == 'KEY_RETAINER'}">Ключ-фиксатор</option>
+                <option value="RETAINER" th:selected="${keyRetainer == 'RETAINER'}">Фиксатор</option>
+            </select>
+            <label for="sort">Сортировать по:</label>
+            <select id="sort" onchange="updateSort()">
+                <option value="name,asc" th:selected="${sortBy == 'name' and order == 'asc'}">Имя (А-Я)</option>
+                <option value="name,desc" th:selected="${sortBy == 'name' and order == 'desc'}">Имя (Я-А)</option>
+                <option value="price,asc" th:selected="${sortBy == 'price' and order == 'asc'}">Цена (возрастание)</option>
+                <option value="price,desc" th:selected="${sortBy == 'price' and order == 'desc'}">Цена (убывание)</option>
+                <option value="fabric,asc" th:selected="${sortBy == 'fabric' and order == 'asc'}">Фабрика (А-Я)</option>
+                <option value="fabric,desc" th:selected="${sortBy == 'fabric' and order == 'desc'}">Фабрика (Я-А)</option>
+            </select>
+        </div>
+        <div class="product-grid">
+            <th:block th:each="retainer : ${retainers}">
+                <div class="product-card">
+                    <img th:src="@{${retainer.imagePath}}" alt="Product Image" class="product-image">
+                    <h2 th:text="${retainer.name}">Product Name</h2>
+                    <p th:text="${retainer.price} + ' ₽'">Price</p>
+                    <a th:href="@{retainers/{id}(id=${retainer.id})}" class="product-link">Подробнее</a>
+                </div>
+            </th:block>
+        </div>
+        <div class="separator-with-shadow">
+            <div class="separator-with-shadow-box"></div>
+        </div>
+    </div>
+    <script>
+        function updateFilters() {
+            const fabricSelect = document.getElementById("fabric");
+            const metalSelect = document.getElementById("metal");
+            const coatingSelect = document.getElementById("coating");
+            const socketSelect = document.getElementById("socket");
+            const keyRetainerSelect = document.getElementById("keyRetainer");
+            const sortSelect = document.getElementById("sort");
+            const selectedSortOption = sortSelect.value;
+            const [sortBy, order] = selectedSortOption.split(",");
+
+            const url = new URL(window.location.href);
+            url.searchParams.set("fabric", fabricSelect.value);
+            url.searchParams.set("metal", metalSelect.value);
+            url.searchParams.set("coating", coatingSelect.value);
+            url.searchParams.set("socket", socketSelect.value);
+            url.searchParams.set("keyRetainer", keyRetainerSelect.value);
+            url.searchParams.set("sortBy", sortBy);
+            url.searchParams.set("order", order);
+            window.location.href = url.toString();
+        }
+
+        function updateSort() {
+            updateFilters();
+        }
+    </script>
+</th:block>
+</html>

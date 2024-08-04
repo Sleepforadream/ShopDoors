@@ -1,7 +1,7 @@
 package com.shopdoors.dao.entity.product.molding;
 
 import com.shopdoors.dao.entity.abstracted.Moldings;
-import com.shopdoors.dao.entity.product.furniture.Bracing;
+import com.shopdoors.dao.entity.product.furniture.Fastening;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -19,5 +19,5 @@ import lombok.experimental.SuperBuilder;
 public class Baseboard extends Moldings {
 
     @OneToOne
-    private Bracing bracing;
+    private Fastening fastening;
 }

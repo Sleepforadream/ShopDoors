@@ -1,8 +1,11 @@
 package com.shopdoors.dao.entity.product.molding;
 
 import com.shopdoors.dao.entity.abstracted.Moldings;
+import com.shopdoors.dao.enums.product.WaterResistanceType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,9 +19,10 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "flooring")
-public class Flooring extends Moldings {
+@Table(name = "floor_covering")
+public class FloorCovering extends Moldings {
 
     @Column(length = 100, nullable = false)
-    boolean isWaterResistance;
+    @Enumerated(EnumType.STRING)
+    WaterResistanceType waterResistanceType;
 }

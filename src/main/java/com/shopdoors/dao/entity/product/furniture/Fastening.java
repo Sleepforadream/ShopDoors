@@ -13,7 +13,7 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @SuperBuilder
 @NoArgsConstructor
-@Table(name = "bracing")
-public class Bracing extends Furniture {
+@Table(name = "fastening")
+public class Fastening extends Furniture {
 
 }

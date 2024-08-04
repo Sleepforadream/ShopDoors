@@ -1,7 +1,10 @@
 package com.shopdoors.dao.enums.user;
 
+import lombok.Getter;
+
+@Getter
 public enum Fabric {
-    SOFIA("София"),
+    SOFIA("Sofia"),
     KD("Краснодеревщик"),
     MEZZO_PORTE("Меццо Порте"),
     SYNERGY("Синержи"),

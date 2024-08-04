@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}" lang="ru">
+
+<head>
+    <title layout:fragment="title" th:text="${peephole.name}">Детали продукта</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<th:block layout:fragment="content">
+    <div class="product-detail-container">
+        <div class="product-detail">
+            <img th:src="@{${peephole.imagePath}}" alt="Product Image" class="product-detail-image">
+            <div class="product-info">
+                <h1 th:text="${peephole.name}">Название продукта</h1>
+
+                <b th:text="'Описание:'"></b>
+                <p th:text="${peephole.description}"></p>
+                <hr>
+                <br>
+                <b th:text="'Фабрика: '"></b>
+                <q th:text="${peephole.fabric.getRusName()}"></q>
+
+                <br>
+                <b th:text="'Наполнение: '"></b>
+                <comment th:text="${peephole.filling.getRusName()}"></comment>
+
+                <br>
+                <b th:text="'Покрытие: '"></b>
+                <comment th:text="${peephole.coating.getRusName()}"></comment>
+
+                <br>
+                <b th:text="'Толщина метала: '"></b>
+                <comment th:text="${peephole.metal.getRusName()}"></comment>
+
+                <br>
+                <b th:text="'Максимальная глубина: '"></b>
+                <comment th:text="${peephole.maximumDepth}"></comment>
+
+                <br>
+                <b th:text="'Минимальная глубина: '"></b>
+                <comment th:text="${peephole.minimumDepth}"></comment>
+
+                <br>
+                <b th:text="'Тип глазка: '"></b>
+                <comment th:text="${peephole.peepholeType.getRusName()}"></comment>
+
+                <br>
+                <b th:text="'Ширина: '"></b>
+                <comment th:text="${peephole.getWidth()}"></comment>
+
+                <br>
+                <b th:text="'Высота: '"></b>
+                <comment th:text="${peephole.getHeight()}"></comment>
+
+                <br>
+                <b th:text="'Толщина: '"></b>
+                <comment th:text="${peephole.getDepth()}"></comment>
+
+                <br>
+                <b th:text="'Сторонность: '"></b>
+                <comment th:text="${peephole.getSide().getRusName()}"></comment>
+
+                <p class="price" th:text="${peephole.price} + ' ₽'">Цена</p>
+                <br>
+                <div class="action-buttons">
+                    <a href="#" class="buy-button">Добавить в корзину</a>
+                    <a href="#" class="favorite-button"><i class="fas fa-heart"></i></a>
+                </div>
+
+                <a th:href="@{/furniture/peepholes}" class="back-link">← Вернуться к списку</a>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+</html>

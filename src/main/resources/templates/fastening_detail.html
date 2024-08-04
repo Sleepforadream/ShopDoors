@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}" lang="ru">
+
+<head>
+    <title layout:fragment="title" th:text="${fastening.name}">Детали продукта</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<th:block layout:fragment="content">
+    <div class="product-detail-container">
+        <div class="product-detail">
+            <img th:src="@{${fastening.imagePath}}" alt="Product Image" class="product-detail-image">
+            <div class="product-info">
+                <h1 th:text="${fastening.name}">Название продукта</h1>
+
+                <b th:text="'Описание:'"></b>
+                <p th:text="${fastening.description}"></p>
+                <hr>
+                <br>
+                <b th:text="'Фабрика: '"></b>
+                <q th:text="${fastening.fabric.getRusName()}"></q>
+
+                <br>
+                <b th:text="'Наполнение: '"></b>
+                <comment th:text="${fastening.filling.getRusName()}"></comment>
+
+                <br>
+                <b th:text="'Покрытие: '"></b>
+                <comment th:text="${fastening.coating.getRusName()}"></comment>
+
+                <br>
+                <b th:text="'Толщина метала: '"></b>
+                <comment th:text="${fastening.metal.getRusName()}"></comment>
+
+                <br>
+                <b th:text="'Ширина: '"></b>
+                <comment th:text="${fastening.getWidth()}"></comment>
+
+                <br>
+                <b th:text="'Высота: '"></b>
+                <comment th:text="${fastening.getHeight()}"></comment>
+
+                <br>
+                <b th:text="'Толщина: '"></b>
+                <comment th:text="${fastening.getDepth()}"></comment>
+
+                <br>
+                <b th:text="'Сторонность: '"></b>
+                <comment th:text="${fastening.getSide().getRusName()}"></comment>
+
+                <p class="price" th:text="${fastening.price} + ' ₽'">Цена</p>
+                <br>
+                <div class="action-buttons">
+                    <a href="#" class="buy-button">Добавить в корзину</a>
+                    <a href="#" class="favorite-button"><i class="fas fa-heart"></i></a>
+                </div>
+
+                <a th:href="@{/furniture/fastenings}" class="back-link">← Вернуться к списку</a>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+</html>

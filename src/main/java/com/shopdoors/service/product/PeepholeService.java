@@ -1,11 +1,11 @@
 package com.shopdoors.service.product;
 
-import com.shopdoors.dao.entity.abstracted.Hinge;
-import com.shopdoors.dao.entity.product.furniture.RoomHinge;
+import com.shopdoors.dao.entity.product.furniture.Peephole;
 import com.shopdoors.dao.enums.product.Coating;
 import com.shopdoors.dao.enums.product.Metal;
+import com.shopdoors.dao.enums.product.PeepholeType;
 import com.shopdoors.dao.enums.user.Fabric;
-import com.shopdoors.dao.repository.product.RoomHingeRepository;
+import com.shopdoors.dao.repository.product.PeepholeRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,30 +19,38 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @Slf4j
 @Getter
-public class HingeService {
-    private final RoomHingeRepository roomHingeRepository;
+public class PeepholeService {
+    private final PeepholeRepository peepholeRepository;
 
-    public List<Hinge> getFilteredHinges(
-            String sortBy, String order, String fabric, String metal, String coating, Integer count, Boolean isHide
+    public List<Peephole> getFilteredPeepholes(
+            String sortBy,
+            String order,
+            String fabric,
+            String metal,
+            String coating,
+            Integer minimumDepth,
+            Integer maximumDepth,
+            String peepholeType
     ) {
         Sort sort = Sort.by(Sort.Direction.fromString(order), sortBy);
 
         Fabric fabricEnum = !Objects.equals(fabric, null) && !Objects.equals(fabric, "") ? Fabric.valueOf(fabric) : null;
         Metal metalEnum = !Objects.equals(metal, null) && !Objects.equals(metal, "") ? Metal.valueOf(metal) : null;
         Coating coatingEnum = !Objects.equals(coating, null) && !Objects.equals(coating, "") ? Coating.valueOf(coating) : null;
+        PeepholeType peepholeTypeEnum = !Objects.equals(peepholeType, null) && !Objects.equals(peepholeType, "") ? PeepholeType.valueOf(peepholeType) : null;
 
-        return roomHingeRepository.findAllWithFilters(fabricEnum, metalEnum, coatingEnum, count, isHide, sort);
+        return peepholeRepository.findAllWithFilters(fabricEnum, metalEnum, coatingEnum, minimumDepth, maximumDepth, peepholeTypeEnum, sort);
     }
 
-    public Hinge getHingeById(Long id) {
-        return roomHingeRepository.findById(id).orElseThrow();
+    public Peephole getPeepholeById(Long id) {
+        return peepholeRepository.findById(id).orElseThrow();
     }
 
     public String getImgPathByName(String name) {
         log.info("Get img path for product - {}", name);
-        return roomHingeRepository
+        return peepholeRepository
                 .findByName(name)
-                .orElse(new RoomHinge())
+                .orElse(new Peephole())
                 .getImagePath();
     }
 }

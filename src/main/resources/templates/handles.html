@@ -44,13 +44,13 @@
             <select id="coating" onchange="updateFilters()">
                 <option value="">Все</option>
                 <option value="CHROME" th:selected="${coating == 'CHROME'}">Хром</option>
-                <option value="MATTE_CHROME" th:selected="${coating == 'MATTE_CHROME'}">Белый</option>
-                <option value="GOLD" th:selected="${coating == 'GOLD'}">Синий</option>
-                <option value="MATTE_GOLD" th:selected="${coating == 'MATTE_GOLD'}">Красный</option>
-                <option value="BRONZE" th:selected="${coating == 'BRONZE'}">Зелёный</option>
-                <option value="BLACK" th:selected="${coating == 'BLACK'}">Жёлтый</option>
-                <option value="WHITE" th:selected="${coating == 'WHITE'}">Оранжевый</option>
-                <option value="GRAPHITE" th:selected="${coating == 'GRAPHITE'}">Розовый</option>
+                <option value="MATTE_CHROME" th:selected="${coating == 'MATTE_CHROME'}">Матовый хром</option>
+                <option value="GOLD" th:selected="${coating == 'GOLD'}">Золото</option>
+                <option value="MATTE_GOLD" th:selected="${coating == 'MATTE_GOLD'}">Матовое золото</option>
+                <option value="BRONZE" th:selected="${coating == 'BRONZE'}">Бронза</option>
+                <option value="BLACK" th:selected="${coating == 'BLACK'}">Чёрный</option>
+                <option value="WHITE" th:selected="${coating == 'WHITE'}">Белый</option>
+                <option value="GRAPHITE" th:selected="${coating == 'GRAPHITE'}">Графит</option>
             </select>
             <label for="socket">Розетка:</label>
             <select id="socket" onchange="updateFilters()">
@@ -91,7 +91,7 @@
                     <img th:src="@{${handle.imagePath}}" alt="Product Image" class="product-image">
                     <h2 th:text="${handle.name}">Product Name</h2>
                     <p th:text="${handle.price} + ' ₽'">Price</p>
-                    <a th:href="@{/handles/{id}(id=${handle.id})}" class="product-link">Подробнее</a>
+                    <a th:href="@{handles/{id}(id=${handle.id})}" class="product-link">Подробнее</a>
                 </div>
             </th:block>
         </div>

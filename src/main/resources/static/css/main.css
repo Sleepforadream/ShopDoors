@@ -5457,3 +5457,84 @@ input#phoneNumber:invalid + .error-input-phoneNumber {
 .modal-backdrop.in {
     opacity: 0.5;
 }
+
+.product-detail {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 20px 0;
+}
+
+.product-detail-image {
+    height: 80vh;
+    max-width: 40vw;
+    margin-right: 40px;
+}
+
+.product-info {
+    max-width: 50%;
+}
+
+.product-info h1 {
+    margin-top: 0;
+}
+
+.product-info p {
+    /*font-size: 18px;*/
+    line-height: 1.5;
+    margin: 10px 0;
+}
+
+.price {
+    font-size: 34px;
+    font-weight: bold;
+    color: #2d3e50;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.buy-button {
+    background-color: #427ed1;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.buy-button:hover {
+    background-color: rgba(66, 126, 209, 0.9);
+}
+
+.favorite-button {
+    background-color: #f44336;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.favorite-button:hover {
+    background-color: #e53935;
+}
+
+.favorite-button i {
+    font-size: 18px;
+}
+
+.back-link {
+    margin-top: 20px;
+    display: inline-block;
+    color: #427ed1;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
