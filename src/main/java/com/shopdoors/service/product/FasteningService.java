@@ -1,8 +1,10 @@
 package com.shopdoors.service.product;
 
+import com.shopdoors.dao.entity.abstracted.Product;
 import com.shopdoors.dao.entity.product.furniture.Fastening;
 import com.shopdoors.dao.enums.product.Coating;
 import com.shopdoors.dao.enums.product.Metal;
+import com.shopdoors.dao.enums.product.ProductType;
 import com.shopdoors.dao.enums.user.Fabric;
 import com.shopdoors.dao.repository.product.FasteningRepository;
 import lombok.Getter;
@@ -13,12 +15,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 @Getter
-public class FasteningService {
+public class FasteningService implements ProductService {
     private final FasteningRepository fasteningRepository;
 
     public List<Fastening> getFilteredFastenings(
@@ -37,7 +40,7 @@ public class FasteningService {
         return fasteningRepository.findAllWithFilters(fabricEnum, metalEnum, coatingEnum, sort);
     }
 
-    public Fastening getFasteningById(Long id) {
+    public Fastening getFasteningById(UUID id) {
         return fasteningRepository.findById(id).orElseThrow();
     }
 
@@ -47,5 +50,15 @@ public class FasteningService {
                 .findByName(name)
                 .orElse(new Fastening())
                 .getImagePath();
+    }
+
+    @Override
+    public Product getProductById(UUID id) {
+        return fasteningRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public ProductType getProductType() {
+        return ProductType.FASTENING;
     }
 }

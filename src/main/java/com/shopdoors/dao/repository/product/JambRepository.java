@@ -12,8 +12,9 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
-public interface JambRepository extends JpaRepository<Jamb, Long> {
+public interface JambRepository extends JpaRepository<Jamb, UUID> {
     Optional<Jamb> findByName(String name);
 
     @Query("SELECT jb FROM Jamb jb WHERE " +

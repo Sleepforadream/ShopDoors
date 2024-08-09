@@ -12,8 +12,9 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
-public interface PannierRepository extends JpaRepository<Pannier, Long> {
+public interface PannierRepository extends JpaRepository<Pannier, UUID> {
     Optional<Pannier> findByName(String name);
 
     @Query("SELECT pn FROM Pannier pn WHERE " +

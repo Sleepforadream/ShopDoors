@@ -2,6 +2,7 @@ package com.shopdoors.dao.entity.product.molding;
 
 import com.shopdoors.dao.entity.abstracted.Moldings;
 import com.shopdoors.dao.entity.product.furniture.Fastening;
+import com.shopdoors.dao.enums.product.ProductType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -20,4 +21,9 @@ public class Baseboard extends Moldings {
 
     @OneToOne
     private Fastening fastening;
+
+    @Override
+    public ProductType getType() {
+        return ProductType.BASEBOARD;
+    }
 }

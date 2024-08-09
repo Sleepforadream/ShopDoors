@@ -1,6 +1,7 @@
 package com.shopdoors.dao.entity.product.molding;
 
 import com.shopdoors.dao.entity.abstracted.Moldings;
+import com.shopdoors.dao.enums.product.ProductType;
 import com.shopdoors.dao.enums.product.WaterResistanceType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,4 +26,9 @@ public class FloorCovering extends Moldings {
     @Column(length = 100, nullable = false)
     @Enumerated(EnumType.STRING)
     WaterResistanceType waterResistanceType;
+
+    @Override
+    public ProductType getType() {
+        return ProductType.FLOOR_COVERING;
+    }
 }

@@ -1,9 +1,11 @@
 package com.shopdoors.service.product;
 
+import com.shopdoors.dao.entity.abstracted.Product;
 import com.shopdoors.dao.entity.product.furniture.RoomLock;
 import com.shopdoors.dao.enums.product.Coating;
 import com.shopdoors.dao.enums.product.LockType;
 import com.shopdoors.dao.enums.product.Metal;
+import com.shopdoors.dao.enums.product.ProductType;
 import com.shopdoors.dao.enums.product.TongueType;
 import com.shopdoors.dao.enums.user.Fabric;
 import com.shopdoors.dao.repository.product.RoomLockRepository;
@@ -15,12 +17,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 @Getter
-public class RoomLockService {
+public class RoomLockService implements ProductService {
     private final RoomLockRepository roomLockRepository;
 
     public List<RoomLock> getFilteredRoomLocks(
@@ -37,7 +40,7 @@ public class RoomLockService {
         return roomLockRepository.findAllWithFilters(fabricEnum, metalEnum, coatingEnum, tongueTypeEnum, lockTypeEnum, sort);
     }
 
-    public RoomLock getRoomLockById(Long id) {
+    public RoomLock getRoomLockById(UUID id) {
         return roomLockRepository.findById(id).orElseThrow();
     }
 
@@ -47,5 +50,15 @@ public class RoomLockService {
                 .findByName(name)
                 .orElse(new RoomLock())
                 .getImagePath();
+    }
+
+    @Override
+    public Product getProductById(UUID id) {
+        return roomLockRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public ProductType getProductType() {
+        return ProductType.ROOM_LOCK;
     }
 }

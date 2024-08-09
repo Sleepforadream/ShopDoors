@@ -13,8 +13,9 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
-public interface RoomLockRepository extends JpaRepository<RoomLock, Long> {
+public interface RoomLockRepository extends JpaRepository<RoomLock, UUID> {
     Optional<RoomLock> findByName(String name);
 
     @Query("SELECT rl FROM RoomLock rl WHERE " +

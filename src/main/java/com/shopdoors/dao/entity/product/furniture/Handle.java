@@ -1,6 +1,7 @@
 package com.shopdoors.dao.entity.product.furniture;
 
 import com.shopdoors.dao.entity.abstracted.Furniture;
+import com.shopdoors.dao.enums.product.ProductType;
 import com.shopdoors.dao.enums.product.Socket;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,4 +29,9 @@ public class Handle extends Furniture {
 
     @Column(length = 100, nullable = false)
     private int rodLength;
+
+    @Override
+    public ProductType getType() {
+        return ProductType.HANDLE;
+    }
 }

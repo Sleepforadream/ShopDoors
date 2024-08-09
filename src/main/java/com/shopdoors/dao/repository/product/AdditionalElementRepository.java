@@ -12,8 +12,9 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
-public interface AdditionalElementRepository extends JpaRepository<AdditionalElement, Long> {
+public interface AdditionalElementRepository extends JpaRepository<AdditionalElement, UUID> {
     Optional<AdditionalElement> findByName(String name);
 
     @Query("SELECT ae FROM AdditionalElement ae WHERE " +

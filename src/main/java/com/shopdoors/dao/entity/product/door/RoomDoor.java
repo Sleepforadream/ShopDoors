@@ -9,11 +9,16 @@ import com.shopdoors.dao.entity.product.molding.AdditionalElement;
 import com.shopdoors.dao.entity.product.molding.Jamb;
 import com.shopdoors.dao.entity.product.molding.Pannier;
 import com.shopdoors.dao.enums.product.Facing;
+import com.shopdoors.dao.enums.product.ProductType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -54,4 +59,9 @@ public class RoomDoor extends Door {
 
     @OneToOne
     private AdditionalElement additionalElement;
+
+    @Override
+    public ProductType getType() {
+        return ProductType.ROOM_DOOR;
+    }
 }

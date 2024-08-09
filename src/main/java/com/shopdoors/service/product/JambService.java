@@ -1,12 +1,12 @@
 package com.shopdoors.service.product;
 
-import com.shopdoors.dao.entity.product.molding.Baseboard;
+import com.shopdoors.dao.entity.abstracted.Product;
 import com.shopdoors.dao.entity.product.molding.Jamb;
 import com.shopdoors.dao.enums.product.Facing;
 import com.shopdoors.dao.enums.product.Filling;
 import com.shopdoors.dao.enums.product.MoldingType;
+import com.shopdoors.dao.enums.product.ProductType;
 import com.shopdoors.dao.enums.user.Fabric;
-import com.shopdoors.dao.repository.product.BaseboardRepository;
 import com.shopdoors.dao.repository.product.JambRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -16,12 +16,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 @Getter
-public class JambService {
+public class JambService implements ProductService {
     private final JambRepository jambRepository;
 
     public List<Jamb> getFilteredJamb(
@@ -42,7 +43,7 @@ public class JambService {
         return jambRepository.findAllWithFilters(fabricEnum, fillingEnum, facingEnum, moldingTypeEnum, sort);
     }
 
-    public Jamb getJambById(Long id) {
+    public Jamb getJambById(UUID id) {
         return jambRepository.findById(id).orElseThrow();
     }
 
@@ -52,5 +53,15 @@ public class JambService {
                 .findByName(name)
                 .orElse(new Jamb())
                 .getImagePath();
+    }
+
+    @Override
+    public Product getProductById(UUID id) {
+        return jambRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public ProductType getProductType() {
+        return ProductType.JAMB;
     }
 }

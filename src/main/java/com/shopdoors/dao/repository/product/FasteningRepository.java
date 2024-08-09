@@ -11,8 +11,9 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
-public interface FasteningRepository extends JpaRepository<Fastening, Long> {
+public interface FasteningRepository extends JpaRepository<Fastening, UUID> {
     Optional<Fastening> findByName(String name);
 
     @Query("SELECT bb FROM Fastening bb WHERE " +

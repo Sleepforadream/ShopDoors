@@ -12,8 +12,9 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
-public interface PeepholeRepository extends JpaRepository<Peephole, Long> {
+public interface PeepholeRepository extends JpaRepository<Peephole, UUID> {
     Optional<Peephole> findByName(String name);
 
     @Query("SELECT dp FROM Peephole dp WHERE " +

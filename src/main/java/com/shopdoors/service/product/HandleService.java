@@ -1,8 +1,10 @@
 package com.shopdoors.service.product;
 
+import com.shopdoors.dao.entity.abstracted.Product;
 import com.shopdoors.dao.entity.product.furniture.Handle;
 import com.shopdoors.dao.enums.product.Coating;
 import com.shopdoors.dao.enums.product.Metal;
+import com.shopdoors.dao.enums.product.ProductType;
 import com.shopdoors.dao.enums.product.Socket;
 import com.shopdoors.dao.enums.user.Fabric;
 import com.shopdoors.dao.repository.product.HandleRepository;
@@ -14,12 +16,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 @Getter
-public class HandleService {
+public class HandleService implements ProductService {
     private final HandleRepository handleRepository;
 
     public List<Handle> getFilteredHandles(
@@ -35,7 +38,7 @@ public class HandleService {
         return handleRepository.findAllWithFilters(fabricEnum, metalEnum, coatingEnum, socketEnum, rodLength, sort);
     }
 
-    public Handle getHandleById(Long id) {
+    public Handle getHandleById(UUID id) {
         return handleRepository.findById(id).orElseThrow();
     }
 
@@ -45,5 +48,15 @@ public class HandleService {
                 .findByName(name)
                 .orElse(new Handle())
                 .getImagePath();
+    }
+
+    @Override
+    public Product getProductById(UUID id) {
+        return handleRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public ProductType getProductType() {
+        return ProductType.HANDLE;
     }
 }

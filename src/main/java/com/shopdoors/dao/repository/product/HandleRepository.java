@@ -12,8 +12,9 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
-public interface HandleRepository extends JpaRepository<Handle, Long> {
+public interface HandleRepository extends JpaRepository<Handle, UUID> {
     Optional<Handle> findByName(String name);
 
     @Query("SELECT dh FROM Handle dh WHERE " +

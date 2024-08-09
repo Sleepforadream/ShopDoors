@@ -1,9 +1,11 @@
 package com.shopdoors.service.product;
 
+import com.shopdoors.dao.entity.abstracted.Product;
 import com.shopdoors.dao.entity.product.door.EntryDoor;
 import com.shopdoors.dao.enums.product.Color;
 import com.shopdoors.dao.enums.product.Filling;
 import com.shopdoors.dao.enums.product.Metal;
+import com.shopdoors.dao.enums.product.ProductType;
 import com.shopdoors.dao.enums.user.Fabric;
 import com.shopdoors.dao.repository.product.EntryDoorRepository;
 import lombok.Getter;
@@ -14,12 +16,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 @Getter
-public class EntryDoorService {
+public class EntryDoorService implements ProductService {
     private final EntryDoorRepository entryDoorRepository;
 
     public List<EntryDoor> getFilteredEntryDoors(
@@ -40,7 +43,7 @@ public class EntryDoorService {
         return entryDoorRepository.findAllWithFilters(fabricEnum, metalEnum, colorEnum, fillingEnum, sort);
     }
 
-    public EntryDoor getEntryDoorById(Long id) {
+    public EntryDoor getEntryDoorById(UUID id) {
         return entryDoorRepository.findById(id).orElseThrow();
     }
 
@@ -50,5 +53,15 @@ public class EntryDoorService {
                 .findByName(name)
                 .orElse(new EntryDoor())
                 .getImagePath();
+    }
+
+    @Override
+    public Product getProductById(UUID id) {
+        return entryDoorRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public ProductType getProductType() {
+        return ProductType.ENTRY_DOOR;
     }
 }

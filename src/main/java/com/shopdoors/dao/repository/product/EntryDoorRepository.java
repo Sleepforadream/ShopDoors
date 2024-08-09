@@ -14,8 +14,9 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
-public interface EntryDoorRepository extends JpaRepository<EntryDoor, Long> {
+public interface EntryDoorRepository extends JpaRepository<EntryDoor, UUID> {
 
     Optional<EntryDoor> findByName(String name);
 

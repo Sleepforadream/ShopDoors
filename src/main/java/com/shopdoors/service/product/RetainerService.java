@@ -1,9 +1,11 @@
 package com.shopdoors.service.product;
 
+import com.shopdoors.dao.entity.abstracted.Product;
 import com.shopdoors.dao.entity.product.furniture.Retainer;
 import com.shopdoors.dao.enums.product.Coating;
 import com.shopdoors.dao.enums.product.KeyRetainer;
 import com.shopdoors.dao.enums.product.Metal;
+import com.shopdoors.dao.enums.product.ProductType;
 import com.shopdoors.dao.enums.product.Socket;
 import com.shopdoors.dao.enums.user.Fabric;
 import com.shopdoors.dao.repository.product.RetainerRepository;
@@ -15,12 +17,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 @Getter
-public class RetainerService {
+public class RetainerService implements ProductService {
     private final RetainerRepository retainerRepository;
 
     public List<Retainer> getFilteredRetainers(
@@ -37,7 +40,7 @@ public class RetainerService {
         return retainerRepository.findAllWithFilters(fabricEnum, metalEnum, coatingEnum, socketEnum, keyRetainerEnum, sort);
     }
 
-    public Retainer getRetainerById(Long id) {
+    public Retainer getRetainerById(UUID id) {
         return retainerRepository.findById(id).orElseThrow();
     }
 
@@ -47,5 +50,15 @@ public class RetainerService {
                 .findByName(name)
                 .orElse(new Retainer())
                 .getImagePath();
+    }
+
+    @Override
+    public Product getProductById(UUID id) {
+        return retainerRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public ProductType getProductType() {
+        return ProductType.RETAINER;
     }
 }

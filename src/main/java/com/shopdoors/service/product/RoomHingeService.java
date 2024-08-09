@@ -1,9 +1,11 @@
 package com.shopdoors.service.product;
 
+import com.shopdoors.dao.entity.abstracted.Product;
 import com.shopdoors.dao.entity.product.furniture.RoomHinge;
 import com.shopdoors.dao.enums.product.Coating;
 import com.shopdoors.dao.enums.product.HingeType;
 import com.shopdoors.dao.enums.product.Metal;
+import com.shopdoors.dao.enums.product.ProductType;
 import com.shopdoors.dao.enums.user.Fabric;
 import com.shopdoors.dao.repository.product.RoomHingeRepository;
 import lombok.Getter;
@@ -14,12 +16,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 @Getter
-public class RoomHingeService {
+public class RoomHingeService implements ProductService {
     private final RoomHingeRepository roomHingeRepository;
 
     public List<RoomHinge> getFilteredHinges(
@@ -35,7 +38,7 @@ public class RoomHingeService {
         return roomHingeRepository.findAllWithFilters(fabricEnum, metalEnum, coatingEnum, count, hingeTypeEnum, sort);
     }
 
-    public RoomHinge getHingeById(Long id) {
+    public RoomHinge getHingeById(UUID id) {
         return roomHingeRepository.findById(id).orElseThrow();
     }
 
@@ -45,5 +48,15 @@ public class RoomHingeService {
                 .findByName(name)
                 .orElse(new RoomHinge())
                 .getImagePath();
+    }
+
+    @Override
+    public Product getProductById(UUID id) {
+        return roomHingeRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public ProductType getProductType() {
+        return ProductType.ROOM_HINGE;
     }
 }

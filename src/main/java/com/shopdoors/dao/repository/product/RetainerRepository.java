@@ -13,8 +13,9 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
-public interface RetainerRepository extends JpaRepository<Retainer, Long> {
+public interface RetainerRepository extends JpaRepository<Retainer, UUID> {
     Optional<Retainer> findByName(String name);
 
     @Query("SELECT dr FROM Retainer dr WHERE " +

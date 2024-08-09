@@ -1,8 +1,10 @@
 package com.shopdoors.service.product;
 
+import com.shopdoors.dao.entity.abstracted.Product;
 import com.shopdoors.dao.entity.product.molding.FloorCovering;
 import com.shopdoors.dao.enums.product.Facing;
 import com.shopdoors.dao.enums.product.Filling;
+import com.shopdoors.dao.enums.product.ProductType;
 import com.shopdoors.dao.enums.product.WaterResistanceType;
 import com.shopdoors.dao.enums.user.Fabric;
 import com.shopdoors.dao.repository.product.FloorCoveringRepository;
@@ -14,12 +16,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 @Getter
-public class FloorCoveringService {
+public class FloorCoveringService implements ProductService {
     private final FloorCoveringRepository floorCoveringRepository;
 
     public List<FloorCovering> getFilteredFloorCoverings(
@@ -41,7 +44,7 @@ public class FloorCoveringService {
         return floorCoveringRepository.findAllWithFilters(fabricEnum, fillingEnum, facingEnum, waterResistanceTypeEnum, sort);
     }
 
-    public FloorCovering getFloorCoveringById(Long id) {
+    public FloorCovering getFloorCoveringById(UUID id) {
         return floorCoveringRepository.findById(id).orElseThrow();
     }
 
@@ -51,5 +54,15 @@ public class FloorCoveringService {
                 .findByName(name)
                 .orElse(new FloorCovering())
                 .getImagePath();
+    }
+
+    @Override
+    public Product getProductById(UUID id) {
+        return floorCoveringRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public ProductType getProductType() {
+        return ProductType.FLOOR_COVERING;
     }
 }

@@ -2,6 +2,7 @@ package com.shopdoors.dao.entity.product.furniture;
 
 import com.shopdoors.dao.entity.abstracted.Furniture;
 import com.shopdoors.dao.enums.product.KeyRetainer;
+import com.shopdoors.dao.enums.product.ProductType;
 import com.shopdoors.dao.enums.product.Socket;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,4 +31,9 @@ public class Retainer extends Furniture {
     @Column(length = 100, nullable = false)
     @Enumerated(EnumType.STRING)
     private KeyRetainer keyRetainer;
+
+    @Override
+    public ProductType getType() {
+        return ProductType.RETAINER;
+    }
 }

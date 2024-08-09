@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor
@@ -46,16 +47,16 @@ public class DoorController {
             model.addAttribute("metal", metal);
             model.addAttribute("color", color);
             model.addAttribute("filling", filling);
-            return "entry_doors";
+            return "products/doors/entry_doors";
     }
 
     @GetMapping("/entry-doors/{id}")
-    public String getEntryDoorById(@PathVariable Long id, Model model) {
+    public String getEntryDoorById(@PathVariable UUID id, Model model) {
         EntryDoor entryDoor = entryDoorService.getEntryDoorById(id);
         String productImageName = entryDoorService.getImgPathByName(entryDoor.getName());
         entryDoor.setImagePath(imageService.getImgUrl(productImageName));
         model.addAttribute("entryDoor", entryDoor);
-        return "entry_door_detail";
+        return "products/doors/entry_door_detail";
     }
 
     @GetMapping("/room-doors")
@@ -78,15 +79,15 @@ public class DoorController {
         model.addAttribute("fabric", fabric);
         model.addAttribute("facing", facing);
         model.addAttribute("filling", filling);
-        return "room_doors";
+        return "products/doors/room_doors";
     }
 
     @GetMapping("/room-doors/{id}")
-    public String getRoomDoorById(@PathVariable Long id, Model model) {
+    public String getRoomDoorById(@PathVariable UUID id, Model model) {
         RoomDoor roomDoor = roomDoorService.getRoomDoorById(id);
         String productImageName = roomDoorService.getImgPathByName(roomDoor.getName());
         roomDoor.setImagePath(imageService.getImgUrl(productImageName));
         model.addAttribute("roomDoor", roomDoor);
-        return "room_door_detail";
+        return "products/doors/room_door_detail";
     }
 }

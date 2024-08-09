@@ -1,13 +1,13 @@
 package com.shopdoors.service.product;
 
+import com.shopdoors.dao.entity.abstracted.Product;
 import com.shopdoors.dao.entity.product.molding.AdditionalElement;
-import com.shopdoors.dao.entity.product.molding.Jamb;
 import com.shopdoors.dao.enums.product.Facing;
 import com.shopdoors.dao.enums.product.Filling;
 import com.shopdoors.dao.enums.product.MoldingType;
+import com.shopdoors.dao.enums.product.ProductType;
 import com.shopdoors.dao.enums.user.Fabric;
 import com.shopdoors.dao.repository.product.AdditionalElementRepository;
-import com.shopdoors.dao.repository.product.JambRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,12 +16,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 @Getter
-public class AdditionalElementService {
+public class AdditionalElementService implements ProductService {
     private final AdditionalElementRepository additionalElementRepository;
 
     public List<AdditionalElement> getFilteredAdditionalElement(
@@ -42,7 +43,7 @@ public class AdditionalElementService {
         return additionalElementRepository.findAllWithFilters(fabricEnum, fillingEnum, facingEnum, moldingTypeEnum, sort);
     }
 
-    public AdditionalElement getAdditionalElementById(Long id) {
+    public AdditionalElement getAdditionalElementById(UUID id) {
         return additionalElementRepository.findById(id).orElseThrow();
     }
 
@@ -52,5 +53,15 @@ public class AdditionalElementService {
                 .findByName(name)
                 .orElse(new AdditionalElement())
                 .getImagePath();
+    }
+
+    @Override
+    public Product getProductById(UUID id) {
+        return additionalElementRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public ProductType getProductType() {
+        return ProductType.ADDITIONAL_ELEMENT;
     }
 }

@@ -1,7 +1,5 @@
 package com.shopdoors.controller.product;
 
-import com.shopdoors.dao.entity.abstracted.Hinge;
-import com.shopdoors.dao.entity.product.door.RoomDoor;
 import com.shopdoors.dao.entity.product.furniture.EntryLock;
 import com.shopdoors.dao.entity.product.furniture.Fastening;
 import com.shopdoors.dao.entity.product.furniture.Handle;
@@ -9,7 +7,6 @@ import com.shopdoors.dao.entity.product.furniture.Peephole;
 import com.shopdoors.dao.entity.product.furniture.Retainer;
 import com.shopdoors.dao.entity.product.furniture.RoomHinge;
 import com.shopdoors.dao.entity.product.furniture.RoomLock;
-import com.shopdoors.dao.enums.product.HingeType;
 import com.shopdoors.service.ImageService;
 import com.shopdoors.service.product.EntryLockService;
 import com.shopdoors.service.product.FasteningService;
@@ -27,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor
@@ -44,7 +42,7 @@ public class FurnitureController {
 
     @GetMapping("")
     public String getFurniture() {
-        return "furniture";
+        return "products/furniture";
     }
 
     @GetMapping("/handles")
@@ -73,16 +71,16 @@ public class FurnitureController {
         model.addAttribute("coating", coating);
         model.addAttribute("socket", socket);
         model.addAttribute("rodLength", rodLength);
-        return "handles";
+        return "products/furniture/handles";
     }
 
     @GetMapping("/handles/{id}")
-    public String getHandleById(@PathVariable Long id, Model model) {
+    public String getHandleById(@PathVariable UUID id, Model model) {
         Handle handle = handleService.getHandleById(id);
         String productImageName = handleService.getImgPathByName(handle.getName());
         handle.setImagePath(imageService.getImgUrl(productImageName));
         model.addAttribute("handle", handle);
-        return "handle_detail";
+        return "products/furniture/handle_detail";
     }
 
     @GetMapping("/room-hinges")
@@ -109,16 +107,16 @@ public class FurnitureController {
         model.addAttribute("coating", coating);
         model.addAttribute("count", count);
         model.addAttribute("hingeType", hingeType);
-        return "room_hinges";
+        return "products/furniture/room_hinges";
     }
 
     @GetMapping("/room-hinges/{id}")
-    public String getHingeById(@PathVariable Long id, Model model) {
+    public String getHingeById(@PathVariable UUID id, Model model) {
         RoomHinge roomHinge = roomHingeService.getHingeById(id);
         String productImageName = roomHingeService.getImgPathByName(roomHinge.getName());
         roomHinge.setImagePath(imageService.getImgUrl(productImageName));
         model.addAttribute("roomHinge", roomHinge);
-        return "room_hinge_detail";
+        return "products/furniture/room_hinge_detail";
     }
 
     @GetMapping("/room-locks")
@@ -147,16 +145,16 @@ public class FurnitureController {
         model.addAttribute("coating", coating);
         model.addAttribute("tongueType", tongueType);
         model.addAttribute("lockType", lockType);
-        return "room-locks";
+        return "products/furniture/room-locks";
     }
 
     @GetMapping("/room-locks/{id}")
-    public String getRoomLockById(@PathVariable Long id, Model model) {
+    public String getRoomLockById(@PathVariable UUID id, Model model) {
         RoomLock roomLock = roomLockService.getRoomLockById(id);
         String productImageName = roomLockService.getImgPathByName(roomLock.getName());
         roomLock.setImagePath(imageService.getImgUrl(productImageName));
         model.addAttribute("roomLock", roomLock);
-        return "room_lock_detail";
+        return "products/furniture/room_lock_detail";
     }
 
     @GetMapping("/entry-locks")
@@ -187,16 +185,16 @@ public class FurnitureController {
         model.addAttribute("defenseClass", defenseClass);
         model.addAttribute("firstKeyType", firstKeyType);
         model.addAttribute("secondKeyType", secondKeyType);
-        return "entry-locks";
+        return "products/furniture/entry-locks";
     }
 
     @GetMapping("/entry-locks/{id}")
-    public String getEntryLockById(@PathVariable Long id, Model model) {
+    public String getEntryLockById(@PathVariable UUID id, Model model) {
         EntryLock entryLock = entryLockService.getEntryLockById(id);
         String productImageName = entryLockService.getImgPathByName(entryLock.getName());
         entryLock.setImagePath(imageService.getImgUrl(productImageName));
         model.addAttribute("entryLock", entryLock);
-        return "entry_lock_detail";
+        return "products/furniture/entry_lock_detail";
     }
 
     @GetMapping("/retainers")
@@ -225,16 +223,16 @@ public class FurnitureController {
         model.addAttribute("coating", coating);
         model.addAttribute("socket", socket);
         model.addAttribute("keyRetainer", keyRetainer);
-        return "retainers";
+        return "products/furniture/retainers";
     }
 
     @GetMapping("/retainers/{id}")
-    public String getRetainerById(@PathVariable Long id, Model model) {
+    public String getRetainerById(@PathVariable UUID id, Model model) {
         Retainer retainer = retainerService.getRetainerById(id);
         String productImageName = retainerService.getImgPathByName(retainer.getName());
         retainer.setImagePath(imageService.getImgUrl(productImageName));
         model.addAttribute("retainer", retainer);
-        return "retainer_detail";
+        return "products/furniture/retainer_detail";
     }
 
     @GetMapping("/peepholes")
@@ -265,16 +263,16 @@ public class FurnitureController {
         model.addAttribute("minimumDepth", minimumDepth);
         model.addAttribute("maximumDepth", maximumDepth);
         model.addAttribute("peepholeType", peepholeType);
-        return "peepholes";
+        return "products/furniture/peepholes";
     }
 
     @GetMapping("/peepholes/{id}")
-    public String getPeepholeById(@PathVariable Long id, Model model) {
+    public String getPeepholeById(@PathVariable UUID id, Model model) {
         Peephole peephole = peepholeService.getPeepholeById(id);
         String productImageName = peepholeService.getImgPathByName(peephole.getName());
         peephole.setImagePath(imageService.getImgUrl(productImageName));
         model.addAttribute("peephole", peephole);
-        return "peephole_detail";
+        return "products/furniture/peephole_detail";
     }
 
     @GetMapping("/fastenings")
@@ -297,15 +295,15 @@ public class FurnitureController {
         model.addAttribute("fabric", fabric);
         model.addAttribute("metal", metal);
         model.addAttribute("coating", coating);
-        return "fastenings";
+        return "products/furniture/fastenings";
     }
 
     @GetMapping("/fastenings/{id}")
-    public String getFasteningById(@PathVariable Long id, Model model) {
+    public String getFasteningById(@PathVariable UUID id, Model model) {
         Fastening fastening = fasteningService.getFasteningById(id);
         String productImageName = fasteningService.getImgPathByName(fastening.getName());
         fastening.setImagePath(imageService.getImgUrl(productImageName));
         model.addAttribute("fastening", fastening);
-        return "fastening_detail";
+        return "products/furniture/fastening_detail";
     }
 }

@@ -8,11 +8,16 @@ import com.shopdoors.dao.entity.product.furniture.Retainer;
 import com.shopdoors.dao.entity.product.molding.Panel;
 import com.shopdoors.dao.enums.product.Color;
 import com.shopdoors.dao.enums.product.Metal;
+import com.shopdoors.dao.enums.product.ProductType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -57,4 +62,9 @@ public class EntryDoor extends Door {
     @Column(length = 100, nullable = false)
     @Enumerated(EnumType.STRING)
     private Metal metal;
+
+    @Override
+    public ProductType getType() {
+        return ProductType.ENTRY_DOOR;
+    }
 }

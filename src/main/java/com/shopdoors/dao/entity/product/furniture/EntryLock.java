@@ -3,6 +3,7 @@ package com.shopdoors.dao.entity.product.furniture;
 import com.shopdoors.dao.entity.abstracted.Lock;
 import com.shopdoors.dao.enums.product.DefenseClass;
 import com.shopdoors.dao.enums.product.KeyType;
+import com.shopdoors.dao.enums.product.ProductType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -34,4 +35,9 @@ public class EntryLock extends Lock {
     @Column(length = 100)
     @Enumerated(EnumType.STRING)
     private KeyType secondKeyType;
+
+    @Override
+    public ProductType getType() {
+        return ProductType.ENTRY_LOCK;
+    }
 }

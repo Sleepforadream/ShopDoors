@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor
@@ -38,7 +39,7 @@ public class MoldingController {
 
     @GetMapping("")
     public String getMoldings() {
-        return "moldings";
+        return "products/moldings";
     }
 
     @GetMapping("/baseboards")
@@ -61,16 +62,16 @@ public class MoldingController {
         model.addAttribute("fabric", fabric);
         model.addAttribute("filling", filling);
         model.addAttribute("facing", facing);
-        return "baseboards";
+        return "products/moldings/baseboards";
     }
 
     @GetMapping("/baseboards/{id}")
-    public String getBaseboardById(@PathVariable Long id, Model model) {
+    public String getBaseboardById(@PathVariable UUID id, Model model) {
         Baseboard baseboard = baseboardService.getBaseboardById(id);
         String productImageName = baseboardService.getImgPathByName(baseboard.getName());
         baseboard.setImagePath(imageService.getImgUrl(productImageName));
         model.addAttribute("baseboard", baseboard);
-        return "baseboard_detail";
+        return "products/moldings/baseboard_detail";
     }
 
     @GetMapping("/additional-elements")
@@ -97,16 +98,16 @@ public class MoldingController {
         model.addAttribute("filling", filling);
         model.addAttribute("facing", facing);
         model.addAttribute("moldingType", moldingType);
-        return "additional_elements";
+        return "products/moldings/additional_elements";
     }
 
     @GetMapping("/additional-elements/{id}")
-    public String getAdditionalElementById(@PathVariable Long id, Model model) {
+    public String getAdditionalElementById(@PathVariable UUID id, Model model) {
         AdditionalElement additionalElement = additionalElementService.getAdditionalElementById(id);
         String productImageName = additionalElementService.getImgPathByName(additionalElement.getName());
         additionalElement.setImagePath(imageService.getImgUrl(productImageName));
         model.addAttribute("additionalElement", additionalElement);
-        return "additional_element_detail";
+        return "products/moldings/additional_element_detail";
     }
 
     @GetMapping("/floor-coverings")
@@ -133,16 +134,16 @@ public class MoldingController {
         model.addAttribute("filling", filling);
         model.addAttribute("facing", facing);
         model.addAttribute("waterResistanceType", waterResistanceType);
-        return "floor_coverings";
+        return "products/moldings/floor_coverings";
     }
 
     @GetMapping("/floor-coverings/{id}")
-    public String getFloorCoveringById(@PathVariable Long id, Model model) {
+    public String getFloorCoveringById(@PathVariable UUID id, Model model) {
         FloorCovering floorCovering = floorCoveringService.getFloorCoveringById(id);
         String productImageName = floorCoveringService.getImgPathByName(floorCovering.getName());
         floorCovering.setImagePath(imageService.getImgUrl(productImageName));
         model.addAttribute("floorCovering", floorCovering);
-        return "floor_covering_detail";
+        return "products/moldings/floor_covering_detail";
     }
 
     @GetMapping("/jambs")
@@ -169,16 +170,16 @@ public class MoldingController {
         model.addAttribute("filling", filling);
         model.addAttribute("facing", facing);
         model.addAttribute("moldingType", moldingType);
-        return "jambs";
+        return "products/moldings/jambs";
     }
 
     @GetMapping("/jambs/{id}")
-    public String getJambsById(@PathVariable Long id, Model model) {
+    public String getJambsById(@PathVariable UUID id, Model model) {
         Jamb jamb = jambService.getJambById(id);
         String productImageName = jambService.getImgPathByName(jamb.getName());
         jamb.setImagePath(imageService.getImgUrl(productImageName));
         model.addAttribute("jamb", jamb);
-        return "jamb_detail";
+        return "products/moldings/jamb_detail";
     }
 
     @GetMapping("/panels")
@@ -205,16 +206,16 @@ public class MoldingController {
         model.addAttribute("filling", filling);
         model.addAttribute("facing", facing);
         model.addAttribute("panelType", panelType);
-        return "panels";
+        return "products/moldings/panels";
     }
 
     @GetMapping("/panels/{id}")
-    public String getPanelById(@PathVariable Long id, Model model) {
+    public String getPanelById(@PathVariable UUID id, Model model) {
         Panel panel = panelService.getPanelById(id);
         String productImageName = panelService.getImgPathByName(panel.getName());
         panel.setImagePath(imageService.getImgUrl(productImageName));
         model.addAttribute("panel", panel);
-        return "panel_detail";
+        return "products/moldings/panel_detail";
     }
 
     @GetMapping("/panniers")
@@ -241,15 +242,15 @@ public class MoldingController {
         model.addAttribute("filling", filling);
         model.addAttribute("facing", facing);
         model.addAttribute("moldingType", moldingType);
-        return "panniers";
+        return "products/moldings/panniers";
     }
 
     @GetMapping("/panniers/{id}")
-    public String getPannierById(@PathVariable Long id, Model model) {
+    public String getPannierById(@PathVariable UUID id, Model model) {
         Pannier pannier = pannierService.getPannierById(id);
         String productImageName = pannierService.getImgPathByName(pannier.getName());
         pannier.setImagePath(imageService.getImgUrl(productImageName));
         model.addAttribute("pannier", pannier);
-        return "pannier_detail";
+        return "products/moldings/pannier_detail";
     }
 }

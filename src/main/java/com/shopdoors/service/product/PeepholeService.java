@@ -1,9 +1,11 @@
 package com.shopdoors.service.product;
 
+import com.shopdoors.dao.entity.abstracted.Product;
 import com.shopdoors.dao.entity.product.furniture.Peephole;
 import com.shopdoors.dao.enums.product.Coating;
 import com.shopdoors.dao.enums.product.Metal;
 import com.shopdoors.dao.enums.product.PeepholeType;
+import com.shopdoors.dao.enums.product.ProductType;
 import com.shopdoors.dao.enums.user.Fabric;
 import com.shopdoors.dao.repository.product.PeepholeRepository;
 import lombok.Getter;
@@ -14,12 +16,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 @Getter
-public class PeepholeService {
+public class PeepholeService implements ProductService {
     private final PeepholeRepository peepholeRepository;
 
     public List<Peephole> getFilteredPeepholes(
@@ -42,7 +45,7 @@ public class PeepholeService {
         return peepholeRepository.findAllWithFilters(fabricEnum, metalEnum, coatingEnum, minimumDepth, maximumDepth, peepholeTypeEnum, sort);
     }
 
-    public Peephole getPeepholeById(Long id) {
+    public Peephole getPeepholeById(UUID id) {
         return peepholeRepository.findById(id).orElseThrow();
     }
 
@@ -52,5 +55,15 @@ public class PeepholeService {
                 .findByName(name)
                 .orElse(new Peephole())
                 .getImagePath();
+    }
+
+    @Override
+    public Product getProductById(UUID id) {
+        return peepholeRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public ProductType getProductType() {
+        return ProductType.PEEPHOLE;
     }
 }

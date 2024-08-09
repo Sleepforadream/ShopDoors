@@ -11,8 +11,9 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
-public interface BaseboardRepository extends JpaRepository<Baseboard, Long> {
+public interface BaseboardRepository extends JpaRepository<Baseboard, UUID> {
     Optional<Baseboard> findByName(String name);
 
     @Query("SELECT bb FROM Baseboard bb WHERE " +

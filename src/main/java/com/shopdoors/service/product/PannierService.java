@@ -1,9 +1,11 @@
 package com.shopdoors.service.product;
 
+import com.shopdoors.dao.entity.abstracted.Product;
 import com.shopdoors.dao.entity.product.molding.Pannier;
 import com.shopdoors.dao.enums.product.Facing;
 import com.shopdoors.dao.enums.product.Filling;
 import com.shopdoors.dao.enums.product.MoldingType;
+import com.shopdoors.dao.enums.product.ProductType;
 import com.shopdoors.dao.enums.user.Fabric;
 import com.shopdoors.dao.repository.product.PannierRepository;
 import lombok.Getter;
@@ -14,12 +16,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 @Getter
-public class PannierService {
+public class PannierService implements ProductService {
     private final PannierRepository pannierRepository;
 
     public List<Pannier> getFilteredPannier(
@@ -40,7 +43,7 @@ public class PannierService {
         return pannierRepository.findAllWithFilters(fabricEnum, fillingEnum, facingEnum, moldingTypeEnum, sort);
     }
 
-    public Pannier getPannierById(Long id) {
+    public Pannier getPannierById(UUID id) {
         return pannierRepository.findById(id).orElseThrow();
     }
 
@@ -50,5 +53,15 @@ public class PannierService {
                 .findByName(name)
                 .orElse(new Pannier())
                 .getImagePath();
+    }
+
+    @Override
+    public Product getProductById(UUID id) {
+        return pannierRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public ProductType getProductType() {
+        return ProductType.PANNIER;
     }
 }

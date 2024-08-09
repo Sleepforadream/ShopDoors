@@ -12,8 +12,9 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
-public interface RoomHingeRepository extends JpaRepository<RoomHinge, Long> {
+public interface RoomHingeRepository extends JpaRepository<RoomHinge, UUID> {
     Optional<RoomHinge> findByName(String name);
 
     @Query("SELECT dh FROM RoomHinge dh WHERE " +

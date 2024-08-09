@@ -11,8 +11,9 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
-public interface RoomDoorRepository extends JpaRepository<RoomDoor, Long> {
+public interface RoomDoorRepository extends JpaRepository<RoomDoor, UUID> {
     Optional<RoomDoor> findByName(String name);
 
     @Query("SELECT rd FROM RoomDoor rd WHERE " +

@@ -1,10 +1,12 @@
 package com.shopdoors.service.product;
 
+import com.shopdoors.dao.entity.abstracted.Product;
 import com.shopdoors.dao.entity.product.furniture.EntryLock;
 import com.shopdoors.dao.enums.product.Coating;
 import com.shopdoors.dao.enums.product.DefenseClass;
 import com.shopdoors.dao.enums.product.KeyType;
 import com.shopdoors.dao.enums.product.Metal;
+import com.shopdoors.dao.enums.product.ProductType;
 import com.shopdoors.dao.enums.user.Fabric;
 import com.shopdoors.dao.repository.product.EntryLockRepository;
 import lombok.Getter;
@@ -15,12 +17,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 @Getter
-public class EntryLockService {
+public class EntryLockService implements ProductService {
     private final EntryLockRepository entryLockRepository;
 
     public List<EntryLock> getFilteredEntryLocks(
@@ -45,7 +48,7 @@ public class EntryLockService {
         return entryLockRepository.findAllWithFilters(fabricEnum, metalEnum, coatingEnum, defenseClassEnum, firstKeyTypeEnum, secondKeyTypeEnum, sort);
     }
 
-    public EntryLock getEntryLockById(Long id) {
+    public EntryLock getEntryLockById(UUID id) {
         return entryLockRepository.findById(id).orElseThrow();
     }
 
@@ -55,5 +58,15 @@ public class EntryLockService {
                 .findByName(name)
                 .orElse(new EntryLock())
                 .getImagePath();
+    }
+
+    @Override
+    public Product getProductById(UUID id) {
+        return entryLockRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public ProductType getProductType() {
+        return ProductType.ENTRY_LOCK;
     }
 }

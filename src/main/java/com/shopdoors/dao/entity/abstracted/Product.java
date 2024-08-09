@@ -1,6 +1,7 @@
 package com.shopdoors.dao.entity.abstracted;
 
 import com.shopdoors.dao.enums.product.Filling;
+import com.shopdoors.dao.enums.product.ProductType;
 import com.shopdoors.dao.enums.product.Side;
 import com.shopdoors.dao.enums.user.Fabric;
 import jakarta.persistence.Column;
@@ -12,11 +13,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+
+import java.util.UUID;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -28,8 +33,8 @@ import lombok.experimental.SuperBuilder;
 public abstract class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID uuid;
 
     @Column(length = 100, nullable = false, unique = true)
     private String name;
@@ -63,4 +68,6 @@ public abstract class Product {
     @Column(length = 100, nullable = false)
     @Enumerated(EnumType.STRING)
     private Fabric fabric;
+
+    public abstract ProductType getType();
 }

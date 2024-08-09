@@ -15,8 +15,9 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
-public interface EntryLockRepository extends JpaRepository<EntryLock, Long> {
+public interface EntryLockRepository extends JpaRepository<EntryLock, UUID> {
     Optional<EntryLock> findByName(String name);
 
     @Query("SELECT rl FROM EntryLock rl WHERE " +

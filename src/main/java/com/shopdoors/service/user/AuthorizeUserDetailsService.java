@@ -132,4 +132,8 @@ public class AuthorizeUserDetailsService implements UserDetailsService {
         });
         currentAuth.setAuthenticated(false);
     }
+
+    public User findByUsername(String username) {
+        return userRepository.findByEmail(username).orElseThrow();
+    }
 }

@@ -2,6 +2,7 @@ package com.shopdoors.dao.entity.product.molding;
 
 import com.shopdoors.dao.entity.abstracted.Moldings;
 import com.shopdoors.dao.enums.product.PanelType;
+import com.shopdoors.dao.enums.product.ProductType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -23,4 +24,9 @@ public class Panel extends Moldings {
     @Column(length = 100, nullable = false)
     @Enumerated(EnumType.STRING)
     PanelType panelType;
+
+    @Override
+    public ProductType getType() {
+        return ProductType.PANEL;
+    }
 }
