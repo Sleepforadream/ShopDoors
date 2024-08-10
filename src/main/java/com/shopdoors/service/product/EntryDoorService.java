@@ -1,6 +1,6 @@
 package com.shopdoors.service.product;
 
-import com.shopdoors.dao.entity.abstracted.Product;
+import com.shopdoors.dao.entity.product.abstracted.Product;
 import com.shopdoors.dao.entity.product.door.EntryDoor;
 import com.shopdoors.dao.enums.product.Color;
 import com.shopdoors.dao.enums.product.Filling;

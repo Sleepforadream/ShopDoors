@@ -1,6 +1,6 @@
 package com.shopdoors.dao.entity.product.furniture;
 
-import com.shopdoors.dao.entity.abstracted.Lock;
+import com.shopdoors.dao.entity.product.abstracted.Lock;
 import com.shopdoors.dao.enums.product.DefenseClass;
 import com.shopdoors.dao.enums.product.KeyType;
 import com.shopdoors.dao.enums.product.ProductType;

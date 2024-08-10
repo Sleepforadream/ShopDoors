@@ -1,9 +1,8 @@
-package com.shopdoors.dao.entity.abstracted;
+package com.shopdoors.dao.entity.product.abstracted;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

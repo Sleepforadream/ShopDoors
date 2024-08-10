@@ -1,6 +1,6 @@
 package com.shopdoors.service.product;
 
-import com.shopdoors.dao.entity.abstracted.Product;
+import com.shopdoors.dao.entity.product.abstracted.Product;
 import com.shopdoors.dao.entity.product.molding.Panel;
 import com.shopdoors.dao.enums.product.Facing;
 import com.shopdoors.dao.enums.product.Filling;

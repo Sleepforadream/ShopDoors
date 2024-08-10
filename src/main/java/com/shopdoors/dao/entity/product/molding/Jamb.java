@@ -1,6 +1,6 @@
 package com.shopdoors.dao.entity.product.molding;
 
-import com.shopdoors.dao.entity.abstracted.Moldings;
+import com.shopdoors.dao.entity.product.abstracted.Moldings;
 import com.shopdoors.dao.enums.product.MoldingType;
 import com.shopdoors.dao.enums.product.ProductType;
 import jakarta.persistence.Column;

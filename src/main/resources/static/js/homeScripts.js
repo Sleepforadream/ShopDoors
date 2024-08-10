@@ -3,13 +3,9 @@
 //начало setHeightSlider
 
     let sliderContainer = document.querySelectorAll('.sliders-container'); // Блок со слайдами
-    let secondHeaderMenu = document.querySelector('.second-header-menu'); // Второе меню
-    //Первое меню было объявлено выше
-    let mobileMenu = document.querySelector('.mobile-menu-box'); //Мобильное меню
 
     let coordsSecondHeaderMenu = openPopupCategoryButtonSticky.clientHeight; //Высота второго меню
     let coordsHeaderMenu = openPopupCategoryButtonSticky.clientHeight; //Высота первого меню
-    let coordsMobileMenu = openPopupCategoryButtonSticky.clientHeight; //Высота мобильного меню
 
     let heightHeader = coordsSecondHeaderMenu + coordsHeaderMenu;
 
@@ -19,17 +15,8 @@
         slide.style.height = heightSliderContainer + 'px'; // Применение позиционирования слайдера по вертикали
     });
 
-
-
     if(window.innerWidth < 1050){
-            let secondMobileMenu = document.querySelector('.second-header-menu');
-            let headerMobileMenu = document.querySelector('.header-menu');
-
-            let coordsSecondMobileMenu = openPopupCategoryButtonSticky.clientHeight;
-            let coordsHeaderMobileMenu = openPopupCategoryButtonSticky.clientHeight;
-
             let heightHeader = 172;
-            //let heightHeader = (coordsSecondMobileMenu * 2) + coordsHeaderMobileMenu;
             let heightSliderContainer = window.innerHeight - heightHeader + 4;
             sliderContainer.forEach((slide) => {
                 slide.style.height = heightSliderContainer + 'px'; // Применение позиционирования слайдера по вертикали
@@ -89,11 +76,11 @@
 
     let timerSlide = setInterval(() => nextActiveSlide(), 5000);
 
-    slidersContainer.addEventListener('mouseenter', e => {
+    slidersContainer.addEventListener('mouseenter', () => {
         clearInterval(timerSlide);
     });
 
-    slidersContainer.addEventListener('mouseleave', e => {
+    slidersContainer.addEventListener('mouseleave', () => {
         timerSlide = setInterval(() => nextActiveSlide(), 5000);
     });
 
@@ -182,11 +169,11 @@
         popoverGuaranties2.style.top = topPopoverGuaranties2 + 'px'; // Применение позиционирования окна по вертикали
     }
 
-    buttonImageGuaranties.addEventListener('click', e => {
+    buttonImageGuaranties.addEventListener('click', () => {
         popoverGuaranties.classList.toggle('active');
     });
 
-    buttonImageGuaranties2.addEventListener('click', e => {
+    buttonImageGuaranties2.addEventListener('click', () => {
         popoverGuaranties2.classList.toggle('active');
     });
 
@@ -212,8 +199,6 @@
         }
     })
 
-
-
 //конец tooltipGuaranties
 
 // начало sliderReview
@@ -228,11 +213,11 @@
     let subtitleHeadingReview2 = document.querySelector('.subtitle-heading-review2'); // Кнопка переключения на следующий слайд
     let sliderReviewBox = document.querySelector('.slider-review-box');
 
-    buttonSliderReview.addEventListener('click', e => {
+    buttonSliderReview.addEventListener('click', () => {
         activeSlideReview1();
     });
 
-    buttonSliderReview2.addEventListener('click', e => {
+    buttonSliderReview2.addEventListener('click', () => {
         activeSlideReview2();
     });
 
@@ -269,42 +254,24 @@
 
     let timerSlideReview = setInterval(() => nextActiveSlideReview(), 5000);
 
-    sliderReviewBox.addEventListener('mouseenter', e => {
+    sliderReviewBox.addEventListener('mouseenter', () => {
         clearInterval(timerSlideReview);
     });
 
-    sliderReviewBox.addEventListener('mouseleave', e => {
+    sliderReviewBox.addEventListener('mouseleave', () => {
         timerSlideReview = setInterval(() => nextActiveSlideReview(), 5000);
     });
 
 
 // конец sliderReview
 
-//начало carouselBrands
-
-    let carouselIcons = document.querySelectorAll('.carousel-icon');
-    let carouselArea = document.querySelector('.our-brands-carousel');
-
-    //let timerCarouselIcons = setInterval(() => nextActiveCarouselIcon(), 5000);
-
-    /*const nextActiveCarouselIcon = () => {
-        carouselIcons.forEach((icon) => {
-            setTimeout(() => icon.remove(), 5000);
-        })
-    }
-
-    nextActiveCarouselIcon();*/
-
-//конец carouselBrands
-
 // начало resizeBloks
 
-    window.addEventListener('resize', function(event) {
+    window.addEventListener('resize', function() {
 
         //изменение размера контейнера со слайдами при изменении размера окна
         let coordsSecondHeaderMenu = openPopupCategoryButtonSticky.clientHeight;
         let coordsHeaderMenu = openPopupCategoryButtonSticky.clientHeight;
-        let coordsMobileMenu = openPopupCategoryButtonSticky.clientHeight;
         let heightHeader = coordsSecondHeaderMenu + coordsHeaderMenu;
         let heightSliderContainer = window.innerHeight - heightHeader + 4;
         sliderContainer.forEach((slide) => {
@@ -313,12 +280,6 @@
 
         //изменение размера текста контейнера со слайдами при изменении размера окна
         if(window.innerWidth < 1050){
-            let secondMobileMenu = document.querySelector('.second-header-menu');
-            let headerMobileMenu = document.querySelector('.header-menu');
-
-            let coordsSecondMobileMenu = openPopupCategoryButtonSticky.clientHeight;
-            let coordsHeaderMobileMenu = openPopupCategoryButtonSticky.clientHeight;
-
             let heightHeader = 172;
             //let heightHeader = (coordsSecondMobileMenu * 2) + coordsHeaderMobileMenu;
             let heightSliderContainer = window.innerHeight - heightHeader + 4;

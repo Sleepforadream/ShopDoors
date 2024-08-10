@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}" lang="ru">
+
+<head>
+    <title layout:fragment="title">История заказов</title>
+</head>
+
+<th:block layout:fragment="content">
+    <br>
+    <div class="order-history-container">
+        <h1>История заказов</h1>
+        <th:block th:if="${#lists.isEmpty(orders)}">
+            <p>Вы еще не совершали заказов.</p>
+        </th:block>
+        <th:block th:unless="${#lists.isEmpty(orders)}">
+            <ul class="order-list">
+                <th:block th:each="order : ${orders}">
+                    <li>
+                        Заказ № <span th:text="${order.id}"></span> -
+                        Дата заказа: <span th:text="${order.orderDate}"></span> -
+                        Дата доставки: <span th:text="${order.deliveryDate}"></span>
+                        <ul>
+                            <th:block th:each="item : ${order.customerOrderItems}">
+                                <li>
+                                    <span th:text="${item.product.name}"></span> -
+                                    Количество: <span th:text="${item.quantity}"></span> -
+                                    Цена: <span th:text="${item.price} + ' ₽'"></span>
+                                </li>
+                            </th:block>
+                        </ul>
+                        <a th:href="@{/orders/{id}(id=${order.getId()})}"
+                           class="product-link">Посмотреть детали заказа
+                        </a>
+                    </li>
+                </th:block>
+            </ul>
+        </th:block>
+        <a href="/">Вернуться на главную</a>
+    </div>
+    <br>
+</th:block>
+</html>

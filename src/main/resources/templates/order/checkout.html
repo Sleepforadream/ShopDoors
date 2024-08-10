@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}" lang="ru">
+
+<head>
+    <title layout:fragment="title">Оформление заказа</title>
+</head>
+
+<th:block layout:fragment="content">
+    <div class="checkout-container">
+        <h1 class="checkout-title">Оформление заказа</h1>
+        <div class="checkout-summary">
+            <h2 class="checkout-summary-title">Содержимое корзины</h2>
+            <th:block th:each="item : ${cart.items}">
+                <div class="checkout-item">
+                    <span class="item-name" th:text="${item.product.name}"></span> -
+                    <span class="item-quantity" th:text="${item.quantity}"></span> x
+                    <span class="item-price" th:text="${item.product.price} + ' ₽'"></span>
+                </div>
+            </th:block>
+            <div class="checkout-total">
+                <strong>Общая стоимость:</strong>
+                <span th:text="${cart.totalPrice} + ' ₽'"></span>
+            </div>
+        </div>
+
+        <form class="payment-form" th:action="@{/order-confirmation}" method="post">
+            <h2 class="payment-title">Информация для оплаты</h2>
+            <div class="checkout-form-group">
+                <label class="checkout-form-label" for="cardNumber">Номер карты:</label>
+                <input
+                        class="checkout-form-input"
+                        type="text"
+                        id="cardNumber"
+                        name="cardNumber"
+                        minlength="16"
+                        maxlength="16"
+                        pattern="\d{16}"
+                        required
+                        placeholder="Введите 16-значный номер карты">
+            </div>
+            <div class="checkout-form-group">
+                <label class="checkout-form-label" for="expiryDate">Дата окончания:</label>
+                <input class="checkout-form-input" type="date" id="expiryDate" name="expiryDate" required>
+            </div>
+            <div class="checkout-form-group">
+                <label class="checkout-form-label" for="cvv">CVV:</label>
+                <input
+                        class="checkout-form-input"
+                        type="text"
+                        id="cvv"
+                        name="cvv"
+                        maxlength="3"
+                        pattern="\d{3}"
+                        required
+                        placeholder="Введите 3-значный CVV код">
+            </div>
+            <br>
+            <button class="checkout-submit-button" type="submit">Оформить заказ</button>
+        </form>
+    </div>
+</th:block>
+
+</html>

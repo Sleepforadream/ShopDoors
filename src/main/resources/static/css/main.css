@@ -2687,6 +2687,7 @@ img {
 }
 
 .button-image-recommend {
+    text-decoration: none;
     color: #494949;
     transition: all .2s;
     line-height: 16px;
@@ -5545,6 +5546,8 @@ input#phoneNumber:invalid + .error-input-phoneNumber {
     max-width: 900px;
     margin: 0 auto;
     font-family: Arial, sans-serif;
+    text-align: center;
+    min-height: 78vh;
 }
 
 .cart-title {
@@ -5678,4 +5681,376 @@ input#phoneNumber:invalid + .error-input-phoneNumber {
 
 .cart-item-actions {
     display: flex;
+    justify-content: center;
+}
+
+.checkout-container {
+    width: 60%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.checkout-title {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.checkout-summary-title, .payment-title {
+    text-align: center;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: #333;
+}
+
+.checkout-summary {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.checkout-item {
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    color: #555;
+}
+
+.checkout-total {
+    text-align: right;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+    margin-top: 20px;
+}
+
+.payment-form {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.checkout-form-group {
+    margin-bottom: 15px;
+}
+
+.checkout-form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1em;
+    color: #333;
+}
+
+.checkout-form-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.1em;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.checkout-submit-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #427ed1;
+    color: white;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.checkout-submit-button:hover {
+    background-color: rgba(66, 126, 209, 0.9);
+}
+
+/* Основные стили для контейнера */
+.order-confirmation-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.order-confirmation-container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.order-confirmation-container p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #555;
+}
+
+.order-confirmation-container a {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #427ed1;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.order-confirmation-container a:hover {
+    background-color: rgba(66, 126, 209, 0.9);
+}
+
+.empty-cart-message {
+    font-size: 18px;
+    margin-top: 20px;
+    color: #333;
+    text-align: center;
+}
+
+/* Стили для ссылки на каталог товаров */
+.catalog-link {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #427ed1;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.catalog-link:hover {
+    background-color: rgba(66, 126, 209, 0.9);
+}
+
+
+.order-history-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    max-width: 800px;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.order-history-container h1 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.order-history-container p {
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+}
+
+.order-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.order-list li {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: box-shadow 0.3s;
+}
+
+.order-list li:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.order-list ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+.order-list li ul li {
+    margin-bottom: 5px;
+}
+
+.order-list span {
+    font-weight: bold;
+}
+
+.order-history-container a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #427ed1;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    text-align: center;
+}
+
+.order-history-container a:hover {
+    background-color: rgba(66, 126, 209, 0.9);
+}
+
+.order-action-form{
+    display: flex;
+    justify-content: space-between;
+}
+
+.order-remove-btn{
+    background-color: #c0392b;
+    color: white;
+    padding: 5px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.current-order-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    min-height: 75vh;
+}
+
+.current-order-container h1 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.current-order-container p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.current-order-container ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.current-order-container ul li {
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: box-shadow 0.3s;
+}
+
+.current-order-container ul li:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.current-order-container span {
+    font-weight: bold;
+}
+
+.current-order-container a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #427ed1;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    text-align: center;
+}
+
+.current-order-container a:hover {
+    background-color: rgba(66, 126, 209, 0.9);
+}
+
+.modal-order-detail {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-order-detail-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.modal-order-detail-header {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.modal-order-detail-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-order-detail-confirm, .btn-order-detail-cancel {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-order-detail-confirm {
+    background-color: #c0392b;
+    color: white;
+}
+
+.btn-order-detail-confirm:hover {
+    background-color: rgba(192, 57, 43, 0.9);
+    color: white;
+}
+
+.btn-order-detail-cancel {
+    background-color: #427ed1;
+    color: white;
+}
+
+.btn-order-detail-cancel:hover{
+    background-color: rgba(66, 126, 209, 0.9);
+    color: white;
 }

@@ -1,4 +1,4 @@
-package com.shopdoors.dao.entity.abstracted;
+package com.shopdoors.dao.entity.product.abstracted;
 
 import jakarta.persistence.Entity;
 import lombok.NoArgsConstructor;

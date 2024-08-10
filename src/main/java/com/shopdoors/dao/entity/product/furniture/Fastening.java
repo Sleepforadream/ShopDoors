@@ -1,6 +1,6 @@
 package com.shopdoors.dao.entity.product.furniture;
 
-import com.shopdoors.dao.entity.abstracted.Furniture;
+import com.shopdoors.dao.entity.product.abstracted.Furniture;
 import com.shopdoors.dao.enums.product.ProductType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

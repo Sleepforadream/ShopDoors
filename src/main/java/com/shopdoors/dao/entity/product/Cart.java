@@ -1,6 +1,6 @@
 package com.shopdoors.dao.entity.product;
 
-import com.shopdoors.dao.entity.abstracted.Product;
+import com.shopdoors.dao.entity.product.abstracted.Product;
 import com.shopdoors.dao.entity.user.User;
 import com.shopdoors.dao.enums.product.ProductType;
 import jakarta.persistence.CascadeType;
@@ -29,7 +29,7 @@ public class Cart {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.MERGE)
     private List<CartItem> items = new ArrayList<>();
 
     public void addItemOrUpdate(Product product, ProductType productType, int quantity) {

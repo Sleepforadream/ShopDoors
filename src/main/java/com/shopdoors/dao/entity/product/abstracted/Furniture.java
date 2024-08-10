@@ -1,4 +1,4 @@
-package com.shopdoors.dao.entity.abstracted;
+package com.shopdoors.dao.entity.product.abstracted;
 
 import com.shopdoors.dao.enums.product.Coating;
 import com.shopdoors.dao.enums.product.Metal;

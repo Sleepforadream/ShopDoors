@@ -9,38 +9,43 @@
 <th:block layout:fragment="content">
     <div class="cart-container">
         <h1 class="cart-title">Корзина</h1>
-        <div class="cart-items">
-            <th:block th:each="item : ${cart.items}">
-                <div class="cart-item">
-                    <img th:src="@{${item.product.imagePath}}" alt="Product Image" class="cart-item-image">
-                    <div class="cart-item-details">
-                        <div class="cart-item-name" th:text="${item.product.name}"></div>
-                        <div class="cart-item-info">
-                            <div class="cart-item-price">Цена: <span th:text="${item.product.price} + ' ₽'"></span></div>
-                            <div class="cart-item-quantity">
-                                <form th:action="@{/cart/update/{id}(id=${item.product.uuid})}" method="post">
-                                    <label for="quantity" class="visually-hidden">Количество:</label>
-                                    <input type="number" id="quantity" name="quantity" min="0" th:value="${item.quantity}" class="quantity-input" onchange="this.form.submit()">
+
+        <th:block th:if="${#lists.isEmpty(cart.items)}">
+            <p class="empty-cart-message">Ваша корзина пуста.</p>
+            <a href="/room-doors" class="catalog-link">Перейти в каталог товаров</a>
+        </th:block>
+
+        <th:block th:if="${not #lists.isEmpty(cart.items)}">
+            <div class="cart-items">
+                <th:block th:each="item : ${cart.items}">
+                    <div class="cart-item">
+                        <img th:src="@{${item.product.imagePath}}" alt="Product Image" class="cart-item-image">
+                        <div class="cart-item-details">
+                            <div class="cart-item-name" th:text="${item.product.name}"></div>
+                            <div class="cart-item-info">
+                                <div class="cart-item-price">Цена: <span th:text="${item.product.price} + ' ₽'"></span></div>
+                                <div class="cart-item-quantity">
+                                    <form th:action="@{/cart/update/{id}(id=${item.product.uuid})}" method="post">
+                                        <label for="quantity" class="visually-hidden">Количество:</label>
+                                        <input type="number" id="quantity" name="quantity" min="0" th:value="${item.quantity}" class="quantity-input" onchange="this.form.submit()">
+                                    </form>
+                                </div>
+                                <div class="cart-item-total">Общая стоимость: <span th:text="${item.product.price * item.quantity} + ' ₽'"></span></div>
+                            </div>
+                            <div class="cart-item-actions">
+                                <form th:action="@{/cart/remove/{id}(id=${item.product.uuid})}" method="post" class="cart-action-form">
+                                    <button type="submit" class="cart-remove-btn"><i class="fas fa-trash-alt"></i> Удалить</button>
                                 </form>
                             </div>
-                            <div class="cart-item-total">Общая стоимость: <span th:text="${item.product.price * item.quantity} + ' ₽'"></span></div>
-                        </div>
-                        <div class="cart-item-actions">
-                            <form th:action="@{/cart/remove/{id}(id=${item.product.uuid})}" method="post" class="cart-action-form">
-                                <button type="submit" class="cart-remove-btn"><i class="fas fa-trash-alt"></i> Удалить</button>
-                            </form>
-                            <form th:action="@{/cart/purchase/{id}(id=${item.product.uuid})}" method="post" class="cart-action-form">
-                                <button type="submit" class="cart-purchase-btn"><i class="fas fa-shopping-cart"></i> Оформить данный товар</button>
-                            </form>
                         </div>
                     </div>
-                </div>
-            </th:block>
-        </div>
-        <p class="cart-total">Общая стоимость: <span th:text="${cart.totalPrice} + ' ₽'"></span></p>
-        <form th:action="@{/cart/purchase/all}" method="post" class="cart-action-form">
-            <button type="submit" class="cart-checkout-link"><i class="fas fa-shopping-cart"></i> Оформить все товары</button>
-        </form>
+                </th:block>
+            </div>
+            <p class="cart-total">Общая стоимость: <span th:text="${cart.totalPrice} + ' ₽'"></span></p>
+            <form th:action="@{/checkout}" method="post" class="cart-action-form">
+                <button type="submit" class="cart-checkout-link"><i class="fas fa-shopping-cart"></i> Оформить все товары</button>
+            </form>
+        </th:block>
     </div>
 </th:block>
 </html>

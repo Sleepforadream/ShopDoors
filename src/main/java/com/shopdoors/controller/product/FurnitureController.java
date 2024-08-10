@@ -15,6 +15,7 @@ import com.shopdoors.service.product.PeepholeService;
 import com.shopdoors.service.product.RetainerService;
 import com.shopdoors.service.product.RoomHingeService;
 import com.shopdoors.service.product.RoomLockService;
+import com.shopdoors.service.user.AuthorizeUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,9 +40,11 @@ public class FurnitureController {
     private final RetainerService retainerService;
     private final PeepholeService peepholeService;
     private final FasteningService fasteningService;
+    private final AuthorizeUserDetailsService userService;
 
     @GetMapping("")
-    public String getFurniture() {
+    public String getFurniture(Model model) {
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         return "products/furniture";
     }
 
@@ -63,6 +66,7 @@ public class FurnitureController {
             String productImageName = handleService.getImgPathByName(handle.getName());
             handle.setImagePath(imageService.getImgUrl(productImageName));
         }
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         model.addAttribute("handles", handles);
         model.addAttribute("sortBy", sortBy);
         model.addAttribute("order", order);
@@ -79,6 +83,7 @@ public class FurnitureController {
         Handle handle = handleService.getHandleById(id);
         String productImageName = handleService.getImgPathByName(handle.getName());
         handle.setImagePath(imageService.getImgUrl(productImageName));
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         model.addAttribute("handle", handle);
         return "products/furniture/handle_detail";
     }
@@ -99,6 +104,7 @@ public class FurnitureController {
             String productImageName = roomHingeService.getImgPathByName(hinge.getName());
             hinge.setImagePath(imageService.getImgUrl(productImageName));
         }
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         model.addAttribute("hinges", hinges);
         model.addAttribute("sortBy", sortBy);
         model.addAttribute("order", order);
@@ -115,6 +121,7 @@ public class FurnitureController {
         RoomHinge roomHinge = roomHingeService.getHingeById(id);
         String productImageName = roomHingeService.getImgPathByName(roomHinge.getName());
         roomHinge.setImagePath(imageService.getImgUrl(productImageName));
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         model.addAttribute("roomHinge", roomHinge);
         return "products/furniture/room_hinge_detail";
     }
@@ -137,6 +144,7 @@ public class FurnitureController {
             String productImageName = roomLockService.getImgPathByName(roomLock.getName());
             roomLock.setImagePath(imageService.getImgUrl(productImageName));
         }
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         model.addAttribute("roomLocks", roomLocks);
         model.addAttribute("sortBy", sortBy);
         model.addAttribute("order", order);
@@ -153,6 +161,7 @@ public class FurnitureController {
         RoomLock roomLock = roomLockService.getRoomLockById(id);
         String productImageName = roomLockService.getImgPathByName(roomLock.getName());
         roomLock.setImagePath(imageService.getImgUrl(productImageName));
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         model.addAttribute("roomLock", roomLock);
         return "products/furniture/room_lock_detail";
     }
@@ -176,6 +185,7 @@ public class FurnitureController {
             String productImageName = entryLockService.getImgPathByName(entryLock.getName());
             entryLock.setImagePath(imageService.getImgUrl(productImageName));
         }
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         model.addAttribute("entryLocks", entryLocks);
         model.addAttribute("sortBy", sortBy);
         model.addAttribute("order", order);
@@ -193,6 +203,7 @@ public class FurnitureController {
         EntryLock entryLock = entryLockService.getEntryLockById(id);
         String productImageName = entryLockService.getImgPathByName(entryLock.getName());
         entryLock.setImagePath(imageService.getImgUrl(productImageName));
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         model.addAttribute("entryLock", entryLock);
         return "products/furniture/entry_lock_detail";
     }
@@ -215,6 +226,7 @@ public class FurnitureController {
             String productImageName = retainerService.getImgPathByName(retainer.getName());
             retainer.setImagePath(imageService.getImgUrl(productImageName));
         }
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         model.addAttribute("retainers", retainers);
         model.addAttribute("sortBy", sortBy);
         model.addAttribute("order", order);
@@ -228,6 +240,7 @@ public class FurnitureController {
 
     @GetMapping("/retainers/{id}")
     public String getRetainerById(@PathVariable UUID id, Model model) {
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         Retainer retainer = retainerService.getRetainerById(id);
         String productImageName = retainerService.getImgPathByName(retainer.getName());
         retainer.setImagePath(imageService.getImgUrl(productImageName));
@@ -254,6 +267,7 @@ public class FurnitureController {
             String productImageName = peepholeService.getImgPathByName(peephole.getName());
             peephole.setImagePath(imageService.getImgUrl(productImageName));
         }
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         model.addAttribute("peepholes", peepholes);
         model.addAttribute("sortBy", sortBy);
         model.addAttribute("order", order);
@@ -271,6 +285,7 @@ public class FurnitureController {
         Peephole peephole = peepholeService.getPeepholeById(id);
         String productImageName = peepholeService.getImgPathByName(peephole.getName());
         peephole.setImagePath(imageService.getImgUrl(productImageName));
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         model.addAttribute("peephole", peephole);
         return "products/furniture/peephole_detail";
     }
@@ -289,6 +304,7 @@ public class FurnitureController {
             String productImageName = fasteningService.getImgPathByName(fastening.getName());
             fastening.setImagePath(imageService.getImgUrl(productImageName));
         }
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         model.addAttribute("fastenings", fastenings);
         model.addAttribute("sortBy", sortBy);
         model.addAttribute("order", order);
@@ -303,6 +319,7 @@ public class FurnitureController {
         Fastening fastening = fasteningService.getFasteningById(id);
         String productImageName = fasteningService.getImgPathByName(fastening.getName());
         fastening.setImagePath(imageService.getImgUrl(productImageName));
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         model.addAttribute("fastening", fastening);
         return "products/furniture/fastening_detail";
     }

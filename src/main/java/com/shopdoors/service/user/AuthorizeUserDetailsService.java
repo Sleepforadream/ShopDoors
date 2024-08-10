@@ -136,4 +136,13 @@ public class AuthorizeUserDetailsService implements UserDetailsService {
     public User findByUsername(String username) {
         return userRepository.findByEmail(username).orElseThrow();
     }
+
+    public String getCurrentUserImgPath() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (!username.equals("anonymousUser")) {
+            String userImageName = getImgPathByEmail(username);
+            return imageService.getImgUrl(userImageName);
+        }
+        return null;
+    }
 }

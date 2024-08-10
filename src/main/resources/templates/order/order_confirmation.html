@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}" lang="ru">
+
+<head>
+    <title layout:fragment="title">Заказ оформлен</title>
+</head>
+
+<th:block layout:fragment="content">
+    <div class="order-confirmation-container">
+        <h1>Спасибо за ваш заказ!</h1>
+        <p>Ваш заказ № <span th:text="${order.id}"></span> был успешно оформлен.</p>
+        <p>Ожидаемая дата доставки: <span th:text="${order.deliveryDate}"></span></p>
+        <a th:href="@{/orders/{id}(id=${order.id})}"
+           class="product-link">Посмотреть текущий заказ
+        </a>
+        <a href="/">Вернуться на главную</a>
+    </div>
+</th:block>
+</html>

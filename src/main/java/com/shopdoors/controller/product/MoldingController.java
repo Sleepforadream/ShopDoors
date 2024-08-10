@@ -13,6 +13,7 @@ import com.shopdoors.service.product.FloorCoveringService;
 import com.shopdoors.service.product.JambService;
 import com.shopdoors.service.product.PanelService;
 import com.shopdoors.service.product.PannierService;
+import com.shopdoors.service.user.AuthorizeUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,9 +37,11 @@ public class MoldingController {
     private final JambService jambService;
     private final PanelService panelService;
     private final PannierService pannierService;
+    private final AuthorizeUserDetailsService userService;
 
     @GetMapping("")
-    public String getMoldings() {
+    public String getMoldings(Model model) {
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         return "products/moldings";
     }
 
@@ -56,6 +59,7 @@ public class MoldingController {
             String productImageName = baseboardService.getImgPathByName(baseboard.getName());
             baseboard.setImagePath(imageService.getImgUrl(productImageName));
         }
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         model.addAttribute("baseboards", baseboards);
         model.addAttribute("sortBy", sortBy);
         model.addAttribute("order", order);
@@ -70,6 +74,7 @@ public class MoldingController {
         Baseboard baseboard = baseboardService.getBaseboardById(id);
         String productImageName = baseboardService.getImgPathByName(baseboard.getName());
         baseboard.setImagePath(imageService.getImgUrl(productImageName));
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         model.addAttribute("baseboard", baseboard);
         return "products/moldings/baseboard_detail";
     }
@@ -91,6 +96,7 @@ public class MoldingController {
             String productImageName = additionalElementService.getImgPathByName(additionalElement.getName());
             additionalElement.setImagePath(imageService.getImgUrl(productImageName));
         }
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         model.addAttribute("additionalElements", additionalElements);
         model.addAttribute("sortBy", sortBy);
         model.addAttribute("order", order);
@@ -106,6 +112,7 @@ public class MoldingController {
         AdditionalElement additionalElement = additionalElementService.getAdditionalElementById(id);
         String productImageName = additionalElementService.getImgPathByName(additionalElement.getName());
         additionalElement.setImagePath(imageService.getImgUrl(productImageName));
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         model.addAttribute("additionalElement", additionalElement);
         return "products/moldings/additional_element_detail";
     }
@@ -127,6 +134,7 @@ public class MoldingController {
             String productImageName = floorCoveringService.getImgPathByName(floorCovering.getName());
             floorCovering.setImagePath(imageService.getImgUrl(productImageName));
         }
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         model.addAttribute("floorCoverings", floorCoverings);
         model.addAttribute("sortBy", sortBy);
         model.addAttribute("order", order);
@@ -142,6 +150,7 @@ public class MoldingController {
         FloorCovering floorCovering = floorCoveringService.getFloorCoveringById(id);
         String productImageName = floorCoveringService.getImgPathByName(floorCovering.getName());
         floorCovering.setImagePath(imageService.getImgUrl(productImageName));
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         model.addAttribute("floorCovering", floorCovering);
         return "products/moldings/floor_covering_detail";
     }
@@ -163,6 +172,7 @@ public class MoldingController {
             String productImageName = jambService.getImgPathByName(jamb.getName());
             jamb.setImagePath(imageService.getImgUrl(productImageName));
         }
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         model.addAttribute("jambs", jambs);
         model.addAttribute("sortBy", sortBy);
         model.addAttribute("order", order);
@@ -178,6 +188,7 @@ public class MoldingController {
         Jamb jamb = jambService.getJambById(id);
         String productImageName = jambService.getImgPathByName(jamb.getName());
         jamb.setImagePath(imageService.getImgUrl(productImageName));
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         model.addAttribute("jamb", jamb);
         return "products/moldings/jamb_detail";
     }
@@ -199,6 +210,7 @@ public class MoldingController {
             String productImageName = panelService.getImgPathByName(panel.getName());
             panel.setImagePath(imageService.getImgUrl(productImageName));
         }
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         model.addAttribute("panels", panels);
         model.addAttribute("sortBy", sortBy);
         model.addAttribute("order", order);
@@ -214,6 +226,7 @@ public class MoldingController {
         Panel panel = panelService.getPanelById(id);
         String productImageName = panelService.getImgPathByName(panel.getName());
         panel.setImagePath(imageService.getImgUrl(productImageName));
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         model.addAttribute("panel", panel);
         return "products/moldings/panel_detail";
     }
@@ -235,6 +248,7 @@ public class MoldingController {
             String productImageName = pannierService.getImgPathByName(pannier.getName());
             pannier.setImagePath(imageService.getImgUrl(productImageName));
         }
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         model.addAttribute("panniers", panniers);
         model.addAttribute("sortBy", sortBy);
         model.addAttribute("order", order);
@@ -250,6 +264,7 @@ public class MoldingController {
         Pannier pannier = pannierService.getPannierById(id);
         String productImageName = pannierService.getImgPathByName(pannier.getName());
         pannier.setImagePath(imageService.getImgUrl(productImageName));
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         model.addAttribute("pannier", pannier);
         return "products/moldings/pannier_detail";
     }

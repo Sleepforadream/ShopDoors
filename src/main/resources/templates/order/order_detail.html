@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}" lang="ru">
+
+<head>
+    <title layout:fragment="title">Детали заказа</title>
+</head>
+
+<th:block layout:fragment="content">
+    <script type="text/javascript" th:src="@{/js/orderDetailScripts.js}" defer></script>
+    <br>
+    <div class="current-order-container">
+        <h1>Текущий заказ</h1>
+        <th:block th:if="${currentOrder != null}">
+            <p>Заказ № <span th:text="${currentOrder.id}"></span></p>
+            <p>Дата заказа: <span th:text="${currentOrder.orderDate}"></span></p>
+            <p>Дата доставки: <span th:text="${currentOrder.deliveryDate}"></span></p>
+            <p>Осталось дней до доставки:
+                <span th:text="${T(java.time.temporal.ChronoUnit).DAYS.between(T(java.time.LocalDate).now(), currentOrder.deliveryDate)}"></span>
+            </p>
+            <p>Спецификация товаров: </p>
+            <ul>
+                <th:block th:each="item : ${currentOrder.customerOrderItems}">
+                    <li>
+                        <span th:text="${item.product.name}"></span> -
+                        Количество: <span th:text="${item.quantity}"></span> -
+                        Цена: <span th:text="${item.price} + ' ₽'"></span>
+                    </li>
+                </th:block>
+            </ul>
+            <p>Общая сумма заказа:
+                <span th:text="${currentOrder.getTotalPrice()}"></span> ₽
+            </p>
+        </th:block>
+        <th:block th:if="${currentOrder == null}">
+            <p>У вас нет текущего заказа.</p>
+        </th:block>
+        <form id="deleteForm" th:action="@{/orders/{id}(id=${currentOrder.getId()})}" method="post" class="order-action-form" onsubmit="return showModal()">
+            <a href="/orders" style="margin: inherit;">Ко всем заказам</a>
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit" class="order-remove-btn"><i class="fas fa-trash-alt"></i> Удалить</button>
+        </form>
+    </div>
+    <br>
+
+    <div id="confirmationModal" class="modal-order-detail">
+        <div class="modal-order-detail-content">
+            <div class="modal-order-detail-header">Подтверждение удаления</div>
+            <p>Вы точно хотите отменить заказ?</p>
+            <div class="modal-order-detail-buttons">
+                <button class="btn-order-detail-confirm" onclick="confirmDeletion()">Да</button>
+                <button class="btn-order-detail-cancel" onclick="cancelDeletion()">Нет</button>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

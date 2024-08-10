@@ -1,6 +1,6 @@
 package com.shopdoors.controller.product;
 
-import com.shopdoors.dao.entity.abstracted.Product;
+import com.shopdoors.dao.entity.product.abstracted.Product;
 import com.shopdoors.dao.entity.product.Cart;
 import com.shopdoors.dao.entity.product.CartItem;
 import com.shopdoors.dao.entity.user.User;
@@ -52,9 +52,7 @@ public class CartController {
 
     @GetMapping("/cart")
     public String viewCart(Principal principal, Model model) {
-        if (principal == null) {
-            return "redirect:/login";
-        }
+        if (principal == null) return "redirect:/login";
 
         User user = userService.findByUsername(principal.getName());
         Cart cart = cartRepository.findByUser(user).orElseGet(Cart::new);
@@ -65,15 +63,14 @@ public class CartController {
             product.setImagePath(imageService.getImgUrl(productImageName));
         }
 
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         model.addAttribute("cart", cart);
         return "products/cart";
     }
 
     @PostMapping("/cart/add/{id}/{type}")
     public String addToCart(@PathVariable UUID id, @PathVariable String type, @RequestParam int quantity, Principal principal) {
-        if (principal == null) {
-            return "redirect:/login";
-        }
+        if (principal == null) return "redirect:/login";
 
         User user = userService.findByUsername(principal.getName());
 
@@ -93,9 +90,7 @@ public class CartController {
 
     @PostMapping("/cart/update/{id}")
     public String updateCartItemQuantity(@PathVariable UUID id, @RequestParam int quantity, Principal principal) {
-        if (principal == null) {
-            return "redirect:/login";
-        }
+        if (principal == null) return "redirect:/login";
 
         User user = userService.findByUsername(principal.getName());
         Cart cart = cartRepository.findByUser(user).orElse(null);
@@ -121,9 +116,7 @@ public class CartController {
 
     @PostMapping("/cart/remove/{id}")
     public String removeFromCart(@PathVariable UUID id, Principal principal) {
-        if (principal == null) {
-            return "redirect:/login";
-        }
+        if (principal == null) return "redirect:/login";
 
         User user = userService.findByUsername(principal.getName());
         Cart cart = cartRepository.findByUser(user).orElse(null);
