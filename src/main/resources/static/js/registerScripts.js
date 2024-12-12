@@ -2,13 +2,10 @@
     let registerForm = document.querySelector('.signup-form');
     let mainHeader = document.querySelector('.main-header');
     let mainForm = document.querySelector('.main-form');
-    let shopFooter = document.querySelector('.shop-footer');
     let errorBlock = document.querySelector('.error-register-block');
     let secondMenu = document.querySelector('.second-header-menu');
 
     secondMenu.style.display = "none";
-
-    let coordsShopFooter = shopFooter.getBoundingClientRect();
 
     let heightHeader = mainHeader.offsetHeight;
 

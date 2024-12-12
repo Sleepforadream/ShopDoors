@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}" lang="ru">
+
+<head>
+    <title layout:fragment="title">Избранное</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<th:block layout:fragment="content">
+    <div class="favorites-container">
+        <h1>Избранные товары</h1>
+        <th:block th:if="${favorites.size() > 0}">
+            <th:block th:each="item : ${favorites}">
+                <div class="favorites-card">
+                    <img th:src="${item.product.imagePath}" alt="Product Image">
+                    <h3 th:text="${item.product.name}"></h3>
+                    <p class="price" th:text="${item.product.price} + ' ₽'"></p>
+                    <form th:action="@{/favorites/remove/{id}/{type}(id=${item.product.uuid}, type=${item.product.type})}" method="post">
+                        <button type="submit">Удалить из избранного</button>
+                    </form>
+                </div>
+            </th:block>
+        </th:block>
+        <th:block th:if="${favorites.size() == 0}">
+            <p class="no-favorites">У вас нет избранных товаров.</p>
+        </th:block>
+    </div>
+</th:block>
+
+</html>

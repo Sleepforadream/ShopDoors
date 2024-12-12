@@ -12,17 +12,12 @@ window.onload = function () {
     let contactsBarBackface = document.querySelectorAll('.about-contacts-bar-content-backface');
     let contactsBarArea = document.querySelectorAll('.about-contacts-bar, .about-contacts-bar-right');
 
-    function activateRotate(numberIndex) {
-        contactsBar[numberIndex].classList.add('active');
-        contactsBarBackface[numberIndex].classList.add('active');
-    }
-
     for (let i = 0; i < contactsBarArea.length; i++) {
-        contactsBarArea[i].addEventListener('mouseenter', e => {
+        contactsBarArea[i].addEventListener('mouseenter', () => {
             contactsBar[i].classList.add('active');
             contactsBarBackface[i].classList.add('active');
         })
-        contactsBarArea[i].addEventListener('mouseleave', e => {
+        contactsBarArea[i].addEventListener('mouseleave', () => {
             contactsBar[i].classList.remove('active');
             contactsBarBackface[i].classList.remove('active');
         })
@@ -44,18 +39,18 @@ window.onload = function () {
 
     let {popup, openPopupButton, userBlock, userCheckbox, userLogin, userPassword} = positionPopup();
 
-    userBlock.addEventListener('mouseenter', (e) => {
+    userBlock.addEventListener('mouseenter', () => {
         popup.classList.add('active');
 
-        userLogin.addEventListener('click', (e) => {
+        userLogin.addEventListener('click', () => {
             popup.classList.add('activetwo');
         });
 
-        userPassword.addEventListener('click', (e) => {
+        userPassword.addEventListener('click', () => {
             popup.classList.add('activetwo');
         });
 
-        userCheckbox.addEventListener('click', (e) => {
+        userCheckbox.addEventListener('click', () => {
             popup.classList.add('activetwo');
         });
 
@@ -67,7 +62,7 @@ window.onload = function () {
             });
         }
 
-        userBlock.addEventListener('mouseleave', (e) => {
+        userBlock.addEventListener('mouseleave', () => {
             popup.classList.remove('active');
         });
     });
@@ -153,31 +148,31 @@ window.onload = function () {
     popupCategory.style.top = topCategoryBlock + 'px'; // Применение позиционирования окна по вертикали
 
 
-    openPopupCategoryButton.addEventListener('mouseenter', (e) => {
+    openPopupCategoryButton.addEventListener('mouseenter', () => {
         openPopupCategoryButton.classList.add('active');
         textMenuCategories.classList.add('active');
         arrowMenuCategories.classList.add('active');
 
-        openPopupCategoryButton.addEventListener('mouseleave', (e) => {
+        openPopupCategoryButton.addEventListener('mouseleave', () => {
             openPopupCategoryButton.classList.remove('active');
             textMenuCategories.classList.remove('active');
             arrowMenuCategories.classList.remove('active');
         });
     });
 
-    categoryBlock.addEventListener('mouseenter', (e) => {
+    categoryBlock.addEventListener('mouseenter', () => {
         popupCategory.classList.add('active');
 
-        categoryBlock.addEventListener('mouseleave', (e) => {
+        categoryBlock.addEventListener('mouseleave', () => {
             popupCategory.classList.remove('active');
         });
     });
 
     imageCategoryBlock.forEach((img) => {
-        img.addEventListener('mouseenter', (e) => {
+        img.addEventListener('mouseenter', () => {
             img.classList.add('active');
 
-            img.addEventListener('mouseleave', (e) => {
+            img.addEventListener('mouseleave', () => {
                 img.classList.remove('active');
             });
         });
@@ -197,11 +192,11 @@ window.onload = function () {
     hoverBlock.forEach((button) => {
         let footerText = button.querySelector('.text-footer-list')
         let footerDropdown = button.querySelector('.dropdown-footer-icon')
-        button.addEventListener('mouseenter', e => {
+        button.addEventListener('mouseenter', () => {
             hoverFooterText(footerText,footerDropdown);
         });
 
-        button.addEventListener('mouseleave', e => {
+        button.addEventListener('mouseleave', () => {
                 hoverFooterText(footerText,footerDropdown);
         });
     });
@@ -213,7 +208,6 @@ window.onload = function () {
 
     let popupSearchSticky = document.querySelector('.menu-search-sticky'); // Само окно
     let openSearchPopupButtonSticky = document.querySelector('.search-icon-box-sticky'); // Кнопка для показа окна
-    let headerMenuSticky = document.querySelector('.header-sticky-menu'); //Хэдер
     let InputSearchSticky = document.querySelector('.input-search-sticky'); //Поле ввода для поиска
 
     let coordsSearchPopupButtonSticky = openSearchPopupButtonSticky.getBoundingClientRect(); //Координаты кнопки показа окна
@@ -259,31 +253,31 @@ window.onload = function () {
     popupCategorySticky.style.top = topCategoryBlockSticky + 'px'; // Применение позиционирования окна по вертикали
 
 
-    openPopupCategoryButtonSticky.addEventListener('mouseenter', (e) => {
+    openPopupCategoryButtonSticky.addEventListener('mouseenter', () => {
         openPopupCategoryButtonSticky.classList.add('active');
         textMenuCategoriesSticky.classList.add('active');
         arrowMenuCategoriesSticky.classList.add('active');
 
-        openPopupCategoryButtonSticky.addEventListener('mouseleave', (e) => {
+        openPopupCategoryButtonSticky.addEventListener('mouseleave', () => {
             openPopupCategoryButtonSticky.classList.remove('active');
             textMenuCategoriesSticky.classList.remove('active');
             arrowMenuCategoriesSticky.classList.remove('active');
         });
     });
 
-    categoryBlockSticky.addEventListener('mouseenter', (e) => {
+    categoryBlockSticky.addEventListener('mouseenter', () => {
         popupCategorySticky.classList.add('active');
 
-        categoryBlockSticky.addEventListener('mouseleave', (e) => {
+        categoryBlockSticky.addEventListener('mouseleave', () => {
             popupCategorySticky.classList.remove('active');
         });
     });
 
     imageCategoryBlockSticky.forEach((img) => {
-        img.addEventListener('mouseenter', (e) => {
+        img.addEventListener('mouseenter', () => {
             img.classList.add('active');
 
-            img.addEventListener('mouseleave', (e) => {
+            img.addEventListener('mouseleave', () => {
                 img.classList.remove('active');
             });
         });
@@ -334,13 +328,10 @@ window.onload = function () {
 //начало setHeightSlider
 
     let sliderContainer = document.querySelectorAll('.sliders-container'); // Блок со слайдами
-    let secondHeaderMenu = document.querySelector('.second-header-menu'); // Второе меню
     //Первое меню было объявлено выше
-    let mobileMenu = document.querySelector('.mobile-menu-box'); //Мобильное меню
 
     let coordsSecondHeaderMenu = openPopupCategoryButtonSticky.clientHeight; //Высота второго меню
     let coordsHeaderMenu = openPopupCategoryButtonSticky.clientHeight; //Высота первого меню
-    let coordsMobileMenu = openPopupCategoryButtonSticky.clientHeight; //Высота мобильного меню
 
     let heightHeader = coordsSecondHeaderMenu + coordsHeaderMenu;
 
@@ -353,12 +344,6 @@ window.onload = function () {
 
 
     if(window.innerWidth < 1050){
-            let secondMobileMenu = document.querySelector('.second-header-menu');
-            let headerMobileMenu = document.querySelector('.header-menu');
-
-            let coordsSecondMobileMenu = openPopupCategoryButtonSticky.clientHeight;
-            let coordsHeaderMobileMenu = openPopupCategoryButtonSticky.clientHeight;
-
             let heightHeader = 172;
             //let heightHeader = (coordsSecondMobileMenu * 2) + coordsHeaderMobileMenu;
             let heightSliderContainer = window.innerHeight - heightHeader + 4;
@@ -420,11 +405,11 @@ window.onload = function () {
 
     let timerSlide = setInterval(() => nextActiveSlide(), 5000);
 
-    slidersContainer.addEventListener('mouseenter', e => {
+    slidersContainer.addEventListener('mouseenter', () => {
         clearInterval(timerSlide);
     });
 
-    slidersContainer.addEventListener('mouseleave', e => {
+    slidersContainer.addEventListener('mouseleave', () => {
         timerSlide = setInterval(() => nextActiveSlide(), 5000);
     });
 
@@ -513,11 +498,11 @@ window.onload = function () {
         popoverGuaranties2.style.top = topPopoverGuaranties2 + 'px'; // Применение позиционирования окна по вертикали
     }
 
-    buttonImageGuaranties.addEventListener('click', e => {
+    buttonImageGuaranties.addEventListener('click', () => {
         popoverGuaranties.classList.toggle('active');
     });
 
-    buttonImageGuaranties2.addEventListener('click', e => {
+    buttonImageGuaranties2.addEventListener('click', () => {
         popoverGuaranties2.classList.toggle('active');
     });
 
@@ -543,8 +528,6 @@ window.onload = function () {
         }
     })
 
-
-
 //конец tooltipGuaranties
 
 // начало sliderReview
@@ -559,11 +542,11 @@ window.onload = function () {
     let subtitleHeadingReview2 = document.querySelector('.subtitle-heading-review2'); // Кнопка переключения на следующий слайд
     let sliderReviewBox = document.querySelector('.slider-review-box');
 
-    buttonSliderReview.addEventListener('click', e => {
+    buttonSliderReview.addEventListener('click', () => {
         activeSlideReview1();
     });
 
-    buttonSliderReview2.addEventListener('click', e => {
+    buttonSliderReview2.addEventListener('click', () => {
         activeSlideReview2();
     });
 
@@ -600,48 +583,19 @@ window.onload = function () {
 
     let timerSlideReview = setInterval(() => nextActiveSlideReview(), 5000);
 
-    sliderReviewBox.addEventListener('mouseenter', e => {
+    sliderReviewBox.addEventListener('mouseenter', () => {
         clearInterval(timerSlideReview);
     });
 
-    sliderReviewBox.addEventListener('mouseleave', e => {
+    sliderReviewBox.addEventListener('mouseleave', () => {
         timerSlideReview = setInterval(() => nextActiveSlideReview(), 5000);
     });
 
-
 // конец sliderReview
-
-//начало carouselBrands
-
-    let carouselIcons = document.querySelectorAll('.carousel-icon');
-    let carouselArea = document.querySelector('.our-brands-carousel');
-
-    //let timerCarouselIcons = setInterval(() => nextActiveCarouselIcon(), 5000);
-
-    /*const nextActiveCarouselIcon = () => {
-        carouselIcons.forEach((icon) => {
-            setTimeout(() => icon.remove(), 5000);
-        })
-    }
-
-    nextActiveCarouselIcon();*/
-
-//конец carouselBrands
-
-//начало contactsRotate
-
-//    let contactsBar = document.querySelectorAll('.about-contacts-bar-content');
-//    let contactsBarBackface = document.querySelector('.about-contacts-bar-content-backface');
-//
-//    contactsBar.addEventListener('click', e => {
-//        contactsBar.classList.add('active');
-//    });
-
-//конец contactsRotate
 
 // начало resizeBloks
 
-    window.addEventListener('resize', function(event) {
+    window.addEventListener('resize', function() {
         let coordsSearchPopupButton = openSearchPopupButton.getBoundingClientRect(); //Координаты кнопки показа окна
         let leftSearchPopup = coordsSearchPopupButton.left + (openSearchPopupButton.offsetWidth - popupSearch.offsetWidth); // Координаты позиционирования окна по горизонтали
         let topSearchPopup = coordsSearchPopupButton.top + openSearchPopupButton.offsetHeight + (headerMenu.offsetHeight / 2) - 1; // Координаты позиционирования окна по вертикали
@@ -682,7 +636,6 @@ window.onload = function () {
         //изменение размера контейнера со слайдами при изменении размера окна
         let coordsSecondHeaderMenu = openPopupCategoryButtonSticky.clientHeight;
         let coordsHeaderMenu = openPopupCategoryButtonSticky.clientHeight;
-        let coordsMobileMenu = openPopupCategoryButtonSticky.clientHeight;
         let heightHeader = coordsSecondHeaderMenu + coordsHeaderMenu;
         let heightSliderContainer = window.innerHeight - heightHeader + 4;
         sliderContainer.forEach((slide) => {
@@ -691,12 +644,6 @@ window.onload = function () {
 
         //изменение размера текста контейнера со слайдами при изменении размера окна
         if(window.innerWidth < 1050){
-            let secondMobileMenu = document.querySelector('.second-header-menu');
-            let headerMobileMenu = document.querySelector('.header-menu');
-
-            let coordsSecondMobileMenu = openPopupCategoryButtonSticky.clientHeight;
-            let coordsHeaderMobileMenu = openPopupCategoryButtonSticky.clientHeight;
-
             let heightHeader = 172;
             //let heightHeader = (coordsSecondMobileMenu * 2) + coordsHeaderMobileMenu;
             let heightSliderContainer = window.innerHeight - heightHeader + 4;

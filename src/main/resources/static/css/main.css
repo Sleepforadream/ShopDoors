@@ -5512,13 +5512,14 @@ input#phoneNumber:invalid + .error-input-phoneNumber {
 }
 
 .favorite-button {
+    cursor: pointer;
+    border-width: 0;
     background-color: #f44336;
     color: white;
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 5px;
     display: flex;
-    align-items: center;
     gap: 8px;
     transition: background-color 0.3s ease;
 }
@@ -6053,4 +6054,84 @@ input#phoneNumber:invalid + .error-input-phoneNumber {
 .btn-order-detail-cancel:hover{
     background-color: rgba(66, 126, 209, 0.9);
     color: white;
+}
+
+.favorite-item-image {
+    width: 100px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 10px;
+}
+
+.favorites-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Расстояние между карточками */
+}
+
+.favorites-card {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 15px;
+    gap: 15px;
+}
+
+.favorites-card img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.favorites-card .product-info {
+    flex-grow: 1;
+}
+
+.favorites-card h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.favorites-card p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #666;
+}
+
+.favorites-card button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    align-self: flex-start;
+}
+
+.favorites-card button:hover {
+    background-color: #c62828;
+}
+
+.favorites-container h1 {
+    width: 100%;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.no-favorites {
+    min-height: 63vh;
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    color: #666;
 }

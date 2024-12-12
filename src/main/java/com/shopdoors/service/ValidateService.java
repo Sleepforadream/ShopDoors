@@ -73,7 +73,7 @@ public class ValidateService {
             if (infoSizeValidation.containsValue(false)) return infoSizeValidation;
         }
 
-        Map<String, Boolean> nickNameCorrectValidation = validateCorrectName(profileDto.getFirstName(), "nickName");
+        Map<String, Boolean> nickNameCorrectValidation = validateCorrectName(profileDto.getNickName(), "nickName");
         if (nickNameCorrectValidation.containsValue(false)) return nickNameCorrectValidation;
 
         if (!profileDto.getFirstName().isEmpty()) {

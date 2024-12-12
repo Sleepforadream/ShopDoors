@@ -29,8 +29,8 @@ public class OrderController {
     private final AuthorizeUserDetailsService userService;
     private final CartRepository cartRepository;
     private final CustomerOrderRepository customerOrderRepository;
+    private final AuthorizeUserDetailsService userDetailsService;
     private final TransactionRunner transactionRunner;
-    private final ImageService imageService;
 
     @PostMapping("/checkout")
     public String showCheckoutPage(Principal principal, Model model) {
@@ -63,10 +63,9 @@ public class OrderController {
     public String viewOrderHistory(Principal principal, Model model) {
         if (principal == null) return "redirect:/login";
 
-        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
-
         User currentUser = userService.findByUsername(principal.getName());
         List<CustomerOrder> orders = orderService.getOrderHistory(currentUser);
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         model.addAttribute("orders", orders);
         return "/order/orders";
     }
@@ -74,14 +73,8 @@ public class OrderController {
     @GetMapping("/orders/{id}")
     public String viewCurrentOrder(Principal principal, Model model, @PathVariable long id) {
         if (principal == null) return "redirect:/login";
-
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        if (!username.equals("anonymousUser")) {
-            String userImageName = userService.getImgPathByEmail(username);
-            model.addAttribute("imgProfileUrl", imageService.getImgUrl(userImageName));
-        }
-
         CustomerOrder currentOrder = orderService.getOrderById(id);
+        model.addAttribute("imgProfileUrl", userDetailsService.getCurrentUserImgPath());
         model.addAttribute("currentOrder", currentOrder);
         return "/order/order_detail";
     }

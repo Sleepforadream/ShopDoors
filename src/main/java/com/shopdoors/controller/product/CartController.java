@@ -63,8 +63,8 @@ public class CartController {
             product.setImagePath(imageService.getImgUrl(productImageName));
         }
 
-        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         model.addAttribute("cart", cart);
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         return "products/cart";
     }
 

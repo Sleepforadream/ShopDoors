@@ -1,26 +1,10 @@
-    //
-// SmoothScroll for websites v1.4.10 (Balazs Galambosi)
-// http://www.smoothscroll.net/
-//
-// Licensed under the terms of the MIT license.
-//
-// You may use it in your theme if you credit me.
-// It is also free to use on any individual website.
-//
-// Exception:
-// The only restriction is to not publish any
-// extension for browsers or native application
-// without getting a written permission first.
-//
-
 (function () {
 
-// Scroll Variables (tweakable)
 var defaultOptions = {
 
     // Scrolling Core
     frameRate        : 150, // [Hz]
-    animationTime    : 400, // [ms]
+    animationTime    : 900, // [ms]
     stepSize         : 100, // [px]
 
     // Pulse (less tweakable)
@@ -96,7 +80,7 @@ function init() {
     initTest();
 
     // Checks if this script is running in a frame
-    if (top != self) {
+    if (top !== self) {
         isFrame = true;
     }
 
@@ -186,7 +170,7 @@ function scrollArray(elem, left, top) {
 
     directionCheck(left, top);
 
-    if (options.accelerationMax != 1) {
+    if (options.accelerationMax !== 1) {
         var now = Date.now();
         var elapsed = now - lastScroll;
         if (elapsed < options.accelerationDelta) {
@@ -224,7 +208,7 @@ function scrollArray(elem, left, top) {
         elem.style.scrollBehavior = 'auto';
     }
 
-    var step = function (time) {
+    var step = function () {
 
         var now = Date.now();
         var scrollX = 0;
@@ -420,7 +404,7 @@ function keydown(event) {
     }
 
     // [arrwow keys] on radio buttons should be left alone
-    if (isNodeName(target, 'input') && target.type == 'radio' &&
+    if (isNodeName(target, 'input') && target.type === 'radio' &&
         arrowKeys[event.keyCode])  {
       return true;
     }
@@ -436,7 +420,7 @@ function keydown(event) {
 
     var clientHeight = overflowing.clientHeight;
 
-    if (overflowing == document.body) {
+    if (overflowing === document.body) {
         clientHeight = window.innerHeight;
     }
 
@@ -458,7 +442,7 @@ function keydown(event) {
             y = clientHeight * 0.9;
             break;
         case key.home:
-            if (overflowing == document.body && document.scrollingElement)
+            if (overflowing === document.body && document.scrollingElement)
                 overflowing = document.scrollingElement;
             y = -overflowing.scrollTop;
             break;
@@ -512,7 +496,7 @@ function scheduleClearCache() {
     clearTimeout(clearCacheTimer);
     clearCacheTimer = setInterval(function () {
         cacheX = cacheY = smoothBehaviorForElement = {};
-    }, 1*1000);
+    }, 1000);
 }
 
 function setCache(elems, overflowing, x) {
@@ -577,7 +561,7 @@ function isScrollBehaviorSmooth(el) {
     var id = uniqueID(el);
     if (smoothBehaviorForElement[id] == null) {
         var scrollBehavior = getComputedStyle(el, '')['scroll-behavior'];
-        smoothBehaviorForElement[id] = ('smooth' == scrollBehavior);
+        smoothBehaviorForElement[id] = ('smooth' === scrollBehavior);
     }
     return smoothBehaviorForElement[id];
 }
@@ -637,7 +621,7 @@ function isTouchpad(deltaY) {
 }
 
 function isDivisible(n, divisor) {
-    return (Math.floor(n / divisor) == n / divisor);
+    return (Math.floor(n / divisor) === n / divisor);
 }
 
 function allDeltasDivisableBy(divisor) {
@@ -649,7 +633,7 @@ function allDeltasDivisableBy(divisor) {
 function isInsideYoutubeVideo(event) {
     var elem = event.target;
     var isControl = false;
-    if (document.URL.indexOf ('www.youtube.com/watch') != -1) {
+    if (document.URL.indexOf ('www.youtube.com/watch') !== -1) {
         do {
             isControl = (elem.classList &&
                          elem.classList.contains('html5-video-controls'));
@@ -680,9 +664,8 @@ var getScrollRoot = (function() {
       dummy.style.cssText = 'height:10000px;width:1px;';
       document.body.appendChild(dummy);
       var bodyScrollTop  = document.body.scrollTop;
-      var docElScrollTop = document.documentElement.scrollTop;
       window.scrollBy(0, 3);
-      if (document.body.scrollTop != bodyScrollTop)
+      if (document.body.scrollTop !== bodyScrollTop)
         (SCROLL_ROOT = document.body);
       else
         (SCROLL_ROOT = document.documentElement);
@@ -725,7 +708,7 @@ function pulse(x) {
     if (x >= 1) return 1;
     if (x <= 0) return 0;
 
-    if (options.pulseNormalize == 1) {
+    if (options.pulseNormalize === 1) {
         options.pulseNormalize /= pulse_(1);
     }
     return pulse_(x);
@@ -737,7 +720,7 @@ function pulse(x) {
  ***********************************************/
 
 var userAgent = window.navigator.userAgent;
-var isEdge    = /Edge/.test(userAgent); // thank you MS
+var isEdge    = /Edge/.test(userAgent); // thank you, MS
 var isChrome  = /chrome/i.test(userAgent) && !isEdge;
 var isSafari  = /safari/i.test(userAgent) && !isEdge;
 var isMobile  = /mobile/i.test(userAgent);

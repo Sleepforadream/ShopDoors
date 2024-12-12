@@ -88,7 +88,7 @@ public class AuthorizeUserDetailsService implements UserDetailsService {
             user.setInfo(profileDto.getInfo());
             user.setAddress(profileDto.getAddress());
             MultipartFile file = profileDto.getImg();
-            user.setImgPath(file.getOriginalFilename());
+            user.setImgPath(s3Properties.getImgProfilePath() + file.getOriginalFilename());
             if (!user.equals(((AuthorizeUserDetails) currentAuth.getPrincipal()).user())) {
                 try {
                     if (!file.isEmpty()) {

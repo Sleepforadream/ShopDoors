@@ -1,7 +1,6 @@
 let profileBox = document.querySelector('.profile-box');
 let mainHeader = document.querySelector('.main-header');
 let profileInfoBox = document.querySelector('.profile-info-box');
-let shopFooter = document.querySelector('.shop-footer');
 let secondMenu = document.querySelector('.second-header-menu');
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -9,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const profileImage = document.getElementById('profileImage');
     const imgProfileRemove = document.getElementById('imgProfileRemove');
     const imgProfileName = document.getElementById('imgProfileName');
-    const defaultImage = '/img/users_photo/unknownUser.svg';
+    const defaultImage = '/img/users/unknownUser.svg';
 
     imgProfileAdd.addEventListener('change', function () {
         const file = this.files[0];
@@ -26,13 +25,11 @@ document.addEventListener('DOMContentLoaded', function () {
     imgProfileRemove.addEventListener('click', function () {
         profileImage.src = defaultImage;
         imgProfileAdd.value = '';
-        imgProfileName.value = 'unknownUser.svg';
+        imgProfileName.value = 'profiles/unknownUser.svg';
     });
 });
 
 secondMenu.style.display = "none";
-
-let coordsShopFooter = shopFooter.getBoundingClientRect();
 
 let heightHeader = mainHeader.offsetHeight;
 
@@ -46,7 +43,5 @@ let coordsProfileBox = profileBox.getBoundingClientRect();
 if (coordsProfileInfoBox.bottom > coordsProfileBox.bottom || coordsProfileInfoBox.top < coordsProfileBox.top) {
 
     profileBox.style.height = 450 + 'px';
-
-    //let coordsRegisterForm = profileBox.getBoundingClientRect();
 
 }

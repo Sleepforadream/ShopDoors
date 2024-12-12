@@ -1,12 +1,9 @@
 let profileBox = document.querySelector('.profile-box');
 let mainHeader = document.querySelector('.main-header');
 let profileInfoBox = document.querySelector('.profile-info-box');
-let shopFooter = document.querySelector('.shop-footer');
 let secondMenu = document.querySelector('.second-header-menu');
 
 secondMenu.style.display = "none";
-
-let coordsShopFooter = shopFooter.getBoundingClientRect();
 
 let heightHeader = mainHeader.offsetHeight;
 

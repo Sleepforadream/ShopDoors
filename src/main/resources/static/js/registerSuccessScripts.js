@@ -2,9 +2,6 @@
     let registerForm = document.querySelector('.signin-form-success');
     let mainHeader = document.querySelector('.main-header');
     let mainForm = document.querySelector('.login_success-block');
-    let shopFooter = document.querySelector('.shop-footer');
-
-    let coordsShopFooter = shopFooter.getBoundingClientRect();
 
     let heightHeader = mainHeader.offsetHeight;
 
