@@ -195,30 +195,44 @@
                 <constraints primaryKey="true"/>
             </column>
             <column name="handle_uuid" type="UUID">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
             <column name="room_hinge_uuid" type="UUID">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
             <column name="retainer_uuid" type="UUID">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
+            </column>
+            <column name="additional_element_uuid" type="UUID">
+                <constraints nullable="true"/>
+            </column>
+            <column name="jamb_uuid" type="UUID">
+                <constraints nullable="true"/>
+            </column>
+            <column name="pannier_uuid" type="UUID">
+                <constraints nullable="true"/>
+            </column>
+            <column name="room_lock_uuid" type="UUID">
+                <constraints nullable="true"/>
             </column>
             <column name="facing" type="VARCHAR(100) CHECK (facing IN ('SPL', 'METAL', 'PLASTIC', 'LAMINATE', 'ENAMEL', 'CORTEX', 'VENEER', 'ECO_VENEER', 'MDF_PANEL'))">
                 <constraints nullable="false"/>
             </column>
-            <column name="color" type="VARCHAR(100) CHECK (color IN ('BLACK', 'WHITE', 'BLUE', 'RED', 'GREEN', 'YELLOW', 'ORANGE', 'PINK', 'PURPLE', 'GRAPHITE'))">
-                <constraints nullable="false"/>
-            </column>
-            <column name="metal" type="VARCHAR(100) CHECK (metal IN ('THICKNESS_01', 'THICKNESS_02', 'THICKNESS_03', 'THICKNESS_04', 'THICKNESS_05', 'THICKNESS_06', 'THICKNESS_07', 'THICKNESS_08', 'THICKNESS_09', 'THICKNESS_10', 'THICKNESS_11', 'THICKNESS_12'))">
-                <constraints nullable="false"/>
-            </column>
         </createTable>
         <addForeignKeyConstraint baseTableName="room_door" baseColumnNames="handle_uuid"
-                                 referencedTableName="handle" referencedColumnNames="uuid" constraintName="fk_handle"/>
+                                 referencedTableName="handle" referencedColumnNames="uuid" referencesUniqueColumn="false" constraintName="fk_handle"/>
         <addForeignKeyConstraint baseTableName="room_door" baseColumnNames="room_hinge_uuid"
-                                 referencedTableName="room_hinge" referencedColumnNames="uuid" constraintName="fk_room_hinge"/>
+                                 referencedTableName="room_hinge" referencedColumnNames="uuid" referencesUniqueColumn="false" constraintName="fk_room_hinge"/>
         <addForeignKeyConstraint baseTableName="room_door" baseColumnNames="retainer_uuid"
-                                 referencedTableName="retainer" referencedColumnNames="uuid" constraintName="fk_retainer"/>
+                                 referencedTableName="retainer" referencedColumnNames="uuid" referencesUniqueColumn="false" constraintName="fk_retainer"/>
+        <addForeignKeyConstraint baseTableName="room_door" baseColumnNames="additional_element_uuid"
+                                 referencedTableName="additional_element" referencedColumnNames="uuid" referencesUniqueColumn="false" constraintName="fk_additional_element"/>
+        <addForeignKeyConstraint baseTableName="room_door" baseColumnNames="jamb_uuid"
+                                 referencedTableName="jamb" referencedColumnNames="uuid" referencesUniqueColumn="false" constraintName="fk_jamb"/>
+        <addForeignKeyConstraint baseTableName="room_door" baseColumnNames="pannier_uuid"
+                                 referencedTableName="pannier" referencedColumnNames="uuid" referencesUniqueColumn="false" constraintName="fk_pannier"/>
+        <addForeignKeyConstraint baseTableName="room_door" baseColumnNames="room_lock_uuid"
+                                 referencedTableName="room_lock" referencedColumnNames="uuid" referencesUniqueColumn="false" constraintName="fk_room_lock"/>
     </changeSet>
 
 
@@ -246,18 +260,23 @@
             <column name="second_entry_lock_uuid" type="UUID">
                 <constraints nullable="true"/>
             </column>
+            <column name="retainer_uuid" type="UUID">
+                <constraints nullable="true"/>
+            </column>
         </createTable>
-        <addForeignKeyConstraint baseTableName="entry_door" baseColumnNames="panel_inside_uuid"
+        <addForeignKeyConstraint baseTableName="entry_door" baseColumnNames="panel_inside_uuid" referencesUniqueColumn="false"
                                  referencedTableName="panel" referencedColumnNames="uuid" constraintName="fk_panel_inside"/>
-        <addForeignKeyConstraint baseTableName="entry_door" baseColumnNames="panel_outside_uuid"
+        <addForeignKeyConstraint baseTableName="entry_door" baseColumnNames="panel_outside_uuid" referencesUniqueColumn="false"
                                  referencedTableName="panel" referencedColumnNames="uuid" constraintName="fk_panel_outside"/>
-        <addForeignKeyConstraint baseTableName="entry_door" baseColumnNames="handle_uuid"
+        <addForeignKeyConstraint baseTableName="entry_door" baseColumnNames="handle_uuid" referencesUniqueColumn="false"
                                  referencedTableName="handle" referencedColumnNames="uuid" constraintName="fk_handle"/>
-        <addForeignKeyConstraint baseTableName="entry_door" baseColumnNames="entry_hinge_uuid"
+        <addForeignKeyConstraint baseTableName="entry_door" baseColumnNames="entry_hinge_uuid" referencesUniqueColumn="false"
                                  referencedTableName="entry_hinge" referencedColumnNames="uuid" constraintName="fk_entry_hinge"/>
-        <addForeignKeyConstraint baseTableName="entry_door" baseColumnNames="first_entry_lock_uuid"
+        <addForeignKeyConstraint baseTableName="entry_door" baseColumnNames="first_entry_lock_uuid" referencesUniqueColumn="false"
                                  referencedTableName="entry_lock" referencedColumnNames="uuid" constraintName="fk_first_entry_lock"/>
-        <addForeignKeyConstraint baseTableName="entry_door" baseColumnNames="second_entry_lock_uuid"
+        <addForeignKeyConstraint baseTableName="entry_door" baseColumnNames="second_entry_lock_uuid" referencesUniqueColumn="false"
                                  referencedTableName="entry_lock" referencedColumnNames="uuid" constraintName="fk_second_entry_lock"/>
+        <addForeignKeyConstraint baseTableName="entry_door" baseColumnNames="retainer_uuid" referencesUniqueColumn="false"
+                                 referencedTableName="retainer" referencedColumnNames="uuid" constraintName="fk_retainer"/>
     </changeSet>
 </databaseChangeLog>

@@ -14,17 +14,4 @@ public class ShopDoorsApplication {
         SpringApplication.run(ShopDoorsApplication.class, args);
     }
 
-//    @Bean
-//    public CommandLineRunner commandLineRunner(AuthorizeUserRepository repository) {
-//        return args -> {
-//            try {
-//                var entity = repository.findByNickName("nervan");
-//                System.err.println("Success: " + entity.get().getFirstName());
-//            } catch (Exception e) {
-//                System.err.println("Error: Unable to connect to the database.");
-//                e.printStackTrace();
-//            }
-//        };
-//    }
-
 }
