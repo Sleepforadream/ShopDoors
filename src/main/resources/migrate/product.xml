@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <!-- Panel Table -->
+    <changeSet id="1" author="carev.maxim">
+        <createTable tableName="panel">
+            <column name="uuid" type="UUID">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="panel_type" type="VARCHAR(100) CHECK (panel_type IN ('FOR_ENTRY', 'FOR_SLOPE'))">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Pannier Table -->
+    <changeSet id="2" author="carev.maxim">
+        <createTable tableName="pannier">
+            <column name="uuid" type="UUID">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="molding_type" type="VARCHAR(100) CHECK (molding_type IN ('TELESCOPIC', 'FLAT'))">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Jamb Table -->
+    <changeSet id="3" author="carev.maxim">
+        <createTable tableName="jamb">
+            <column name="uuid" type="UUID">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="molding_type" type="VARCHAR(100) CHECK (molding_type IN ('TELESCOPIC', 'FLAT'))">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Floor Covering Table -->
+    <changeSet id="4" author="carev.maxim">
+        <createTable tableName="floor_covering">
+            <column name="uuid" type="UUID">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="water_resistance_type" type="VARCHAR(100) CHECK (water_resistance_type IN ('WATER_RESISTANCE', 'PARTIAL_WATER_RESISTANCE', 'NO_WATER_RESISTANCE'))">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Fastening Table -->
+    <changeSet id="5" author="carev.maxim">
+        <createTable tableName="fastening">
+            <column name="uuid" type="UUID">
+                <constraints primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Baseboard Table -->
+    <changeSet id="6" author="carev.maxim">
+        <createTable tableName="baseboard">
+            <column name="uuid" type="UUID">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="fastening_uuid" type="UUID">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="baseboard" baseColumnNames="fastening_uuid"
+                                 referencedTableName="fastening" referencedColumnNames="uuid"
+                                 constraintName="fk_fastening"/>
+    </changeSet>
+
+    <!-- Additional Element Table -->
+    <changeSet id="7" author="carev.maxim">
+        <createTable tableName="additional_element">
+            <column name="uuid" type="UUID">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="molding_type" type="VARCHAR(100) CHECK (molding_type IN ('TELESCOPIC', 'FLAT'))">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Room Lock Table -->
+    <changeSet id="8" author="carev.maxim">
+        <createTable tableName="room_lock">
+            <column name="uuid" type="UUID">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="tongue_type" type="VARCHAR(100) CHECK (tongue_type IN ('MECHANICAL', 'MAGNETIC'))">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lock_type" type="VARCHAR(100) CHECK (lock_type IN ('KEY', 'RETAINER'))">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Room Hinge Table -->
+    <changeSet id="9" author="carev.maxim">
+        <createTable tableName="room_hinge">
+            <column name="uuid" type="UUID">
+                <constraints primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Retainer Table -->
+    <changeSet id="10" author="carev.maxim">
+        <createTable tableName="retainer">
+            <column name="uuid" type="UUID">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="socket" type="VARCHAR(100) CHECK (socket IN ('SQUARE_THICK', 'SQUARE_THIN', 'ROUND_THICK', 'ROUND_THIN', 'WITHOUT_SOCKET'))">
+                <constraints nullable="false"/>
+            </column>
+            <column name="key_retainer" type="VARCHAR(100) CHECK (key_retainer IN ('KEY_KEY', 'KEY_RETAINER', 'RETAINER'))">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Peephole Table -->
+    <changeSet id="11" author="carev.maxim">
+        <createTable tableName="peephole">
+            <column name="uuid" type="UUID">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="maximum_depth" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="minimum_depth" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="peephole_type" type="VARCHAR(100) CHECK (peephole_type IN ('LIGHT_ENHANCED', 'BULLETPROOF', 'ELECTRIC'))">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Handle Table -->
+    <changeSet id="12" author="carev.maxim">
+        <createTable tableName="handle">
+            <column name="uuid" type="UUID">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="socket" type="VARCHAR(100) CHECK (socket IN ('SQUARE_THICK', 'SQUARE_THIN', 'ROUND_THICK', 'ROUND_THIN', 'WITHOUT_SOCKET'))">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rod_length" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Entry Lock Table -->
+    <changeSet id="13" author="carev.maxim">
+        <createTable tableName="entry_lock">
+            <column name="uuid" type="UUID">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="defense_class" type="VARCHAR(100) CHECK (defense_class IN ('FIRST', 'SECOND', 'THIRD', 'FOURTH'))">
+                <constraints nullable="false"/>
+            </column>
+            <column name="first_key_type" type="VARCHAR(100) CHECK (first_key_type IN ('SUVALDNY', 'CYLINDER', 'ELECTRIC', 'NONE'))">
+                <constraints nullable="false"/>
+            </column>
+            <column name="second_key_type" type="VARCHAR(100) CHECK (second_key_type IN ('SUVALDNY', 'CYLINDER', 'ELECTRIC', 'NONE'))">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Entry Hinge Table -->
+    <changeSet id="14" author="carev.maxim">
+        <createTable tableName="entry_hinge">
+            <column name="uuid" type="UUID">
+                <constraints primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Room Door Table -->
+    <changeSet id="15" author="carev.maxim">
+        <createTable tableName="room_door">
+            <column name="uuid" type="UUID">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="handle_uuid" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="room_hinge_uuid" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="retainer_uuid" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="facing" type="VARCHAR(100) CHECK (facing IN ('SPL', 'METAL', 'PLASTIC', 'LAMINATE', 'ENAMEL', 'CORTEX', 'VENEER', 'ECO_VENEER', 'MDF_PANEL'))">
+                <constraints nullable="false"/>
+            </column>
+            <column name="color" type="VARCHAR(100) CHECK (color IN ('BLACK', 'WHITE', 'BLUE', 'RED', 'GREEN', 'YELLOW', 'ORANGE', 'PINK', 'PURPLE', 'GRAPHITE'))">
+                <constraints nullable="false"/>
+            </column>
+            <column name="metal" type="VARCHAR(100) CHECK (metal IN ('THICKNESS_01', 'THICKNESS_02', 'THICKNESS_03', 'THICKNESS_04', 'THICKNESS_05', 'THICKNESS_06', 'THICKNESS_07', 'THICKNESS_08', 'THICKNESS_09', 'THICKNESS_10', 'THICKNESS_11', 'THICKNESS_12'))">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="room_door" baseColumnNames="handle_uuid"
+                                 referencedTableName="handle" referencedColumnNames="uuid" constraintName="fk_handle"/>
+        <addForeignKeyConstraint baseTableName="room_door" baseColumnNames="room_hinge_uuid"
+                                 referencedTableName="room_hinge" referencedColumnNames="uuid" constraintName="fk_room_hinge"/>
+        <addForeignKeyConstraint baseTableName="room_door" baseColumnNames="retainer_uuid"
+                                 referencedTableName="retainer" referencedColumnNames="uuid" constraintName="fk_retainer"/>
+    </changeSet>
+
+
+    <!-- Entry Door Table -->
+    <changeSet id="16" author="carev.maxim">
+        <createTable tableName="entry_door">
+            <column name="uuid" type="UUID">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="panel_inside_uuid" type="UUID">
+                <constraints nullable="true"/>
+            </column>
+            <column name="panel_outside_uuid" type="UUID">
+                <constraints nullable="true"/>
+            </column>
+            <column name="handle_uuid" type="UUID">
+                <constraints nullable="true"/>
+            </column>
+            <column name="entry_hinge_uuid" type="UUID">
+                <constraints nullable="true"/>
+            </column>
+            <column name="first_entry_lock_uuid" type="UUID">
+                <constraints nullable="true"/>
+            </column>
+            <column name="second_entry_lock_uuid" type="UUID">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="entry_door" baseColumnNames="panel_inside_uuid"
+                                 referencedTableName="panel" referencedColumnNames="uuid" constraintName="fk_panel_inside"/>
+        <addForeignKeyConstraint baseTableName="entry_door" baseColumnNames="panel_outside_uuid"
+                                 referencedTableName="panel" referencedColumnNames="uuid" constraintName="fk_panel_outside"/>
+        <addForeignKeyConstraint baseTableName="entry_door" baseColumnNames="handle_uuid"
+                                 referencedTableName="handle" referencedColumnNames="uuid" constraintName="fk_handle"/>
+        <addForeignKeyConstraint baseTableName="entry_door" baseColumnNames="entry_hinge_uuid"
+                                 referencedTableName="entry_hinge" referencedColumnNames="uuid" constraintName="fk_entry_hinge"/>
+        <addForeignKeyConstraint baseTableName="entry_door" baseColumnNames="first_entry_lock_uuid"
+                                 referencedTableName="entry_lock" referencedColumnNames="uuid" constraintName="fk_first_entry_lock"/>
+        <addForeignKeyConstraint baseTableName="entry_door" baseColumnNames="second_entry_lock_uuid"
+                                 referencedTableName="entry_lock" referencedColumnNames="uuid" constraintName="fk_second_entry_lock"/>
+    </changeSet>
+</databaseChangeLog>

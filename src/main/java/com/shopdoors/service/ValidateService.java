@@ -257,13 +257,13 @@ public class ValidateService {
 
     private Map<String, Boolean> validateCorrectName(String name, String fieldName) {
         Map<String, Boolean> erroredFields = new HashMap<>();
-        String NAME_PATTERN = "^[a-zA-Z\\d_-]{3,16}$";
+        String NAME_PATTERN = "^[a-zA-Zа-яА-Я\\d_-]{3,16}$";
         Pattern pattern = Pattern.compile(NAME_PATTERN);
         Matcher matcher = pattern.matcher(name);
         if (matcher.matches()) {
             erroredFields.put("Введённое имя валидно", true);
         } else {
-            erroredFields.put("Поле " + fieldName + " должно содержать только латинские буквы, цифры, дефис и знак подчёркивания. " +
+            erroredFields.put("Поле " + fieldName + " должно содержать буквы, цифры, дефис и знак подчёркивания. " +
                     "Длина - не менее 3 символов, не более 16 символов", false);
         }
         return erroredFields;

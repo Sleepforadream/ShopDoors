@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <!-- Таблица client -->
+    <changeSet id="1" author="carev.maxim">
+        <createTable tableName="client">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="register_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="contract_number" type="VARCHAR(100)">
+                <constraints unique="true"/>
+            </column>
+            <column name="first_name" type="VARCHAR(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="second_name" type="VARCHAR(1000)"/>
+            <column name="third_name" type="VARCHAR(1000)"/>
+            <column name="phone_number" type="VARCHAR(12)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Таблица employee -->
+    <changeSet id="2" author="carev.maxim">
+        <createTable tableName="employee">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="register_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="passport" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="contract_number" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="first_name" type="VARCHAR(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="second_name" type="VARCHAR(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="third_name" type="VARCHAR(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="position" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="gender" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="birth_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone_number" type="VARCHAR(12)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="address" type="VARCHAR(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="img_path" type="VARCHAR(300)"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Таблица measurement -->
+    <changeSet id="3" author="carev.maxim">
+        <createTable tableName="measurement">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="register_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address" type="VARCHAR(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="city" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fabric" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="room_doors_count" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="enter_doors_count" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="measurement_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="measurement_time" type="TIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="info" type="VARCHAR(1000)"/>
+            <column name="reminder_sent" type="BOOLEAN"/>
+            <column name="client_id" type="BIGINT"/>
+            <column name="employee_id" type="BIGINT"/>
+        </createTable>
+
+        <!-- Уникальное ограничение для measurement_date и measurement_time -->
+        <addUniqueConstraint
+                columnNames="measurement_date, measurement_time, address"
+                tableName="measurement"
+                constraintName="uc_measurement"/>
+
+        <!-- Внешние ключи -->
+        <addForeignKeyConstraint
+                baseTableName="measurement"
+                baseColumnNames="client_id"
+                referencedTableName="client"
+                referencedColumnNames="id"
+                constraintName="fk_client"
+                onDelete="SET NULL"/>
+
+        <addForeignKeyConstraint
+                baseTableName="measurement"
+                baseColumnNames="employee_id"
+                referencedTableName="employee"
+                referencedColumnNames="id"
+                constraintName="fk_employee"
+                onDelete="SET NULL"/>
+    </changeSet>
+
+</databaseChangeLog>

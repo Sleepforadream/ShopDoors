@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <!-- Таблица users -->
+    <changeSet id="1" author="carev.maxim">
+        <createTable tableName="users">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="register_date" type="DATE" defaultValueDate="CURRENT_DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nick_name" type="VARCHAR(1000)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="first_name" type="VARCHAR(1000)"/>
+            <column name="second_name" type="VARCHAR(1000)"/>
+            <column name="third_name" type="VARCHAR(1000)"/>
+            <column name="gender" type="VARCHAR(25)"/>
+            <column name="birth_date" type="DATE"/>
+            <column name="phone_number" type="VARCHAR(12)">
+                <constraints unique="true"/>
+            </column>
+            <column name="address" type="VARCHAR(1000)"/>
+            <column name="info" type="VARCHAR(1000)"/>
+            <column name="img_path" type="VARCHAR(300)"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Таблица cart -->
+    <changeSet id="2" author="carev.maxim">
+        <createTable tableName="cart">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!-- Внешний ключ для связи с таблицей users -->
+        <addForeignKeyConstraint
+                baseTableName="cart"
+                baseColumnNames="user_id"
+                referencedTableName="users"
+                referencedColumnNames="id"
+                constraintName="fk_cart_user"
+                onDelete="CASCADE"/>
+
+        <!-- Уникальный ключ для user_id -->
+        <addUniqueConstraint columnNames="user_id" tableName="cart"/>
+    </changeSet>
+
+    <!-- Таблица cart_item -->
+    <changeSet id="3" author="carev.maxim">
+        <createTable tableName="cart_item">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="cart_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantity" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_type" type="VARCHAR(100) CHECK(product_type IN ('ROOM_DOOR', 'ENTRY_DOOR', 'HANDLE', 'ROOM_HINGE', 'ROOM_LOCK', 'ENTRY_LOCK', 'RETAINER', 'PEEPHOLE', 'FASTENING', 'ADDITIONAL_ELEMENT', 'JAMB', 'PANNIER', 'BASEBOARD', 'PANEL', 'FLOOR_COVERING')">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!-- Внешний ключ для связи с таблицей cart -->
+        <addForeignKeyConstraint
+                baseTableName="cart_item"
+                baseColumnNames="cart_id"
+                referencedTableName="cart"
+                referencedColumnNames="id"
+                constraintName="fk_cart_item_cart"
+                onDelete="CASCADE"/>
+
+        <!-- Уникальное ограничение для cart_id, product_uuid, product_type -->
+        <addUniqueConstraint columnNames="cart_id, product_id, product_type" tableName="cart_item"/>
+    </changeSet>
+
+</databaseChangeLog>

@@ -10,6 +10,10 @@ spring:
   jpa:
     open-in-view: true
     generate-ddl: true
+  liquibase:
+    change-log: classpath:/migrate/changelog-master.xml
+#    change-log: classpath:/db/changelog/2024/12/changelog-master.xml
+    enabled: true
   main:
     banner-mode: off
   servlet:

@@ -33,6 +33,7 @@ dependencies {
     implementation("io.minio:minio:8.5.2")
     implementation("commons-io:commons-io:2.16.1")
     implementation("org.postgresql:postgresql")
+    implementation("org.liquibase:liquibase-core")
 
     compileOnly("org.projectlombok:lombok")
 

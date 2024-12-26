@@ -12,6 +12,16 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('measurementDate').setAttribute('max', maxDateISO);
 });
 
+function formatTime(value) {
+    // Преобразует 800 в "08:00" или 900 в "09:00"
+    const str = value.toString().padStart(4, '0'); // Убедиться, что строка имеет 4 символа
+    const hours = str.slice(0, 2);
+    let minutes = str.slice(2);
+    minutes = minutes.replace(",", "");
+    minutes = minutes.concat("0")
+    return `${hours}:${minutes}`;
+}
+
 function updateAvailableTimes(date) {
     fetch(`/api/available-times?date=${date}`)
         .then(response => response.json())
@@ -26,7 +36,7 @@ function updateAvailableTimes(date) {
                 data.forEach(time => {
                     const option = document.createElement('option');
                     option.value = time;
-                    option.textContent = time;
+                    option.textContent = formatTime(time);
                     timeSelect.appendChild(option);
                 });
             }
