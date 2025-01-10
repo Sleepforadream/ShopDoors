@@ -97,6 +97,7 @@ public class MinioService {
                             .expiry(60 * 60)
                             .build());
         } catch (InsufficientDataException
+                 | IllegalArgumentException
                  | ErrorResponseException
                  | InternalException
                  | InvalidKeyException

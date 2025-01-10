@@ -52,8 +52,6 @@ public class CartController {
 
     @GetMapping("/cart")
     public String viewCart(Principal principal, Model model) {
-        if (principal == null) return "redirect:/login";
-
         User user = userService.findByUsername(principal.getName());
         Cart cart = cartRepository.findByUser(user).orElseGet(Cart::new);
 
@@ -70,8 +68,6 @@ public class CartController {
 
     @PostMapping("/cart/add/{id}/{type}")
     public String addToCart(@PathVariable UUID id, @PathVariable String type, @RequestParam int quantity, Principal principal) {
-        if (principal == null) return "redirect:/login";
-
         User user = userService.findByUsername(principal.getName());
 
         Cart cart = cartRepository.findByUser(user).orElseGet(() -> {
@@ -90,8 +86,6 @@ public class CartController {
 
     @PostMapping("/cart/update/{id}")
     public String updateCartItemQuantity(@PathVariable UUID id, @RequestParam int quantity, Principal principal) {
-        if (principal == null) return "redirect:/login";
-
         User user = userService.findByUsername(principal.getName());
         Cart cart = cartRepository.findByUser(user).orElse(null);
 
@@ -116,8 +110,6 @@ public class CartController {
 
     @PostMapping("/cart/remove/{id}")
     public String removeFromCart(@PathVariable UUID id, Principal principal) {
-        if (principal == null) return "redirect:/login";
-
         User user = userService.findByUsername(principal.getName());
         Cart cart = cartRepository.findByUser(user).orElse(null);
 

@@ -1,12 +1,10 @@
 package com.shopdoors.controller.measurement;
 
 import com.shopdoors.dto.MeasurementDto;
-import com.shopdoors.service.ImageService;
 import com.shopdoors.service.MeasurementService;
 import com.shopdoors.service.ValidateService;
 import com.shopdoors.service.user.AuthorizeUserDetailsService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

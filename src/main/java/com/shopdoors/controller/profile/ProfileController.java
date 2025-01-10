@@ -17,7 +17,6 @@ public class ProfileController {
     @GetMapping(value = {"/private_profile", "/private_profile_home"})
     public String profilePage(Model model) {
         String currentEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        if (currentEmail.equals("anonymousUser")) return "redirect:/home";
 
         model.addAttribute("currentPage", "/private_profile_home");
 

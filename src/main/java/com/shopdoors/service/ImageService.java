@@ -26,7 +26,6 @@ public class ImageService {
 
     public String getImgUrl(String objectName) {
         log.info("Retrieving user image from {}", objectName);
-        Objects.requireNonNull(objectName);
         return minioService.getObjectUrl(minioService.getImgBucket(), objectName);
     }
 }

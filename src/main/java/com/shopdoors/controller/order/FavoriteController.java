@@ -1,17 +1,13 @@
 package com.shopdoors.controller.order;
 
-import com.shopdoors.dao.entity.order.Favorite;
 import com.shopdoors.dao.entity.order.FavoriteItem;
-import com.shopdoors.dao.entity.product.CartItem;
 import com.shopdoors.dao.entity.product.abstracted.Product;
-import com.shopdoors.dao.entity.product.door.EntryDoor;
 import com.shopdoors.dao.entity.user.User;
 import com.shopdoors.service.FavoriteService;
 import com.shopdoors.service.ImageService;
 import com.shopdoors.service.user.AuthorizeUserDetailsService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,8 +28,6 @@ public class FavoriteController {
 
     @GetMapping("/favorites")
     public String viewFavorites(Principal principal, Model model) {
-        if (principal == null) return "redirect:/login";
-
         User user = userService.findByUsername(principal.getName());
         List<FavoriteItem> favoriteItems = favoriteService.getUserFavorites(user).getItems();
 
@@ -50,19 +44,14 @@ public class FavoriteController {
 
     @PostMapping("/favorites/toggle/{id}/{type}")
     public String toggleFavorite(@PathVariable UUID id, @PathVariable String type, Principal principal, HttpServletRequest request) {
-        if (principal == null) return "redirect:/login";
-
         User user = userService.findByUsername(principal.getName());
         favoriteService.toggleProductFavoriteStatus(user, id, type);
 
-        // Возвращаемся на ту же страницу
         return "redirect:" + request.getHeader("Referer");
     }
 
     @PostMapping("/favorites/remove/{id}/{type}")
     public String removeFromFavorites(@PathVariable UUID id, @PathVariable String type, Principal principal) {
-        if (principal == null) return "redirect:/login";
-
         User user = userService.findByUsername(principal.getName());
         favoriteService.removeProductFromFavorites(user, id, type);
 

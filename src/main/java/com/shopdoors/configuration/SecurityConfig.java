@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -19,14 +20,18 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((authorizeHttpRequests) ->
                         authorizeHttpRequests
-                                .requestMatchers("/**").permitAll())
-//                .formLogin(formLogin ->
-//                        formLogin
-//                                .loginPage("/login")
-//                                .defaultSuccessUrl("/home", true)
-//                                .permitAll()
-//                )
-                .csrf().disable()
+                                .requestMatchers("/private_profile", "/private_profile_home",
+                                        "/private_profile_security", "/private_profile_info", "/cart/**",
+                                        "/checkout/**", "/favorites/**", "/orders/**", "/order-confirmation/**")
+                                .authenticated()
+                                .anyRequest().permitAll())
+                .exceptionHandling(exceptionHandling ->
+                        exceptionHandling
+                                .accessDeniedHandler((request, response, accessDeniedException) ->
+                                        response.sendRedirect("/login"))
+                                .authenticationEntryPoint((request, response, authException) ->
+                                        response.sendRedirect("/login")))
+                .csrf(AbstractHttpConfigurer::disable)
                 .logout(LogoutConfigurer::permitAll);
         return http.build();
     }
@@ -36,10 +41,8 @@ public class SecurityConfig {
                                                        PasswordEncoder passwordEncoder,
                                                        AuthorizeUserDetailsService userDetailsService)
             throws Exception {
-        return http.getSharedObject(AuthenticationManagerBuilder.class)
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder)
-                .and()
-                .build();
+        AuthenticationManagerBuilder builder = http.getSharedObject(AuthenticationManagerBuilder.class);
+        builder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
+        return builder.build();
     }
 }

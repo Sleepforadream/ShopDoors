@@ -84,12 +84,6 @@ function init() {
         isFrame = true;
     }
 
-    /**
-     * Safari 10 fixed it, Chrome fixed it in v45:
-     * This fixes a bug where the areas left and right to
-     * the content does not trigger the onmousewheel event
-     * on some pages. e.g.: html, body { height: 100% }
-     */
     else if (isOldSafari &&
              scrollHeight > windowHeight &&
             (body.offsetHeight <= windowHeight ||
@@ -117,7 +111,6 @@ function init() {
 
         addEvent('resize', refreshSize);
 
-        // TODO: attributeFilter?
         var config = {
             attributes: true,
             childList: true,
@@ -676,17 +669,6 @@ var getScrollRoot = (function() {
   };
 })();
 
-
-/***********************************************
- * PULSE (by Michael Herf)
- ***********************************************/
-
-/**
- * Viscous fluid with a pulse for part and decay for the rest.
- * - Applies a fixed force over an interval (a damped acceleration), and
- * - Lets the exponential bleed away the velocity over a longer interval
- * - Michael Herf, http://stereopsis.com/stopping/
- */
 function pulse_(x) {
     var val, start, expx;
     // test
