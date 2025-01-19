@@ -26,7 +26,8 @@ public class ClientService {
     ) {
         log.info("Save client with email {}", email);
         Client client = clientRepository.findByEmail(email).orElse(new Client());
-        if (client.getEmail() == null || client.getEmail().isEmpty()) {
+        var oldEmail = client.getEmail();
+        if (oldEmail == null || oldEmail.isEmpty()) {
             client = clientRepository.save(
                     Client.builder()
                             .registerDate(LocalDate.now())
@@ -42,7 +43,7 @@ public class ClientService {
                     Client.builder()
                             .id(client.getId())
                             .registerDate(client.getRegisterDate())
-                            .email(client.getEmail())
+                            .email(oldEmail)
                             .phoneNumber(phoneNumber)
                             .firstName(name)
                             .secondName(secondName)

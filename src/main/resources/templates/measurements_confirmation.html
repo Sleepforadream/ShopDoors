@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}" lang="ru">
+
+<head>
+    <title layout:fragment="title">Запрос на замер выполнен</title>
+</head>
+
+<th:block layout:fragment="content">
+    <div class="order-confirmation-container">
+        <h1>Спасибо за ваше обращение!</h1>
+        <p>Ваш запрос на замер был успешно оформлен.</p>
+        <p>Ваш специалист по замерам: <span th:text="${
+            measurement.getEmployee().getSecondName() + ' ' +
+            measurement.getEmployee().getFirstName() + ' ' +
+            measurement.getEmployee().getThirdName()
+            }"></span>
+        </p>
+        <p>Дата замера: <span th:text="${measurement.getMeasurementDate()}"></span></p>
+        <p>Время замера: <span th:text="${measurement.getMeasurementTime()}"></span></p>
+        <p>Вся информация о предстоящем замере также была отправлена на Вашу почту</p>
+        <a href="/">Вернуться на главную</a>
+    </div>
+</th:block>
+</html>

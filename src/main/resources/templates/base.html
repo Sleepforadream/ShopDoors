@@ -205,7 +205,7 @@
                         </li>
                     </th:block>
                     <th:block th:unless="${#currentView} == 'home'">
-                        <li style="padding-right:40px!important;">
+                        <li style="padding-right:40px!important;"><a href="/home" class="text-menu">Главная</a>
                         </li>
                     </th:block>
                     <li style="padding-right:40px!important;">
@@ -308,13 +308,6 @@
                             </div>
                         </div>
                     </li>
-                    <th:block th:if="${#currentView} == 'headings'">
-                        <li style="padding-right:40px!important;"><a href="/headings" class="text-menu hover">Блог</a>
-                        </li>
-                    </th:block>
-                    <th:block th:unless="${#currentView} == 'headings'">
-                        <li style="padding-right:40px!important;"><a href="/headings" class="text-menu">Блог</a></li>
-                    </th:block>
                     <th:block th:if="${#currentView} == 'about'">
                         <li style="padding-right:40px!important;"><a href="/about" class="text-menu hover">О нас</a>
                         </li>
@@ -462,13 +455,6 @@
                             </div>
                         </div>
                     </li>
-                    <th:block th:if="${#currentView} == 'headings'">
-                        <li style="padding-right:40px!important;"><a href="/headings" class="text-menu hover">Блог</a>
-                        </li>
-                    </th:block>
-                    <th:block th:unless="${#currentView} == 'headings'">
-                        <li style="padding-right:40px!important;"><a href="/headings" class="text-menu">Блог</a></li>
-                    </th:block>
                     <th:block th:if="${#currentView} == 'about'">
                         <li style="padding-right:40px!important;"><a href="/about" class="text-menu hover">О нас</a>
                         </li>
@@ -477,8 +463,7 @@
                         <li style="padding-right:40px!important;"><a href="/about" class="text-menu">О нас</a></li>
                     </th:block>
                     <th:block th:if="${#currentView} == 'contacts'">
-                        <li style="padding-right:40px!important;"><a href="/contacts"
-                                                                     class="text-menu hover">Контакты</a>
+                        <li style="padding-right:40px!important;"><a href="/contacts" class="text-menu hover">Контакты</a>
                         </li>
                     </th:block>
                     <th:block th:unless="${#currentView} == 'contacts'">

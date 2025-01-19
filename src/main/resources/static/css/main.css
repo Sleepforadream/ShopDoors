@@ -4135,6 +4135,10 @@ img {
     transition-timing-function: linear;
 }
 
+.politic-confidentiality-text:hover{
+    text-decoration-line: underline;
+}
+
 .politic-confidentiality-icon-left {
     border-style: solid;
     border-radius: 50%;
@@ -4985,7 +4989,7 @@ img {
 .main-private-profile {
     padding-left: 30px;
     padding-right: 30px;
-    margin: auto auto 30px;
+    margin: auto auto 45vh;
     display: flex;
     max-width: var(--site_width);
 
@@ -5847,7 +5851,7 @@ input#phoneNumber:invalid + .error-input-phoneNumber {
     padding: 20px;
     background-color: #f9f9f9;
     max-width: 800px;
-    margin: 0 auto;
+    margin: 0 auto 50vh;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }

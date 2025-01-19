@@ -14,6 +14,7 @@ import com.shopdoors.util.TransactionRunner;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -33,9 +34,9 @@ public class MeasurementService {
     private final ClientService clientService;
     private final NotificationService notificationService;
 
-    public void createEventMeasurement(MeasurementDto measurementDto) {
+    public Measurement createEventMeasurement(MeasurementDto measurementDto) {
         log.info("Creating event measurement for email: {}", measurementDto.getEmail());
-        transactionRunner.doInTransaction(
+        return transactionRunner.doInTransaction(
                 () -> {
                     Client client = clientService.save(
                             measurementDto.getEmail(),
@@ -45,6 +46,8 @@ public class MeasurementService {
                             measurementDto.getThirdName()
                     );
 
+                    measurementDto.setMeasurementTime(measurementDto.getMeasurementTime().replace(",0", ":00"));
+
                     List<Employee> availableMeasures = getAvailableMeasures(
                             LocalDate.parse(measurementDto.getMeasurementDate()),
                             LocalTime.parse(measurementDto.getMeasurementTime())
@@ -53,10 +56,11 @@ public class MeasurementService {
                     Employee appointedMeasurer = availableMeasures.stream().findAny().orElseThrow();
 
                     Measurement measurement = save(measurementDto, client, appointedMeasurer);
-
-                    notificationService.notifyOnNewMeasurementToEmployee(appointedMeasurer, measurement, client);
-                    notificationService.notifyOnNewMeasurementToClient(appointedMeasurer, measurement, client);
-                    log.info("Successfully created measurement for email: {}", measurementDto.getEmail());
+                    if (measurement != null) {
+                        notificationService.notifyOnNewMeasurementToEmployee(appointedMeasurer, measurement, client);
+                        notificationService.notifyOnNewMeasurementToClient(appointedMeasurer, measurement, client);
+                        log.info("Successfully created measurement for email: {}", measurementDto.getEmail());
+                    }
                     return measurement;
                 }
         );
@@ -87,9 +91,12 @@ public class MeasurementService {
                             .employee(appointedMeasurer)
                             .build()
             );
+            log.info("Successfully saved measurement for address: {}", measurementDto.getAddress());
+            return measurement;
+        } else {
+            log.info("This measurement for address: {} already exist", measurementDto.getAddress());
+            return null;
         }
-        log.info("Successfully saved measurement for address: {}", measurementDto.getAddress());
-        return measurement;
     }
 
     public List<Employee> getAvailableMeasures(LocalDate date, LocalTime time) {

@@ -80,17 +80,23 @@ public class MeasurementController {
         var errors = validateService.validateMeasurements(measurementDto);
 
         if (!errors.values().stream().findFirst().orElse(true)) {
-            addErrorAttributesForModel(measurementDto, model, errors);
+            addAttributesForModel(measurementDto, model, errors);
             return "measurements";
         }
 
-        measurementService.createEventMeasurement(measurementDto);
+        var measurement = measurementService.createEventMeasurement(measurementDto);
+
+        if (measurement == null) {
+            model.addAttribute("error", "Такой замер уже существует");
+            return "measurements";
+        }
 
         model.addAttribute("success", true);
-        return "redirect:/measurements";
+        model.addAttribute("measurement", measurement);
+        return "measurements_confirmation";
     }
 
-    private static void addErrorAttributesForModel(MeasurementDto measurementDto, Model model, Map<String, Boolean> errors) {
+    private static void addAttributesForModel(MeasurementDto measurementDto, Model model, Map<String, Boolean> errors) {
         model.addAttribute("error", errors.keySet()
                 .stream()
                 .findFirst()

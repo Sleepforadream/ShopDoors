@@ -1,7 +1,5 @@
 package com.shopdoors.controller;
 
-import com.shopdoors.dao.entity.user.Article;
-import com.shopdoors.dao.repository.user.ArticleRepository;
 import com.shopdoors.service.user.AuthorizeUserDetailsService;
 import com.shopdoors.service.ImageService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,46 +18,22 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.time.format.DateTimeFormatter;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
 public class HomeController {
-    private final ArticleRepository articleRepository;
     private final LoginController loginController;
     private final AuthorizeUserDetailsService userDetailsService;
     private final ImageService imageService;
 
     @GetMapping(value = {"/", "/home"})
     public String homePage(Model model) {
-        List<Article> articles = articleRepository.findAllByOrderByDateDesc();
 
         model.addAttribute("currentView", "home");
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         if (!username.equals("anonymousUser")) {
             String userImageName = userDetailsService.getImgPathByEmail(username);
             model.addAttribute("imgProfileUrl", imageService.getImgUrl(userImageName));
-        }
-
-        if (articles.size() > 1) {
-            Article article1 = articles.get(0);
-            Article article2 = articles.get(1);
-
-            List<String> monthsYears = articles.stream()
-                    .map(article -> article.getDate().format(DateTimeFormatter.ofPattern("yyyy MMMM")))
-                    .distinct()
-                    .sorted(Comparator.reverseOrder())
-                    .collect(Collectors.toList());
-
-            model.addAttribute("articles", articles);
-            model.addAttribute("article1", article1);
-            model.addAttribute("article2", article2);
-            model.addAttribute("monthsyears", monthsYears);
-        } else {
-            model.addAttribute("articles", articles);
         }
         return "home";
     }
