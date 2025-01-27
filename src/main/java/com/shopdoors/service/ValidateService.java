@@ -243,7 +243,7 @@ public class ValidateService {
 
     private Map<String, Boolean> validateCorrectLogin(String login) {
         Map<String, Boolean> erroredFields = new HashMap<>();
-        String LOGIN_PATTERN = "^[a-zA-Z\\d_-]{3,16}$";
+        String LOGIN_PATTERN = "^[a-zA-Zа-яА-Яё\\d_-]{3,16}$";
         Pattern pattern = Pattern.compile(LOGIN_PATTERN);
         Matcher matcher = pattern.matcher(login);
         if (matcher.matches()) {
@@ -257,7 +257,7 @@ public class ValidateService {
 
     private Map<String, Boolean> validateCorrectName(String name, String fieldName) {
         Map<String, Boolean> erroredFields = new HashMap<>();
-        String NAME_PATTERN = "^[a-zA-Zа-яА-Я\\d_-]{3,16}$";
+        String NAME_PATTERN = "^[a-zA-Zа-яА-Яё\\d_-]{3,16}$";
         Pattern pattern = Pattern.compile(NAME_PATTERN);
         Matcher matcher = pattern.matcher(name);
         if (matcher.matches()) {
@@ -271,7 +271,7 @@ public class ValidateService {
 
     private Map<String, Boolean> validateCorrectAddress(String address) {
         Map<String, Boolean> erroredFields = new HashMap<>();
-        String ADDRESS_PATTERN = "^[a-zA-Zа-яА-Я\\d\\s-,.№/]{3,256}$";
+        String ADDRESS_PATTERN = "^[a-zA-Zа-яА-Яё\\d\\s-,.№/]{3,256}$";
         Pattern pattern = Pattern.compile(ADDRESS_PATTERN);
         Matcher matcher = pattern.matcher(address);
         if (matcher.matches()) {

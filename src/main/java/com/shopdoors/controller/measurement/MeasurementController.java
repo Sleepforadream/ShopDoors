@@ -92,6 +92,7 @@ public class MeasurementController {
         }
 
         model.addAttribute("success", true);
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         model.addAttribute("measurement", measurement);
         return "measurements_confirmation";
     }

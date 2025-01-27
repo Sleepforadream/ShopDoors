@@ -41,6 +41,7 @@ public class OrderController {
 
         model.addAttribute("cart", cart);
         model.addAttribute("user", user);
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         return "order/checkout";
     }
 
@@ -50,6 +51,7 @@ public class OrderController {
         CustomerOrder order = orderService.createOrder(user);
         model.addAttribute("message", "Заказ успешно оформлен!");
         model.addAttribute("order", order);
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         return "order/order_confirmation";
     }
 
@@ -74,6 +76,7 @@ public class OrderController {
     public String deleteCurrentOrder(Model model, @PathVariable long id) {
         CustomerOrder currentOrder = orderService.getOrderById(id);
         model.addAttribute("currentOrder", currentOrder);
+        model.addAttribute("imgProfileUrl", userService.getCurrentUserImgPath());
         transactionRunner.doInTransaction(() -> customerOrderRepository.delete(currentOrder));
         return "redirect:/orders";
     }
